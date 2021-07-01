@@ -1,0 +1,16 @@
+{
+    "wait": "*Tunggu permintaan anda sedang diproses*",
+    "oversize": "_Note_ : Karena ukuran file terlalu besar, silahkan download melalui link diatas",
+    "error": {
+        "Iv": "Link yang kamu berikan tidak valid",
+        "api": "Maaf terjadi kesalahan",
+	"notfound": "File yang anda cari tidak ditemukan/error"
+    },
+    "only": {
+        "group": "Perintah ini hanya bisa dilakukan dalam group",
+        "ownerG": "only owner gc",
+        "ownerB": "only owner bot",
+        "admin": "Perintah ini hanya bisa digunakan oleh admin group",
+        "Badmin": "Perintah ini hanya bisa digunakan ketika Bot menjadi admin"
+    }
+}
