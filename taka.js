@@ -108,7 +108,6 @@ let io = SocketIO(server)
         let { unpipeEmit } = pipeEmit(conn, socket, 'conn-')
         socket.on('disconnect', unpipeEmit)
     })
-}
 
 function pipeEmit(event, event2, prefix = '') {
     let old = event.emit
