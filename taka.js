@@ -101,7 +101,7 @@ app.use('/', (req, res) => {
 conn.connects()
 console.log("on bang bot nya")
 })
-app.listen(PORT, () => console.log(`Listening On Port ${PORT}`)))
+app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 const zynz = conn.zynn
 zynz.on('CB:action,,battery', json => {
 const batteryLevelStr = json[2][0][1].value
