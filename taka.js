@@ -60,6 +60,7 @@ pendaftar = JSON.parse(fs.readFileSync('./src/pendaftar.json'))
 const emoji = new EmojiAPI();
 const base64Img = require('base64-img')
 const fakeUa = require('fake-useragent');
+const SocketIO = require('SocketIO')
 const Exif = require('./lib/exif');
 const exif = new Exif();
 const tovid = require('./lib/tovideo')
@@ -102,6 +103,25 @@ conn.connects()
 console.log("on bang bot nya")
 })
 app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+let io = SocketIO(server)
+    io.on('connection', socket => {
+        let { unpipeEmit } = pipeEmit(conn, socket, 'conn-')
+        socket.on('disconnect', unpipeEmit)
+    })
+}
+
+function pipeEmit(event, event2, prefix = '') {
+    let old = event.emit
+    event.emit = function (event, ...args) {
+        old.emit(event, ...args)
+        event2.emit(prefix + event, ...args)
+    }
+    return {
+        unpipeEmit() {
+            event.emit = old
+        }
+    }
+}
 const zynz = conn.zynn
 zynz.on('CB:action,,battery', json => {
 const batteryLevelStr = json[2][0][1].value
