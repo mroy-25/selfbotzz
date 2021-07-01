@@ -60,7 +60,7 @@ pendaftar = JSON.parse(fs.readFileSync('./src/pendaftar.json'))
 const emoji = new EmojiAPI();
 const base64Img = require('base64-img')
 const fakeUa = require('fake-useragent');
-const SocketIO = require('SocketIO')
+const SocketIO = require('socket.io')
 const Exif = require('./lib/exif');
 const exif = new Exif();
 const tovid = require('./lib/tovideo')
@@ -102,7 +102,7 @@ app.use('/', (req, res) => {
 conn.connects()
 console.log("on bang bot nya")
 })
-app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 let io = SocketIO(server)
     io.on('connection', socket => {
         let { unpipeEmit } = pipeEmit(conn, socket, 'conn-')
