@@ -101,6 +101,7 @@ const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
 app.use('/', (req, res) => {  
 conn.connects()
 console.log("on bang bot nya")
+})
 let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 let io = SocketIO(server)
     io.on('connection', socket => {
@@ -121,8 +122,6 @@ function pipeEmit(event, event2, prefix = '') {
         }
     }
 }
-})
-
 const zynz = conn.zynn
 zynz.on('CB:action,,battery', json => {
 const batteryLevelStr = json[2][0][1].value
