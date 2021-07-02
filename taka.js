@@ -825,7 +825,7 @@ case 'sticker2':
 if (isMedia && !tod.message.videoMessage || isQuotedImage) {
 var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
 var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-await stik.stickerCase(img, reply, zynn)
+await stik.stickerCase(tod, reply, zynn, args)
 }
 break
 case 'tovideo':
