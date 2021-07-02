@@ -1,6 +1,6 @@
 /*BY FAJAR thx to aqul hexagon */
  const {
-	WAConnection,
+	WAConnection: _WAConnection,
 	MessageType,
 	Presence,
 	MessageOptions,
@@ -15,6 +15,7 @@
 	processTime,
     ChatModification
 } = require('@adiwajshing/baileys');
+const simple = require('./lib/simple')
 const wa = require('./whatsapp/message')
 const skrep = require('./skrep')
 const moment = require("moment-timezone");
