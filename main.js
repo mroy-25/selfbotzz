@@ -12,11 +12,11 @@ const {
     GroupSettingChange
 } = require('@adiwajshing/baileys')
 const simple = require('./lib/simple')
-let WAConnection = simple.WAConnection(_WAConnection)
+let connectt = simple.WAConnection(_WAConnection)
 const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
-const zynn = new WAConnection()
+const zynn = new connectt()
 zynn.version = [2, 2119, 6]
 exports.zynn = zynn
 require('./taka.js')
