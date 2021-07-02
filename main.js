@@ -16,7 +16,7 @@ let connectt = simple.WAConnection(_WAConnection)
 const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
-const zynn = new connectt()
+global.zynn = new connectt()
 zynn.version = [2, 2119, 6]
 exports.zynn = zynn
 require('./taka.js')
