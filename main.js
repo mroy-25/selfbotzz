@@ -12,7 +12,7 @@ const {
     GroupSettingChange
 } = require('@adiwajshing/baileys')
 const simple = require('./lib/simple')
-let connectt = await simple.WAConnection(_WAConnection)
+let connectt = simple.WAConnection(_WAConnection)
 const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
