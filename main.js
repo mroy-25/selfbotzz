@@ -5,12 +5,14 @@ YANG PASTINYA BANYAK COPY PASTE
 OKE TERIMA KASIH
 */
 const {
-    WAConnection,
+    WAConnection: _WAConnection,
     MessageType,
     Presence,
     Mimetype,
     GroupSettingChange
 } = require('@adiwajshing/baileys')
+const simple = require('./lib/simple')
+let WAConnection = simple.WAConnection(_WAConnection)
 const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
