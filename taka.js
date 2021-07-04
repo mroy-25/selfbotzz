@@ -372,30 +372,27 @@ const fake = async(text) =>{
 	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
 	zynn.updatePresence(from, Presence.composing)
 }
-const createSticker = (path, sender, command) => {
-	ffmpeg(`${path}`)
-.input(path)
+const createSticker = (path) => {
+ran = wa.getRandom('.webp')
+						await ffmpeg(`${path}`)
+							.input(path)
 							.on('start', function (cmd) {
 								console.log(`Started : ${cmd}`)
 							})
-							.on(mess.error.api, function (err) {
+							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(path)
-								reply(mess.error.api)
+								reply(mess.error.stick)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exif.create(command, 'ZBOT', `createstick`)
-								exec(`webpmux -set exif ./sticker/createstick.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-									if (error) return reply(mess.error.api)
-									wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
-									fs.unlinkSync(path)	
-									fs.unlinkSync(`./sticker/${sender}.webp`)	
-								})
+								zynn.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: tod})
+								fs.unlinkSync(path)
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
-							.save(`./sticker/${sender}.webp`)
+							.save(ran)
 }
 const isBaileys = async() =>{
 const isbileys = tod.message.extendedTextMessage.contextInfo.stanzaId.startsWith('3EB0') ? 'True' : 'False'
@@ -699,66 +696,60 @@ var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM',
 var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
 await sticker.stickerCase(tod, reply, zynn, args)
 break
-case 'sticker':
-			case 'stiker':
-			case 's':
-				if (isMedia && !tod.message.videoMessage || isQuotedImage) {
-					var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
-					var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-					await ffmpeg(`${media}`)
+case 'stiker':
+				case 'sticker':
+					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+						const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+						ran = wa.getRandom('.webp')
+						await ffmpeg(`./${media}`)
 							.input(media)
 							.on('start', function (cmd) {
 								console.log(`Started : ${cmd}`)
 							})
-							.on(mess.error.api, function (err) {
+							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
-								fake(mess.error.api)
+								reply(mess.error.stick)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-									if (error) return fake(mess.error.api)
-									wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
-									fs.unlinkSync(media)	
-									fs.unlinkSync(`./sticker/${sender}.webp`)
-								})
+								zynn.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: tod})
+								fs.unlinkSync(media)
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
-							.save(`./sticker/${sender}.webp`)
-				} else if ((isMedia && tod.message.videoMessage.fileLength < 100000000 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 100000000)) {
-					if ((isMedia && tod.message.videoMessage.fileLength > 800000 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength > 800000)) return reply('Ukuran video terlalu besar')
-					var encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
-					var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-					fake(mess.wait)
-						await ffmpeg(`${media}`)
-							.inputFormat(media.split('.')[4])
+							.save(ran)
+					} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+						const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+						ran = wa.getRandom('.webp')
+						reply(mess.wait)
+						await ffmpeg(`./${media}`)
+							.inputFormat(media.split('.')[1])
 							.on('start', function (cmd) {
 								console.log(`Started : ${cmd}`)
 							})
-							.on(mess.error.api, function (err) {
+							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								fake(mess.error.api)
+								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-									if (error) return fake(mess.error.api)
-									wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
-									fs.unlinkSync(media)
-									fs.unlinkSync(`./sticker/${sender}.webp`)
-								})
+								zynn.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								fs.unlinkSync(media)
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
-							.save(`./sticker/${sender}.webp`)
-				} else {
-					fake(`Kirim gambar/video dengan caption ${prefix}sticker atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`)
-				}
-				break
+							.save(ran)
+					} else {
+						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
+					}
+            break
 case 'swm':
 			case 'stickerwm':
 				if (isMedia && !tod.message.videoMessage || isQuotedImage) {
@@ -2859,7 +2850,7 @@ try{
 	data = await Ra.StickerSearch(q)
 	for(let i=0; i<10; i++){
 		if(data.data.sticker[i] === undefined) return console.log('Sticker habis, pengiriman diberhentikan')
-		sendStickerFromUrlWithWM(data.data.sticker[i])
+		sendStickerFromUrl(data.data.sticker[i])
 		await wa.sleep(3000)
 	}
 }catch(e){
