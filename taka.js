@@ -386,7 +386,7 @@ ran = wa.getRandom('.webp')
 							})
 							.on('end', function () {
 								console.log('Finish')
-								zynn.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: tod})
+								wa.sendSticker(from, fs.readFileSync(ran), tod)
 								fs.unlinkSync(path)
 								fs.unlinkSync(ran)
 							})
@@ -714,7 +714,7 @@ case 'stiker':
 							})
 							.on('end', function () {
 								console.log('Finish')
-								zynn.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: tod})
+								wa.sendSticker(from, fs.readFileSync(ran), tod)
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
@@ -739,7 +739,7 @@ case 'stiker':
 							})
 							.on('end', function () {
 								console.log('Finish')
-								zynn.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								wa.sendSticker(from, fs.readFileSync(ran), tod)
 								fs.unlinkSync(media)
 								fs.unlinkSync(ran)
 							})
