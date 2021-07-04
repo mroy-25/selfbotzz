@@ -372,7 +372,7 @@ const fake = async(text) =>{
 	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
 	zynn.updatePresence(from, Presence.composing)
 }
-const createSticker = (path) => {
+const createSticker = async(path) => {
 ran = wa.getRandom('.webp')
 						await ffmpeg(`${path}`)
 							.input(path)
