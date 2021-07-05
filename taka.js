@@ -412,7 +412,7 @@ const ftoko = {
                     },
                     "businessOwnerJid": `0@s.whatsapp.net`
                 }}}
-const freply = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": fakec`, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "height": 1080, "width": 1079, "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "jpegThumbnail": fs.readFileSync(`./media/zynn.jpeg`)} } }
+//const freply = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": fakec`, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "height": 1080, "width": 1079, "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "jpegThumbnail": fs.readFileSync(`./media/zynn.jpeg`)} } }
 if(fakerep == "freply"){
    var rep = freply
 }
@@ -3364,12 +3364,12 @@ case 'setfake':
 if(!itsMe) return
    teks = `Silahkan pilih salah satu\n\n${shp} image\n${shp} group\n${shp} loc\n${shp} liveloc\n${shp} toko\n\nContoh : ${prefix}setfake image`
 if(!q) return fake(teks)
-if(args[0] == 'image'){
+/*if(args[0] == 'image'){
    setting.fakerep = 'freply'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
    fake('Sukses')
-}
-else if(args[0] == 'document'){
+}*/
+if(args[0] == 'document'){
    setting.fakerep = 'fdocu'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
    fake('Sukses')
