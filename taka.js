@@ -401,7 +401,7 @@ const ftoko = {
                     "product": {
                         "productImage": {
                             "mimetype": "image/jpeg",
-                            "jpegThumbnail": fakeimage
+                            "jpegThumbnail": ''
                         },
                         "title": fakec,
                         "description": fakec,
@@ -3362,7 +3362,7 @@ reply(`tag orangnya/reply pesan dengan caption ${prefix}getpic`)
 break
 case 'setfake':
 if(!itsMe) return
-   teks = `Silahkan pilih salah satu\n\n${shp} image\n${shp} group\n${shp} loc\n${shp} liveloc\n${shp} toko\n\nContoh : ${prefix}setfake image`
+   teks = `Silahkan pilih salah satu\n\n${shp} image\n${shp} group\n${shp} loc\n${shp} liveloc\n${shp} toko\n${shp} troli\n${shp} vn\n${shp} audio\n${shp} kontak\n\nContoh : ${prefix}setfake image`
 if(!q) return fake(teks)
 /*if(args[0] == 'image'){
    setting.fakerep = 'freply'
@@ -3371,6 +3371,11 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 }*/
 if(args[0] == 'document'){
    setting.fakerep = 'fdocu'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
+else if(args[0] == 'troli'){
+   setting.fakerep = 'troli'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
    fake('Sukses')
 }
