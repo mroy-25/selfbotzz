@@ -92,6 +92,7 @@ const vcard = 'BEGIN:VCARD\n'
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 publicc = setting.public
+fakec = setting.fake
 nopref = 'multi'
 shp = "▢"
 fakenomor = '0@s.whatsapp.net'
@@ -296,14 +297,79 @@ const mek = new z
 		const itsMe = Owner.includes(sender)
 		const isGroupAdmins = groupAdmins.includes(sender) || false
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
-const floc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fakecap}}}
-const fliveloc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": `Rumah Doi`}}}
+const fdocu = { key: {
+                  fromMe: false,
+                  participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
+               }, message: { "documentMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "title": fakec, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./media/aqul.jpeg')}}}
+            
+
+const troli =  { key: {
+                  fromMe: false,
+                  participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
+               }, message: {orderMessage: {itemCount: 0, status: 200, thumbnail: fakeimage, surface: 200, message: fakec, orderTitle: 'zynn', sellerJid: fakenomor} } } 
+
+const freply = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": fakec, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} } }
+const faudio = { key: {
+                  fromMe: false,
+                  participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
+               },
+               message: {
+                  "audioMessage":{"url":"https://mmg.whatsapp.net/d/f/AlFv-IaZTgOgxOdf-RqhVZK75eFaPs10IqE-7NV0tmeT.enc","mimetype":"audio/mp4","fileSha256":"wRodpKmEuSoaYw4n5UjHFls9fyKBuI50KJgikNAqm4Y=","seconds":359996400,"ptt":false,"mediaKey":"KX0tCJKisn9VbW65/768NkKc/JgFGEZ9Y+U3Ayw3q6E=","fileEncSha256":"5tnRGEGhOzKhB4GsGOz3ypaBrkPJOcpT57CrdaFtog4="
+               }}}
+const fvn = { key: {
+                  fromMe: false,
+                  participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
+               },
+               message: {
+                  "audioMessage":{"url":"https://mmg.whatsapp.net/d/f/AlFv-IaZTgOgxOdf-RqhVZK75eFaPs10IqE-7NV0tmeT.enc","mimetype":"audio/mp4","fileSha256":"wRodpKmEuSoaYw4n5UjHFls9fyKBuI50KJgikNAqm4Y=","seconds":359996400,"ptt":true,"mediaKey":"KX0tCJKisn9VbW65/768NkKc/JgFGEZ9Y+U3Ayw3q6E=","fileEncSha256":"5tnRGEGhOzKhB4GsGOz3ypaBrkPJOcpT57CrdaFtog4="
+               }}}
+const fkontak = { key: {
+                  fromMe: false,
+                  participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
+               },
+               message: {
+                  "contactMessage":{"displayName":fakec,"vcard":"BEGIN:VCARD\nVERSION:3.0\nN:2;Fajar;;;\nFN:Fajar 2\nitem1.TEL;waid=6281223546913:+62 812-2354-6913\nitem1.X-ABLabel:Mobile\nEND:VCARD"
+               }}}
+const fkontak2 = { key: {
+                  fromMe: false,
+                  participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
+               },
+               message: {
+                   "contactsArrayMessage": {
+    "displayName": "100 contacts",
+    "contacts": [
+      {
+        "displayName": "9",
+        "vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;9;;;\nFN:9\nEND:VCARD"
+      },
+      {
+        "displayName": "Admin",
+        "vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Admin;;;\nFN:Admin\nitem1.TEL:+994 40 619 86 91\nitem1.X-ABLabel:Mobile\nEND:VCARD"
+      }
+    ]
+    
+               }}}
+const fkontak3 =  {
+  "key": {
+    "fromMe": false,
+"participant":"0@s.whatsapp.net",
+    "remoteJid": "0@s.whatsapp.net"
+  },
+  "message": {
+    "contactMessage": {
+      "displayName": command,
+"vcard": `BEGIN:VCARD\nVERSION:3.0\nN:XL;${command},;;;\nFN:${command},\nitem1.TEL;waid=${tod.participant.split('@')[0]}:+${tod.participant.split('@')[1]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+    }
+  }
+}
+const floc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fake}}}
+const fliveloc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": fake}}}
 const fakegroup = { key: {
                   fromMe: false,
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
-                  conversation: `${fakecap} : ${prefix}${command}`
+                  conversation: `${fake} : ${prefix}${command}`
                }}
 const finvite = {
   "key": {
@@ -316,7 +382,7 @@ const finvite = {
     "groupJid": from,
     "inviteCode": "NgsCIU2lXKh3VHJT",
     "groupName": groupName,
-    "caption": fakecap + `: ${command}`,
+    "caption": fakec,
     "jpegThumbnail": fakeimage,
     "height": 6080,
     "width": 6000
@@ -324,28 +390,28 @@ const finvite = {
 }
 }
 const ftoko = {
-key: {
-         fromMe: false,
-         participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
-      },
-      message: {
-         "productMessage": {
-            "product": {
-               "productImage":{
-                  "mimetype": "image/jpeg",
-                  "jpegThumbnail": fs.readFileSync(`./media/zynn.jpeg`)
-               },
-               "title": fakecap + `: ${command}`,
-               //"description": "SELF BOT",
-               "currencyCode": "USD",
-               "priceAmount1000": "2000",
-               //"retailerId": "Self Bot",
-               //"productImageCount": 1
+            "key": {
+                "remoteJid": "status@broadcast",
+                "fromMe": false,
+                "id": generateMessageID(),
+                "participant": "0@s.whatsapp.net"
             },
-            "businessOwnerJid": fakenomor
-      }
-   }
-}
+            message: {
+                "productMessage": {
+                    "product": {
+                        "productImage": {
+                            "mimetype": "image/jpeg",
+                            "jpegThumbnail": fakeimage
+                        },
+                        "title": fakec,
+                        "description": fakec,
+                        "currencyCode": "IDR",
+                        "priceAmount1000": "0",
+                        "retailerId": "𝗕𝗢𝗧",
+                        "productImageCount": 1
+                    },
+                    "businessOwnerJid": `0@s.whatsapp.net`
+                }}}
 const freply = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": fakecap + `: ${command}`, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "height": 1080, "width": 1079, "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "jpegThumbnail": fs.readFileSync(`./media/zynn.jpeg`)} } }
 if(fakerep == "freply"){
    var rep = freply
@@ -367,6 +433,47 @@ else if(fakerep == "liveloc"){
 }
 else if(fakerep == "invite"){
   var rep = finvite
+}
+else if(fakerep == "fdocu"){
+   var rep = fdocu
+}
+else if(fakerep == "troli"){
+   var rep = troli
+}
+else if(fakerep == "audio"){
+   var rep = faudio
+}
+else if(fakerep == "vn"){
+   var rep = fvn
+}
+else if(fakerep == "kontak"){
+   var rep = fkontak
+}
+else if(fakerep == 'kontak2'){
+	var rep = fkontak2
+}
+else if(fakerep == 'kontak3'){
+	var rep = fkontak3
+}
+const flink2 = (img1, img2, url, teks) => {
+	 zynn.sendMessage(from, img1, MessageType.image, {
+        thumbnail: img1,
+        caption: teks,
+        "contextInfo": {
+            text: 'hi',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            sendEphemeral: true,
+            "externalAdReply": {
+                "title": fakec,
+                "body": "𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡",
+                "previewType": "PHOTO",
+                "thumbnailUrl": "",
+                "thumbnail": img2,
+                "sourceUrl": url
+            }},
+			quoted: rep
+})
 }
 const fake = async(text) =>{
 	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
@@ -682,6 +789,15 @@ description: `Jangan Bully saya Bang`,
 title: `Halo ` + await wa.getPushname(sender, tod),
 jpegThumbnail: fakeimage }, 'extendedTextMessage', { detectLinks: false, contextInfo: {mentionedJid: [sender]}, quoted: rep})
 }
+else if(setting.menu == 'flink2'){
+	try{
+		pp = await zynn.getProfilePicture(sender)
+		buff = await wa.getBuffer(pp)
+	}catch{
+		buff = fakeimage
+	}
+	flink2(fakeimage, buff, 'https://github.com/', help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+}
 else{
 			zynn.sendMessage(from, ppimg, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
@@ -988,6 +1104,15 @@ setting = await JSON.parse(fs.readFileSync('./setting.json'))
 fakecap = setting.fakecap
 fake(`Sukses`)
 break
+case 'setfaketext':
+if(!itsMe) return
+if (!arg) return fake(`Penggunaan ${prefix}setfaketext teks`)
+setting.fake = q
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+fakecap = setting.fake
+fake(`Sukses Mengubah Text fake ke ` + q)
+break
 case 'setmenu':
 if(!itsMe) return
 if (!arg) return fake(`Penggunaan ${prefix}setmenu jenis`)
@@ -1003,15 +1128,19 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 fake(`Sukses`)
 }
+else if(args[0] == 'flink2'){
+setting.menu = 'flink2'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+fake(`Sukses`)
+}
 else{
 setting.menu = 'biasa'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 fake(`Sukses`)
 }
-
 break
-
 case 'setprefix':
 if(!itsMe) return
 	if(!args[0]){
@@ -3240,6 +3369,11 @@ if(args[0] == 'image'){
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
    fake('Sukses')
 }
+else if(args[0] == 'document'){
+   setting.fakerep = 'fdocu'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
 else if(args[0] == 'group'){
    setting.fakerep = 'fgrup'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
@@ -3248,6 +3382,31 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 else if(args[0] == 'reply'){
    setting.fakerep = 'reply' 
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
+else if(args[0] == 'vn'){
+   setting.fakerep = 'vn'
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
+else if(args[0] == 'audio'){
+   setting.fakerep = 'audio'
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
+else if(args[0] == 'kontak'){
+   setting.fakerep = 'kontak'
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
+else if(args[0] == 'kontak2'){
+   setting.fakerep = 'kontak2'
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   fake('Sukses')
+}
+else if(args[0] == 'kontak3'){
+   setting.fakerep = 'kontak3'
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
    fake('Sukses')
 }
 else if(args[0] == 'loc'){
@@ -3303,7 +3462,7 @@ case 'kontak':
 if(!itsMe) return reply(mess.only.ownerB)
 asu = q.split('|')[0]
 asu2 = q.split('|')[1]
-if (!asu) return reply2(`Penggunaan ${prefix}kontak @tag atau nomor|nama`)
+if (!asu) return fake(`Penggunaan ${prefix}kontak @tag atau nomor|nama`)
 if (tod.message.extendedTextMessage != undefined){
 	mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
 	wa.sendKontak(from,mentioned[0].split('@')[0], asu2, tod)
@@ -3314,7 +3473,7 @@ break
 case 'kontag':
 if(!itsMe) return reply(mess.only.ownerB)
 argz = arg.split('|')
-if (!argz) return reply2(`Penggunaan ${prefix}kontak @tag atau nomor|nama`)
+if (!argz) return fake(`Penggunaan ${prefix}kontak @tag atau nomor|nama`)
 if (tod.message.extendedTextMessage != undefined){
 	mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
 	wa.hideTagKontak(from,mentioned[0].split('@')[0], argz[1])
