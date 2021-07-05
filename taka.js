@@ -794,7 +794,7 @@ zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, 
                 "previewType": "",
                 "thumbnailUrl": "",
                 "thumbnail": fakeimage,
-                "sourceUrl": https://github.com/'
+                "sourceUrl": 'https://github.com/'
             }},
 			quoted: rep
 })
