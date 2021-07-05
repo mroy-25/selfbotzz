@@ -13,7 +13,8 @@
 	waChatKey,
 	mentionedJid,
 	processTime,
-    ChatModification
+	generateMessageID,
+    	ChatModification
 } = require('@adiwajshing/baileys');
 const wa = require('./whatsapp/message')
 const skrep = require('./skrep')
