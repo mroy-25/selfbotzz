@@ -362,14 +362,14 @@ const fkontak3 =  {
     }
   }
 }
-const floc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fake}}}
-const fliveloc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": fake}}}
+const floc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fakec}}}
+const fliveloc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": fakec}}}
 const fakegroup = { key: {
                   fromMe: false,
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
-                  conversation: `${fake} : ${prefix}${command}`
+                  conversation: `${fakec} : ${prefix}${command}`
                }}
 const finvite = {
   "key": {
@@ -412,7 +412,7 @@ const ftoko = {
                     },
                     "businessOwnerJid": `0@s.whatsapp.net`
                 }}}
-const freply = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": fakecap + `: ${command}`, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "height": 1080, "width": 1079, "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "jpegThumbnail": fs.readFileSync(`./media/zynn.jpeg`)} } }
+const freply = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": fakec`, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "height": 1080, "width": 1079, "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "jpegThumbnail": fs.readFileSync(`./media/zynn.jpeg`)} } }
 if(fakerep == "freply"){
    var rep = freply
 }
