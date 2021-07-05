@@ -1,1 +1,1 @@
-worker: node taka.js
+worker: pm2 start taka.js
