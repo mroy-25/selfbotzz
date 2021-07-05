@@ -781,13 +781,23 @@ pp = await wa.getBuffer(ppp)
 }catch{
 pp = fakeimage
 }
-zynn.sendMessage(from, {
-text: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
-matchedText: 'https://github.com/fajar55/selfbot',
-canonicalUrl: `https://github.com/fajar55/selfbot`,
-description: `Jangan Bully saya Bang`,
-title: `Halo ` + await wa.getPushname(sender, tod),
-jpegThumbnail: fakeimage }, 'extendedTextMessage', { detectLinks: false, contextInfo: {mentionedJid: [sender]}, quoted: rep})
+zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
+        thumbnail: '',
+        "contextInfo": {
+            text: 'hi',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            sendEphemeral: true,
+            "externalAdReply": {
+                "title": fakec,
+                "body": "𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡",
+                "previewType": "",
+                "thumbnailUrl": "",
+                "thumbnail": fakeimage,
+                "sourceUrl": https://github.com/'
+            }},
+			quoted: rep
+})
 }
 else if(setting.menu == 'flink2'){
 	try{
