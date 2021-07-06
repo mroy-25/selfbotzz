@@ -940,7 +940,7 @@ case 'swm':
 					fake(`Kirim gambar/video dengan caption ${prefix}stickerwm nama|author atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`, id)
 				}
 				break
-case 'colong':
+/*case 'colong':
 if (!isQuotedSticker) return fake(`Reply sticker dengan caption *${prefix}colong*`)
 var encmediia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 const meidia = await zynn.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
@@ -965,6 +965,47 @@ wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
 fs.unlinkSync(media)
 fs.unlinkSync(`./sticker/takestick_${sender}.exif`)
 })
+break
+*/
+case 'colong':
+if(isQuotedSticker){
+	boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+	owgi = await zynn.downloadMediaMessage(boij)
+	idc = await GenerateSerialNumber('0000')
+	path = `./media/colong_${idc}.jpeg`
+	await fs.writeFileSync(path, owgi)
+	var imgbb = require('imgbb-uploader')
+	anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", path)
+	res = `${anu.display_url}`
+	fs.unlinkSync(path)
+	try{
+		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(setting.author)}&pack=${encodeUrl(setting.pack)}&apikey=hardianto`)
+		wa.sendSticker(from, data, tod)
+	}catch{
+		reply(mess.error.api)
+	}
+}break
+case 'takestick':
+if (!isQuotedSticker) return fake(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
+const pembawm = body.slice(11)
+if (!pembawm.includes('|')) return fake(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
+	boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+	owgi = await zynn.downloadMediaMessage(boij)
+idc = await GenerateSerialNumber('0000')
+	path = `./media/takestick_${idc}.jpeg`
+	await fs.writeFileSync(path, owgi)
+const packname = q.split('|')[0]
+const author = q.split('|')[1]
+var imgbb = require('imgbb-uploader')
+	anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", path)
+	res = `${anu.display_url}`
+	fs.unlinkSync(path)
+	try{
+		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(author)}&pack=${encodeUrl(packname)}&apikey=hardianto`)
+		wa.sendSticker(from, data, tod)
+	}catch{
+		reply(mess.error.api)
+	}
 break
 case 'tovideo':
 case 'tomp4':
@@ -1070,11 +1111,20 @@ if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isA
 })
 }
 break
-case 'exif':
+/*case 'exif':
 if(!itsMe) return
 if (args.length < 1) return fake(`Penggunaan ${prefix}exif nama|author`)
 if (!arg.split('|')) return fake(`Penggunaan ${prefix}exif nama|author`)
 exif.create(arg.split('|')[0], arg.split('|')[1])
+fake('sukses')
+break*/
+case 'exif':
+if(!itsMe) return
+if (args.length < 1) return fake(`Penggunaan ${prefix}exif nama|author`)
+if (!arg.split('|')) return fake(`Penggunaan ${prefix}exif nama|author`)
+setting.packname = q.split('|')[0]
+setting.author = q.split('|')[1]
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 fake('sukses')
 break
 case 'public':
