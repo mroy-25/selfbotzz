@@ -300,17 +300,20 @@ const mek = new z
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                }, message: { "documentMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "title": fakec, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./media/zynn.jpeg')}}}
             
 
 const troli =  { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                }, message: {orderMessage: {itemCount: 0, status: 200, thumbnail: fakeimage, surface: 200, message: fakec, orderTitle: 'zynn', sellerJid: fakenomor} } } 
 
 const faudio = { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
@@ -318,6 +321,7 @@ const faudio = { key: {
                }}}
 const fvn = { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
@@ -325,6 +329,7 @@ const fvn = { key: {
                }}}
 const fkontak = { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
@@ -332,6 +337,7 @@ const fkontak = { key: {
                }}}
 const fkontak2 = { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
@@ -352,6 +358,7 @@ const fkontak2 = { key: {
 const fkontak3 =  {
   "key": {
     "fromMe": false,
+"id": generateMessageID(),
 "participant":"0@s.whatsapp.net",
     "remoteJid": "0@s.whatsapp.net"
   },
@@ -362,10 +369,11 @@ const fkontak3 =  {
     }
   }
 }
-const floc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fakec}}}
-const fliveloc = { key: { fromMe: false, participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": fakec}}}
+const floc = { key: { fromMe: false, id: generateMessageID(), participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fakec}}}
+const fliveloc = { key: { fromMe: false, id: generateMessageID(), participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": fakec}}}
 const fakegroup = { key: {
                   fromMe: false,
+	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                },
                message: {
