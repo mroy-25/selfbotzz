@@ -1,6 +1,10 @@
 /*BY FAJAR thx to aqul hexagon */
  const {
 	WAConnection: _WAConnection,
+	 MessageType,
+	Presence,
+	MessageOptions,
+	Mimetype,
 	 WALocationMessage,
 	WA_MESSAGE_STUB_TYPES,
 	ReconnectMode,
