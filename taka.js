@@ -1170,7 +1170,7 @@ if (!arg) return fake(`Penggunaan ${prefix}setfaketext teks`)
 setting.fake = q
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
-fakecap = setting.fake
+fakec = setting.fake
 fake(`Sukses Mengubah Text fake ke ` + q)
 break
 case 'setmenu':
