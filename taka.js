@@ -983,7 +983,7 @@ if(isQuotedSticker){
 	res = `${anu.display_url}`
 	fs.unlinkSync(path)
 	try{
-		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(setting.author)}&pack=${encodeUrl(setting.pack)}&apikey=hardianto`)
+		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(setting.packname)}&pack=${encodeUrl(setting.author)}&apikey=hardianto`)
 		wa.sendSticker(from, data, tod)
 	}catch{
 		reply(mess.error.api)
@@ -1005,7 +1005,7 @@ var imgbb = require('imgbb-uploader')
 	res = `${anu.display_url}`
 	fs.unlinkSync(path)
 	try{
-		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(author)}&pack=${encodeUrl(packname)}&apikey=hardianto`)
+		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(packname)}&pack=${encodeUrl(author)}&apikey=hardianto`)
 		wa.sendSticker(from, data, tod)
 	}catch{
 		reply(mess.error.api)
