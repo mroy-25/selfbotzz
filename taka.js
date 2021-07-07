@@ -517,7 +517,7 @@ mimetype: 'audio/mp4',
 }
 const fake = async(text) =>{
 if(!rep === tod){
-	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{mentionedJid: [sender}, forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
+	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{mentionedJid: [sender], forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
 	zynn.updatePresence(from, Presence.composing)
 }
 else{
