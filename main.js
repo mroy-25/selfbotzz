@@ -26,37 +26,7 @@ function nocache(module, cb = () => { }) {
         cb(module)
     })
 }
-exports.connects = async() => {
-    let authofile = './session.json'
-    zynn.version = [2, 2119, 6]
-    zynn.logger.level = 'warn'
-    zynn.on('qr', qr => {
-        qrcode.generate(qr, { small: true })
-        console.log(`QR Siap, Scan Pack`)
-    })
-    /*
-    zynn.on('credentials-updated', () => {
-        fs.writeFileSync(authofile, JSON.stringify(zynn.base64EncodedAuthInfo(), null, '\t'))
-        console.log(color('Wait....'))
-    })
-    */
-    fs.existsSync(authofile) && zynn.loadAuthInfo(authofile)
-    zynn.on('connecting', () => {
-        console.log(color('Connecting...'))
-    })
-    zynn.on('open', () => {
-        console.log(color('Welcome Owner'))
-    })
-    await zynn.connect({timeoutMs: 30*1000})
-    fs.writeFileSync(authofile, JSON.stringify(zynn.base64EncodedAuthInfo(), null, '\t'))
-    zynn.on('chat-update', async (message) => {
-        require('./taka.js')(zynn, message)
-    })
-exports.zynn = zynn
-    return zynn
-}
-
-const connect = async() => {
+const connects = async() => {
     let authofile = './session.json'
     zynn.version = [2, 2119, 6]
     zynn.logger.level = 'warn'
@@ -79,6 +49,11 @@ const connect = async() => {
 	})
 	await zynn.connect({timeoutMs: 30*1000})
     fs.writeFileSync(authofile, JSON.stringify(zynn.base64EncodedAuthInfo(), null, '\t'))
+zynn.on('CB:action,,battery', json => {
+const batteryLevelStr = json[2][0][1].value
+const batterylevel = parseInt(batteryLevelStr)
+fs.writeFileSync('./src/batre.json' , JSON.stringify(json[2][0], null , 2))
+})
 zynn.on('group-participants-update', async (msg) => {
 console.log('Group Change')
 require('./src/detection.js')(zynn, msg)
@@ -119,3 +94,4 @@ function uncache(module = '.') {
     })
 }
 connect()
+module.exports.connects = connects;
