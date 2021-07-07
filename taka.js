@@ -475,9 +475,56 @@ const flink2 = (img1, img2, url, teks) => {
 			quoted: rep
 })
 }
+const fek = (buff, thumb, url, title) => {
+if(!rep === tod){
+	 zynn.sendMessage(from, buff, MessageType.audio, {
+        "contextInfo": {
+	mentionedJid: [sender],
+mimetype: 'audio/mp4',
+            text: 'hi',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            sendEphemeral: true,
+            "externalAdReply": {
+                "title": title,
+                "body": "",
+                "previewType": "PHOTO",
+                "thumbnailUrl": "",
+                "thumbnail": thumb,
+                "sourceUrl": url
+            }},
+			quoted: rep
+})
+}
+else{
+	zynn.sendMessage(from, buff, MessageType.audio, {
+        "contextInfo": {
+mimetype: 'audio/mp4',
+            text: 'hi',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            sendEphemeral: true,
+            "externalAdReply": {
+                "title": title,
+                "body": "",
+                "previewType": "PHOTO",
+                "thumbnailUrl": "",
+                "thumbnail": thumb,
+                "sourceUrl": url
+            }},
+			quoted: rep
+})
+}
+}
 const fake = async(text) =>{
+if(!rep === tod){
 	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
 	zynn.updatePresence(from, Presence.composing)
+}
+else{
+	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
+	zynn.updatePresence(from, Presence.composing)
+}
 }
 const createSticker = async(path) => {
 ran = wa.getRandom('.webp')
@@ -2791,8 +2838,10 @@ try{
 		return sendMediaURL(from, thumb, `*P L A Y  M U S I C*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
 	}
 	teks = `*P L A Y  M U S I C*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n\nTunggu sebentar\nMusic segera dikirim`
-	await sendMediaURL(from, thumb, teks)
-	sendFileFromUrl(from, dl_link)
+	buff1 = await wa.getBuffer(thumb)
+	wa.sendImage(from, buff1, tod, teks)
+	buff = await wa.getBuffer(dl_link)
+	fek(buff, buff1, '', 'Playing : ' + title)
 	}catch(e){
 	reply(mess.error.api)
 }
@@ -2810,8 +2859,10 @@ try{
 		return sendMediaURL(from, thumb, `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
 	}
 	teks = `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n\nTunggu sebentar\nMusic segera dikirim`
-	await sendMediaURL(from, thumb, teks)
-	sendMediaURL(from, dl_link)
+	buff1 = await wa.getBuffer(thumb)
+	wa.sendImage(from, buff1, tod, teks)
+	buff = await wa.getBuffer(dl_link)
+	fek(buff, buff1, '', 'YTMP3 : ' + title)
 }catch(e){
 	reply(mess.error.api)
 }
