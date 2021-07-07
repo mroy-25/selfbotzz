@@ -126,12 +126,6 @@ function pipeEmit(event, event2, prefix = '') {
         }
     }
 }
-const zynz = conn.zynn
-zynz.on('CB:action,,battery', json => {
-const batteryLevelStr = json[2][0][1].value
-const batterylevel = parseInt(batteryLevelStr)
-fs.writeFileSync('./src/batre.json' , JSON.stringify(json[2][0], null , 2))
-})
 module.exports = zynn = async (zynn, tod) => {
     try {
         if (!tod.hasNewMessage) return
