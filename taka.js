@@ -765,7 +765,7 @@ var shep = shp
             "itemCount": 1,
             "status": "INQUIRY",
             "surface": "CATALOG",
-            "message": help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+            "message": help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
             "orderTitle": "</ Hanya Orang Biasa",
             "sellerJid": "6281990498472@s.whatsapp.net",
             "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
@@ -781,7 +781,7 @@ pp = await wa.getBuffer(ppp)
 }catch{
 pp = fakeimage
 }
-zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
+zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
             text: 'hi',
@@ -806,10 +806,10 @@ else if(setting.menu == 'flink2'){
 	}catch{
 		buff = fakeimage
 	}
-	flink2(fakeimage, buff, 'https://github.com/', help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
 else{
-			zynn.sendMessage(from, ppimg, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
 break
 case 'stickmenu':
