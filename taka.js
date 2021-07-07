@@ -1,6 +1,6 @@
 /*BY FAJAR thx to aqul hexagon */
  const {
-	WAConnection: _WAConnection,
+	WAConnection,
 	 MessageType,
 	Presence,
 	MessageOptions,
@@ -279,8 +279,6 @@ var countDownDate = new Date(tanggal).getTime();
  result = `${dayss} Hari ${hourss} Jam ${minutess} Menit ${secondss} Detik`
 return result
 }
-const z = await simple.WAConnection(_WAConnection)
-const mek = new z
         const botNumber = zynn.user.jid
 		const isGroup = from.endsWith('@g.us')
 		const Owner = ['32495947149@s.whatsapp.net', '6287798005230@s.whatsapp.net', '6281990498472@s.whatsapp.net', '13342199618@s.whatsapp.net']
