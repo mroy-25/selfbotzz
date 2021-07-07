@@ -17,8 +17,6 @@ const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
 const zynn = new connectt()
-zynn.version = [2, 2119, 6]
-exports.zynn = zynn
 require('./taka.js')
 nocache('./taka.js', module => console.log(`${module} is now updated!`))
 function nocache(module, cb = () => { }) {
@@ -30,6 +28,7 @@ function nocache(module, cb = () => { }) {
 }
 exports.connects = async() => {
     let authofile = './session.json'
+    zynn.version = [2, 2119, 6]
     zynn.logger.level = 'warn'
     zynn.on('qr', qr => {
         qrcode.generate(qr, { small: true })
@@ -53,11 +52,13 @@ exports.connects = async() => {
     zynn.on('chat-update', async (message) => {
         require('./taka.js')(zynn, message)
     })
+exports.zynn = zynn
     return zynn
 }
 
 const connect = async() => {
     let authofile = './session.json'
+    zynn.version = [2, 2119, 6]
     zynn.logger.level = 'warn'
 	zynn.on('qr', qr => {
         qrcode.generate(qr, { small: true })
