@@ -477,10 +477,9 @@ const flink2 = (img1, img2, url, teks) => {
 }
 const fek = (buff, thumb, url, title) => {
 if(!rep === tod){
-	 zynn.sendMessage(from, buff, MessageType.audio, {
+	 zynn.sendMessage(from, buff, MessageType.audio, {mimetype: 'audio/mp4',
         "contextInfo": {
 	mentionedJid: [sender],
-mimetype: 'audio/mp4',
             text: 'hi',
             "forwardingScore": 1000000000,
             isForwarded: true,
@@ -518,7 +517,7 @@ mimetype: 'audio/mp4',
 }
 const fake = async(text) =>{
 if(!rep === tod){
-	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
+	zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{mentionedJid: [sender}, forwardingScore: 508, isForwarded: true}, sendEphemeral: true, thumbnail: fs.readFileSync(`./media/zynn.jpeg`)})
 	zynn.updatePresence(from, Presence.composing)
 }
 else{
