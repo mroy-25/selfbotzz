@@ -12,11 +12,11 @@ const {
     GroupSettingChange
 } = require('@adiwajshing/baileys')
 const simple = require('./lib/simple')
-let connectt = simple.WAConnection(_WAConnection)
+let WAConnection = simple.WAConnection(_WAConnection)
 const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
-const zynn = new connectt()
+let zynn = new WAConnection()
 require('./taka.js')
 nocache('./taka.js', module => console.log(`${module} is now updated!`))
 function nocache(module, cb = () => { }) {
