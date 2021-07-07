@@ -17,6 +17,7 @@ const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
 let zynn = new WAConnection()
+export.zynn = zynn
 require('./taka.js')
 nocache('./taka.js', module => console.log(`${module} is now updated!`))
 function nocache(module, cb = () => { }) {
