@@ -1227,37 +1227,9 @@ case 'term':
 				})
 break
 case 'speed':
-let timestamp = speed();
-let latensi = speed() - timestamp
-fake(`Speed: ${latensi.toFixed(4)}second`)
-break
 case 'ping':
-let i = []
-let giid = []
-for (mem of totalchat){
-	i.push(mem.jid)
-	}
-for (id of i){
-	if (id && id.includes('g.us')){
-		giid.push(id)
-	}
-}
-let timestampi = speed();
-let latensii = speed() - timestampi
-teskny = `*L O A D E D  M E S S A G E*\n\n${shp} *Group Chat :* ${giid.length}
-${shp} *Personal Chat :* ${totalchat.length - giid.length}
-${shp} *Total Chat :* ${totalchat.length}
-${shp} *Speed :* ${latensii.toFixed(4)} Second
-${shp} *Runtime :* ${runtime(run)}\n
-*I N F O  D E V I C E*\n
-${shp} *V. Whatsapp :* ${wa_version}
-${shp} *RAM :* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-${shp} *MCC :* ${mcc}
-${shp} *MNC :* ${mnc}
-${shp} *Versi OS :* ${os_version}
-${shp} *Merk HP :* ${device_manufacturer}
-${shp} *Versi HP :* ${device_model}`
-fake(teskny)
+const { speedz } = require('./lib/speed.js')
+speedz(zynn, reply)
 break
 case 'runtime':
 fake(runtime(run))
@@ -1583,48 +1555,22 @@ zynn.sendMessage(from, {displayname: 'Fajar_Ihsana', vcard: vcard}, MessageType.
 reply('Tuh nomor ownernya')
 break
 case 'caripesan':
-if(!q) return reply('Masukkan teks pesan yang akan dicari!')
-tagg = []
-jmlh = q.split('|')[1]
-if(!jmlh){
-	jmlh = 10
-}
-data = await zynn.searchMessages(q, tod.key.remoteJid, jmlh, 1)
-fox = `*C A R I  P E S A N*\n${shp} Query : ${q}\n\n`
-console.log(`Total ${data.messages.length} pesan didapatkan`)
-num = 0
-for(let i of data.messages){
-   num += 1
-   if (i.message.conversation) {
-    if (i.key.fromMe){ 
-        fox += `${shp} Nama: `+zynn.user.name+`\n${shp} Tag : @`+zynn.user.jid.split("@")[0]+`\n${shp} Msg : `+i.message.conversation+`\n${shp} MsgID : `+i.key.id+`\n${shp} Type:  conversation\n\n`
-    }else{
-    	pushnama = await wa.getPushname(i.participant, tod)
-    	fox += `${shp} Nama: `+pushnama+`\n${shp} Tag : @`+i.participant.split("@")[0]+`\n${shp} Msg : `+i.message.conversation+`\n${shp} MsgID : `+i.key.id+`\n${shp} Type :  conversation\n\n`
-    } 
-}
-else if (i.message.extendedTextMessage){
-    if (i.key.fromMe){ 
-        fox += `${shp} Nama: `+zynn.user.name+`\n${shp} Tag : @`+zynn.user.jid.split("@")[0]+`\n${shp} Msg : `+i.message.extendedTextMessage.text+`\n${shp} MsgID : `+i.key.id+`\n${shp} Type :  extendedTextMessage\n\n`
-    }else{
-    	pushnama = await wa.getPushname(i.participant, tod)
-    	fox += `${shp} Nama: `+pushnama+`\n${shp} Tag : @`+i.participant.split("@")[0]+`\n${shp} Msg : `+i.message.extendedTextMessage.text+`\n${shp} MsgID : `+i.key.id+`\n${shp} Type :  extendedTextMessage\n\n`
-    }
-}
-else if(i.message.ephemeralMessage){
-	if (i.key.fromMe){ 
-        fox += `${shp} Nama: `+zynn.user.name+`\n${shp} Tag : @`+zynn.user.jid.split("@")[0]+`\n${shp} Msg : `+i.message.ephemeralMessage.message.extendedTextMessage.text+`\n${shp} MsgID : `+i.key.id+`\n${shp} Type :  ephemeralMessage\n\n`
-    }else{
-    	pushnama = await wa.getPushname(i.participant, tod)
-        fox += `${shp} Nama: `+pushnama+`\n${shp} Tag : @`+i.participant.split("@")[0]+`\n${shp} Msg : `+i.message.ephemeralMessage.message.extendedTextMessage.text+`\n${shp} MsgID : `+i.key.id+`\n${shp} Type :  ephemeralMessage\n\n`
-    }
-	}
-tagg.push(i.participant)
-tagg.push(zynn.user.jid)
-}
-console.log(fox)
-wa.Mentions(from, fox, tagg, tod)
-break
+            if(!q)return reply('pesannya apa bang?')
+            let v = await zynn.searchMessages(q,from,15,1)
+            let s = v.messages
+            let el = s.filter(v => v.message)
+            el.shift()
+            try {
+            if(el[0].message.conversation == undefined) return
+            reply(`Ditemukan ${el.length} pesan`)
+            await wa.sleep(3000)
+            for(let i = 0; i < el.length; i++) {
+            await zynn.sendMessage(from,'Nih pesannya',text,{quoted:el[i]})
+            }
+            } catch(e){
+            reply('Pesan tidak ditemukan!')
+            }           
+            break
 case 'listpc':
 if(!itsMe) return
 cpc = await wa.getpc(totalchat)
@@ -1819,8 +1765,17 @@ console.log(data)
 if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true) return reply('Tidak mendukung sticker gif')
 fake(mess.wait)
 const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-ran = await wa.getRandom('.png')
+const media = await zynn.downloadMediaMessage(encmedia)
+let toBase64 = media.toString('base64')
+let upload = await require("./lib/uptoturu")(toBase64)
+data = await ameapi.generate(asu, {url: upload.image.image.url})
+        console.log(data)
+        buff = Buffer.from(data, 'base64')
+        await fs.writeFileSync(`./${asu}.jpg`, buff)
+        ples = `./${asu}.jpg`
+        createSticker(ples, sender, asu)
+	}
+/*ran = await wa.getRandom('.png')
 exec(`ffmpeg -i ${media} ${ran}`,async (err) => {
         fs.unlinkSync(media)
         if (err) {
@@ -1840,7 +1795,7 @@ exec(`ffmpeg -i ${media} ${ran}`,async (err) => {
         createSticker(ples, sender, asu)
 	}
  })
-}
+}*/
 else if(!tod.message.extendedTextMessage.contextInfo.participant == ''){
 	fake(mess.wait)
         try{
