@@ -93,5 +93,5 @@ function uncache(module = '.') {
         }
     })
 }
-connect()
+connects()
 module.exports.connects = connects;
