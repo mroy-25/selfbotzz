@@ -1693,7 +1693,7 @@ else{
 reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
 }
 break
-case 'swasted':
+/*case 'swasted':
 case 'swanted':
 case 'sutatoo':
 case 'sunsharpen':
@@ -1795,7 +1795,7 @@ exec(`ffmpeg -i ${media} ${ran}`,async (err) => {
         createSticker(ples, sender, asu)
 	}
  })
-}*/
+}
 else if(!tod.message.extendedTextMessage.contextInfo.participant == ''){
 	fake(mess.wait)
         try{
@@ -1817,6 +1817,7 @@ else{
 reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
 }
 break
+*/
 case 'pinterest':
 if(!q) return reply('Mau cari apa dipinterest?')
 fake(mess.wait)
