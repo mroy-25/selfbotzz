@@ -423,13 +423,19 @@ exports.getbusinessprof = async(jid) => {
             jid: wid,
         }
     }
-exports.add = async(orangnya) => {
+exports.add = async(orangnya, tod) => {
+if(orangnya.match('@s.whatsapp.net')){
+orang = orangnya
+}
+else{
 orang = orangnya + '@s.whatsapp.net'
+}
 response = await zynn.groupAdd(from, [orang])
-console.log(response.participants)
-for (let user of response.participants.filter(user => Object.values(user)[0].code == 403)) {
-console.log(user)
-let inv = (Object.values(user))
-zynn.sendGroupV4Invite(from, testt, inv[0].invite_code, inv[0].invite_code_exp, false ,`Invitation to join my WhatsApp group`)
+o = response.participants[0]
+let inv = (Object.values(o))
+if(inv[0].code == 409) return reply('Orang yang anda add sudah ada didalam Group!')
+else if(inv[0].code == 403){
+zynn.sendMessage(from, 'Mengirim Undangan Group Ke ${orangnya}' MesssageType.text, {quoted: tod, contextInfo: {mentionedJid: [orang]}})
+zynn.sendGroupV4Invite(from, orang, inv[0].invite_code, inv[0].invite_code_exp, false ,`Invitation to join my WhatsApp group`)
 }
 }
