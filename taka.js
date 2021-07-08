@@ -1323,7 +1323,7 @@ case 'add':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
 if (!arg) return fake(`Penggunaan ${prefix}add 628xxxx`)
-	wa.add2(from, args[0])
+	wa.add2(from, args[0], tod, reply)
 	fake(`Otw...`)
 break
 case 'fakethumb':
