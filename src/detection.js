@@ -65,7 +65,7 @@ module.exports = zynz = async (zynn, anu) => {
 if(anu.participants[0] === zynn.user.jid) return zynn.sendMessage(anu.jid, teks, MessageType.text)
 	if (!welkom.includes(anu.jid)) return
 	if(setting.picdetec === true){
-	img = `https://pecundang.herokuapp.com/api/canvaswelbg?name=${encodeUrl(namaewa)}&avatar=${shortpc.data}&background=https://www.photohdx.com/images/2016/05/red-blurry-background.jpg&gcname=${encodeUrl(mdata.subject)}&jumlahmem=${mdata.participants.length}`
+	img = `https://dapuhy-api.herokuapp.com/api/canvas/welcome2?name=${encodeUrl(namaewa)}&discriminator=8253&member=${mdata.participants.length}&gcname=${encodeUrl(mdata.subject)}&pp=${shortpc.data}&bg=https://telegra.ph/file/6978a64214fcc081a6263.jpg&apikey=LLRHVIWF`
 	}
             num = anu.participants[0]
             user = '@' + num.split('@')[0]
@@ -105,7 +105,7 @@ Sering nimbrung dan baca rules grup`
          } else if (anu.action == 'remove') {
             if(!left.includes(anu.jid)) return
 	if(setting.picdetec === true){
-	img = `https://pecundang.herokuapp.com/api/canvasbyebg?name=${encodeUrl(namaewa)}&avatar=${shortpc.data}&background=https://www.photohdx.com/images/2016/05/red-blurry-background.jpg&gcname=${encodeUrl(mdata.subject)}&jumlahmem=${mdata.participants.length}`
+	img = `https://dapuhy-api.herokuapp.com/api/canvas/goodbye2?name=${encodeUrl(namaewa)}&discriminator=8253&member=${mdata.participants.length}&gcname=${encodeUrl(mdata.subject)}&pp=${shortpc.data}&bg=https://telegra.ph/file/6978a64214fcc081a6263.jpg&apikey=LLRHVIWF`
 	}
             num = anu.participants[0]
             user = '@' + num.split('@')[0]
