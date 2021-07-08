@@ -477,7 +477,7 @@ const flink2 = (img1, img2, url, teks) => {
 }
 const fek = (buff, thumb, url, title) => {
 if(!rep === tod){
-	 zynn.sendMessage(from, buff, MessageType.audio, {mimetype: 'audio/mp4',
+	 zynn.sendMessage(from, buff, MessageType.audio, {mimetype: 'audio/mp4', filename: 'audio.mp3',
         "contextInfo": {
 	mentionedJid: [sender],
             text: 'hi',
