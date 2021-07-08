@@ -435,7 +435,7 @@ o = response.participants[0]
 let inv = (Object.values(o))
 if(inv[0].code == 409) return reply('Orang yang anda add sudah ada didalam Group!')
 else if(inv[0].code == 403){
-zynn.sendMessage(from, 'Mengirim Undangan Group Ke @${orangnya}', MessageType.text, {quoted: tod, contextInfo: {mentionedJid: [orang]}})
+zynn.sendMessage(from, `Mengirim Undangan Group Ke @${orangnya}`, MessageType.text, {quoted: tod, contextInfo: {mentionedJid: [orang]}})
 zynn.sendGroupV4Invite(from, orang, inv[0].invite_code, inv[0].invite_code_exp, false ,`Invitation to join my WhatsApp group`)
 }
 }
