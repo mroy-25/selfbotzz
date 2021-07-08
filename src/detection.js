@@ -65,7 +65,7 @@ module.exports = zynz = async (zynn, anu) => {
 if(anu.participants[0] === zynn.user.jid) return zynn.sendMessage(anu.jid, teks, MessageType.text)
 	if (!welkom.includes(anu.jid)) return
 	if(setting.picdetec === true){
-	img = `https://dapuhy-api.herokuapp.com/api/canvas/welcome2?name=${encodeUrl(namaewa)}&discriminator=8253&member=${mdata.participants.length}&gcname=${encodeUrl(mdata.subject)}&pp=${shortpc.data}&bg=https://telegra.ph/file/6978a64214fcc081a6263.jpg&apikey=LLRHVIWF`
+	img = await axios.get(`https://dapuhy-api.herokuapp.com/api/canvas/welcome2?name=${encodeUrl(namaewa)}&discriminator=8253&member=${mdata.participants.length}&gcname=${encodeUrl(mdata.subject)}&pp=${shortpc.data}&bg=https://telegra.ph/file/6978a64214fcc081a6263.jpg&apikey=LLRHVIWF`)
 	}
             num = anu.participants[0]
             user = '@' + num.split('@')[0]
@@ -77,7 +77,7 @@ if(anu.participants[0] === zynn.user.jid) return zynn.sendMessage(anu.jid, teks,
              textwel2 = `${textwel1.replace("@subject",gcname)}`
 		textwel3 = `${textwel2.replace("@desc", desc)}`
 		if(setting.picdetec === true){
-		return wa.sendFileFromUrl(mdata.id, img, finvite, textwel3, [num])
+		return wa.sendFileFromUrl(mdata.id, img.data.result, finvite, textwel3, [num])
          	}
 		else{
                 return zynn.sendMessage(mdata.id, textwel3, MessageType.text, {contextInfo: {"mentionedJid": [num]}, quoted: finvite})
@@ -105,7 +105,7 @@ Sering nimbrung dan baca rules grup`
          } else if (anu.action == 'remove') {
             if(!left.includes(anu.jid)) return
 	if(setting.picdetec === true){
-	img = `https://dapuhy-api.herokuapp.com/api/canvas/goodbye2?name=${encodeUrl(namaewa)}&discriminator=8253&member=${mdata.participants.length}&gcname=${encodeUrl(mdata.subject)}&pp=${shortpc.data}&bg=https://telegra.ph/file/6978a64214fcc081a6263.jpg&apikey=LLRHVIWF`
+	img = await axios.get(`https://dapuhy-api.herokuapp.com/api/canvas/goodbye2?name=${encodeUrl(namaewa)}&discriminator=8253&member=${mdata.participants.length}&gcname=${encodeUrl(mdata.subject)}&pp=${shortpc.data}&bg=https://telegra.ph/file/6978a64214fcc081a6263.jpg&apikey=LLRHVIWF`)
 	}
             num = anu.participants[0]
             user = '@' + num.split('@')[0]
@@ -117,7 +117,7 @@ Sering nimbrung dan baca rules grup`
              textleft2 = `${textleft1.replace("@gcname",gcname)}`
 		textleft3 = `${textleft2.replace("@desc", desc)}`
                 if(setting.picdetec === true){
-                return wa.sendFileFromUrl(mdata.id, img, finvite, textleft3, [num])
+                return wa.sendFileFromUrl(mdata.id, img.data.result, finvite, textleft3, [num])
                 }
                 else{
                 return zynn.sendMessage(mdata.id, textleft3, MessageType.text, {contextInfo: {"mentionedJid": [num]}, quoted: finvite})
