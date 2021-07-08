@@ -423,7 +423,7 @@ exports.getbusinessprof = async(jid) => {
             jid: wid,
         }
     }
-exports.add = async(orangnya, tod) => {
+exports.add = async(from, orangnya, tod) => {
 if(orangnya.match('@s.whatsapp.net')){
 orang = orangnya
 }
