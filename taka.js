@@ -2837,10 +2837,8 @@ try{
 		return sendMediaURL(from, thumb, `*P L A Y  M U S I C*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
 	}
 	teks = `*P L A Y  M U S I C*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n\nTunggu sebentar\nMusic segera dikirim`
-	buff1 = await wa.getBuffer(thumb)
-	wa.sendImage(from, buff1, tod, teks)
-	buff = await wa.getBuffer(dl_link)
-	fek(buff, buff1, '', 'Playing : ' + title)
+	wa.sendFileFromUrl(from, thumb, tod, teks)
+	wa.sendFileFromUrl(from, dl_link, tod)
 	}catch(e){
 	reply(mess.error.api)
 }
@@ -2858,10 +2856,8 @@ try{
 		return sendMediaURL(from, thumb, `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
 	}
 	teks = `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n\nTunggu sebentar\nMusic segera dikirim`
-	buff1 = await wa.getBuffer(thumb)
-	wa.sendImage(from, buff1, tod, teks)
-	buff = await wa.getBuffer(dl_link)
-	fek(buff, buff1, '', 'YTMP3 : ' + title)
+	wa.sendFileFromUrl(from, thumb, tod, teks)
+	wa.sendFileFromUrl(from, dl_link, tod)
 }catch(e){
 	reply(mess.error.api)
 }
