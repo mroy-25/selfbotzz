@@ -1323,8 +1323,8 @@ case 'add':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
 if (!arg) return fake(`Penggunaan ${prefix}add 628xxxx`)
-	wa.add(from, [args[0] + '@s.whatsapp.net'])
-	fake(`Otw..., Kalo ga bisa berarti dia private ok`)
+	wa.add2(from, args[0])
+	fake(`Otw...`)
 break
 case 'fakethumb':
 if ((isMedia && !tod.message.videoMessage || isQuotedImage)) {
