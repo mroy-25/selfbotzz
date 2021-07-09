@@ -2,6 +2,65 @@ const cheerio = require('cheerio')
 const fetch = require('node-fetch')
 const axios = require('axios')
 
+exports.ghfollower = (query) => {
+        return new Promise((resolve,reject) => {
+                axios.get('https://github.com/'+ query + '?tab=followers')
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const link = [];
+                        const result = [];
+                        const username = [];
+                        $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div > div > div > div.d-table-cell.col-9.v-align-top.pr-3 > a').each(function(a,b) {
+                                link.push('https://github.com/' + $(b).attr('href'))
+                                username.push($(b).attr('href').split('/')[1])
+                        })
+                        for(let i=0; i<link.length; i++){
+                        	result.push({
+                        		username : username[i],
+                        		link : link[i]
+                        	})
+                        }
+                        const hasil = {
+                        	username : $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-3.mb-4.mb-md-0 > div > div.clearfix.d-flex.d-md-block.flex-items-center.mb-4.mb-md-0 > div.vcard-names-container.float-left.col-12.py-3.js-sticky.js-user-profile-sticky-fields > h1 > span.p-nickname.vcard-username.d-block').text().split('\n')[1].replace('        ',''),
+                        	followers : $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-3.mb-4.mb-md-0 > div > div.d-flex.flex-column > div.js-profile-editable-area.d-flex.flex-column.d-md-block > div.flex-order-1.flex-md-order-none.mt-2.mt-md-0 > div > a:nth-child(1) > span').text(),
+                        	avatar : $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-3.mb-4.mb-md-0 > div > div.clearfix.d-flex.d-md-block.flex-items-center.mb-4.mb-md-0 > div.position-relative.d-inline-block.col-2.col-md-12.mr-3.mr-md-0.flex-shrink-0 > a > img').attr('src'),
+                        	listfollowers : result
+                        }
+                  resolve(hasil)
+                })
+                .catch(reject)
+        })
+}
+exports.ghfollowing = (query) => {
+        return new Promise((resolve,reject) => {
+                axios.get('https://github.com/'+ query + '?tab=following')
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const link = [];
+                        const result = [];
+                        const username = [];
+                        $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div > div > div > div.d-table-cell.col-9.v-align-top.pr-3 > a').each(function(a,b) {
+                                link.push('https://github.com/' + $(b).attr('href'))
+                                username.push($(b).attr('href').split('/')[1])
+                        })
+                        for(let i=0; i<link.length; i++){
+                        	result.push({
+                        		username : username[i],
+                        		link : link[i]
+                        	})
+                        }
+                        const hasil = {
+                        	username : $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-3.mb-4.mb-md-0 > div > div.clearfix.d-flex.d-md-block.flex-items-center.mb-4.mb-md-0 > div.vcard-names-container.float-left.col-12.py-3.js-sticky.js-user-profile-sticky-fields > h1 > span.p-nickname.vcard-username.d-block').text().split('\n')[1].replace('        ',''),
+                        	following : $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-3.mb-4.mb-md-0 > div > div.d-flex.flex-column > div.js-profile-editable-area.d-flex.flex-column.d-md-block > div.flex-order-1.flex-md-order-none.mt-2.mt-md-0 > div > a:nth-child(2) > span').text(),
+                        	avatar : $('#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-3.mb-4.mb-md-0 > div > div.clearfix.d-flex.d-md-block.flex-items-center.mb-4.mb-md-0 > div.position-relative.d-inline-block.col-2.col-md-12.mr-3.mr-md-0.flex-shrink-0 > a > img').attr('src'),
+                        	listfollowing : result
+                        }
+                  resolve(hasil)
+                })
+                .catch(reject)
+        })
+}
+
 exports.corona = async (country) => {
   if (!country) return loghandler.noinput;
   try {
