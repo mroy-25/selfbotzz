@@ -2,6 +2,35 @@ const cheerio = require('cheerio')
 const fetch = require('node-fetch')
 const axios = require('axios')
 
+exports.ghuser = (query) => {
+        return new Promise((resolve,reject) => {
+                axios.get('https://github.com/search?q=' + query + '&type=users')
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const username = [];
+                        const link = [];
+                        const result = [];
+                        const thumb = [];
+                        $('#user_search_results > div > div > div.flex-auto > div > div.f4.text-normal > a.color-text-secondary').each(function(a,b) {
+                                link.push('https://github.com/' + $(b).attr('href'))
+                                usr = $(b).text();
+                                username.push(usr)
+                        })
+                        $('#user_search_results > div > div > div.flex-shrink-0.mr-2 > a > img').each(function(c,d) {
+                        thumb.push($(d).attr('src').replace('s=40&', ''))
+                    })
+                        for(let i=0; i<link.length; i++){
+                        	result.push({
+                        		name : username[i],
+                        		thumb : thumb[i],
+                        		link : link[i]
+                        	})
+                        }
+                  resolve(result)
+                })
+                .catch(reject)
+        })
+}
 exports.ghfollower = (query) => {
         return new Promise((resolve,reject) => {
                 axios.get('https://github.com/'+ query + '?tab=followers')
