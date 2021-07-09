@@ -5,9 +5,10 @@ const encodeUrl = require('encodeurl');
 const moment = require("moment-timezone");
 const wa = require('../whatsapp/message')
 const { color } = require('../lib/color')
+const set = JSON.parse(fs.readFileSync('./setting.json'))
 fakenomor = '0@s.whatsapp.net'
-fake = '</SELFBOTZ'
-shp = '▢'
+fake = set.fake
+shp = '♦️'
 module.exports = zynz = async (zynn, anu) => {
 	const setting = JSON.parse(fs.readFileSync('./setting.json'))
 	const welkam = JSON.parse(fs.readFileSync('./src/welkam.json'))
