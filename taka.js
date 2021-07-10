@@ -551,6 +551,16 @@ const isBaileys = async() =>{
 const isbileys = tod.message.extendedTextMessage.contextInfo.stanzaId.startsWith('3EB0') ? 'True' : 'False'
 reply(isbileys)
 }
+const isBusiness = async(orangnya) => {
+bus = await zynn.query({json: ['query', 'exist', orangnya], requiresPhoneConnection: false})
+try{
+	if(y.biz === true){
+	business = true
+}catch{
+	business = false
+}
+return(business)
+}
 const sendStickerFromUrlWithWM = async(url) => {
    ranp = wa.getRandom('.gif')
    rano = wa.getRandom('.webp')
@@ -4575,6 +4585,19 @@ if (!isGroup)return reply(mess.only.group)
 if(!tod.message.extendedTextMessage.contextInfo.participant === zynn.user.jid) return
 zynn.deleteMessage(from, { id: tod.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 break
+case 'infobisnis':
+if(!q) return reply(`Cara penggunaan : ${prefix}infobisnis tag orang/masukkan nomor whatsapp/n/nContoh : ${prefix}infobisnis 6281990498472\n\nNote : Nomor harus diawali dengan kode negara`)
+try{
+mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJId[0]
+}catch{
+if(isNaN(args[0])) return reply('Input harus berupa nomor whatsapp!')
+mentioned = args[0] + '@s.whatsapp.net'
+}
+data = await isBusiness(mentioned)
+if(data === false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
+data2 = await wa.getbusinessprof(mentioned)
+reply(JSON.stringify(data2, null, 2))
+}
 default:
 	if (chats.startsWith('x')){
 	if(!itsMe) return
