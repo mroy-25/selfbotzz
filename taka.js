@@ -555,10 +555,10 @@ const isBusiness = async(orangnya) => {
 bus = await zynn.query({json: ['query', 'exist', orangnya], requiresPhoneConnection: false})
 try{
 	if(bus.biz === true){
-	business = true
+	const business = true
 	}
 }catch{
-	business = false
+	const business = false
 }
 return business
 }
