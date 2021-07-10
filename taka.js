@@ -4589,7 +4589,7 @@ break
 case 'infobisnis':
 if(!q) return reply(`Cara penggunaan : ${prefix}infobisnis tag orang/masukkan nomor whatsapp/n/nContoh : ${prefix}infobisnis 6281990498472\n\nNote : Nomor harus diawali dengan kode negara`)
 if(isNaN(body.slice(13))) return reply('Input harus berupa nomor whatsapp!')
-mentioned = args[0].replace('@', '') + '@s.whatsapp.net
+mentioned = args[0].replace('@', '') + '@s.whatsapp.net'
 data = await isBusiness(mentioned)
 if(data === false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
 data2 = await wa.getbusinessprof(mentioned)
