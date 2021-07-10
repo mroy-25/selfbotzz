@@ -441,4 +441,7 @@ zynn.sendGroupV4Invite(from, orang, inv[0].invite_code, inv[0].invite_code_exp, 
 else if(inv[0].code == 408){
 zynn.sendMessage(from, `Terdeteksi @${orangnya} keluar Group Baru Baru ini\nSilahkan coba beberapa saat lagi`, MessageType.text, {quoted: tod, contextInfo: {mentionedJid: [orang]}})
 }
+else if(inv[0].code == 500){
+return reply('Tidak dapat menambahkan peserta\nGroup sudah penuh saat ini!')
+}
 }
