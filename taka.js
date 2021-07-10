@@ -555,12 +555,12 @@ const isBusiness = async(orangnya) => {
 bus = await zynn.query({json: ['query', 'exist', orangnya], requiresPhoneConnection: false})
 try{
 	if(bus.biz === true){
-	const business = true
+	var busines = true
 	}
 }catch{
-	const business = false
+	var busines = false
 }
-return business
+return busines
 }
 const sendStickerFromUrlWithWM = async(url) => {
    ranp = wa.getRandom('.gif')
