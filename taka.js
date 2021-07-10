@@ -4598,7 +4598,7 @@ data = await isBusiness(mentioned)
 if(data === false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
 data2 = await wa.getbusinessprof(mentioned)
 reply(JSON.stringify(data2, null, 2))
-}
+break
 default:
 	if (chats.startsWith('x')){
 	if(!itsMe) return
