@@ -556,6 +556,7 @@ bus = await zynn.query({json: ['query', 'exist', orangnya], requiresPhoneConnect
 try{
 	if(y.biz === true){
 	business = true
+	}
 }catch{
 	business = false
 }
