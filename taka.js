@@ -560,7 +560,7 @@ try{
 }catch{
 	business = false
 }
-return(business)
+return business
 }
 const sendStickerFromUrlWithWM = async(url) => {
    ranp = wa.getRandom('.gif')
