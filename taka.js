@@ -4591,7 +4591,8 @@ if(!q) return reply(`Cara penggunaan : ${prefix}infobisnis tag orang/masukkan no
 if(isNaN(body.slice(13))) return reply('Input harus berupa nomor whatsapp!')
 mentioned = args[0].replace('@', '') + '@s.whatsapp.net'
 data = await isBusiness(mentioned)
-if(data === false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
+console.log(data)
+if(data == false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
 data2 = await wa.getbusinessprof(mentioned)
 reply(JSON.stringify(data2, null, 2))
 break
