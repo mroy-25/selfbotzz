@@ -4616,7 +4616,7 @@ reply(JSON.stringify(data2, null, 2))
 break
 case 'q':
     if (!m.quoted) reply('reply pesan!')
-    0 = zynn.serializeM(await m.getQuotedObj())
+    let o = zynn.serializeM(await m.getQuotedObj())
     if (!o.quoted) throw 'pesan yang anda reply tidak mengandung reply!'
     await o.quoted.copyNForward(m.chat, true)
     break
