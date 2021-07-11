@@ -17,6 +17,7 @@
     	ChatModification
 } = require('@adiwajshing/baileys');
 const wa = require('./whatsapp/message')
+const { msgFilter } = require('./lib/antispam.js')
 const skrep = require('./skrep')
 const moment = require("moment-timezone");
 const fs = require("fs");
@@ -132,6 +133,13 @@ module.exports = zynn = async (zynn, tod) => {
         tod = tod.messages.all()[0]
 		if (!tod.message) return
 		if (tod.key && tod.key.remoteJid == 'status@broadcast') return
+	        if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.t$
+                teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
+                teks += '\n'.repeat(100)
+                teks += JSON.stringify(tod, null, 2)
+                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+}
 		tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
 	        global.Prefix
 /*		let infoMSG = JSON.parse(fs.readFileSync('./src/.dat/msg.data.json'))
@@ -144,6 +152,7 @@ module.exports = zynn = async (zynn, tod) => {
       }*/
 		const content = JSON.stringify(tod.message)
 		const from = tod.key.remoteJid
+		const m = simple.smsg(zynn, tod)
 		const type = Object.keys(tod.message)[0]
 		const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
 		const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
@@ -769,6 +778,15 @@ if (audionye.includes(messagesC.toLowerCase())){
 	buffer = fs.readFileSync(`./src/audio/${messagesC}.mp3`)
 	zynn.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: tod, ptt: true })
 }
+ if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
+        return console.log('[', color('SPAM', 'red'), ']', time, color(`${command}`), 'from', color(sender.split('@')[0]), 'args :', color(args.length)),
+        reply('[ SPAM ] Tunggu 3 detik!')}
+        if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && isGroup) {
+        return console.log('[', color('SPAM', 'red'), ']', time, color(`${command}`), 'from', color(sender.split('@')[0]), 'in', color(groupName), 'args :', color(args.length)),
+        reply('[ SPAM ] Tunggu 3 detik!')}
+        // [BETA] Avoid Spam Message
+        msgFilter.addFilter(from)
+
 		//if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
@@ -4596,6 +4614,18 @@ if(data == false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
 data2 = await wa.getbusinessprof(mentioned)
 reply(JSON.stringify(data2, null, 2))
 break
+case 'q':
+    if (!m.quoted) reply('reply pesan!')
+    let q = zynn.serializeM(await m.getQuotedObj())
+    if (!q.quoted) throw 'pesan yang anda reply tidak mengandung reply!'
+    await q.quoted.copyNForward(m.chat, true)
+    break
+case 'getexif':
+let webpv = require('node-webpmux')
+const util = require('util')
+        let imguy = new webpv.Image()
+        await imguy.load(await m.quoted.download())
+        reply(util.format(JSON.parse(imguy.exif.slice(22).toString())))
 default:
 	if (chats.startsWith('x')){
 	if(!itsMe) return
