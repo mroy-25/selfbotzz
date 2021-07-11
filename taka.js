@@ -778,7 +778,7 @@ if (audionye.includes(messagesC.toLowerCase())){
 	buffer = fs.readFileSync(`./src/audio/${messagesC}.mp3`)
 	zynn.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: tod, ptt: true })
 }
- if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
+ /*if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
         return console.log('[', color('SPAM', 'red'), ']', time, color(`${command}`), 'from', color(sender.split('@')[0]), 'args :', color(args.length)),
         reply('[ SPAM ] Tunggu 3 detik!')}
         if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && isGroup) {
@@ -786,7 +786,7 @@ if (audionye.includes(messagesC.toLowerCase())){
         reply('[ SPAM ] Tunggu 3 detik!')}
         // [BETA] Avoid Spam Message
         msgFilter.addFilter(from)
-
+*/
 		//if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
