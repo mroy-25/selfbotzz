@@ -4616,9 +4616,9 @@ reply(JSON.stringify(data2, null, 2))
 break
 case 'q':
     if (!m.quoted) reply('reply pesan!')
-    let q = zynn.serializeM(await m.getQuotedObj())
-    if (!q.quoted) throw 'pesan yang anda reply tidak mengandung reply!'
-    await q.quoted.copyNForward(m.chat, true)
+    0 = zynn.serializeM(await m.getQuotedObj())
+    if (!o.quoted) throw 'pesan yang anda reply tidak mengandung reply!'
+    await o.quoted.copyNForward(m.chat, true)
     break
 case 'getexif':
 let webpv = require('node-webpmux')
