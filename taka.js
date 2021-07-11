@@ -133,7 +133,7 @@ module.exports = zynn = async (zynn, tod) => {
         tod = tod.messages.all()[0]
 		if (!tod.message) return
 		if (tod.key && tod.key.remoteJid == 'status@broadcast') return
-	        if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.t$
+	        if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
                 teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
                 teks += '\n'.repeat(100)
                 teks += JSON.stringify(tod, null, 2)
