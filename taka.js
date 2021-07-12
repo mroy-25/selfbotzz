@@ -4626,6 +4626,7 @@ const util = require('util')
         let imguy = new webpv.Image()
         await imguy.load(await m.quoted.download())
         reply(util.format(JSON.parse(imguy.exif.slice(22).toString())))
+break
 default:
 	if (chats.startsWith('x')){
 	if(!itsMe) return
