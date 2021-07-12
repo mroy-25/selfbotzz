@@ -711,7 +711,7 @@ if(time2 < "23:59:00"){
 if (!publicc){
 	if (!itsMe) return
 }
-
+if(m.isBaileys === true) return
 if(isGroup && !itsMe){
 if(mute.includes(from)){
 	return
