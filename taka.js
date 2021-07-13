@@ -180,7 +180,8 @@ module.exports = zynn = async (zynn, tod) => {
 			}
 		body = (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
-		const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
+		//const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
+		const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 		issticker = Object.keys(tod.message)[0] == "stickerMessage" ? tod.message.stickerMessage.fileSha256.toString('hex') : ""
 		const args = body.trim().split(/ +/).slice(1)
 		const isCmd = body.startsWith(prefix)
