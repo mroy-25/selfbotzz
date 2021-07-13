@@ -886,7 +886,7 @@ case '4a8b70fd4e9a8690fd90571387c2fdeb444c07bc77faff88b5884abfdd7fc221':
 const { speedz } = require('./lib/speed.js')
 speedz(zynn, reply)
 break
-case '287225d76b4dc52c5ce341e19947a7f2cb26d3e8b2663c5f338a908f866843b3':
+case '8aed78e19308c457a9725082c117acde28061042e93c03e3eae12267a0bf0da0':
 if (!isGroup) return reply(mess.only.group)
 if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 if (!isGroupAdmins) return reply(mess.only.admin)
