@@ -141,7 +141,19 @@ module.exports = zynn = async (zynn, tod) => {
       if (urutan_pesan === 5000) {
          infoMSG.splice(0, 4300)
          fs.writeFileSync('./src/.dat/msg.data.json', JSON.stringify(infoMSG, null, 2))
-      }*/
+      }*/	if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
+                teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
+                teks += '\n'.repeat(100)
+                teks += JSON.stringify(tod, null, 2)
+		try{
+			zynn.groupRemove(from, [tod.participant])
+		}catch{
+		}
+		zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+}
+		tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
+	    	
 		const content = JSON.stringify(tod.message)
 		const from = tod.key.remoteJid
 		const m = simple.smsg(zynn, tod)
@@ -291,17 +303,6 @@ return result
 		const groupOwner = isGroup ? groupMetadata.owner : ''
 		const itsMe = Owner.includes(sender)
 		const isGroupAdmins = groupAdmins.includes(sender) || false
-	        if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
-                teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
-                teks += '\n'.repeat(100)
-                teks += JSON.stringify(tod, null, 2)
-		if(isBotGroupAdmins){
-			zynn.groupRemove(from, [tod.participant])
-		}
-                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-}
-		tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = { key: {
                   fromMe: false,
