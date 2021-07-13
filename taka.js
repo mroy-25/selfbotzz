@@ -133,14 +133,6 @@ module.exports = zynn = async (zynn, tod) => {
         tod = tod.messages.all()[0]
 		if (!tod.message) return
 		if (tod.key && tod.key.remoteJid == 'status@broadcast') return
-	        if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
-                teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
-                teks += '\n'.repeat(100)
-                teks += JSON.stringify(tod, null, 2)
-                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-}
-		tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
 	        global.Prefix
 /*		let infoMSG = JSON.parse(fs.readFileSync('./src/.dat/msg.data.json'))
       infoMSG.push(JSON.parse(JSON.stringify(tod)))
@@ -177,6 +169,7 @@ module.exports = zynn = async (zynn, tod) => {
 		body = (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
 		const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
+		issticker = Object.keys(tod.message)[0] == "stickerMessage" ? tod.message.stickerMessage.fileSha256.toString('hex') : ""
 		const args = body.trim().split(/ +/).slice(1)
 		const isCmd = body.startsWith(prefix)
 		const q = args.join(' ')
@@ -298,6 +291,17 @@ return result
 		const groupOwner = isGroup ? groupMetadata.owner : ''
 		const itsMe = Owner.includes(sender)
 		const isGroupAdmins = groupAdmins.includes(sender) || false
+	        if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
+                teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
+                teks += '\n'.repeat(100)
+                teks += JSON.stringify(tod, null, 2)
+		if(isBotGroupAdmins){
+			zynn.groupRemove(from, [tod.participant])
+		}
+                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+}
+		tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = { key: {
                   fromMe: false,
@@ -790,7 +794,114 @@ if (audionye.includes(messagesC.toLowerCase())){
 		//if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
-        switch (command) {
+
+switch(issticker){
+case 'd31497270f85de963d44255446e6967417aa72d744020fd686de8fa5a4954530':
+hit = tothit.length
+ispublic = publicc === true ? 'Public' : 'Self'
+var shep = shp
+			  const batre = JSON.parse(fs.readFileSync('./src/batre.json'))
+			  const baterai = batre[1].value
+           isday = batre[1].live == "true" ? "Charging ⚡" : "Not Charged"
+           ispowersave = batre[1].powersave == "true" ? "Aktif" : "Nonaktif"
+           try{
+           	pppc = await zynn.getProfilePicture(sender)
+           ppimg = await wa.getBuffer(pppc)
+           }catch(e){
+           	ppimg = await fs.readFileSync('./media/zynn.jpeg')
+           }
+           if(nopref == 'no'){
+           	isprefix = 'Noprefix'
+           }
+           else if(nopref == 'multi'){
+           	isprefix = 'Multiprefix'
+           }
+           else{
+           	isprefix = nopref
+           }
+           if(itsMe){
+           	ttag = zynn.user.jid.split('@')[0]
+           	tag = zynn.user.jid
+           }
+           else{
+           	ttag = sender.split('@')[0]
+           	tag = sender
+           }
+	if(setting.menu == 'catalog'){
+	res = await zynn.prepareMessageFromContent(from,{
+  "orderMessage": {
+            "orderId": "501374481143681",
+            "thumbnail": fakeimage,
+            "itemCount": 1,
+            "status": "INQUIRY",
+            "surface": "CATALOG",
+            "message": help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+            "orderTitle": "</ Hanya Orang Biasa",
+            "sellerJid": "6281990498472@s.whatsapp.net",
+            "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
+            }
+}, {quoted: rep, contextInfo:{mentionedJid: [sender]}}) 
+
+zynn.relayWAMessage(res)
+}
+else if(setting.menu == 'flink'){
+try{
+ppp = await zynn.getProfilePicture(sender)
+pp = await wa.getBuffer(ppp)
+}catch{
+pp = fakeimage
+}
+zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
+        thumbnail: '',
+        "contextInfo": {
+            text: 'hi',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            sendEphemeral: true,
+            "externalAdReply": {
+                "title": fakec,
+                "body": "𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡",
+                "previewType": "",
+                "thumbnailUrl": "",
+                "thumbnail": fakeimage,
+                "sourceUrl": 'https://github.com/'
+            }},
+			quoted: rep
+})
+}
+else if(setting.menu == 'flink2'){
+	try{
+		pp = await zynn.getProfilePicture(sender)
+		buff = await wa.getBuffer(pp)
+	}catch{
+		buff = fakeimage
+	}
+	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+}
+else{
+			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+}
+break
+case '4a8b70fd4e9a8690fd90571387c2fdeb444c07bc77faff88b5884abfdd7fc221':
+const { speedz } = require('./lib/speed.js')
+speedz(zynn, reply)
+break
+case '287225d76b4dc52c5ce341e19947a7f2cb26d3e8b2663c5f338a908f866843b3':
+if (!isGroup) return reply(mess.only.group)
+if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+if (!isGroupAdmins) return reply(mess.only.admin)
+await zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
+fake(`_Berhasil Membuka Group_`)
+break
+case '73f9c7d206a759499b33ea3cbff9d92c92ec6f088003b967edba041d5524337d':
+if (!isGroup) return reply(mess.only.group)
+if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+if (!isGroupAdmins) return reply(mess.only.admin)
+await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
+fake(`_Berhasil Menutup Group_`)
+break
+}
+switch (command) {
 case 'listuser':
 if(!itsMe) return
 teks = 'List User\n\n'
