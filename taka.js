@@ -3926,7 +3926,7 @@ if (args[0] == 'on') {
 	reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}left on`)
 }
 break
-case 'group':
+case 'groupsetting':
 if(!isGroupAdmins) return
 				po = zynn.prepareMessageFromContent(from, {
 					"listMessage":{
