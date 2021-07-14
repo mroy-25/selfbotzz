@@ -2961,6 +2961,42 @@ sendMediaURL(from, images,`Hasil Pencarian : ${q}`)
 	reply('Gambar tidak ditemukan')
 }
 break
+case 'ytdl':
+if(!q) return reply('Mau cari apa diyoutube?')
+fake(mess.wait)
+datai = [];
+try{
+        ysearch = await yts(q)
+        hdata = ysearch.all
+}catch(e){
+        return reply(mess.error.api)
+}
+num = 1
+for(let i=0; i<hdata.length; i++){
+        datai.push({
+                        "rows": [
+                           {
+                              "title": "MP3",
+                                                          description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
+                              "rowId": hdata[i].url
+                           },
+                                                   {
+                              "title": "MP4",
+                                                          description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
+                              "rowId": hdata[i].url
+                           }
+                        ], title: num})
+        num += 1
+}
+po = zynn.prepareMessageFromContent(from, {
+         "listMessage":{
+                  "title": "*YOUTUBE DOWNLOAD*",
+                  "description": `Request By : ${await wa.getPushname(sender, tod)}\n*Hasil Pencarian : ${q}*\n*Download dengan klik tombol dibawah*`,
+                  "buttonText": "Result",
+                  "listType": "SINGLE_SELECT",
+                  "sections": datai}}, {contextInfo: {mentionedJid: [sender]}}) 
+            zynn.relayWAMessage(po, {waitForAck: true})
+break
 case 'ytsearch':
 if(!q) return reply('Mau cari apa diyoutube?')
 try{
