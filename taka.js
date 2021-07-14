@@ -181,6 +181,8 @@ module.exports = zynn = async (zynn, tod) => {
 		body = (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
 		//const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
+		tmplt = Object.keys(tod.message)[0] == "listResponseMessage" ? tod.message.listResponseMessage.selectedDisplayText : ""
+                q2 = Object.keys(tod.message)[0] == "listResponseMessage" ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : ""
 		const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 		issticker = Object.keys(tod.message)[0] == "stickerMessage" ? tod.message.stickerMessage.fileSha256.toString('hex') : ""
 		const args = body.trim().split(/ +/).slice(1)
@@ -723,24 +725,6 @@ if(mute.includes(from)){
 	return
 }}
 if(isGroup){
-try{
-//console.log('yey')
-if (tod.message.listResponseMessage.selectedDisplayText == 'open') {
-if(!isGroupAdmins) return
-console.log('open')
-                                          teks1 = `*_Sukses Membuka Group oleh Admin`
-                                            zynn.sendMessage(from, teks1,MessageType.text,{quoted : tod})
-                                                zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
-                                        } else if (tod.message.listResponseMessage.selectedDisplayText == 'close') {
-if(!isGroupAdmins) return
-                                          teks2 = `*_Sukses Menutup Group oleh Admin`
-                                        zynn.sendMessage(from, teks2,MessageType.text,{quoted : tod})
-                                                zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
-}
-}catch{
-}
-}
-if(isGroup){
     try{
 if(!tod.message.extendedTextMessage.contextInfo.expiration == ''){
 var isephe = false
@@ -797,6 +781,83 @@ if (audionye.includes(messagesC.toLowerCase())){
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
 
+switch(tmplt){
+case 'MP3':
+fake(mess.wait)
+try{
+        downm = await yta(q2)
+        const { dl_link, thumb, title, filesizeF, filesize } = downm
+        if(Number(filesize) >= 50000){
+                short = await axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                return sendMediaURL(from, thumb, `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
+        }
+        teks = `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Type : MP3\n\nTunggu sebentar\nMusic segera dikirim`
+        wa.sendFileFromUrl(from, thumb, tod, teks)
+        wa.sendFileFromUrl(from, dl_link, tod)
+}catch(e){
+        reply(mess.error.api)
+}
+break
+case 'MP4':
+fake(mess.wait)
+try{
+        downm = await ytv(q2)
+        const { dl_link, thumb, title, filesizeF, filesize } = downm
+        if(Number(filesize) >= 50000){
+                short = await axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                return sendMediaURL(from, thumb, `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
+        }
+        teks = `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Type : MP4\n\nTunggu sebentar\nMusic segera dikirim`
+        wa.sendFileFromUrl(from, thumb, tod, teks)
+        wa.sendFileFromUrl(from, dl_link, tod)
+}catch(e){
+        reply(mess.error.api)
+}
+break
+case 'WELCOMEON':
+if (!isGroup) return reply(mess.OnlyGrup)
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+	if (welkom.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
+	welkom.push(from)
+	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
+	reply('_Sukses mengaktifkan Welcome digroup ini_')
+break
+case 'WELCOMEOFF':
+if (!isGroup) return reply(mess.OnlyGrup)
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+	let off = welkom.indexOf(from)
+	welkom.splice(off, 1)
+	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
+	reply('_Sukses menonaktifkan Welcome digroup ini_')
+break
+case 'LEFTON':
+if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if (!isGroup) return reply(mess.OnlyGrup)
+	if (left.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
+	left.push(from)
+	fs.writeFileSync('./src/left.json', JSON.stringify(left))
+	reply('_Sukses mengaktifkan left digroup ini_')
+break
+case 'LEFTOFF':
+if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+	let off = left.indexOf(from)
+	left.splice(off, 1)
+	fs.writeFileSync('./src/left.json', JSON.stringify(left))
+	reply('_Sukses menonaktifkan left digroup ini_')
+break
+case 'OPEN':
+if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+await zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
+reply('Berhasil Membuka Group')
+break
+case 'CLOSE':
+if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
+reply('Berhasil Menutup Group')
+break
+}
 switch(issticker){
 case 'd31497270f85de963d44255446e6967417aa72d744020fd686de8fa5a4954530':
 hit = tothit.length
@@ -3839,12 +3900,28 @@ if(!isGroupAdmins) return
                      {
                         "rows": [
                            {
-                              "title": "open",
-                              "rowId": `${prefix}${command} open`
+                              "title": "OPEN",
+                              "rowId": ``
                            },
-						   {
-                              "title": "close",
-                              "rowId": `${prefix}${command} close`
+			{
+                              "title": 'CLOSE,
+                              "rowId": ``
+                           },
+			 {
+                              "title": "WELCOMEON",
+                              "rowId": ``
+                           },
+			 {
+                              "title": "WELCOMEOFF",
+                              "rowId": ``
+                           },
+			 {
+                              "title": "LEFTON",
+                              "rowId": ``
+                           },
+			 {
+                              "title": "LEFTOFF",
+                              "rowId": ``
                            }
                         ]
                      }]}}, {}) 
