@@ -3940,7 +3940,7 @@ if(!isGroupAdmins) return
                               "rowId": ``
                            },
 			{
-                              "title": 'CLOSE,
+                              "title": 'CLOSE',
                               "rowId": ``
                            },
 			 {
