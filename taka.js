@@ -825,7 +825,7 @@ break
 case 'WELCOMEOFF':
 if (!isGroup) return reply(mess.OnlyGrup)
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-	let off = welkom.indexOf(from)
+	off = welkom.indexOf(from)
 	welkom.splice(off, 1)
 	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 	reply('_Sukses menonaktifkan Welcome digroup ini_')
@@ -840,7 +840,7 @@ if (!isGroup) return reply(mess.OnlyGrup)
 break
 case 'LEFTOFF':
 if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
-	let off = left.indexOf(from)
+	off = left.indexOf(from)
 	left.splice(off, 1)
 	fs.writeFileSync('./src/left.json', JSON.stringify(left))
 	reply('_Sukses menonaktifkan left digroup ini_')
@@ -3882,7 +3882,7 @@ if (args[0] == 'on') {
 	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 	reply('_Sukses mengaktifkan Welcome digroup ini_')
 } else if (args[0] == 'off') {
-	let off = welkom.indexOf(from)
+	off = welkom.indexOf(from)
 	welkom.splice(off, 1)
 	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 	reply('_Sukses menonaktifkan Welcome digroup ini_')
@@ -3916,7 +3916,7 @@ if (args[0] == 'on') {
 	fs.writeFileSync('./src/left.json', JSON.stringify(left))
 	reply('_Sukses mengaktifkan left digroup ini_')
 } else if (args[0] == 'off') {
-	let off = left.indexOf(from)
+	off = left.indexOf(from)
 	left.splice(off, 1)
 	fs.writeFileSync('./src/left.json', JSON.stringify(left))
 	reply('_Sukses menonaktifkan left digroup ini_')
