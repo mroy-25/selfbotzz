@@ -2996,7 +2996,7 @@ po = zynn.prepareMessageFromContent(from, {
                   "description": `Request By : ${await wa.getPushname(sender, tod)}\n*Hasil Pencarian : ${q}*\n*Download dengan klik tombol dibawah*`,
                   "buttonText": "Result",
                   "listType": "SINGLE_SELECT",
-                  "sections": datai}}, {contextInfo: {mentionedJid: [sender]}}) 
+                  "sections": datai}}, {}) 
             zynn.relayWAMessage(po, {waitForAck: true})
 break
 case 'ytsearch':
@@ -3930,8 +3930,8 @@ case 'groupsetting':
 if(!isGroupAdmins) return
 				po = zynn.prepareMessageFromContent(from, {
 					"listMessage":{
-                  "title": "*Z-BOT*",
-                  "description": "pilh open/close",
+                  "title": "GROUP SETTING",
+                  "description": "ZBOT",
                   "buttonText": "COMMANDS",
                   "listType": "SINGLE_SELECT",
                   "sections": [
