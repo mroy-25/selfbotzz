@@ -1486,27 +1486,29 @@ break
 case 'promote':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
+if(m.quoted){
+wa.promote(from, m.quoted.sender)
+fake(sukses)
+}
+else{
 if (!arg) return fake(`Penggunaan ${prefix}promote @tag atau nomor`)
-if (tod.message.extendedTextMessage != undefined){
-    mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
-	await fake(`sukses`)
-	wa.promote(from, mentioned)
-} else {
-	await fake(`sukses`)
-	wa.promote(from, [args[0] + '@s.whatsapp.net'])
+if(m.mentionedJid === undefined) return reply('Penggunaan ${prefix}promote @tag atau nomor')
+wa.promote(from, m.mentionedJid[0])
+fake(sukses)
 }
 break
 case 'demote':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
-if (!arg) return fake(`Penggunaan ${prefix}demote @tag atau nomor`)
-if (tod.message.extendedTextMessage != undefined){
-	mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
-	await fake(`sukses`)
-	wa.demote(from, mentioned)
-} else {
-	await fake(`sukses`)
-	wa.demote(from, [args[0] + '@s.whatsapp.net'])
+if(m.quoted){
+wa.demote(from, m.quoted.sender)
+fake(sukses)
+}
+else{
+if (!arg) return fake(`Penggunaan ${prefix}promote @tag atau nomor`)
+if(m.mentionedJid === undefined) return reply('Penggunaan ${prefix}promote @tag atau nomor')
+wa.demote(from, m.mentionedJid[0])
+fake(sukses)
 }
 break
 case 'kick':
@@ -3926,7 +3928,7 @@ if (args[0] == 'on') {
 break
 case 'group':
 if(!isGroupAdmins) return
-				let po = zynn.prepareMessageFromContent(from, {
+				po = zynn.prepareMessageFromContent(from, {
 					"listMessage":{
                   "title": "*Z-BOT*",
                   "description": "pilh open/close",
