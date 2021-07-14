@@ -780,7 +780,8 @@ if (audionye.includes(messagesC.toLowerCase())){
 		//if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
-
+try{
+if(m.quoted.sender === zynn.user.jid){
 switch(tmplt){
 case 'MP3':
 fake(mess.wait)
@@ -857,6 +858,9 @@ if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
 reply('Berhasil Menutup Group')
 break
+}
+}
+}catch{
 }
 switch(issticker){
 case 'd31497270f85de963d44255446e6967417aa72d744020fd686de8fa5a4954530':
