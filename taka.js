@@ -304,8 +304,8 @@ return result
 		const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 		//const isGroupAdmins = groupAdmins.includes(sender) || 
 		const groupOwner = isGroup ? groupMetadata.owner : ''
-		const itsMe = Owner.includes(sender)
-		const isGroupAdmins = groupAdmins.includes(sender) || false
+		const itsMe = Owner.includes(m.sender)
+		const isGroupAdmins = groupAdmins.includes(m.sender) || false
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = { key: {
                   fromMe: false,
