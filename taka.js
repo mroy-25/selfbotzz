@@ -93,7 +93,6 @@ const vcard = 'BEGIN:VCARD\n'
 
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
-fakeimage2 = fs.readFileSync(`./media/zynn2.jpeg`)
 publicc = setting.public
 fakec = setting.fake
 nopref = 'multi'
@@ -945,7 +944,7 @@ else if(setting.menu == 'flink2'){
 	}catch{
 		buff = fakeimage
 	}
-	flink2(fakeimage2, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
 else{
 			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
@@ -1062,7 +1061,7 @@ else if(setting.menu == 'flink2'){
 	}catch{
 		buff = fakeimage
 	}
-	flink2(fs.readFileSync('./media/zynn2.jpeg'), buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
 else{
 			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
