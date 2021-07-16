@@ -160,8 +160,8 @@ module.exports = zynn = async (zynn, tod) => {
 		const type = Object.keys(tod.message)[0]
 		const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
 		const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-		const cmd = (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : ''.slice(1).trim().split(/ +/).shift().toLowerCase()
-		const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/gi) : '-'
+		const cmd = (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : ''.slice(1).trim().split(/ +/).shift().toLowerCase()
+		const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/gi) : '.'
 		noprefix = ''
 		if(nopref == 'no'){
 			prefix = noprefix
@@ -178,7 +178,7 @@ module.exports = zynn = async (zynn, tod) => {
 			slc = 1
 			slc2 = 2
 			}
-		body = (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
+		body = (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix)) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
 		//const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
 		tmplt = Object.keys(tod.message)[0] == "listResponseMessage" ? tod.message.listResponseMessage.selectedDisplayText : ""
@@ -4106,7 +4106,73 @@ case 'ghfollowers':
 case 'ghfol':
 if(!q) return reply('Masukkan username githubnya!')
 fake(mess.wait)
-try{
+try{case 'asupan':
+if(!q){
+        po = zynn.prepareMessageFromContent(from, {
+                                        "listMessage":{
+                  "title": "*ASUPAN*",
+                  "description": "Silahkan dipilih kak asupannya:v",
+                  "buttonText": "Asupannya Disini",
+                  "listType": "SINGLE_SELECT",
+                  "sections": [
+                     {
+                        "rows": [
+                           {
+                              "title": "ASUPAN +62",
+                              "rowId": `${prefix}asupan +62`
+                           },
+                           {
+                              "title": "ASUPAN SANTUY",
+                              "rowId": `${prefix}asupan santuy`
+                           },
+                           {
+                              "title": "ASUPAN BOCIL",
+                              "rowId": `${prefix}asupan bocil`
+                           },
+                           {
+                              "title": "ASUPAN UKHTI",
+                              "rowId": `${prefix}asupan ukhti`
+                           },
+                           {
+                              "title": "ASUPAN RIKA GUSTIANI",
+                              "rowId": `${prefix}asupan rikagustiani`
+                           },
+                           {
+                              "title": "ASUPAN GHEA",
+                              "rowId": `${prefix}asupan ghea`
+                           },
+                        ]
+                     }]}}, {}) 
+            zynn.relayWAMessage(po, {waitForAck: true})
+}
+if(q == '+62'){
+fake(mess.wait)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupan?apikey=ItsMeVean`)
+}else
+if(q == 'santuy'){
+fake(mess.wait)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupansantuy?apikey=ItsMeVean`)
+}else
+if(q == 'bocil'){
+fake(mess.wait)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanbocil?apikey=ItsMeVean`)
+}else
+if(q == 'ukhti'){
+fake(mess.wait)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanukhty?apikey=ItsMeVean`)
+}else
+if(q == 'rikagustiani'){
+fake(mess.wait)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanrikagusriani?apikey=ItsMeVean`)
+}else
+if(q == 'ghea'){
+fake(mess.wait)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey=ItsMeVean`)
+}/*else{
+reply(`Cara Penggunaan : ${prefix + command} ghea\n\nTersedia\n• +62\n• santuy\n• bocil\n• ukhti\n• rikagusriani\n• ghea`)
+}*/
+break
+
 	data = await skrep.ghfollower(q)
 	teks = `*F O L L O W E R S  G I T H U B*\n\n${shp} Username : ${data.username}\n${shp} Followers : ${data.followers}\n\n*L I S T  F O L L O W E R S* : \n\n`
 	for(let i of data.listfollowers){
@@ -4118,6 +4184,7 @@ try{
 	reply(mess.error.api)
 }
 break
+
 case 'setwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q) return reply(`Contoh penggunaan : ${prefix}setwelcome Halo @user, Selamat datang di Group @subject\n\nInfo : \n${shp} @user = Tag Member\n${shp} @subject = Nama Group\n${shp} @desc = deskripsi group`)
