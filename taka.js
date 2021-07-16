@@ -1039,7 +1039,7 @@ pp = fakeimage
 zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
-"mentionedJid: [sender],
+"mentionedJid": [sender],
             text: 'hi',
             "forwardingScore": 1000000000,
             isForwarded: true,
