@@ -96,7 +96,7 @@ fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 publicc = setting.public
 fakec = setting.fake
 nopref = 'multi'
-shp = "♦️"
+shp = setting.shp
 fakenomor = '0@s.whatsapp.net'
 autoread = false
 fakerep = setting.fakerep
@@ -292,7 +292,7 @@ return result
 }
         const botNumber = zynn.user.jid
 		const isGroup = from.endsWith('@g.us')
-		const Owner = ['32495947149@s.whatsapp.net', '6287798005230@s.whatsapp.net', '6281990498472@s.whatsapp.net', '13342199618@s.whatsapp.net']
+		const Owner = ['32495947149@s.whatsapp.net', '6287798005230@s.whatsapp.net', '6281990498472@s.whatsapp.net', '13342199618@s.whatsapp.net', zynn.user.jid]
 		const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
 		const totalchat = await zynn.chats.all()
 		const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
@@ -379,7 +379,7 @@ const fkontak3 =  {
   }
 }
 const floc = { key: { fromMe: false, id: generateMessageID(), participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "locationMessage": { "name":fakec}}}
-const fliveloc = { key: { fromMe: false, id: generateMessageID(), participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "name": fakec}}}
+const fliveloc = { key: { fromMe: false, id: generateMessageID(), participant: fakenomor, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "liveLocationMessage": { "caption": fakec}}}
 const fakegroup = { key: {
                   fromMe: false,
 	id: generateMessageID(),
