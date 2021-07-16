@@ -8,7 +8,7 @@ const { color } = require('../lib/color')
 const set = JSON.parse(fs.readFileSync('./setting.json'))
 fakenomor = '0@s.whatsapp.net'
 fake = set.fake
-shp = '♦️'
+shp = set.shp
 module.exports = zynz = async (zynn, anu) => {
 	const setting = JSON.parse(fs.readFileSync('./setting.json'))
 	const welkam = JSON.parse(fs.readFileSync('./src/welkam.json'))
