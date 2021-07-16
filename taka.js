@@ -4106,7 +4106,19 @@ case 'ghfollowers':
 case 'ghfol':
 if(!q) return reply('Masukkan username githubnya!')
 fake(mess.wait)
-try{case 'asupan':
+try{
+	data = await skrep.ghfollower(q)
+	teks = `*F O L L O W E R S  G I T H U B*\n\n${shp} Username : ${data.username}\n${shp} Followers : ${data.followers}\n\n*L I S T  F O L L O W E R S* : \n\n`
+	for(let i of data.listfollowers){
+		teks += shp + ' Username : ' + i.username + '\n'
+		teks += shp + ' Link : ' + i.link + '\n\n------------------------------\n\n' 
+	}
+	wa.sendFileFromUrl(from, data.avatar, tod, teks)
+}catch{
+	reply(mess.error.api)
+}
+break
+case 'asupan':
 if(!q){
         po = zynn.prepareMessageFromContent(from, {
                                         "listMessage":{
@@ -4172,19 +4184,6 @@ sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey
 reply(`Cara Penggunaan : ${prefix + command} ghea\n\nTersedia\n• +62\n• santuy\n• bocil\n• ukhti\n• rikagusriani\n• ghea`)
 }*/
 break
-
-	data = await skrep.ghfollower(q)
-	teks = `*F O L L O W E R S  G I T H U B*\n\n${shp} Username : ${data.username}\n${shp} Followers : ${data.followers}\n\n*L I S T  F O L L O W E R S* : \n\n`
-	for(let i of data.listfollowers){
-		teks += shp + ' Username : ' + i.username + '\n'
-		teks += shp + ' Link : ' + i.link + '\n\n------------------------------\n\n' 
-	}
-	wa.sendFileFromUrl(from, data.avatar, tod, teks)
-}catch{
-	reply(mess.error.api)
-}
-break
-
 case 'setwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q) return reply(`Contoh penggunaan : ${prefix}setwelcome Halo @user, Selamat datang di Group @subject\n\nInfo : \n${shp} @user = Tag Member\n${shp} @subject = Nama Group\n${shp} @desc = deskripsi group`)
