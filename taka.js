@@ -1531,12 +1531,6 @@ if (tod.message.extendedTextMessage != undefined){
 	wa.kick(from, [args[0] + '@s.whatsapp.net'])
 }
 break
-wa.kick(from, mentioned)
-} else {
-        await fake(`Otw...`)
-wa.kick(from, [args[0] + '@s.whatsapp.net'])
-}
-break
 case 'add':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
