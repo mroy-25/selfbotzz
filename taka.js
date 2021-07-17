@@ -1514,7 +1514,7 @@ fake('sukses')
 else{
 if (!arg) return fake(`Penggunaan ${prefix}demote @tag atau nomor`)
 if(m.mentionedJid === undefined) return reply(`Penggunaan ${prefix}demote @tag atau nomor`)
-wa.demote(from, [m.mentionedJid[0]]
+wa.demote(from, [m.mentionedJid[0]])
 fake('sukses')
 }
 break
