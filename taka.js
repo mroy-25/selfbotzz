@@ -1494,28 +1494,28 @@ case 'promote':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
 if(m.quoted){
-wa.promote(from, m.quoted.sender)
-fake(sukses)
+wa.promote(from, [m.quoted.sender])
+fake('sukses')
 }
 else{
 if (!arg) return fake(`Penggunaan ${prefix}promote @tag atau nomor`)
-if(m.mentionedJid === undefined) return reply('Penggunaan ${prefix}promote @tag atau nomor')
-wa.promote(from, m.mentionedJid[0])
-fake(sukses)
+if(m.mentionedJid == '') return reply(`Penggunaan ${prefix}promote @tag atau nomor`)
+wa.promote(from, [m.mentionedJid[0]])
+fake('sukses')
 }
 break
 case 'demote':
 if(!isGroupAdmins) return reply(mess.only.admin)
-if(!isBotGroupAdmins) return reply(mess.only.Badmin)
-if(m.quoted){
-wa.demote(from, m.quoted.sender)
-fake(sukses)
+if(!isBotGroupAdmins) return reply(mess.only.Badmin)                                      
+if(m.quoted){                                                                             
+wa.demote(from, [m.quoted.sender])                                                        
+fake('sukses')
 }
 else{
-if (!arg) return fake(`Penggunaan ${prefix}promote @tag atau nomor`)
-if(m.mentionedJid === undefined) return reply('Penggunaan ${prefix}promote @tag atau nomor')
-wa.demote(from, m.mentionedJid[0])
-fake(sukses)
+if (!arg) return fake(`Penggunaan ${prefix}demote @tag atau nomor`)
+if(m.mentionedJid === undefined) return reply(`Penggunaan ${prefix}demote @tag atau nomor`)
+wa.demote(from, [m.mentionedJid[0]]
+fake('sukses')
 }
 break
 case 'kick':
@@ -1531,12 +1531,24 @@ if (tod.message.extendedTextMessage != undefined){
 	wa.kick(from, [args[0] + '@s.whatsapp.net'])
 }
 break
+wa.kick(from, mentioned)
+} else {
+        await fake(`Otw...`)
+wa.kick(from, [args[0] + '@s.whatsapp.net'])
+}
+break
 case 'add':
 if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
-if (!arg) return fake(`Penggunaan ${prefix}add 628xxxx`)
-	wa.add2(from, args[0], tod, reply)
-	fake(`Otw...`)
+if(m.quoted){
+fake('otw')
+wa.add2(from, m.quoted.sender, tod, reply)
+}
+else{
+if (!arg) return fake(`Penggunaan ${prefix}add 62xxxxx atau reply pesan`)
+fake('otw')
+wa.add2(from, args[0], tod, reply)
+}
 break
 case 'fakethumb':
 if ((isMedia && !tod.message.videoMessage || isQuotedImage)) {
