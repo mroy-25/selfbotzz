@@ -948,6 +948,34 @@ else if(setting.menu == 'flink2'){
 	}
 	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
+else if(setting.menu == 'button'){
+const but = [
+    {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
+    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1}
+]
+po = await zynn.prepareMessage(from, fakeimage, image)
+const buttonMessages = {
+imageMessage: po.message.imageMessage,
+contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+footerText: fakec,
+buttons: but,
+headerType: 4
+}
+zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
+thumbnail: fakeimage,
+contextInfo: {
+text: 'hi',
+externalAdReply: {
+title: fakec,
+body: 'INFORMATION',
+previewType: 'PHOTO',
+thumbnailUrl: '',
+thumbnail: ppimg,
+sourceUrl: 'https://github.com'
+}},
+quoted: tod
+})
+}
 else{
 			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
@@ -1074,7 +1102,7 @@ po = await zynn.prepareMessage(from, fakeimage, image)
 const buttonMessages = {
 imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
-footerText: "_Made With ❤️_",
+footerText: fakec,
 buttons: but,
 headerType: 4
 }
