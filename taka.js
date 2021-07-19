@@ -962,7 +962,6 @@ buttons: but,
 headerType: 4
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
-thumbnail: fakeimage,
 contextInfo: {
 text: 'hi',
 externalAdReply: {
@@ -1107,7 +1106,6 @@ buttons: but,
 headerType: 4
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
-thumbnail: fakeimage,
 contextInfo: {
 "mentionedJid": [sender],
 text: 'hi',
