@@ -77,6 +77,7 @@ const welkam = JSON.parse(fs.readFileSync('./src/welkam.json'))
 const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
 const left = JSON.parse(fs.readFileSync('./src/left.json'))
 const tleft = JSON.parse(fs.readFileSync('./src/tleft.json'))
+const gcprefix = JSON.parse(fs.readFileSync('./src/gcprefix.json'))
 const gambarnye = JSON.parse(fs.readFileSync('./src/image.json'))
 const audionye = JSON.parse(fs.readFileSync('./src/audio.json'))
 const videonye = JSON.parse(fs.readFileSync('./src/video.json'))
@@ -4193,6 +4194,43 @@ sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey
 reply(`Cara Penggunaan : ${prefix + command} ghea\n\nTersedia\n• +62\n• santuy\n• bocil\n• ukhti\n• rikagusriani\n• ghea`)
 }*/
 break
+case 'setprefixgc':
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+if(!q) return reply(`Contoh penggunaan : ${prefix}setprefixgc prefix\nContoh : ${prefix}setprefixgc !`)
+for(let i of gcprefix){
+  if(from.includes(i.id)){
+    let del = gcprefix.indexOf(i)
+      gcprefix.splice(del, 1)
+      await fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
+      prefgc = {
+id : from,
+prefix : args[0]
+}
+    gcprefix.push(prefgc)
+      fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
+      return reply(`Prefix Bot di Group ini diubah menjadi ${q}`)
+    }
+}
+prefgc = {
+id : from,
+prefix : args[0]
+}
+gcprefix.push(prefgc)
+fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
+return reply(`Prefix Bot di Group ini diubah menjadi ${q}`)
+break
+case 'resetprefix':
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+for(let i of gcprefix){
+if(from.includes(i.id)){
+   let del = gcprefix.indexOf(i)
+   gcprefix.splice(del, 1)
+   fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
+   reply(`Prefix bot direset`)
+}
+}
+break
+
 case 'setwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q) return reply(`Contoh penggunaan : ${prefix}setwelcome Halo @user, Selamat datang di Group @subject\n\nInfo : \n${shp} @user = Tag Member\n${shp} @subject = Nama Group\n${shp} @desc = deskripsi group`)
@@ -4327,50 +4365,43 @@ const isBanCtRevoke = dataBanCtRevoke.includes(sender) ? true : false
 if (args.length < 1) return zynn.sendMessage(from, `Penggunaan fitur antidelete :\n\n${prefix}antidelete [on/off]`, MessageType.text)
 if (args[0] == 'on') {           
 if (isGroup) {
-	if (!tod.key.fromMe && !isGroupAdmins) return reply('Hanya Bisa dilakukan Oleh admin Group')
-	if (isRevoke) return zynn.sendMessage(from, `Antidelete telah diaktifkan di grup ini sebelumnya!`, MessageType.text)
-	dataRevoke.push(from)
-	fs.writeFileSync('./src/gc-revoked.json', JSON.stringify(dataRevoke))
-	zynn.sendMessage(from, `Succes Enable Antidelete Grup!`, MessageType.text, {quoted: tod})
+        if (!itsMe && !isGroupAdmins) return reply('Hanya Bisa dilakukan Oleh admin Group')
+        if (isRevoke) return zynn.sendMessage(from, `Antidelete telah diaktifkan di grup ini sebelumnya!`, MessageType.text)
+        dataRevoke.push(from)
+        fs.writeFileSync('./src/gc-revoked.json', JSON.stringify(dataRevoke))
+        zynn.sendMessage(from, `Succes Enable Antidelete Grup!`, MessageType.text, {quoted: tod})
 } else if (!isGroup) {
-	zynn.sendMessage(from, `Untuk kontak penggunaan ${prefix}antidelete ctaktif`, MessageType.text)
+        zynn.sendMessage(from, `Untuk kontak penggunaan ${prefix}antidelete ctaktif`, MessageType.text)
 }
 } else if (args[0] == 'ctaktif') {
 if (!isGroup) {
-	if (!tod.key.fromMe) return reply('Hanya Bisa dilakukan Oleh Owner')
-	if (isCtRevoke) return zynn.sendMessage(from, `Antidelete telah diaktifkan di semua kontak sebelumnya!`, MessageType.text)
-	dataCtRevoke.data = true
-	fs.writeFileSync('./src/ct-revoked.json', JSON.stringify(dataCtRevoke))
-	zynn.sendMessage(from, `Antidelete diaktifkan disemua kontak!`, MessageType.text, {quoted: tod})
+        if (!itsMe) return reply('Hanya Bisa dilakukan Oleh Owner')
+        if (isCtRevoke) return zynn.sendMessage(from, `Antidelete telah diaktifkan di semua kontak sebelumnya!`, MessageType.text)
+        dataCtRevoke.data = true
+        fs.writeFileSync('./src/ct-revoked.json', JSON.stringify(dataCtRevoke))
+        zynn.sendMessage(from, `Antidelete diaktifkan disemua kontak!`, MessageType.text, {quoted: tod})
 } else if (isGroup) {
         zynn.sendMessage(from, `Untuk grup penggunaan ${prefix}antidelete aktif`, MessageType.text)
 }
-} else if (args[0] == 'banct') {
-	if (!itsMe) return reply('Hanya Bisa dilakukan Oleh Owner')
-	if (isBanCtRevoke) return zynn.sendMessage(from, `kontak ini telah ada di database banlist!`, MessageType.text)
-	if (args.length === 2 || args[2].startsWith('0')) return benny.sendMessage(from, `Masukan nomer diawali dengan 62! contoh 62859289xxxxx`, MessageType.text)
-	dataBanCtRevoke.push(args[2] + '@s.whatsapp.net')
-	fs.writeFileSync('./src/ct-revoked-banlist.json', JSON.stringify(dataBanCtRevoke))
-	zynn.sendMessage(from, `Kontak ${args[2]} telah dimasukan ke banlist antidelete secara permanen!`, MessageType.text)
 } else if (args[0] == 'off') {
 if (isGroup) {
-	if (!tod.key.fromMe && !groupAdmins) return reply('Hanya Bisa dilakukan Oleh admin Group')
-	if (!isRevoke) return reply('Anti delete sudah di nonaktifkan')
-	const index = dataRevoke.indexOf(from)
-	dataRevoke.splice(index, 1)
-	fs.writeFileSync('./src/gc-revoked.json', JSON.stringify(dataRevoke))
-	zynn.sendMessage(from, `Succes disable Antidelete Grup!`, MessageType.text)
+        if (!itsMe && !groupAdmins) return reply('Hanya Bisa dilakukan Oleh admin Group')
+        if (!isRevoke) return reply('Anti delete sudah di nonaktifkan')
+        const index = dataRevoke.indexOf(from)
+        dataRevoke.splice(index, 1)
+        fs.writeFileSync('./src/gc-revoked.json', JSON.stringify(dataRevoke))
+        zynn.sendMessage(from, `Succes disable Antidelete Grup!`, MessageType.text)
 } else if (!isGroup) {
-	zynn.sendMessage(from, `Untuk kontak penggunaan ${prefix}antidelete ctmati`, MessageType.text)
+        zynn.sendMessage(from, `Untuk kontak penggunaan ${prefix}antidelete ctmati`, MessageType.text)
 }
 } else if (args[0] == 'ctmati') {
 if (!isGroup) {
-	if (!tod.key.fromMe) return reply('Hanya Bisa dilakukan Oleh Owner')
-	dataCtRevoke.data = false
-	fs.writeFileSync('./src/ct-revoked.json', JSON.stringify(dataCtRevoke))
-	zynn.sendMessage(from, `Antidelete dimatikan disemua kontak!`, MessageType.text)
+        if (!itsMe) return reply('Hanya Bisa dilakukan Oleh Owner')
+        dataCtRevoke.data = false
+        fs.writeFileSync('./src/ct-revoked.json', JSON.stringify(dataCtRevoke))
+        zynn.sendMessage(from, `Antidelete dimatikan disemua kontak!`, MessageType.text)
 } else if (isGroup) {
-	zynn.sendMessage(from, `Untuk grup penggunaan ${prefix}antidelete mati`, MessageType.text)
+        zynn.sendMessage(from, `Untuk grup penggunaan ${prefix}antidelete mati`, MessageType.text)
 }
 }
 break
