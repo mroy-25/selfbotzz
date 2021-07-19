@@ -67,7 +67,11 @@ require('./src/gupdate.js')(zynn, msg)
 })
 zynn.on('chat-update', async (message) => {
 require('./taka.js')(zynn, message)
-    })
+})
+zynn.on('message-delete', async (message) => {
+require('./lib/antidelete.js')(zynn, message)
+})
+
 /*    zynn.on('message-update', async (message) => {
         require('./antidelete.js')(zynn, message)
     })*/
