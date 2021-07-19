@@ -157,6 +157,7 @@ module.exports = zynn = async (zynn, tod) => {
 	    	
 		const content = JSON.stringify(tod.message)
 		const from = tod.key.remoteJid
+		const isGroup = from.endsWith('@g.us')
 		const m = simple.smsg(zynn, tod)
 		const type = Object.keys(tod.message)[0]
 		const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
@@ -303,7 +304,6 @@ var countDownDate = new Date(tanggal).getTime();
 return result
 }
         const botNumber = zynn.user.jid
-		const isGroup = from.endsWith('@g.us')
 		const Owner = ['32495947149@s.whatsapp.net', '6287798005230@s.whatsapp.net', '6281990498472@s.whatsapp.net', '13342199618@s.whatsapp.net', zynn.user.jid]
 		const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
 		const totalchat = await zynn.chats.all()
