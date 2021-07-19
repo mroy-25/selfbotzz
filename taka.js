@@ -161,7 +161,7 @@ module.exports = zynn = async (zynn, tod) => {
 		const type = Object.keys(tod.message)[0]
 		const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
 		const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-		const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : ''.slice(1).trim().split(/ +/).shift().toLowerCase()
+		const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : ''.slice(1).trim().split(/ +/).shift().toLowerCase()
 		const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/gi) : '.'
 		noprefix = ''
 		if(nopref == 'no'){
@@ -179,7 +179,7 @@ module.exports = zynn = async (zynn, tod) => {
 			slc = 1
 			slc2 = 2
 			}
-		body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix)) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix)) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
+		body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
 		//const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
 		tmplt = Object.keys(tod.message)[0] == "listResponseMessage" ? tod.message.listResponseMessage.selectedDisplayText : ""
@@ -274,10 +274,10 @@ const runtime = function(seconds) {
 	var h = Math.floor(seconds % (3600 * 24) / 3600);
 	var m = Math.floor(seconds % 3600 / 60);
 	var s = Math.floor(seconds % 60);
-	var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
-	var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-	var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-	var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+	var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " d, ") : "";
+	var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " h, ") : "";
+	var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " m, ") : "";
+	var sDisplay = s > 0 ? s + (s == 1 ? " second" : " s") : "";
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
 const hitungmundur = async (tanggal) => {
@@ -1064,6 +1064,35 @@ else if(setting.menu == 'flink2'){
 		buff = fakeimage
 	}
 	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+}
+else if(setting.menu == 'button'){
+const but = [
+    {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
+    {buttonId: '.menu', buttonText: {displayText: 'MENU'}, type: 1},
+{buttonId: '.play Hoomage', buttonText: {displayText: 'PLAY HOOMAGE'}, type: 1}
+]
+po = await zynn.prepareMessage(from, fakeimage, image)
+const buttonMessages = {
+imageMessage: po.message.imageMessage,
+contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+footerText: "TEST",
+buttons: but,
+headerType: 4
+}
+zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
+thumbnail: fakeimage,
+contextInfo: {
+text: 'hi',
+externalAdReply: {
+title: fakec,
+body: 'INFORMATION',
+previewType: 'PHOTO',
+thumbnailUrl: '',
+thumbnail: ppimg,
+sourceUrl: 'https://github.com'
+}},
+quoted: tod
+})
 }
 else{
 			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
