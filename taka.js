@@ -973,7 +973,7 @@ thumbnailUrl: '',
 thumbnail: ppimg,
 sourceUrl: 'https://github.com'
 }},
-quoted: tod
+quoted: rep
 })
 }
 else{
@@ -1118,7 +1118,7 @@ thumbnailUrl: '',
 thumbnail: ppimg,
 sourceUrl: 'https://github.com'
 }},
-quoted: tod
+quoted: rep
 })
 }
 else{
