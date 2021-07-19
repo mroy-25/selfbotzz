@@ -1068,14 +1068,13 @@ else if(setting.menu == 'flink2'){
 else if(setting.menu == 'button'){
 const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-    {buttonId: '.menu', buttonText: {displayText: 'MENU'}, type: 1},
-{buttonId: '.play Hoomage', buttonText: {displayText: 'PLAY HOOMAGE'}, type: 1}
+    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1}
 ]
 po = await zynn.prepareMessage(from, fakeimage, image)
 const buttonMessages = {
 imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
-footerText: "TEST",
+footerText: "_Made With ❤️_",
 buttons: but,
 headerType: 4
 }
@@ -1101,6 +1100,23 @@ break
 case 'stickmenu':
 case 'stickermenu':
 fake(stickmenu(shp, prefix))
+break
+case 'thanksto':
+reply(`  ┏━━⬣ 𝙏𝙃𝘼𝙉𝙆𝙎 𝙏𝙊
+  ┃
+  ┃${shp} Allah SWT
+  ┃${shp} Kedua Orang Tua
+  ┃${shp} Aqul
+  ┃${shp} Vean
+  ┃${shp} Elios
+  ┃${shp} Hexagon
+  ┃${shp} Hardianto
+  ┃${shp} Team
+  ┃${shp} Ra-api
+  ┃${shp} Zahir-api
+  ┃${shp} Dan semua penyedia module
+  ┃
+  ┗⬣ 𝙕𝘽𝙊𝙏`)
 break
 case 'sticker2':
 const sticker = require('./src/stickercase')
@@ -3982,28 +3998,36 @@ if(!isGroupAdmins) return
                         "rows": [
                            {
                               "title": "OPEN",
-                              "rowId": ``
+                              "rowId": `${prefix}open`
                            },
 			{
                               "title": 'CLOSE',
-                              "rowId": ``
+                              "rowId": `${prefix}close`
                            },
 			 {
-                              "title": "WELCOMEON",
-                              "rowId": ``
+                              "title": "WELCOME ON",
+                              "rowId": `${prefix}welcome on`
                            },
 			 {
-                              "title": "WELCOMEOFF",
-                              "rowId": ``
+                              "title": "WELCOME OFF",
+                              "rowId": `${prefix}welcome off`
                            },
 			 {
-                              "title": "LEFTON",
-                              "rowId": ``
+                              "title": "LEFT ON",
+                              "rowId": `${prefix}left on`
                            },
 			 {
-                              "title": "LEFTOFF",
-                              "rowId": ``
-                           }
+                              "title": "LEFT OFF",
+                              "rowId": `${prefix}left off`
+                           },
+			 {
+                              "title": "ANTIDELETE ON",
+                              "rowId": `${prefix}antidelete on`
+                           },
+			 {
+                              "title": "ANTIDELETE OFF",
+                              "rowId": `${prefix}antidelete off`
+                           },
                         ]
                      }]}}, {}) 
             zynn.relayWAMessage(po, {waitForAck: true})
@@ -4704,7 +4728,7 @@ teks = `wa.me/${sender.replace("@s.whatsapp.net","")}`
 reply(teks)
 break
 case 'mute':
-if(!itsMe) return
+if(!itsMe && !isGroupAdmins) return
 if(!isGroup) return
 if(mute.includes(from)) return reply('Bot telah dimute di Group ini sebelumnya!')
 mute.push(from)
@@ -4712,7 +4736,7 @@ fs.writeFileSync('./src/mute.json', JSON.stringify(mute))
 reply('Sukses Mute Bot')
 break
 case 'unmute':
-if(!itsMe) return
+if(!itsMe && !isGroupAdmins) return
 if(!isGroup) return
 if(!mute.includes(from)) return reply('Bot tidak dimute pada chat ini!')
 del = mute.indexOf(from)
