@@ -932,7 +932,6 @@ else if(setting.menu == 'flink2'){
 else if(setting.menu == 'button'){
 const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1},
 {buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
 ]
 const buttonMessages = {
@@ -1063,7 +1062,6 @@ else if(setting.menu == 'flink2'){
 else if(setting.menu == 'button'){
 const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1},
 {buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
 ]
 const buttonMessages = {
@@ -1099,7 +1097,7 @@ case 'stickmenu':
 case 'stickermenu':
 fake(stickmenu(shp, prefix))
 break
-case 'thanksto':
+/*case 'thanksto':
 reply(`  ┏━━⬣ 𝙏𝙃𝘼𝙉𝙆𝙎 𝙏𝙊
   ┃
   ┃${shp} Allah SWT
@@ -1116,6 +1114,7 @@ reply(`  ┏━━⬣ 𝙏𝙃𝘼𝙉𝙆𝙎 𝙏𝙊
   ┃
   ┗⬣ 𝙕𝘽𝙊𝙏`)
 break
+*/
 case 'sticker2':
 const sticker = require('./src/stickercase')
 var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
