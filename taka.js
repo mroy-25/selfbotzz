@@ -932,11 +932,10 @@ else if(setting.menu == 'flink2'){
 else if(setting.menu == 'button'){
 const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1}
+    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1},
+{buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
 ]
-po = await zynn.prepareMessage(from, fakeimage, image)
 const buttonMessages = {
-imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
@@ -950,7 +949,7 @@ title: fakec,
 body: 'INFORMATION',
 previewType: 'PHOTO',
 thumbnailUrl: '',
-thumbnail: fakeimage2,
+thumbnail: fakeimage,
 sourceUrl: 'https://github.com'
 }},
 quoted: rep
@@ -1064,11 +1063,10 @@ else if(setting.menu == 'flink2'){
 else if(setting.menu == 'button'){
 const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1}
+    {buttonId: '.thanksto', buttonText: {displayText: 'THANKS TO'}, type: 1},
+{buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
 ]
-po = await zynn.prepareMessage(from, fakeimage, image)
 const buttonMessages = {
-imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
@@ -1084,7 +1082,7 @@ title: fakec,
 body: '',
 previewType: 'PHOTO',
 thumbnailUrl: '',
-thumbnail: fakeimage2,
+thumbnail: fakeimage,
 sourceUrl: 'https://github.com'
 }},
 quoted: rep
@@ -1093,6 +1091,9 @@ quoted: rep
 else{
 			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
+break
+case 'sc':
+reply('Bot ini menggunakan Script bot https://github.com/zennn08/BaseSelfBot')
 break
 case 'stickmenu':
 case 'stickermenu':
