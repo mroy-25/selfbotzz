@@ -3064,7 +3064,7 @@ butt = [
     {buttonId: `${prefix}ytmp3 ${q}`, buttonText: {displayText: 'MP3'}, type: 1}
 ]
 try{
-yutup = await yta(op)
+yutup = await yta(q)
 buff = await wa.getBuffer(yutup.thumb)
 teks = 'Y O U T U B E  D O W N L O A D E R\n\n'
 teks += shp + ' Judul : ' + yutup.title
