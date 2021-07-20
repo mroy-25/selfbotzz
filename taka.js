@@ -4308,7 +4308,51 @@ if(from.includes(i.id)){
 }
 }
 break
-
+	case 'listmem':
+	if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+if(!q){
+	members_id = []
+teks = `⬣ All Member Group ${groupName}\n\n`
+for (let mem of groupMembers) {
+teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
+teks += `  ┗━ ${shp} wa.me/${mem.jid.split('@')[0]}\n\n`
+members_id.push(mem.jid)
+}
+teks += `\n`
+teks += `⬣ ${fakec}`
+return wa.Mentions(from, teks, members_id, tod)
+}
+if(q == 'luar'){
+	  members_id = []
+teks = `⬣ All Non Indonesiaa Member in Group ${groupName}\n\n`
+for (let mem of groupMembers) {
+if(!mem.jid.startsWith('62')){
+teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
+teks += `  ┗━ ${shp} wa.me/${mem.jid.split('@')[0]}\n\n`
+members_id.push(mem.jid)
+var y = mem.jid.length
+}
+}
+teks += `\n`
+teks += `⬣ ${fakec}`
+wa.Mentions(from, teks, members_id, tod)
+}
+else{
+	  members_id = []
+teks = `⬣ All Member Group ${groupName}\n⬣ Kode Negara : ${args[0]}\n\n`
+for (let mem of groupMembers) {
+if(mem.jid.startsWith(`${args[0]}`)){
+teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
+teks += `  ┗━ ${shp} wa.me/${mem.jid.split('@')[0]}\n\n`
+members_id.push(mem.jid)
+var y = mem.jid.length
+}
+}
+teks += `\n`
+teks += `⬣ ${fakec}`
+wa.Mentions(from, teks, members_id, tod)
+}
+break
 case 'setwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q) return reply(`Contoh penggunaan : ${prefix}setwelcome Halo @user, Selamat datang di Group @subject\n\nInfo : \n${shp} @user = Tag Member\n${shp} @subject = Nama Group\n${shp} @desc = deskripsi group`)
