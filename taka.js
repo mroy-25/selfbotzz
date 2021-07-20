@@ -109,25 +109,6 @@ conn.connects()
 console.log("on bang bot nya")
 })
 let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
-let io = SocketIO(server)
-    io.on('connection', socket => {
-console.log('hehe')
-        let { unpipeEmit } = pipeEmit(conn, socket, 'conn-')
-        socket.on('disconnect', unpipeEmit)
-    })
-
-function pipeEmit(event, event2, prefix = '') {
-    let old = event.emit
-    event.emit = function (event, ...args) {
-        old.emit(event, ...args)
-        event2.emit(prefix + event, ...args)
-    }
-    return {
-        unpipeEmit() {
-            event.emit = old
-        }
-    }
-}
 module.exports = zynn = async (zynn, tod) => {
     try {
         if (!tod.hasNewMessage) return
