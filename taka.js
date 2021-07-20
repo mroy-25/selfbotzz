@@ -1181,7 +1181,7 @@ case 'stiker':
 					} else {
 						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
 					}
-            break*/
+            break
 case 'swm':
 			case 'stickerwm':
 					if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
