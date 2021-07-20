@@ -1075,12 +1075,13 @@ buttons: but,
 headerType: 4
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
+thumbnail: '',
 contextInfo: {
 "mentionedJid": [sender],
 text: 'hi',
 externalAdReply: {
 title: fakec,
-body: 'INFORMATION',
+body: '',
 previewType: 'PHOTO',
 thumbnailUrl: '',
 thumbnail: fakeimage2,
@@ -4324,7 +4325,7 @@ return wa.Mentions(from, teks, members_id, tod)
 }
 if(q == 'luar'){
 	  members_id = []
-teks = `⬣ All Non Indonesiaa Member in Group ${groupName}\n\n`
+teks = `⬣ All Non Indonesian Member in Group ${groupName}\n\n`
 for (let mem of groupMembers) {
 if(!mem.jid.startsWith('62')){
 teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
@@ -4350,6 +4351,7 @@ var y = mem.jid.length
 }
 teks += `\n`
 teks += `⬣ ${fakec}`
+if(members_id == '') return reply('Tidak ditemukan')
 wa.Mentions(from, teks, members_id, tod)
 }
 break
