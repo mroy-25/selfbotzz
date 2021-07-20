@@ -94,6 +94,7 @@ const vcard = 'BEGIN:VCARD\n'
 
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
+fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
 publicc = setting.public
 fakec = setting.fake
 nopref = 'multi'
@@ -906,12 +907,6 @@ var shep = shp
 zynn.relayWAMessage(res)
 }
 else if(setting.menu == 'flink'){
-try{
-ppp = await zynn.getProfilePicture(sender)
-pp = await wa.getBuffer(ppp)
-}catch{
-pp = fakeimage
-}
 zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
@@ -932,13 +927,7 @@ zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hi
 })
 }
 else if(setting.menu == 'flink2'){
-	try{
-		pp = await zynn.getProfilePicture(sender)
-		buff = await wa.getBuffer(pp)
-	}catch{
-		buff = fakeimage
-	}
-	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+	flink2(fakeimage, fakeimage2, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
 else if(setting.menu == 'button'){
 const but = [
@@ -961,7 +950,7 @@ title: fakec,
 body: 'INFORMATION',
 previewType: 'PHOTO',
 thumbnailUrl: '',
-thumbnail: ppimg,
+thumbnail: fakeimage2,
 sourceUrl: 'https://github.com'
 }},
 quoted: rep
@@ -1050,12 +1039,6 @@ var shep = shp
 zynn.relayWAMessage(res)
 }
 else if(setting.menu == 'flink'){
-try{
-ppp = await zynn.getProfilePicture(sender)
-pp = await wa.getBuffer(ppp)
-}catch{
-pp = fakeimage
-}
 zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
@@ -1076,13 +1059,7 @@ zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hi
 })
 }
 else if(setting.menu == 'flink2'){
-	try{
-		pp = await zynn.getProfilePicture(sender)
-		buff = await wa.getBuffer(pp)
-	}catch{
-		buff = fakeimage
-	}
-	flink2(fakeimage, buff, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+	flink2(fakeimage, fakeimage2, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
 else if(setting.menu == 'button'){
 const but = [
@@ -1106,7 +1083,7 @@ title: fakec,
 body: 'INFORMATION',
 previewType: 'PHOTO',
 thumbnailUrl: '',
-thumbnail: ppimg,
+thumbnail: fakeimage2,
 sourceUrl: 'https://github.com'
 }},
 quoted: rep
