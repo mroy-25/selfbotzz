@@ -939,7 +939,7 @@ const buttonMessages = {
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
-headerType: 4
+headerType: 1
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
 contextInfo: {
@@ -1070,7 +1070,7 @@ const buttonMessages = {
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
-headerType: 4
+headerType: 1
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
 thumbnail: '',
