@@ -940,7 +940,7 @@ imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
-headerType: 1
+headerType: 4
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
 contextInfo: {
@@ -1072,7 +1072,7 @@ imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
-headerType: 1
+headerType: 4
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
 thumbnail: '',
