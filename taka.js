@@ -3080,7 +3080,7 @@ zynn.sendMessage(from, buttonmes, MessageType.buttonsMessage, {
 quoted: tod
 })
 }catch{
-reply(mess.error.api
+reply(mess.error.api)
 }
 break
 case 'ytsearch':
