@@ -934,7 +934,9 @@ const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
 {buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
 ]
+po = await zynn.prepareMessage(from, fakeimage2, image)
 const buttonMessages = {
+imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
@@ -1064,7 +1066,9 @@ const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
 {buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
 ]
+po = await zynn.prepareMessage(from, fakeimage2, image)
 const buttonMessages = {
+imageMessage: po.message.imageMessage,
 contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
