@@ -1127,7 +1127,8 @@ var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM',
 var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
 await sticker.stickerCase(tod, reply, zynn, args)
 break
-/*case 'stiker':
+case 's':
+case 'stiker':
 				case 'sticker':
 					if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
@@ -1181,12 +1182,11 @@ break
 						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
 					}
             break*/
-case 'sticker':
-case 's':
-case 'stiker':
+case 'swm':
+			case 'stickerwm':
 					if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-						owgi = await zynn.downloadMediaMessage(boij)
+						owgi = await zynn.downloadMediaMessage(encmedia)
 	await fs.writeFileSync(`./media/${sender}.jpeg`, owgi)
 	var imgbb = require('imgbb-uploader')
 	anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", `./media/${sender}.jpeg`)
@@ -1201,7 +1201,7 @@ case 'stiker':
 					} else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
 						//const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-            					owgi = await zynn.downloadMediaMessage(boij)
+            					owgi = await zynn.downloadMediaMessage(encmedia)
             					res = await uploadImages(owgi, false)
 	try{
 		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(packname)}&pack=${encodeUrl(author)}&apikey=hardianto`)
@@ -1213,7 +1213,7 @@ case 'stiker':
 						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
 					}
             break
-case 'swm':
+/*case 'swm':
 			case 'stickerwm':
 				if (isMedia && !tod.message.videoMessage || isQuotedImage) {
 					if (!arg.includes('|')) return fake(`Kirim gambar atau reply gambar dengan caption *${prefix}stickerwm nama|author*`)
