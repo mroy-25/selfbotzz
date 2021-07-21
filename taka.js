@@ -1531,6 +1531,11 @@ setting.menu = 'flink'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 fake(`Sukses`)
+}else if(args[0] == 'flink2'){
+setting.menu = 'flink2'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+fake(`Sukses`)
 }
 else if(args[0] == 'flink2'){
 setting.menu = 'flink2'
@@ -1538,6 +1543,13 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 fake(`Sukses`)
 }
+else if(args[0] == 'polos'){
+setting.menu = 'polos'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+fake(`Sukses`)
+}
+
 else{
 setting.menu = 'biasa'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
