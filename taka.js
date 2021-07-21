@@ -929,6 +929,10 @@ zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hi
 else if(setting.menu == 'flink2'){
 	flink2(fakeimage, fakeimage2, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
+
+else if(setting.menu == 'polos'){
+	wa.Mentions(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
+}
 else if(setting.menu == 'button'){
 const but = [
     {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
@@ -1061,6 +1065,9 @@ zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hi
 }
 else if(setting.menu == 'flink2'){
 	flink2(fakeimage, fakeimage2, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+}
+else if(setting.menu == 'polos'){
+	wa.Mentions(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
 const but = [
