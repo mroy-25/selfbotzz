@@ -51,7 +51,7 @@ fs.writeFileSync('./src/batre.json' , JSON.stringify(json[2][0], null , 2))
 })
 zynn.on('group-participants-update', async (msg) => {
 console.log('Group Change')
-require('./src/detection.js')(zynn, msg)
+require('./lib/detection.js')(zynn, msg)
 })
 zynn.on('group-update', async (msg) => {
 const gchange = JSON.parse(fs.readFileSync('./src/gupdated.json'))
