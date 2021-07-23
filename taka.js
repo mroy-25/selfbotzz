@@ -53,7 +53,7 @@ const infotlp = require('no-telp')
 const express = require('express')
 const app = express()
 const simple = require('./lib/simple')
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
 const imageToBase64 = require('image-to-base64')
 const translate = require('@vitalets/google-translate-api')
 const { yta, ytv, igdl, upload } = require('./lib/ytdl')
@@ -100,7 +100,7 @@ fakec = setting.fake
 nopref = 'multi'
 shp = setting.shp
 fakenomor = '0@s.whatsapp.net'
-autoread = false
+autoread = setting.autoread
 fakerep = setting.fakerep
 tmp_hit = []
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
@@ -109,7 +109,7 @@ app.use('/', (req, res) => {
 conn.connects()
 console.log("on bang bot nya")
 })
-let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+//let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod) => {
     try {
         if (!tod.hasNewMessage) return
@@ -117,14 +117,7 @@ module.exports = zynn = async (zynn, tod) => {
 		if (!tod.message) return
 		if (tod.key && tod.key.remoteJid == 'status@broadcast') return
 	        global.Prefix
-/*		let infoMSG = JSON.parse(fs.readFileSync('./src/.dat/msg.data.json'))
-      infoMSG.push(JSON.parse(JSON.stringify(tod)))
-      fs.writeFileSync('./src/.dat/msg.data.json', JSON.stringify(infoMSG, null, 2))
-      const urutan_pesan = infoMSG.length
-      if (urutan_pesan === 5000) {
-         infoMSG.splice(0, 4300)
-         fs.writeFileSync('./src/.dat/msg.data.json', JSON.stringify(infoMSG, null, 2))
-      }*/	if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
+		if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3) {
                 teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
                 teks += '\n'.repeat(100)
                 teks += JSON.stringify(tod, null, 2)
@@ -136,7 +129,6 @@ module.exports = zynn = async (zynn, tod) => {
                 zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
 }
 		tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
-	    	
 		const content = JSON.stringify(tod.message)
 		const from = tod.key.remoteJid
 		const isGroup = from.endsWith('@g.us')
@@ -166,18 +158,23 @@ if(isGroup){
 try{
 for(let i of gcprefix){
         if(i.id.includes(from)){
-                var prefix = i.prefix
-        }
+                var prefa = i.prefix
+        	if(prefa == 'noprefix'){
+			var prefix = ''
+		}
+		else{
+			var prefix = prefa
+		}
+	}
 }
 }catch{
 }
 }
 
+
 		body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : ''
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
 		//const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
-		tmplt = Object.keys(tod.message)[0] == "listResponseMessage" ? tod.message.listResponseMessage.selectedDisplayText : ""
-                q2 = Object.keys(tod.message)[0] == "listResponseMessage" ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : ""
 		const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 		issticker = Object.keys(tod.message)[0] == "stickerMessage" ? tod.message.stickerMessage.fileSha256.toString('hex') : ""
 		const args = body.trim().split(/ +/).slice(1)
@@ -185,8 +182,6 @@ for(let i of gcprefix){
 		const q = args.join(' ')
 		const run = process.uptime()
 		const arg = chats.slice(command.length + 1, chats.length)
-		//const ramadhan = await axios.get('https://zynnbot-api.herokuapp.com/api/hitungmundur?apikey=XinzBot&tzynnl=12&bulan=4')
-		//const ucapan = await axios.get('https://zynnbot-api.herokuapp.com/api/ucapan?apikey=XinzBot&timeZone=Asia/Jakarta')
 		//function
 		const sendText = (text) => {
     zynn.sendMessage(from, text, MessageType.text)
@@ -194,10 +189,6 @@ for(let i of gcprefix){
 var reply = (text) => {
     zynn.sendMessage(from, text, MessageType.text, {quoted: tod, sendEphemeral: true})
 }
-/*if(tod.key.fromMe){
-await wa.sleep(5000)
-//wa.sendText(from, JSON.stringify(tod, null, 2))
-}*/
 function today(i) {
 var today = new Date();
 var dd = today.getDate();
@@ -274,18 +265,7 @@ const runtime = function(seconds) {
 	var sDisplay = s > 0 ? s + (s == 1 ? " second" : " s") : "";
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
-const hitungmundur = async (tanggal) => {
-var countDownDate = new Date(tanggal).getTime();
- var now = new Date().getTime();
- var distance = countDownDate - now;
- var dayss = Math.floor(distance / (1000 * 60 * 60 * 24));
- var hourss = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
- var minutess = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
- var secondss = Math.floor((distance % (1000 * 60)) / 1000);
- result = `${dayss} Hari ${hourss} Jam ${minutess} Menit ${secondss} Detik`
-return result
-}
-        const botNumber = zynn.user.jid
+ 	        const botNumber = zynn.user.jid
 		const Owner = ['32495947149@s.whatsapp.net', '6287798005230@s.whatsapp.net', '6281990498472@s.whatsapp.net', '13342199618@s.whatsapp.net', zynn.user.jid]
 		const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
 		const totalchat = await zynn.chats.all()
@@ -306,7 +286,7 @@ const fdocu = { key: {
 	id: generateMessageID(),
                   participant: fakenomor, ...(from ? { remoteJid: '6289523258649-1604595598@g.us' } : {})
                }, message: { "documentMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "title": fakec, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./media/zynn.jpeg')}}}
-            
+
 
 const troli =  { key: {
                   fromMe: false,
@@ -559,10 +539,6 @@ ran = wa.getRandom('.webp')
 							.toFormat('webp')
 							.save(ran)
 }
-const isBaileys = async() =>{
-const isbileys = tod.message.extendedTextMessage.contextInfo.stanzaId.startsWith('3EB0') ? 'True' : 'False'
-reply(isbileys)
-}
 const isBusiness = async(orangnya) => {
 bus = await zynn.query({json: ['query', 'exist', orangnya], requiresPhoneConnection: false})
 try{
@@ -588,25 +564,6 @@ const sendStickerFromUrlWithWM = async(url) => {
  })
  })
 }
-async function sendFileFromUrl(from, url, caption, men) {
-            let mime = '';
-            let res = await axios.head(url)
-            mime = res.headers['content-type']
-            let type = mime.split("/")[0]+"Message"
-            if(mime === "image/gif"){
-                type = MessageType.video
-                mime = Mimetype.gif
-            }
-            if(mime === "application/pdf"){
-                type = MessageType.document
-                mime = Mimetype.pdf
-            }
-            if(mime.split("/")[0] === "audio"){
-                mime = Mimetype.mp4Audio
-            }
-            return zynn.sendMessage(from, await wa.getBuffer(url), type, {caption: caption, quoted: tod, mimetype: mime, contextInfo: {"mentionedJid": men ? men : []}})
-        }
-
 const sendMediaURL = async(to, url, text="", mids=[]) =>{
                 if(mids.length > 0){
                     text = normalizeMention(to, text, mids)
@@ -672,7 +629,7 @@ const sendMediaURL = async(to, url, text="", mids=[]) =>{
         const cmd = text.toLowerCase()
         const filePath = 'utils/tmp.' + ext
         const _buffData = type ? await resizeImage(buffData, false) : buffData
-        fs.writeFile(filePath, _buffData, { encoding: 'base64' }, (err) => {
+       fs.writeFile(filePath, _buffData, { encoding: 'base64' }, (err) => {
             if (err) return reject(err)
             console.log('Uploading image to telegra.ph server...')
             const fileData = fs.readFileSync(filePath)
@@ -711,14 +668,42 @@ if(time2 < "23:59:00"){
             var sselamat = 'Jangan Lupa Tidur'
          }
          const ucselamat = sselamat
+      if(autoread){
+      zynn.chatRead(tod.key.remoteJid)
+   }
 if (!publicc){
 	if (!itsMe) return
 }
 if(m.isBaileys === true) return
+senjid = sender.split('@')[0] + '@c.us'
+for(let i of zynn.blocklist){
+if(i === senjid) return
+}
 if(isGroup && !itsMe){
 if(mute.includes(from)){
 	return
 }}
+//simi pc
+if(!isGroup && !tod.key.fromMe && !isCmd){
+try{
+console.log(sender + ' : ' + chats)
+data = await wa.fetchJson(`https://api.zeks.xyz/api/simi?apikey=iloveyou3000&text=${chats}`)
+console.log('Simi : ' + data.result)
+await zynn.updatePresence(from, Presence.composing)
+return reply(`Bot : _${data.result}_`)
+}catch{
+}
+}
+/*else if(isGroup && m.quoted && m.quoted.sender === zynn.user.jid && !tod.key.fromMe && !isCmd){
+try{
+console.log(sender + ' in ' + groupName + ' : ' + chats)
+data = await wa.fetchJson(`https://api.zeks.xyz/api/simi?apikey=iloveyou3000&text=${chats}`)
+//console.log('Simi : ' + data.result)
+await zynn.updatePresence(from, Presence.composing)
+return reply(`Bot : _${data.result}_`)
+}catch{
+}
+}*/
 if(isGroup){
     try{
 if(!tod.message.extendedTextMessage.contextInfo.expiration == ''){
@@ -728,21 +713,7 @@ var isephe = false
 var isephe = true
 }
 }
-isephemeral = isephe == false ? 'Aktif' : 'Nonaktif'
-if(isGroupAdmins){
-if(tod.message.stickerMessage){
-if(tod.message.stickerMessage.url == `https://mmg.whatsapp.net/d/f/AoOD0RUjZGT90MuFrPQuWrfuDSNlbi_ukN_HSfFzZ6_N.enc`){
-await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
-console.log('closestick')
-        fake(`Berhasil Menutup Group`)
-}
-else if(tod.message.stickerMessage.url == `https://mmg.whatsapp.net/d/f/AnyZ1EXrUSxGuKqdQUOXq02fv5h2IyJ_86KDGnI8xbno.enc`){
-await zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
-console.log('openstick')
-        fake(`Berhasil Membuka Group`)
-}
-}
-}
+isephemeral = isephe == false ? true : false
 if(isCmd){
 tothit.push(command)
 fs.writeFileSync('./src/hit.json', JSON.stringify(tothit))
@@ -775,88 +746,7 @@ if (audionye.includes(messagesC.toLowerCase())){
 		//if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
-try{
-if(m.quoted.sender === zynn.user.jid){
-switch(tmplt){
-case 'MP3':
-fake(mess.wait)
-try{
-        downm = await yta(q2)
-        const { dl_link, thumb, title, filesizeF, filesize } = downm
-        if(Number(filesize) >= 50000){
-                short = await axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-                return sendMediaURL(from, thumb, `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
-        }
-        teks = `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Type : MP3\n\nTunggu sebentar\nMusic segera dikirim`
-        wa.sendFileFromUrl(from, thumb, tod, teks)
-        wa.sendFileFromUrl(from, dl_link, tod)
-}catch(e){
-        reply(mess.error.api)
-}
-break
-case 'MP4':
-fake(mess.wait)
-try{
-        downm = await ytv(q2)
-        const { dl_link, thumb, title, filesizeF, filesize } = downm
-        if(Number(filesize) >= 50000){
-                short = await axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-                return sendMediaURL(from, thumb, `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
-        }
-        teks = `*Y O U T U B E  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Type : MP4\n\nTunggu sebentar\nMusic segera dikirim`
-        wa.sendFileFromUrl(from, thumb, tod, teks)
-        wa.sendFileFromUrl(from, dl_link, tod)
-}catch(e){
-        reply(mess.error.api)
-}
-break
-case 'WELCOMEON':
-if (!isGroup) return reply(mess.OnlyGrup)
-if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-	if (welkom.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-	welkom.push(from)
-	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
-	reply('_Sukses mengaktifkan Welcome digroup ini_')
-break
-case 'WELCOMEOFF':
-if (!isGroup) return reply(mess.OnlyGrup)
-if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-	off = welkom.indexOf(from)
-	welkom.splice(off, 1)
-	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
-	reply('_Sukses menonaktifkan Welcome digroup ini_')
-break
-case 'LEFTON':
-if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
-if (!isGroup) return reply(mess.OnlyGrup)
-	if (left.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-	left.push(from)
-	fs.writeFileSync('./src/left.json', JSON.stringify(left))
-	reply('_Sukses mengaktifkan left digroup ini_')
-break
-case 'LEFTOFF':
-if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
-	off = left.indexOf(from)
-	left.splice(off, 1)
-	fs.writeFileSync('./src/left.json', JSON.stringify(left))
-	reply('_Sukses menonaktifkan left digroup ini_')
-break
-case 'OPEN':
-if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
-if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-await zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
-reply('Berhasil Membuka Group')
-break
-case 'CLOSE':
-if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
-if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
-reply('Berhasil Menutup Group')
-break
-}
-}
-}catch{
-}
+
 switch(issticker){
 case 'd31497270f85de963d44255446e6967417aa72d744020fd686de8fa5a4954530':
 hit = tothit.length
@@ -867,37 +757,37 @@ var shep = shp
            isday = batre[1].live == "true" ? "Charging ⚡" : "Not Charged"
            ispowersave = batre[1].powersave == "true" ? "Aktif" : "Nonaktif"
            try{
-           	pppc = await zynn.getProfilePicture(sender)
+                pppc = await zynn.getProfilePicture(sender)
            ppimg = await wa.getBuffer(pppc)
            }catch(e){
-           	ppimg = await fs.readFileSync('./media/zynn.jpeg')
+                ppimg = await fs.readFileSync('./media/zynn.jpeg')
            }
            if(nopref == 'no'){
-           	isprefix = 'Noprefix'
+                isprefix = 'Noprefix'
            }
            else if(nopref == 'multi'){
-           	isprefix = 'Multiprefix'
+                isprefix = 'Multiprefix'
            }
            else{
-           	isprefix = nopref
+                isprefix = nopref
            }
            if(itsMe){
-           	ttag = zynn.user.jid.split('@')[0]
-           	tag = zynn.user.jid
+                ttag = zynn.user.jid.split('@')[0]
+                tag = zynn.user.jid
            }
            else{
-           	ttag = sender.split('@')[0]
-           	tag = sender
+                ttag = sender.split('@')[0]
+                tag = sender
            }
-	if(setting.menu == 'catalog'){
-	res = await zynn.prepareMessageFromContent(from,{
+        if(setting.menu == 'catalog'){
+        res = await zynn.prepareMessageFromContent(from,{
   "orderMessage": {
             "orderId": "501374481143681",
             "thumbnail": fakeimage,
             "itemCount": 1,
             "status": "INQUIRY",
             "surface": "CATALOG",
-            "message": help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+            "message": help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
             "orderTitle": "</ Hanya Orang Biasa",
             "sellerJid": "6281990498472@s.whatsapp.net",
             "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
@@ -907,7 +797,7 @@ var shep = shp
 zynn.relayWAMessage(res)
 }
 else if(setting.menu == 'flink'){
-zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
+zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
 "mentionedJid": [sender],
@@ -920,29 +810,29 @@ zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hi
                 "body": "𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡",
                 "previewType": "",
                 "thumbnailUrl": "",
-                "thumbnail": fakeimage,
+                "thumbnail": fakeimage2,
                 "sourceUrl": 'https://github.com/'
             }},
-			quoted: rep
+                        quoted: rep
 })
 }
 else if(setting.menu == 'flink2'){
-	flink2(fakeimage, fakeimage2, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+        flink2(fakeimage, fakeimage2, 'https://github.com/', help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
-
 else if(setting.menu == 'polos'){
-	wa.Mentions(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
+        wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
 const but = [
-    {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-{buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
+    {buttonId: `${prefix}owner`, buttonText: {displayText: 'OWNER'}, type: 1},
+{buttonId: `${prefix}sc`, buttonText: {displayText: 'SC'}, type: 1},
+    {buttonId: `${prefix}groupbot`, buttonText: {displayText: 'GROUP BOT'}, type: 1}
 ]
-buff = await wa.getBuffer('https://a.uguu.se/fZYzZfxs.jpg')
-po = await zynn.prepareMessage(from, buff, image)
+if(!isephemeral){
+po = await zynn.prepareMessage(from, fakeimage, image)
 const buttonMessages = {
 imageMessage: po.message.imageMessage,
-contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+contentText: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
 headerType: 4
@@ -950,21 +840,21 @@ headerType: 4
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
 contextInfo: {
 text: 'hi',
-externalAdReply: {
-title: fakec,
-body: 'INFORMATION',
-previewType: 'PHOTO',
-thumbnailUrl: '',
-thumbnail: fakeimage,
-sourceUrl: 'https://github.com'
-}},
+mentionedJid: [sender]
+},
+//sendEphemeral: false,
 quoted: rep
 })
 }
 else{
-			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+}
+}
+else{
+                        zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
 break
+
 case '4a8b70fd4e9a8690fd90571387c2fdeb444c07bc77faff88b5884abfdd7fc221':
 const { speedz } = require('./lib/speed.js')
 speedz(zynn, reply)
@@ -1034,7 +924,7 @@ var shep = shp
             "itemCount": 1,
             "status": "INQUIRY",
             "surface": "CATALOG",
-            "message": help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+            "message": help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
             "orderTitle": "</ Hanya Orang Biasa",
             "sellerJid": "6281990498472@s.whatsapp.net",
             "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
@@ -1044,7 +934,7 @@ var shep = shp
 zynn.relayWAMessage(res)
 }
 else if(setting.menu == 'flink'){
-zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
+zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
 "mentionedJid": [sender],
@@ -1064,43 +954,41 @@ zynn.sendMessage(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hi
 })
 }
 else if(setting.menu == 'flink2'){
-	flink2(fakeimage, fakeimage2, 'https://github.com/', help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
+	flink2(fakeimage, fakeimage2, 'https://github.com/', help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep))
 }
 else if(setting.menu == 'polos'){
-	wa.Mentions(from, help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
+	wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
 const but = [
-    {buttonId: '.owner', buttonText: {displayText: 'OWNER'}, type: 1},
-{buttonId: '.sc', buttonText: {displayText: 'SC'}, type: 1}
+    {buttonId: `${prefix}owner`, buttonText: {displayText: 'OWNER'}, type: 1},
+{buttonId: `${prefix}sc`, buttonText: {displayText: 'SC'}, type: 1},
+    {buttonId: `${prefix}groupbot`, buttonText: {displayText: 'GROUP BOT'}, type: 1}
 ]
-buff = await wa.getBuffer('https://a.uguu.se/fZYzZfxs.jpg')
-po = await zynn.prepareMessage(from, buff, image)
+if(!isephemeral){
+po = await zynn.prepareMessage(from, fakeimage, image)
 const buttonMessages = {
 imageMessage: po.message.imageMessage,
-contentText: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+contentText: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
 footerText: fakec,
 buttons: but,
 headerType: 4
 }
 zynn.sendMessage(from, buttonMessages, MessageType.buttonsMessage, {
-thumbnail: '',
 contextInfo: {
-"mentionedJid": [sender],
 text: 'hi',
-externalAdReply: {
-title: fakec,
-body: '',
-previewType: 'PHOTO',
-thumbnailUrl: '',
-thumbnail: fakeimage2,
-sourceUrl: 'https://github.com'
-}},
+mentionedJid: [sender]
+},
+//sendEphemeral: false,
 quoted: rep
 })
 }
 else{
-			zynn.sendMessage(from, ppimg, image, {caption: help(hitungmundur, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+}
+}
+else{
+			zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
 break
 case 'sc':
@@ -1109,6 +997,9 @@ break
 case 'stickmenu':
 case 'stickermenu':
 fake(stickmenu(shp, prefix))
+break
+case 'groupbot':
+reply('https://chat.whatsapp.com/Dt8Icyz3eIK4m1bUm593sR')
 break
 /*case 'thanksto':
 reply(`  ┏━━⬣ 𝙏𝙃𝘼𝙉𝙆𝙎 𝙏𝙊
@@ -1549,6 +1440,12 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 fake(`Sukses`)
 }
+else if(args[0] == 'button'){
+setting.menu = 'button'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+fake(`Sukses`)
+}
 
 else{
 setting.menu = 'biasa'
@@ -1586,6 +1483,65 @@ case 'speed':
 case 'ping':
 const { speedz } = require('./lib/speed.js')
 speedz(zynn, reply)
+break
+case 'block':
+try{
+if(m.quoted){
+zynn.blockUser(m.quoted.sender, 'add')
+reply('Sukses Block User')
+}
+else{
+if(!args[0]) return reply(`Example : ${prefix}block 6281xxxxxx`)
+if(!args[0].includes('@') && isNaN(args[0])) return reply('Input harus berupa Nomor')
+if(chats.length <= 13) return reply('Masukkan nomor dengan benar!')
+if(args[0].includes('@')){          
+nom = args[0].split('@')[1] + '@s.whatsapp.net'
+}
+else if(!args[0].startsWith('0')){
+nom = args[0] + '@s.whatsapp.net'
+}
+else if(args[0].startsWith('0')) return reply('Awali nomor dengan kode negara\nContoh : 628199xxxxx')
+zynn.blockUser(nom, 'add')
+reply('Sukses Block User')
+}
+}catch(e){
+o = String(e)
+reply(o)
+}
+break
+case 'unblock':
+try{
+if(m.quoted){
+zynn.blockUser(m.quoted.sender, 'remove')
+reply('Sukses Unblock User')
+}
+else{
+if(!args[0]) return reply(`Example : ${prefix}unblock 6281xxxxxx`)
+if(!args[0].includes('@') && isNaN(args[0])) return reply('Input harus berupa Nomor')
+if(chats.length <= 13) return reply('Masukkan nomor dengan benar!')
+if(args[0].includes('@')){          
+nom = args[0].split('@')[1] + '@s.whatsapp.net'
+}
+else if(!args[0].startsWith('0')){
+nom = args[0] + '@s.whatsapp.net'
+}
+else if(args[0].startsWith('0')) return reply('Awali nomor dengan kode negara\nContoh : 628199xxxxx')
+zynn.blockUser(nom, 'remove')
+reply('Sukses Unblock User')
+}
+}catch(e){
+o = String(e)
+reply(o)
+}
+break
+case 'listblock':
+tag = [];
+teks = shp + ` List Blocked Number : \nTotal : ${zynn.blocklist.length}\n\n`
+for(let i of zynn.blocklist){
+teks += `> @` + i.split('@')[0] + '\n'
+tag.push(i.split('@')[0] + '@s.whatsapp.net')
+}
+wa.Mentions(from, teks, tag, tod)
 break
 case 'runtime':
 fake(runtime(run))
@@ -1925,6 +1881,7 @@ case 'caripesan':
             let el = s.filter(v => v.message)
             el.shift()
             try {
+//console.log(el)
             if(el[0].message.conversation == undefined) return
             reply(`Ditemukan ${el.length} pesan`)
             await wa.sleep(3000)
@@ -2844,55 +2801,14 @@ else{
 }
    break
 case 'resend':
-	  if(isQuotedSticker){
-	  boij = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	delb = await zynn.downloadMediaMessage(boij)
-	fs.writeFileSync(`./src/sticker/resend.jpg`, delb)
-	buff = fs.readFileSync('./src/sticker/resend.jpg')
-	wa.sendStickerWithFG(from, buff)
-	fs.unlinkSync('./src/sticker/resend.jpg')
-	  }
-	  else if(isQuotedImage){
-	    boij = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	delb = await zynn.downloadMediaMessage(boij)
-	fs.writeFileSync(`./src/image/resend.jpg`, delb)
-	buff = fs.readFileSync('./src/image/resend.jpg')
-	try{
-	wa.sendImage(from, buff, tod, ' ' + tod.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage.caption)
-	}catch(e){
-	wa.sendImage(from,buff, tod)
-	}
-	fs.unlinkSync('./src/image/resend.jpg')
-	  }
-	else if(isQuotedVideo){
-	    boij = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	delb = await zynn.downloadMediaMessage(boij)
-	fs.writeFileSync(`./src/image/resend.mp4`, delb)
-	buff = fs.readFileSync('./src/image/resend.mp4')
-	try{
-	wa.sendVideo(from, buff, tod,' ' + tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.caption)
-	}catch(e){
-	wa.sendVideo(from,buff, tod)
-	}
-	fs.unlinkSync('./src/image/resend.mp4')
-	  }
-	 else if(isQuotedAudio){
-	   boij = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	delb = await zynn.downloadMediaMessage(boij)
-	fs.writeFileSync(`./src/audio/resend.mp3`, delb)
-	buff = fs.readFileSync('./src/audio/resend.mp3')
-	if(tod.message.extendedTextMessage.contextInfo.quotedMessage.audioMessage.ptt == true){
-	wa.sendptt(from, buff, tod)
-	}
-	else{
-	wa.sendAudio(from,buff, tod)
+if(!m.quoted) return reply('Reply pesannya!')
+try{
+po = await zynn.prepareMessageFromContent(from, tod.message.extendedTextMessage.contextInfo.quotedMessage, {})
+zynn.relayWAMessage(po)
+}catch{
+reply(mess.error.api)
 }
-	fs.unlinkSync('./src/audio/resend.mp3')
-	 }
-	 else if(tod.message.extendedTextMessage.contextInfo.quotedMessage){
-	   fake(' ' + tod.message.extendedTextMessage.contextInfo.quotedMessage.conversation)
-	 }
-	break
+break
 case 'addvn':
   if(!itsMe) return reply(mess.only.ownerB)
 	if (!isQuotedAudio) return reply('Reply vnnya blokk!')
@@ -3093,12 +3009,12 @@ for(let i=0; i<hdata.length; i++){
                            {
                               "title": "MP3",
                                                           description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
-                              "rowId": hdata[i].url
+                              "rowId": `${prefix}ytmp3 ${hdata[i].url}`
                            },
                                                    {
                               "title": "MP4",
                                                           description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
-                              "rowId": hdata[i].url
+                              "rowId": `${prefix}ytmp4 ${hdata[i].url}`
                            }
                         ], title: num})
         num += 1
@@ -3173,8 +3089,8 @@ if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.Iv)
 fake(mess.wait)
 try{
-	data = await wa.fetchJson(`https://fxc7-api.herokuapp.com/api/download/tiktok?apikey=Fxc7&url=` + q)
-	wa.sendFileFromUrl(from, data.result.nowatermark, tod, '*T I K T O K  N O  W A T E R M A R K*')
+	//data = await wa.fetchJson(`https://dapuhy-api.herokuapp.com/api/socialmedia/tiktoknowm?url=${q}&apikey=ItsMeVean`)
+	wa.sendFileFromUrl(from, `https://dapuhy-api.herokuapp.com/api/socialmedia/tiktoknowm?url=${q}&apikey=ItsMeVean`, tod, '*T I K T O K  N O  W A T E R M A R K*')
 }catch{
 	reply(mess.error.api)
 }
@@ -3184,9 +3100,8 @@ if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.Iv)
 fake(mess.wait)
 try{
-	data = await wa.fetchJson(`https://fxc7-api.herokuapp.com/api/download/tiktok?apikey=Fxc7&url=` + q)
-	buff = await wa.getBuffer(data.result.watermark)
-	wa.sendVideo(from, buff, tod, '*T I K T O K  W A T E R M A R K*')
+	//data = await wa.fetchJson(`https://fxc7-api.herokuapp.com/api/download/tiktok?apikey=Fxc7&url=` + q)
+	wa.sendFileFromUrl(from, `https://dapuhy-api.herokuapp.com/api/socialmedia/tiktokwithwm?url=${q}&apikey=ItsMeVean`, tod, '*T I K T O K  W A T E R M A R K*')
 }catch{
 	reply(mess.error.api)
 }
@@ -4198,7 +4113,7 @@ try{
 	reply(mess.error.api)
 }
 break
-case 'tiktok2':
+/*case 'tiktok2':
 if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.Iv)
 fake(mess.wait)
@@ -4220,6 +4135,7 @@ try{
 	reply(mess.error.api)
 }
 break
+*/
 case 'konachan':
 if(!q) return reply('Masukkan kata kuncinya!')
 fake(mess.wait)
@@ -4332,7 +4248,13 @@ reply(`Cara Penggunaan : ${prefix + command} ghea\n\nTersedia\n• +62\n• sant
 break
 case 'setprefixgc':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-if(!q) return reply(`Contoh penggunaan : ${prefix}setprefixgc prefix\nContoh : ${prefix}setprefixgc !`)
+//if(!q) return reply(`Contoh penggunaan : ${prefix}setprefixgc prefix\nContoh : ${prefix}setprefixgc !`)
+if(!args[0]){
+var gcpref = 'noprefix'
+}
+else{
+var gcpref = args[0]
+}
 for(let i of gcprefix){
   if(from.includes(i.id)){
     let del = gcprefix.indexOf(i)
@@ -4340,7 +4262,7 @@ for(let i of gcprefix){
       await fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
       prefgc = {
 id : from,
-prefix : args[0]
+prefix : gcpref
 }
     gcprefix.push(prefgc)
       fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
@@ -4349,7 +4271,7 @@ prefix : args[0]
 }
 prefgc = {
 id : from,
-prefix : args[0]
+prefix : gcpref
 }
 gcprefix.push(prefgc)
 fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
@@ -4410,6 +4332,28 @@ teks += `\n`
 teks += `⬣ ${fakec}`
 if(members_id == '') return reply('Tidak ditemukan')
 wa.Mentions(from, teks, members_id, tod)
+}
+break
+case 'autoread':
+if(!itsMe) return reply('Only Owner bruh!')
+if(args[0] == 'on'){
+   if(autoread) return reply('Autoread telah diaktifkan sebelumnya!')
+   setting.autoread = true
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   setting = await JSON.parse(fs.readFileSync('./setting.json'))
+   autoread = setting.autoread
+reply('Autoread berhasil diaktifkan')
+}
+else if(args[0] == 'off'){
+   if(!autoread) return reply('Autoread telah dinonaktifkan sebelumnya!')
+   setting.autoread = false
+   await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+   setting = await JSON.parse(fs.readFileSync('./setting.json'))
+   autoread = setting.autoread
+   reply('Autoread berhasil dinonaktifkan!')
+}
+else{
+   reply('Pilih on/off bruh!')
 }
 break
 case 'setwelcome':
@@ -5187,9 +5131,18 @@ reply(e)
 break
    // console.log(e)
 
-        }
+       /* }
     } catch (err) {
         console.log(color('[ERROR]', 'red'), err)
     }
-}
-
+}*/
+if (isGroup && budy != undefined) {
+	} else {
+	console.log(color('[TEXT]', 'red'), 'SELF-MODE', color(sender.split('@')[0]))
+	}
+}		
+	} catch (e) {
+    e = String(e)
+    if (!e.includes("this.isZero") && !e.includes("undefined")){
+	console.log('Message : %s', color(e, 'green'))
+        }}}
