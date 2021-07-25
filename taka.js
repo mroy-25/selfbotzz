@@ -252,6 +252,13 @@ return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net'
             }
             return serialNumber;
         }
+function torupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return rupiah.split('',rupiah.length-1).reverse().join('');
+        }
 const SN = GenerateSerialNumber("0000")
 const runtime = function(seconds) {
 	seconds = Number(seconds);
@@ -965,8 +972,8 @@ const but = [
 {buttonId: `${prefix}sc`, buttonText: {displayText: 'SC'}, type: 1},
     {buttonId: `${prefix}groupbot`, buttonText: {displayText: 'GROUP BOT'}, type: 1}
 ]
-if(!isephemeral){
 po = await zynn.prepareMessage(from, fakeimage, image)
+po.message = (Object.keys(po.message)[0] === 'ephemeralMessage') ? po.message.ephemeralMessage.message : po.message
 const buttonMessages = {
 imageMessage: po.message.imageMessage,
 contentText: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
@@ -982,10 +989,6 @@ mentionedJid: [sender]
 //sendEphemeral: false,
 quoted: rep
 })
-}
-else{
-zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
-}
 }
 else{
 			zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
@@ -3043,6 +3046,7 @@ buff = await wa.getBuffer(yutup.thumb)
 teks = 'Y O U T U B E  D O W N L O A D E R\n\n'
 teks += shp + ' Judul : ' + yutup.title
 po = await zynn.prepareMessage(from, buff, image)
+await bypasephe(po)
 buttonmes= {
 imageMessage: po.message.imageMessage,
 contentText: teks,
@@ -3147,6 +3151,7 @@ Links = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/
 if (!Links) return reply(mess.error.Iv)
 fake(mess.wait)
 try{
+	if(!q.includes('shorts')){
 	downm = await yta(q)
 	const { dl_link, thumb, title, filesizeF, filesize } = downm
 	if(Number(filesize) >= 50000){
@@ -3156,6 +3161,15 @@ try{
 	teks = `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n\nTunggu sebentar\nMusic segera dikirim`
 	wa.sendFileFromUrl(from, thumb, tod, teks)
 	wa.sendFileFromUrl(from, dl_link, tod)
+	}
+	else{
+	yemte = await ytmp3(q)
+	if(yemte.size.split(' MB')[0] >= 40){
+		return wa.sendFileFromUrl(from, yemte.thumb, tod, `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Title : ${yemte.title}\n${shp} Channel : ${yemte.channel}\n${shp} Upload Date : ${yemte.uploadDate}\n${shp} Views : ${yemte.views}\n${shp} Likes : ${yemte.likes}\n${shp} Dislike : ${yemte.dislike}\n${shp} Size : ${yemte.size}\n${shp} Link Download : ${yemte.result}\n\n${mess.oversize}`)
+	}
+	await wa.sendFileFromUrl(from, yemte.thumb, tod, `*Y T M P 3  D O W N L O A D E R*\n\n${shp} Title : ${yemte.title}\n${shp} Channel : ${yemte.channel}\n${shp} Upload Date : ${yemte.uploadDate}\n${shp} Views : ${yemte.views}\n${shp} Likes : ${yemte.likes}\n${shp} Dislike : ${yemte.dislike}\n${shp} Size : ${yemte.size}\n\nTunggu sebentar\nVideo akan segera dikirim`)
+	wa.sendFileFromUrl(from, yemte.result, tod)
+	}
 }catch(e){
 	reply(mess.error.api)
 }
@@ -3188,6 +3202,7 @@ Links = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/
 if (!Links) return reply(mess.error.Iv)
 fake(mess.wait)
 try{
+	if(!q.includes('shorts')){
 	downm = await ytv(q)
 	const { dl_link, thumb, title, filesizeF, filesize } = downm
 	if(Number(filesize) >= 50000){
@@ -3197,6 +3212,15 @@ try{
 	teks = `*Y T M P 4  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n\nTunggu sebentar\nMusic segera dikirim`
 	await sendMediaURL(from, thumb, teks)
 	sendMediaURL(from, dl_link)
+	}
+	else{
+	yemte = await ytmp4(q)
+	if(yemte.size.split(' MB')[0] >= 40){
+		return wa.sendFileFromUrl(from, yemte.thumb, tod, `*Y T M P 4  D O W N L O A D E R*\n\n${shp} Title : ${yemte.title}\n${shp} Channel : ${yemte.channel}\n${shp} Upload Date : ${yemte.uploadDate}\n${shp} Views : ${yemte.views}\n${shp} Likes : ${yemte.likes}\n${shp} Dislike : ${yemte.dislike}\n${shp} Size : ${yemte.size}\n${shp} Link Download : ${yemte.result}\n\n${mess.oversize}`)
+	}
+	await wa.sendFileFromUrl(from, yemte.thumb, tod, `*Y T M P 4  D O W N L O A D E R*\n\n${shp} Title : ${yemte.title}\n${shp} Channel : ${yemte.channel}\n${shp} Upload Date : ${yemte.uploadDate}\n${shp} Views : ${yemte.views}\n${shp} Likes : ${yemte.likes}\n${shp} Dislike : ${yemte.dislike}\n${shp} Size : ${yemte.size}\n\nTunggu sebentar\nVideo akan segera dikirim`)
+	wa.sendFileFromUrl(from, yemte.result, tod)
+}
 }catch(e){
 	reply(mess.error.api)
 }
@@ -3300,11 +3324,11 @@ case 'igstalk':
 if(!q) return reply('Masukkan username instagram!')
 fake(mess.wait)
 try{
-	data = await wa.fetchJson(`https://lindow-api.herokuapp.com/api/igstalk?username=${q}&apikey=LindowApi`)
-	verify = data.isVerified == false ? '❎' : '✅'
-	privet = data.isPrivate == false ? '❎' : '✅'
-	teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username}\n${shp} Fullname : ${data.fullName}\n${shp} Followers : ${data.subscribersCount}\n${shp} Following : ${data.subscribtions}\n${shp} Verified : ${verify}\n${shp} Private : ${privet}\n${shp} Jumlah Post : ${data.postsCount}\n${shp} Bio : ${data.biography}`
-	sendMediaURL(from, data.profilePicHD, teks)
+	data = await wa.fetchJson(`http://zekais-api.herokuapp.com/igs?username=` + q)
+	verify = data.verified == false ? '❎' : '✅'
+	privet = data.private == false ? '❎' : '✅'
+	teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username}\n${shp} Fullname : ${data.fullname}\n${shp} Followers : ${torupiah(data.follower)}\n${shp} Following : ${torupiah(data.following)}\n${shp} Verified : ${verify}\n${shp} Private : ${privet}\n${shp} Bio : ${data.bio}`
+	sendMediaURL(from, data.profilehd, teks)
 }catch(e){
 	reply(mess.error.api)
 }
@@ -3934,13 +3958,31 @@ break
 case 'welcome':
 if (!isGroup) return reply(mess.OnlyGrup)
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-if (args.length < 1) return reply('𝗜𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴')
-if (args[0] == 'on') {
+if(!q){
+butt = [
+    {buttonId: `${prefix}${command} on`, buttonText: {displayText: 'ENABLE'}, type: 1},
+    {buttonId: `${prefix}${command} off`, buttonText: {displayText: 'DISABLE'}, type: 1}
+]
+bts = {
+contentText: '*WELCOME*',
+footerText: 'Pilih Enable atau Disable',
+buttons: butt,
+headerType: 1
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+}
+//sendEphemeral: false,
+})
+}
+if (q == 'on') {
 	if (welkom.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
 	welkom.push(from)
 	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 	reply('_Sukses mengaktifkan Welcome digroup ini_')
-} else if (args[0] == 'off') {
+} else if (q == 'off') {
 	off = welkom.indexOf(from)
 	welkom.splice(off, 1)
 	fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
@@ -3968,13 +4010,31 @@ break
 case 'left':
 if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if (!isGroup) return reply(mess.OnlyGrup)
-if (args.length < 1) return reply('𝗜𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴')
-if (args[0] == 'on') {
+if(!q){
+butt = [
+    {buttonId: `${prefix}${command} on`, buttonText: {displayText: 'ENABLE'}, type: 1},
+    {buttonId: `${prefix}${command} off`, buttonText: {displayText: 'DISABLE'}, type: 1}
+]
+bts = {
+contentText: '*LEFT*',
+footerText: 'Pilih Enable atau Disable',
+buttons: butt,
+headerType: 1
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+}
+//sendEphemeral: false,
+})
+}
+if (q == 'on') {
 	if (left.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
 	left.push(from)
 	fs.writeFileSync('./src/left.json', JSON.stringify(left))
 	reply('_Sukses mengaktifkan left digroup ini_')
-} else if (args[0] == 'off') {
+} else if (q == 'off') {
 	off = left.indexOf(from)
 	left.splice(off, 1)
 	fs.writeFileSync('./src/left.json', JSON.stringify(left))
@@ -3982,54 +4042,6 @@ if (args[0] == 'on') {
 } else {
 	reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}left on`)
 }
-break
-case 'groupsetting':
-if(!isGroupAdmins) return
-				po = zynn.prepareMessageFromContent(from, {
-					"listMessage":{
-                  "title": "GROUP SETTING",
-                  "description": "ZBOT",
-                  "buttonText": "COMMANDS",
-                  "listType": "SINGLE_SELECT",
-                  "sections": [
-                     {
-                        "rows": [
-                           {
-                              "title": "OPEN",
-                              "rowId": `${prefix}open`
-                           },
-			{
-                              "title": 'CLOSE',
-                              "rowId": `${prefix}close`
-                           },
-			 {
-                              "title": "WELCOME ON",
-                              "rowId": `${prefix}welcome on`
-                           },
-			 {
-                              "title": "WELCOME OFF",
-                              "rowId": `${prefix}welcome off`
-                           },
-			 {
-                              "title": "LEFT ON",
-                              "rowId": `${prefix}left on`
-                           },
-			 {
-                              "title": "LEFT OFF",
-                              "rowId": `${prefix}left off`
-                           },
-			 {
-                              "title": "ANTIDELETE ON",
-                              "rowId": `${prefix}antidelete on`
-                           },
-			 {
-                              "title": "ANTIDELETE OFF",
-                              "rowId": `${prefix}antidelete off`
-                           },
-                        ]
-                     }]}}, {}) 
-            zynn.relayWAMessage(po, {waitForAck: true})
-			
 break
 case 'surah':
 if(!q) return reply('Masukkan nomor surah!')
@@ -4336,7 +4348,26 @@ wa.Mentions(from, teks, members_id, tod)
 break
 case 'autoread':
 if(!itsMe) return reply('Only Owner bruh!')
-if(args[0] == 'on'){
+if(!q){
+butt = [
+    {buttonId: `${prefix}${command} on`, buttonText: {displayText: 'ENABLE'}, type: 1},
+    {buttonId: `${prefix}${command} off`, buttonText: {displayText: 'DISABLE'}, type: 1}
+]
+bts = {
+contentText: 'AUTOREAD',
+footerText: 'Pilih Enable atau Disable',
+buttons: butt,
+headerType: 1
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+}
+//sendEphemeral: false,
+})
+}
+if(q == 'on'){
    if(autoread) return reply('Autoread telah diaktifkan sebelumnya!')
    setting.autoread = true
    await fs.writeFileSync('./setting.json', JSON.stringify(setting))
@@ -4344,7 +4375,7 @@ if(args[0] == 'on'){
    autoread = setting.autoread
 reply('Autoread berhasil diaktifkan')
 }
-else if(args[0] == 'off'){
+else if(q == 'off'){
    if(!autoread) return reply('Autoread telah dinonaktifkan sebelumnya!')
    setting.autoread = false
    await fs.writeFileSync('./setting.json', JSON.stringify(setting))
@@ -4354,6 +4385,26 @@ else if(args[0] == 'off'){
 }
 else{
    reply('Pilih on/off bruh!')
+}
+break
+case 'pesansementara':
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+if(!isBotGroupAdmins) return reply(mess.only.Badmin)
+if(!q) return reply(' Pilih on atau off')
+if(q == 'on'){
+	const { WA_DEFAULT_EPHEMERAL } = require('@adiwajshing/baileys')
+	if(isephemeral) return reply('Pesan Sementara telah diaktifkan sebelumnya')
+	await zynn.toggleDisappearingMessages(from, WA_DEFAULT_EPHEMERAL)
+	reply('Pesan Sementara berhasil diaktifkan')
+}
+else if(q == 'off'){
+	const { WA_DEFAULT_EPHEMERAL } = require('@adiwajshing/baileys')
+	if(!isephemeral) return reply('Pesan Sementara tidak diaktifkan digroup ini!')
+	await zynn.toggleDisappearingMessages(from, 0)
+	reply('Pesan Sementara berhasil dinonaktifkan')
+}
+else{
+	reply(' Pilih on atau off')
 }
 break
 case 'setwelcome':
@@ -4479,6 +4530,26 @@ try{
 }
 break
 case 'antidelete':
+if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if(!q){
+butt = [
+    {buttonId: `${prefix}${command} on`, buttonText: {displayText: 'ENABLE'}, type: 1},
+    {buttonId: `${prefix}${command} off`, buttonText: {displayText: 'DISABLE'}, type: 1}
+]
+bts = {
+contentText: '*ANTI DELETE*',
+footerText: 'Pilih Enable atau Disable',
+buttons: butt,
+headerType: 1
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+}
+//sendEphemeral: false,
+})
+}
 const groupId = isGroup ? groupMetadata.jid : ''
 const dataRevoke = JSON.parse(fs.readFileSync('./src/gc-revoked.json'))
 const dataCtRevoke = JSON.parse(fs.readFileSync('./src/ct-revoked.json'))
@@ -4487,10 +4558,9 @@ const isRevoke = dataRevoke.includes(from)
 const isCtRevoke = dataCtRevoke.data
 const isBanCtRevoke = dataBanCtRevoke.includes(sender) ? true : false
             //const argz = arg.split(' ')
-if (args.length < 1) return zynn.sendMessage(from, `Penggunaan fitur antidelete :\n\n${prefix}antidelete [on/off]`, MessageType.text)
-if (args[0] == 'on') {           
+//if (args.length < 1) return zynn.sendMessage(from, `Penggunaan fitur antidelete :\n\n${prefix}antidelete [on/off]`, MessageType.text)
+if (q == 'on') {           
 if (isGroup) {
-        if (!itsMe && !isGroupAdmins) return reply('Hanya Bisa dilakukan Oleh admin Group')
         if (isRevoke) return zynn.sendMessage(from, `Antidelete telah diaktifkan di grup ini sebelumnya!`, MessageType.text)
         dataRevoke.push(from)
         fs.writeFileSync('./src/gc-revoked.json', JSON.stringify(dataRevoke))
@@ -4498,19 +4568,8 @@ if (isGroup) {
 } else if (!isGroup) {
         zynn.sendMessage(from, `Untuk kontak penggunaan ${prefix}antidelete ctaktif`, MessageType.text)
 }
-} else if (args[0] == 'ctaktif') {
-if (!isGroup) {
-        if (!itsMe) return reply('Hanya Bisa dilakukan Oleh Owner')
-        if (isCtRevoke) return zynn.sendMessage(from, `Antidelete telah diaktifkan di semua kontak sebelumnya!`, MessageType.text)
-        dataCtRevoke.data = true
-        fs.writeFileSync('./src/ct-revoked.json', JSON.stringify(dataCtRevoke))
-        zynn.sendMessage(from, `Antidelete diaktifkan disemua kontak!`, MessageType.text, {quoted: tod})
-} else if (isGroup) {
-        zynn.sendMessage(from, `Untuk grup penggunaan ${prefix}antidelete aktif`, MessageType.text)
-}
-} else if (args[0] == 'off') {
+} else if (q == 'off') {
 if (isGroup) {
-        if (!itsMe && !groupAdmins) return reply('Hanya Bisa dilakukan Oleh admin Group')
         if (!isRevoke) return reply('Anti delete sudah di nonaktifkan')
         const index = dataRevoke.indexOf(from)
         dataRevoke.splice(index, 1)
@@ -4518,15 +4577,6 @@ if (isGroup) {
         zynn.sendMessage(from, `Succes disable Antidelete Grup!`, MessageType.text)
 } else if (!isGroup) {
         zynn.sendMessage(from, `Untuk kontak penggunaan ${prefix}antidelete ctmati`, MessageType.text)
-}
-} else if (args[0] == 'ctmati') {
-if (!isGroup) {
-        if (!itsMe) return reply('Hanya Bisa dilakukan Oleh Owner')
-        dataCtRevoke.data = false
-        fs.writeFileSync('./src/ct-revoked.json', JSON.stringify(dataCtRevoke))
-        zynn.sendMessage(from, `Antidelete dimatikan disemua kontak!`, MessageType.text)
-} else if (isGroup) {
-        zynn.sendMessage(from, `Untuk grup penggunaan ${prefix}antidelete mati`, MessageType.text)
 }
 }
 break
