@@ -704,12 +704,13 @@ if(!tod.key.fromMe && !m.isBaileys){
                 mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
                 mention != undefined ? mention.push(mentionByReply) : []
                 mentionUser = mention != undefined ? mention.filter(n => n) : []
-                if (afk.hasOwnProperty(x.split('@')[0])) {
-		    afktime = afk[x.split('@')[0]].afktime
-                    afkreason = afk[x.split('@')[0]].reason
+		for (let x of mentionUser) {
+                if (afkuser.hasOwnProperty(x.split('@')[0])) {
+		    afktime = afkuser[x.split('@')[0]].afktime
+                    afkreason = afkuser[x.split('@')[0]].reason
                     const cekafk = ms(Date.now() - afktime)
                     ini_txt = `@${x.split('@')[0]} sedang afk.\n\n`
-                    if (afk[x.split('@')[0]] != "") {
+                    if (afkuser[x.split('@')[0]] != "") {
                         ini_txt += `${shp} Reason : ${afkreason}\n${shp} Since : _${cekafk.hours} Jam  ${cekafk.minutes} Menit  ${cekafk.seconds} Detik  Yang lalu_`
                     }
 wa.Mentions(from, ini_txt, [x], tod)
@@ -717,10 +718,10 @@ wa.Mentions(from, ini_txt, [x], tod)
             }
 
 	    //endafk
-	if (afk.hasOwnProperty(orang.split('@')[0])) {
+	if (afkuser.hasOwnProperty(sender.split('@')[0])) {
                 reply("Anda telah keluar dari mode afk.")
-                delete afk[orang.split('@')[0]]
-                fs.writeFileSync("./src/afk.json", JSON.stringify(afk))
+                delete afkuser[orang.split('@')[0]]
+                fs.writeFileSync("./src/afk.json", JSON.stringify(afkuser))
             }
 afkuser = JSON.parse(fs.readFileSync('./src/afk.json'))
 }
