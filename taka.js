@@ -226,31 +226,7 @@ function bold(string) {
 function italic(string) {
                     return '_' + string + '_'
                 }
-var reply = async(text) => {
-zynn.sendMessage(from, text, MessageType.text, {
-        caption: fakec,
-        "contextInfo": {
-            text: 'HelloWorld',
-            "forwardingScore": 1000000000,
-            isForwarded: true,
-            mentionedJid: [sender],
-            "externalAdReply": {
-                "title": `Hi Kak ${await wa.getPushname(sender, tod)}`,
-                "body": `${date} (${dateIslamic})`,
-                "previewType": "PHOTO",
-                "thumbnail": fakeimage
-            }},
-            quoted: tod,
-        sendEphemeral: true
-    })
-}
-if (isGroup && m.mtype == 'viewOnceMessage'){
-                var msg = {...tod}
-                msg.message = tod.message.viewOnceMessage.message
-                msg.message[Object.keys(msg.message)[0]].viewOnce = false
-                reply('ViewOnce detected!')
-                zynn.copyNForward(from, msg)
-            }
+
 function today(i) {
 var today = new Date();
 var dd = today.getDate();
@@ -363,6 +339,32 @@ const fakegroup = await fakereply.fakegroup(from, tod, command)
 const finvite = await fakereply.finvite(from, tod)
 const ftoko = await fakereply.ftoko(from, tod)
 
+//
+var reply = async(text) => {
+zynn.sendMessage(from, text, MessageType.text, {
+        caption: fakec,
+        "contextInfo": {
+            text: 'HelloWorld',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            mentionedJid: [sender],
+            "externalAdReply": {
+                "title": `Hi Kak ${await wa.getPushname(sender, tod)}`,
+                "body": `${date} (${dateIslamic})`,
+                "previewType": "PHOTO",
+                "thumbnail": fakeimage
+            }},
+            quoted: tod,
+        sendEphemeral: true
+    })
+}
+if (isGroup && m.mtype == 'viewOnceMessage'){
+                var msg = {...tod}
+                msg.message = tod.message.viewOnceMessage.message
+                msg.message[Object.keys(msg.message)[0]].viewOnce = false
+                reply('ViewOnce detected!')
+                zynn.copyNForward(from, msg)
+            }
 // error
 try{
 if(error.includes(command)){
