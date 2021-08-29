@@ -210,8 +210,8 @@ else if(type === 'stickerMessage'){
 		const q = args.join(' ')
 		const run = process.uptime()
 		const arg = chats.slice(command.length + 1, chats.length)
-        asus = await wa.random(asupann.length)
-        asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
+        //asus = await wa.random(asupann.length)
+        //asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
 		//function
 		const sendText = (text) => {
@@ -336,8 +336,8 @@ const runtime = function(seconds) {
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
  	        const botNumber = zynn.user.jid
-		const Owner = ['32495947149@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
-		const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
+		const Owner = ['48459081109@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
+        const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
 		const totalchat = await zynn.chats.all()
 		const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
 		const groupName = isGroup ? groupMetadata.subject : ''
@@ -5370,26 +5370,13 @@ const util = require('util')
         reply(util.format(JSON.parse(imguy.exif.slice(22).toString())))
 break
 default:
-	if (chats.startsWith('x')){
-	if(!itsMe) return
-		console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval brooo`))
-			try{
-            return reply(JSON.stringify(eval(chats.slice(2)), null, 2))
-			}catch(err){
-			e = String(err)
-			reply(e)
-		}
-		}
 	if (chats.startsWith('>')){
 	if(!itsMe) return
-		console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval V2 brooo`))
-		try{
-reply(require('util').format(await eval(`;(async () => { ${chats.slice(2)} })()`)))
-}catch(err){
-	e = String(err)
-	reply(e)
-	}
-}
+		exec(chats.slice(2), (err, stdout) => {
+        if (err) return reply(String(err))
+        if (stdout) reply(stdout)
+                })
+		}
 if (chats.startsWith('<')){
 if(!itsMe) return
 const util = require('util')
