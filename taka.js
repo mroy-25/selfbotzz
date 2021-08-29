@@ -238,8 +238,8 @@ zynn.sendMessage(from, text, MessageType.text, {
                 "title": `${shp} Hi Kak ${await wa.getPushname(sender, tod)}`,
                 "body": `${shp} ${date} (${dateIslamic})`,
                 "previewType": "PHOTO",
-                "thumbnail": fs.readFileSync('./media/hitam.jpeg'),
-                "sourceUrl": "https://wa.me/6281990498472?text=Halo Bang"
+                "thumbnail": fakeimage,
+                "sourceUrl": ""
             }},
             quoted: tod,
         sendEphemeral: true
@@ -3133,18 +3133,18 @@ reply(teks)
 }
 break
 case 'infogempa':
+reply(mess.wait)
 try{
-	ress = await Ra.Gempa()
-	teks = `*G E M P A  T E R K I N I*\n\n`
-	for(let i of ress){
-			teks += shp + ` Tanggal : ` + i.result.tanggal + '\n'
-			teks += shp + ` Koordinat : ` + i.result.koordinat + '\n'
-			teks += shp + ` Magnitude : ` + i.result.getaran + '\n'
-			teks += shp + ` Kedalaman : ` + i.result.kedalaman + '\n'
-			teks += shp + ` Skala : ` + i.result.skala + '\n\n-----------------------------\n\n'
-		}
-	reply(teks)
-}catch(e){
+	data = await skrep.gempa()
+	teks = 'INFO GEMPA\n\n'
+	teks = shp + ' Lokasi: ' + data.data.wilayah + '\n'
+	teks += shp + ' Magnitude: ' + data.data.magnitude + '\n'
+	teks += shp + ' Kedalaman: ' + data.data.kedalaman + '\n'
+	teks += shp + ' Lintang - Bujur: ' + data.data.lintang_bujur + '\n'
+	teks += shp + ' Waktu: ' + data.data.waktu + '\n'
+	teks += shp + ' Dirasakan (Skala MMI):\n' + data.data.dirasakan
+	wa.sendFileFromUrl(from, data.data.imagemap, tod, teks)
+}catch{
 	reply(mess.error.api)
 }
 break
