@@ -132,8 +132,8 @@ tzy.on('CB:Presence', async (asd) => {
     if((asd.type == 'composing' || asd.type == 'recording') && cekafk) {
     console.log(asd.participant)
     tzy.sendMessage(asd.id, `@${asd.participant.split('@')[0]} Terdeteksi melakukan aktivitas!, Status afkMu telah dihapus`, MessageType.text, {contextInfo: {mentionedJid: [asd.participant.split('@')[0] + '@s.whatsapp.net']}})
-    delete afk[asd.participant.split('@')[0]]
-    await fs.writeFileSync("./src/afk.json", JSON.stringify(afk))
+    delete afkuser[asd.participant.split('@')[0]]
+    await fs.writeFileSync("./src/afk.json", JSON.stringify(afkuser))
     }
 })
 //let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
