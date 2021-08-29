@@ -709,6 +709,7 @@ afkuser = JSON.parse(fs.readFileSync('./src/afk.json'))
 if (!publicc){
 	if (!itsMe) return
 }
+if(sender.startsWith('92')) return
 if(m.isBaileys === true) return
 senjid = sender.split('@')[0] + '@c.us'
 for(let i of zynn.blocklist){
