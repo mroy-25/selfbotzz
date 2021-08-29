@@ -350,7 +350,7 @@ zynn.sendMessage(from, text, MessageType.text, {
             mentionedJid: [sender],
             "externalAdReply": {
                 "title": `Hi Kak ${await wa.getPushname(sender, tod)}`,
-                "body": `${date} (${dateIslamic})`,
+                "body": `${datee} (${dateIslamic})`,
                 "previewType": "PHOTO",
                 "thumbnail": fakeimage
             }},
