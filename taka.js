@@ -80,7 +80,7 @@ const tleft = JSON.parse(fs.readFileSync('./src/tleft.json'))
 const gcprefix = JSON.parse(fs.readFileSync('./src/gcprefix.json'))
 const gchange = JSON.parse(fs.readFileSync('./src/gupdated.json'))
 const note = JSON.parse(fs.readFileSync('./src/notes.json'))
-//const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
+const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot')
 const { addcmd, getcmd, getcmdpos } = require('./lib/setcmd')
 stickerdb = JSON.parse(fs.readFileSync('./src/stickerdb.json'))
@@ -123,7 +123,7 @@ const a = json[2][0][1].value
     baterai.cas = b
     baterai.powersave = c
 })
-tzy.on('CB:Presence', async (asd) => {
+/*tzy.on('CB:Presence', async (asd) => {
     const wa = require('./whatsapp/message')
     const afk = require('./lib/afk')
     asd = asd[1]
@@ -135,8 +135,8 @@ tzy.on('CB:Presence', async (asd) => {
     delete afk[asd.participant.split('@')[0]]
     await fs.writeFileSync("./src/afk.json", JSON.stringify(afk))
     }
-})
-let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+})*/
+//let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod) => {
     try {
         if (!tod.hasNewMessage) return
@@ -210,8 +210,8 @@ else if(type === 'stickerMessage'){
 		const q = args.join(' ')
 		const run = process.uptime()
 		const arg = chats.slice(command.length + 1, chats.length)
-        //asus = await wa.random(asupann.length)
-        //asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
+        asus = await wa.random(asupann.length)
+        asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
 		//function
 		const sendText = (text) => {
@@ -226,8 +226,24 @@ function bold(string) {
 function italic(string) {
                     return '_' + string + '_'
                 }
-var reply = (text) => {
-zynn.sendMessage(from, text, MessageType.text, {quoted: tod, sendEphemeral: true})
+var reply = async(text) => {
+zynn.sendMessage(from, text, MessageType.text, {
+        caption: fakec,
+        "contextInfo": {
+            text: 'HelloWorld',
+            "forwardingScore": 1000000000,
+            isForwarded: true,
+            mentionedJid: [sender],
+            "externalAdReply": {
+                "title": `${shp} Hi Kak ${await wa.getPushname(sender, tod)}`,
+                "body": `${shp} ${date} (${dateIslamic})`,
+                "previewType": "PHOTO",
+                "thumbnail": fs.readFileSync('./media/hitam.jpeg'),
+                "sourceUrl": "https://wa.me/6281990498472?text=Halo Bang"
+            }},
+            quoted: tod,
+        sendEphemeral: true
+    })
 }
 if (isGroup && m.mtype == 'viewOnceMessage'){
                 var msg = {...tod}
@@ -320,7 +336,7 @@ const runtime = function(seconds) {
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
  	        const botNumber = zynn.user.jid
-		const Owner = ['48459081109@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
+		const Owner = ['32495947149@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
 		const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
 		const totalchat = await zynn.chats.all()
 		const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
@@ -807,7 +823,7 @@ teks = `${fakec}
 + ${shep} Penghemat Baterai : ${ispowersave}
 + `
 teks2 = monospace(`Halo ${await wa.getPushname(sender, tod)}👋\nSaya ZBOT, Bot yang dibuat untuk memudahkan dalam berbagai hal\nSilahkan klik menu untuk melihat fitur bot\n\nNote : Tidak semua fitur work, Maklum saya noob`)
-wa.sendButtonWithImage(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
+wa.sendButtonWithloc(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
 hit = tothit.length
@@ -3776,6 +3792,72 @@ try{
         reply(mess.error.api)
 }
 break
+case 'poly':
+if(!q) return reply('Masukkan teks')
+if(q.length > 10) return reply('Maksimal 10 huruf')
+reply(mess.wait)
+try{
+    data = await skrep.textmakervid(q, 'poly')
+    sendMediaURL(from, data.url, 'Nih udah jadi')
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'bold':
+if(!q) return reply('Masukkan teks')
+if(q.length > 10) return reply('Maksimal 10 huruf')
+reply(mess.wait)
+try{
+    data = await skrep.textmakervid(q, 'bold')
+    sendMediaURL(from, data.url, 'Nih udah jadi')
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'glowing':
+if(!q) return reply('Masukkan teks')
+if(q.length > 10) return reply('Maksimal 10 huruf')
+reply(mess.wait)
+try{
+    data = await skrep.textmakervid(q, 'glowing')
+    sendMediaURL(from, data.url, 'Nih udah jadi')
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'colorful':
+if(!q) return reply('Masukkan teks')
+if(q.length > 10) return reply('Maksimal 10 huruf')
+reply(mess.wait)
+try{
+    data = await skrep.textmakervid(q, 'colorful')
+    sendMediaURL(from, data.url, 'Nih udah jadi')
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'army':
+if(!q) return reply('Masukkan teks')
+if(q.length > 10) return reply('Maksimal 10 huruf')
+reply(mess.wait)
+try{
+    data = await skrep.textmakervid(q, 'army')
+    sendMediaURL(from, data.url, 'Nih udah jadi')
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'retro':
+if(!q) return reply('Masukkan teks')
+if(q.length > 10) return reply('Maksimal 10 huruf')
+reply(mess.wait)
+try{
+    data = await skrep.textmakervid(q, 'retro')
+    sendMediaURL(from, data.url, 'Nih udah jadi')
+}catch{
+    reply(mess.error.api)
+}
+break
 case 'ttp':
 if(!q) return reply('Masukkan teksnya!')
 try{
@@ -3838,6 +3920,27 @@ if (q == 'on') {
 	reply('_Sukses menonaktifkan left digroup ini_')
 } else {
 	reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}left on`)
+}
+break
+case 'antiluar':
+if (!isGroup) return reply(mess.OnlyGrup)
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+if(!q){
+isluar = enable['antiluar'].includes(from) ? 'Aktif' : 'Nonaktif'
+return wa.sendButton(from, bold('ANTILUAR') + '\n' + bold(`Status : ${isluar}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
+}
+if (q == 'on') {
+    if (enable['antiluar'].includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
+    enable['antiluar'].push(from)
+    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+    reply('_Sukses mengaktifkan Antiluar digroup ini_')
+} else if (q == 'off') {
+    off = enable['antiluar'].indexOf(from)
+    enable['antiluar'].splice(off, 1)
+    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+    reply('_Sukses menonaktifkan Antiluar digroup ini_')
+} else {
+    reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}antiluar on`)
 }
 break
 case 'antidelete':
@@ -4054,6 +4157,69 @@ try{
 	wa.sendFileFromUrl(from, data.avatar, tod, teks)
 }catch{
 	reply(mess.error.api)
+}
+break
+case 'speedtest':
+if(!itsMe) return
+reply(mess.wait)
+try{
+    exec('speedtest', async(err, stdout) => {
+        if (err) return reply(String(err))
+        if (stdout){
+server = stdout.split('Server: ')[1].split('\n')[0]
+isp = stdout.split('ISP: ')[1].split('\n')[0]
+latency = stdout.split('Latency:     ')[1].split('\n')[0]
+down= stdout.split('Download:  ')[1].split('\n')[0]
+uploadd = stdout.split('Upload:  ')[1].split('\n')[0]
+url = stdout.split('Result URL: ')[1]
+teks = 'SPEEDTEST\n\n'
+teks += shp + ' Server : ' + server + '\n'
+teks += shp + ' Isp : ' + isp + '\n'
+teks += shp + ' Latensi : ' + latency + '\n'
+teks += shp + ' Download : ' + down + '\n'
+teks += shp + ' Upload : ' + uploadd + '\n'
+teks += shp + ' Url : ' + url + '\n'
+wa.sendFileFromUrl(from, 'https://api.apiflash.com/v1/urltoimage?access_key=5608da775fec43ccab391d3ed75484ba&url=' + url, tod, teks)
+}
+})
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'resep':
+if(!q) return reply('Mau cari resep apa?')
+reply(mess.wait)
+try{
+    data = await skrep.cariresep(q)
+    dataa = await skrep.bacaresep(data.data[0].link)
+    hdata = dataa.data
+    teks = monospace('RESEP MASAKAN\n\n')
+    teks += shp + ' Nama Masakan : ' + hdata.judul + '\n'
+    teks += shp + ' Waktu Masak : ' + hdata.waktu_masak + '\n'
+    teks += shp + ' Porsi : ' + hdata.hasil + '\n'
+    teks += shp + ' Tingkat Kesulitan : ' + hdata.tingkat_kesulitan + '\n'
+    teks += shp + ' Bahan Bahan :\n\n' + hdata.bahan + '\n\n'
+    teks += shp + ' Langkah - Langkah :\n\n' + hdata.langkah_langkah
+    wa.sendFileFromUrl(from, hdata.thumb, tod, teks)
+}catch{
+    reply('Resep tidak ditemukan')
+}
+break
+case 'ptl':
+if(!q) return reply('Username tiktoknya apa?')
+reply(mess.wait)
+try{
+    data = await skrep.asupantiktok(q)
+    hdata = data.media
+    teks = 'PTL TIKTOK\n\n'
+    teks += shp + ' Username : ' + data.username + '\n'
+    teks += shp + ' Caption : ' + hdata.caption + '\n'
+    teks += shp + ' Likes : ' + hdata.likes + '\n'
+    teks += shp + ' Comments : ' + hdata.comments + '\n'
+    teks += shp + ' Share : ' + hdata.share + '\n'
+    wa.sendFileFromUrl(from, hdata.videourl, tod, teks)
+}catch{
+    reply(mess.error.api)
 }
 break
 case 'asupan':
