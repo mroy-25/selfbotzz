@@ -879,7 +879,7 @@ var shep = shp
             "itemCount": 1,
             "status": "INQUIRY",
             "surface": "CATALOG",
-            "message": help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep),
+            "message": help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep),
             "orderTitle": "</ Hanya Orang Biasa",
             "sellerJid": "6281990498472@s.whatsapp.net",
             "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
@@ -889,7 +889,7 @@ var shep = shp
 zynn.relayWAMessage(res)
 }
 else if(setting.menu == 'flink'){
-zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), MessageType.text, {
+zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
 "mentionedJid": [sender],
@@ -909,10 +909,10 @@ zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, 
 })
 }
 else if(setting.menu == 'flink2'){
-	flink2(help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), fakec, `Halo ${await wa.getPushname(sender, tod)}`, fakeimage, 'https://www.youtube.com/watch?v=yK7a99NwG5E', sender)
+	flink2(help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), fakec, `Halo ${await wa.getPushname(sender, tod)}`, fakeimage, 'https://www.youtube.com/watch?v=yK7a99NwG5E', sender)
 }
 else if(setting.menu == 'polos'){
-	wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), [sender], tod)
+	wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
     let i = []
@@ -946,7 +946,7 @@ ${shp} Runtime : ${runtime(run)}`
     wa.sendButtonWithImage(from, teks, footer, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
-			zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, isday, ttag, ispowersave, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+			zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
 break
 case 'sc':
