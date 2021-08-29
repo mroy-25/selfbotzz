@@ -13,6 +13,8 @@ const { color } = require('./lib/color')
 let zynn = new WAConnection()
 exports.zynn = zynn
 require('./taka.js')
+require('./skrep.js')
+nocache('./skrep.js', module => console.log(`${module} is now updated!`))
 nocache('./taka.js', module => console.log(`${module} is now updated!`))
 function nocache(module, cb = () => { }) {
     console.log('Module', `'${module}'`, 'is now being watched for changes')
@@ -46,18 +48,18 @@ const connects = async(zynn) => {
     fs.writeFileSync(authofile, JSON.stringify(zynn.base64EncodedAuthInfo(), null, '\t'))
 zynn.on('CB:action,,battery', json => {
 const batteryLevelStr = json[2][0][1].value
-const batterylevel = parseInt(batteryLevelStr)
 fs.writeFileSync('./src/batre.json' , JSON.stringify(json[2][0], null , 2))
 })
 zynn.on('group-participants-update', async (msg) => {
-console.log('Group Change')
+if(setting.canvas == 'swiftcord'){
+    require('./lib/swiftcord.js')(zynn, msg)    
+}
+else{
 require('./lib/detection.js')(zynn, msg)
+}
 })
 zynn.on('group-update', async (msg) => {
-const gchange = JSON.parse(fs.readFileSync('./src/gupdated.json'))
-if(!gchange.includes(msg.jid)) return
-console.log('Group Update')
-require('./src/gupdate.js')(zynn, msg)
+require('./lib/gupdate.js')(zynn, msg)
 })
 zynn.on('chat-update', async (message) => {
 require('./taka.js')(zynn, message)
@@ -65,6 +67,7 @@ require('./taka.js')(zynn, message)
 zynn.on('message-delete', async (message) => {
 require('./lib/antidelete.js')(zynn, message)
 })
+
 
 /*    zynn.on('message-update', async (message) => {
         require('./antidelete.js')(zynn, message)
