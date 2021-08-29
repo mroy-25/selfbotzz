@@ -238,8 +238,7 @@ zynn.sendMessage(from, text, MessageType.text, {
                 "title": `${shp} Hi Kak ${await wa.getPushname(sender, tod)}`,
                 "body": `${shp} ${date} (${dateIslamic})`,
                 "previewType": "PHOTO",
-                "thumbnail": fakeimage,
-                "sourceUrl": ""
+                "thumbnail": fakeimage
             }},
             quoted: tod,
         sendEphemeral: true
