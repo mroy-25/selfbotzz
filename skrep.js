@@ -3,6 +3,311 @@ const fetch = require('node-fetch')
 const axios = require('axios')
 const _math = require('mathjs')
 const _url = require('url')
+const request = require('request');
+
+exports.gempa = async() => {
+	        return new Promise(async(resolve,reject) => {
+                axios.get('https://www.bmkg.go.id/gempabumi/gempabumi-dirasakan.bmkg')
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const drasa = [];
+                        $('table > tbody > tr:nth-child(1) > td:nth-child(6) > span').get().map((rest) => {
+         					dir = $(rest).text();
+         					drasa.push(dir.replace('\t', ' '))
+        				})
+        				teks = ''
+        				for(let i=0; i<drasa.length; i++){
+        					teks += drasa[i] + '\n'
+        				}
+        				const rasa = teks
+                        const format = {
+                        	imagemap : $('div.modal-body > div > div:nth-child(1) > img').attr('src'),
+                        	magnitude : $('table > tbody > tr:nth-child(1) > td:nth-child(4)').text(),
+                        	kedalaman: $('table > tbody > tr:nth-child(1) > td:nth-child(5)').text(),
+                        	wilayah: $('table > tbody > tr:nth-child(1) > td:nth-child(6) > a').text(),
+                        	waktu: $('table > tbody > tr:nth-child(1) > td:nth-child(2)').text(),
+                        	lintang_bujur: $('table > tbody > tr:nth-child(1) > td:nth-child(3)').text(),
+                        	dirasakan: rasa
+                        }
+                        const result = {
+                        	creator: 'Fajar Ihsana',
+                        	data: format
+                        }
+                  resolve(result)
+			})
+                .catch(reject)
+            })
+}
+exports.asupantiktok = async(query) => {
+	        return new Promise(async(resolve,reject) => {
+                axios.get(`https://urlebird.com/user/${query}/`)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const link = [];
+                        $('#thumbs > div > a').each(function(a,b) {
+                        	link.push($(b).attr('href'))
+                        })
+                        rand = link[Math.floor(Math.random() * link.length)]
+                        axios.get(rand)
+                        .then(({ data }) => {
+                        	const $$ = cheerio.load(data)
+                        	const format = {
+                        		creator : 'Fajar Ihsana',
+                        		username : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.video_html5 > div.container-fluid.ml-2.pt-1.pb-2 > div > div.col-auto.text-left.pl-2 > h2 > a').text().split('@')[1],
+                        		followers : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.video_html5 > div.container-fluid.ml-2.pt-1.pb-2 > div > div.col-auto.text-left.pl-2').text().split('\n')[3],
+                        		media : {
+                        			caption : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info2').text().replace(/\n/g, ''),
+                        			likes : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info > span:nth-child(1)').text().split('💗 ')[1],
+                        			comments : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info > span:nth-child(2)').text().split('📑 ')[1],
+                        			share : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info > span:nth-child(3)').text().split('↪️ ')[1],
+                        			videourl : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.video_html5 > video').attr('src') 
+                        		}
+                        	}
+                  resolve(format)
+			})
+        })
+                .catch(reject)
+            })
+}
+exports.cariresep = async(query) => {
+	        return new Promise(async(resolve,reject) => {
+                axios.get('https://resepkoki.id/?s=' + query)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const link = [];
+                        const judul = [];
+                        const upload_date = [];
+                        const format = [];
+                        const thumb = [];
+                        $('body > div.all-wrapper.with-animations > div:nth-child(5) > div > div.archive-posts.masonry-grid-w.per-row-2 > div.masonry-grid > div > article > div > div.archive-item-media > a').each(function(a,b){
+                        	link.push($(b).attr('href'))
+                        })
+                        $('body > div.all-wrapper.with-animations > div:nth-child(5) > div > div.archive-posts.masonry-grid-w.per-row-2 > div.masonry-grid > div > article > div > div.archive-item-content > header > h3 > a').each(function(c,d){
+                        	jud = $(d).text();
+                        	judul.push(jud)
+                        })
+                        $('body > div.all-wrapper.with-animations > div:nth-child(5) > div > div.archive-posts.masonry-grid-w.per-row-2 > div.masonry-grid > div > article > div > div.archive-item-content > div.archive-item-author-meta > div > div').each(function(e,f){
+                        	upl = $(f).text();
+                        	upload_date.push(upl)
+                        })
+                        $('body > div.all-wrapper.with-animations > div:nth-child(5) > div > div.archive-posts.masonry-grid-w.per-row-2 > div.masonry-grid > div > article > div > div.archive-item-media > a').each(function(g,h){
+                        	thumb.push($(h).attr('src'))
+                        })
+                        for( let i = 0; i < link.length; i++){
+							format.push({
+								judul : judul[i],
+								upload_date : upload_date[i],
+								thumb : thumb[i],
+								link : link[i]
+							})
+						}
+						const result = {
+							creator: 'Fajar Ihsana',
+							data : format
+						}
+                  resolve(result)
+			})
+                .catch(reject)
+            })
+}
+exports.bacaresep = async(query) => {
+	        return new Promise(async(resolve,reject) => {
+                axios.get(query)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const abahan = [];
+                        const atakaran = [];
+                        const atahap = [];
+                        num = 1
+                        $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-details > div > div.single-recipe-ingredients-nutritions > div > table > tbody > tr > td:nth-child(2) > span.ingredient-name').each(function(a,b) {
+                        	bh = $(b).text();
+                        	abahan.push(bh)
+                        })
+                        $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-details > div > div.single-recipe-ingredients-nutritions > div > table > tbody > tr > td:nth-child(2) > span.ingredient-amount').each(function(c,d) {
+                        	uk = $(d).text();
+                        	atakaran.push(uk)
+                        })
+                        $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-content > div.single-steps > table > tbody > tr > td.single-step-description > div > p').each(function(e,f) {
+                        	th = $(f).text();
+                        	atahap.push(num + '. ' + th)
+                        	num += 1
+                        })
+                        const judul = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-title.title-hide-in-desktop > h1').text();
+                        const waktu = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-meta > ul > li.single-meta-cooking-time > span').text();
+                        const hasil = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-meta > ul > li.single-meta-serves > span').text().split(': ')[1]
+                        const level = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-meta > ul > li.single-meta-difficulty > span').text().split(': ')[1]
+                        const thumb = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-details > div > div.single-main-media > div > img').attr('src')
+                        tbahan = 'bahan\n'
+                        for( let i = 0; i < abahan.length; i++){
+							tbahan += abahan[i] + ' ' + atakaran[i] + '\n' 
+						}
+						ttahap = 'tahap\n'
+						for( let i = 0; i < atahap.length; i++){
+							ttahap += atahap[i] + '\n\n' 
+						}
+						const tahap = ttahap
+						const bahan = tbahan
+						const result = {
+							creator : 'Fajar Ihsana',
+							data : {
+								judul : judul,
+								waktu_masak : waktu,
+								hasil : hasil,
+								tingkat_kesulitan : level,
+								thumb : thumb,
+								bahan : bahan.split('bahan\n')[1],
+								langkah_langkah : tahap.split('tahap\n')[1]
+							}
+						}
+                  resolve(result)
+			})
+                .catch(reject)
+            })
+}
+exports.searchgore = async(query) => {
+	        return new Promise(async(resolve,reject) => {
+	        	axios.get('https://seegore.com/?s=' + query).then(dataa => {
+	        		const $$$ = cheerio.load(dataa)
+	        		pagina = $$$('#main > div.container.main-container > div > div.bb-col.col-content > div > div > div > div > nav > ul > li:nth-child(4) > a').text();	
+	        	rand = Math.floor(Math.random() * pagina) + 1
+	        	if(rand === 1){
+	        		slink = 'https://seegore.com/?s=' + query
+	        	}else{
+	        		slink = `https://seegore.com/page/${rand}/?s=${query}` 
+	        	}
+                axios.get(slink)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const link = [];
+                        const judul = [];
+                        const uploader = [];
+                        const format = [];
+                        const thumb = [];
+                        $('#post-items > li > article > div.content > header > h2 > a').each(function(a,b){
+                        	link.push($(b).attr('href'))
+                        })
+                        $('#post-items > li > article > div.content > header > h2 > a').each(function(c,d){
+                        	jud = $(d).text();
+                        	judul.push(jud)
+                        })
+                        $('#post-items > li > article > div.content > header > div > div.bb-cat-links > a').each(function(e,f){
+                        	upl = $(f).text();
+                        	uploader.push(upl)
+                        })
+                        $('#post-items > li > article > div.post-thumbnail > a > div > img').each(function(g,h){
+                        	thumb.push($(h).attr('src'))
+                        })
+                        for( let i = 0; i < link.length; i++){
+							format.push({
+								judul : judul[i],
+								uploader : uploader[i],
+								thumb : thumb[i],
+								link : link[i]
+							})
+						}
+						const result = {
+							creator: 'Fajar Ihsana',
+							data : format
+						}
+                  resolve(result)
+			})
+                .catch(reject)
+            })
+	        })
+}
+exports.randomgore = async() => {
+	        return new Promise(async(resolve,reject) => {
+	        	axios.get('https://seegore.com/gore/').then(dataa => {
+	        		const $$$ = cheerio.load(dataa)
+	        		pagina = $$$('#main > div.container.main-container.bb-stretched-full > div > div > div > div > div > div > nav > ul > li:nth-child(4) > a').text();	
+	        	rand = Math.floor(Math.random() * pagina) + 1
+	        	randvid = Math.floor(Math.random() * 16) + 1
+	        	if(rand === 1){
+	        		slink = 'https://seegore.com/gore/'
+	        	}else{
+	        		slink = `https://seegore.com/gore/page/${rand}/` 
+	        	}
+                axios.get(slink)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const link = [];
+                        const result = [];
+                        const username = [];
+                        const linkp = $(`#post-items > li:nth-child(${randvid}) > article > div.post-thumbnail > a`).attr('href')
+                        const thumbb = $(`#post-items > li:nth-child(${randvid}) > article > div.post-thumbnail > a > div > img`).attr('src')
+                        axios.get(linkp)
+						.then(({ data }) => {
+							const $$ = cheerio.load(data)
+							const format = {
+								judul : $$('div.single-main-container > div > div.bb-col.col-content > div > div > div > div > header > h1').text(),
+								views : $$('div.single-main-container > div > div.bb-col.col-content > div > div > div > div > div.s-post-meta-block.bb-mb-el > div > div > div.col-r.d-table-cell.col-md-6.col-sm-6.text-right-sm > div > span > span.count').text(),
+								comment : $$('div.single-main-container > div > div.bb-col.col-content > div > div > div > div > div.s-post-meta-block.bb-mb-el > div > div > div.col-r.d-table-cell.col-md-6.col-sm-6.text-right-sm > div > a > span.count').text(),
+								thumb : thumbb,
+								link : $$('video > source').attr('src')
+							}
+							const result = {
+								creator: 'Fajar Ihsana',
+								data : format
+							}
+                  resolve(result)
+                })
+			})
+                .catch(reject)
+            })
+        })
+}
+exports.textmakervid = async(text1, style) => {
+if(style == 'poly'){
+  var tstyle = 0
+}
+else if(style == 'bold'){
+  var tstyle = 1
+}
+else if(style == 'glowing'){
+  var tstyle = 2
+}
+else if(style == 'colorful'){
+  var tstyle = 3
+}
+else if(style == 'army'){
+  var tstyle = 4
+}
+else if(style == 'retro'){
+  var tstyle = 5
+}
+  return new Promise((resolve, reject) => {
+    const options = { method: 'POST',
+      url:"https://photooxy.com/other-design/make-a-video-that-spells-your-name-237.html",
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      formData: { optionNumber_0: tstyle ,text_1: text1, login: 'OK' } };
+    
+    request(options, async function (error, response, body) {
+      if (error) throw new Error(error);
+      const $ = cheerio.load(body)
+      const result = {
+           url: $('div.btn-group > a').attr('href')
+      }
+      resolve(result);
+    });
+  })
+}
+exports.bp = async(text) => {
+  return new Promise((resolve, reject) => {
+    const options = { method: 'POST',
+      url:"https://textpro.me/create-blackpink-logo-style-online-1001.html",
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      formData: { 'text[]': text, token: '623c625172b158249e4700caf5ec792e',submit: 'Go' } };
+    
+    request(options, async function (error, response, body) {
+      if (error) throw new Error(error);
+      const $ = cheerio.load(body)
+      const result = {
+           url: $('#view-image-wrapper > div:nth-child(1) > div > img').attr('src')
+      }
+      resolve(result);
+    });
+  })
+}
 
 exports.apkmirror = async(query) => {
         return new Promise((resolve,reject) => {
