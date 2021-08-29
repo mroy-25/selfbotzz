@@ -235,8 +235,8 @@ zynn.sendMessage(from, text, MessageType.text, {
             isForwarded: true,
             mentionedJid: [sender],
             "externalAdReply": {
-                "title": `${shp} Hi Kak ${await wa.getPushname(sender, tod)}`,
-                "body": `${shp} ${date} (${dateIslamic})`,
+                "title": `Hi Kak ${await wa.getPushname(sender, tod)}`,
+                "body": `${date} (${dateIslamic})`,
                 "previewType": "PHOTO",
                 "thumbnail": fakeimage
             }},
