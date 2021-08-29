@@ -526,7 +526,7 @@ locationMessage: {degreesLatitude: 0, degressLongitude:0, jpegThumbnail:img},
 contentText: teks,
 footerText: footer,
 buttons: datai,
-headerType: 5
+headerType: 6
 }
 return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
 caption: teks,
