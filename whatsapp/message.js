@@ -445,3 +445,99 @@ else if(inv[0].code == 500){
 return reply('Tidak dapat menambahkan peserta\nGroup sudah penuh saat ini!')
 }
 }
+exports.sendButton = async(from, teks, footer, display, buttonid, sender) => {
+datai = [];
+for(let i=0; i<display.length; i++){
+        datai.push({
+        buttonId: buttonid[i], buttonText: {displayText: display[i]}, type: 1
+        })
+}
+bts = {
+contentText: teks,
+footerText: footer,
+buttons: datai,
+headerType: 1
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+}
+})
+}
+exports.sendButtonWithImage = async(from, teks, footer, img, display, buttonid, sender, tod) => {
+datai = [];
+for(let i=0; i<display.length; i++){
+        datai.push({
+        buttonId: buttonid[i], buttonText: {displayText: display[i]}, type: 1
+        })
+}
+po = await zynn.prepareMessage(from, img, 'imageMessage')
+po.message = (Object.keys(po.message)[0] === 'ephemeralMessage') ? po.message.ephemeralMessage.message : po.message
+bts = {
+imageMessage: po.message.imageMessage,
+contentText: teks,
+footerText: footer,
+buttons: datai,
+headerType: 4
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {caption: teks,
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+},
+quoted: tod
+})
+}
+exports.sendButtonWithVideo = async(from, teks, footer, vid, display, buttonid, sender, tod) => {
+datai = [];
+for(let i=0; i<display.length; i++){
+        datai.push({
+        buttonId: buttonid[i], buttonText: {displayText: display[i]}, type: 1
+        })
+}
+po = await zynn.prepareMessage(from, vid, 'videoMessage')
+po.message = (Object.keys(po.message)[0] === 'ephemeralMessage') ? po.message.ephemeralMessage.message : po.message
+bts = {
+videoMessage: po.message.videoMessage,
+contentText: teks,
+footerText: footer,
+buttons: datai,
+headerType: 5
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+caption: teks,
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+},
+quoted: tod
+})
+}
+exports.sendButtonWithloc = async(from, teks, footer, img, display, buttonid, sender, tod) => {
+datai = [];
+for(let i=0; i<display.length; i++){
+        datai.push({
+        buttonId: buttonid[i], buttonText: {displayText: display[i]}, type: 1
+        })
+}
+bts = {
+locationMessage: {degreesLatitude: 0, degressLongitude:0, jpegThumbnail:img},
+contentText: teks,
+footerText: footer,
+buttons: datai,
+headerType: 5
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
+caption: teks,
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+},
+quoted: tod
+})
+}
+exports.random = async(num) => {
+	rand = Math.floor(Math.random() * num)
+	return rand
+}
