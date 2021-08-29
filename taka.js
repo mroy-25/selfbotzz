@@ -848,9 +848,6 @@ case 'menu':
 hit = tothit.length
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
-		batre = baterai.baterai
-           isday = baterai.cas == true ? "Charging ⚡" : "Not Charged"
-           ispowersave = baterai.powersave == true ? "Aktif" : "Nonaktif"
            try{
            	pppc = await zynn.getProfilePicture(sender)
            ppimg = await wa.getBuffer(pppc)
