@@ -123,7 +123,7 @@ const a = json[2][0][1].value
     baterai.cas = b
     baterai.powersave = c
 })
-/*tzy.on('CB:Presence', async (asd) => {
+tzy.on('CB:Presence', async (asd) => {
     const wa = require('./whatsapp/message')
     const afk = require('./lib/afk')
     asd = asd[1]
@@ -135,8 +135,8 @@ const a = json[2][0][1].value
     delete afk[asd.participant.split('@')[0]]
     await fs.writeFileSync("./src/afk.json", JSON.stringify(afk))
     }
-})*/
-//let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+})
+let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod) => {
     try {
         if (!tod.hasNewMessage) return
