@@ -80,7 +80,7 @@ const tleft = JSON.parse(fs.readFileSync('./src/tleft.json'))
 const gcprefix = JSON.parse(fs.readFileSync('./src/gcprefix.json'))
 const gchange = JSON.parse(fs.readFileSync('./src/gupdated.json'))
 const note = JSON.parse(fs.readFileSync('./src/notes.json'))
-const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
+//const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
 const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot')
 const { addcmd, getcmd, getcmdpos } = require('./lib/setcmd')
 stickerdb = JSON.parse(fs.readFileSync('./src/stickerdb.json'))
@@ -210,8 +210,8 @@ else if(type === 'stickerMessage'){
 		const q = args.join(' ')
 		const run = process.uptime()
 		const arg = chats.slice(command.length + 1, chats.length)
-        asus = await wa.random(asupann.length)
-        asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
+        //asus = await wa.random(asupann.length)
+        //asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
 		//function
 		const sendText = (text) => {
