@@ -1,1 +1,1 @@
-web: nodemon taka.js
+worker: nodemon taka.js
