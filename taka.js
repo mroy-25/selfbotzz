@@ -136,7 +136,7 @@ tzy.on('CB:Presence', async (asd) => {
     await fs.writeFileSync("./src/afk.json", JSON.stringify(afkuser))
     }
 })
-//let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod) => {
     try {
         if (!tod.hasNewMessage) return
@@ -1927,167 +1927,42 @@ case 'brazzers':
 case 'beautiful':
 case 'approved3000years':
 try{
-if (!tod.message.extendedTextMessage.contextInfo.mentionedJid[0] == ''){
-   reply(mess.wait)
-	org = `${q.replace("@","")}@c.us`
-	try{
-	ppk = await zynn.getProfilePicture(org)
-	}catch{
-	 return reply('Foto profil tidak ada/diprivate')
+	if(isMedia && !zynn.message.videoMessage || isQuotedImage){
+    reply(mess.wait)
+		const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+		const media = await zynn.downloadMediaMessage(encmedia)
+		res = await uploadImages(media, false)
+    	data = await ameapi.generate(command, {url: res})
+    	wa.sendImage(from, data, tod)
 	}
-	data = await ameapi.generate(command, {url: ppk})
-    wa.sendImage(from, data, tod)
-  }
-else if ((isMedia && !zynn.message.videoMessage || isQuotedImage)) {
-reply(mess.wait)
-ger = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-    owgi = await zynn.downloadMediaMessage(ger)
-    res = await uploadImages(owgi, false)
-    data = await ameapi.generate(command, {url: res})
-    wa.sendImage(from, data, tod)
-}
-else if(!tod.message.extendedTextMessage.contextInfo.participant == ''){
-reply(mess.wait)
-       	try{
-	 ppk = await zynn.getProfilePicture(tod.message.extendedTextMessage.contextInfo.participant)
-	}catch{
-		return reply('Foto profil tidak ada/diprivate')
+	else if(m.quoted){
+    reply(mess.wait)
+		try{
+			pp = await zynn.getProfilePicture(m.quoted.sender)
+		}catch{
+			return reply('Foto profil tidak ada/private')
+		}
+		data = await ameapi.generate(command, {url: pp})
+    	wa.sendImage(from, data, tod)
 	}
-        data = await ameapi.generate(command, {url: ppk})
-    wa.sendImage(from, data, tod)
-}
-else{
-        reply(`Reply gambar dengan caption ${prefix}${command}`)
-}
-}catch(e){
-reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
+	else if(!m.mentionedJid == ''){
+    if(m.mentionedJid == '') return reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
+    reply(mess.wait)
+		try{
+			pp = await zynn.getProfilePicture(m.mentionedJid[0])
+		}catch{
+			return reply('Foto profil tidak ada/private')
+		}
+		data = await ameapi.generate(command, {url: pp})
+    	wa.sendImage(from, data, tod)
+	}
+	else{
+		reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
+	}
+}catch{
+	reply(mess.error.api)
 }
 break
-/*case 'swasted':
-case 'swanted':
-case 'sutatoo':
-case 'sunsharpen':
-case 'stobecontinued':
-case 'sthanos':
-case 'ssniper':
-case 'ssharpen':
-case 'ssepia':
-case 'sscary':
-case 'srip':
-case 'sredple':
-case 'srejected':
-case 'sposterize':
-case 'sps4':
-case 'spixelize':
-case 'smissionpassed':
-case 'smoustache':
-case 'slookwhatkarenhave':
-case 'sjail':
-case 'sinvert':
-case 'sinstagram':
-case 'sgreyscale':
-case 'sglitch':
-case 'sgay':
-case 'sframe':
-case 'sfire':
-case 'sdistort':
-case 'sdictator':
-case 'sdeepfry':
-case 'sddungeon':
-case 'scircle':
-case 'schallenger':
-case 'sburn':
-case 'sbrazzers':
-case 'sbeautiful':
-case 'sapproved3000years':
-asu = body.slice(slc2).trim().split(/ +/).shift().toLowerCase()
-try{
-if (!tod.message.extendedTextMessage.contextInfo.mentionedJid[0] == ''){
-reply(mess.wait)
-   org = `${q.replace("@","")}@c.us`
-        try{
-	ppk = await zynn.getProfilePicture(org)
-        }catch{
-	 return reply('Foto profil tidak ada/diprivate')
-	}
-	data = await ameapi.generate(asu, {url: ppk})
-    	console.log(data)
-        buff = Buffer.from(data, 'base64')
-        await fs.writeFileSync(`./${asu}.jpg`, buff)
-        ples = `./${asu}.jpg`
-        createSticker(ples, sender, asu)
-  }
-else if ((isMedia && !zynn.message.videoMessage || isQuotedImage)) {
-	reply(mess.wait)
-	ger = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-	owgi = await zynn.downloadMediaMessage(ger)
-	res = await uploadImages(owgi, false)
-	data = await ameapi.generate(asu, {'url': res})
-	console.log(data)
-	buff = Buffer.from(data, 'base64')
-console.log(data)
-        buff = Buffer.from(data, 'base64')
-      	await fs.writeFileSync(`./${asu}.jpg`, buff)
-	ples = `./${asu}.jpg`
-	createSticker(ples, sender, asu)
-}
-        else if(isQuotedSticker){
-if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true) return reply('Tidak mendukung sticker gif')
-reply(mess.wait)
-const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-const media = await zynn.downloadMediaMessage(encmedia)
-let toBase64 = media.toString('base64')
-let upload = await require("./lib/uptoturu")(toBase64)
-data = await ameapi.generate(asu, {url: upload.image.image.url})
-        console.log(data)
-        buff = Buffer.from(data, 'base64')
-        await fs.writeFileSync(`./${asu}.jpg`, buff)
-        ples = `./${asu}.jpg`
-        createSticker(ples, sender, asu)
-	}
-/*ran = await wa.getRandom('.png')
-exec(`ffmpeg -i ${media} ${ran}`,async (err) => {
-        fs.unlinkSync(media)
-        if (err) {
-        reply(`gagal`)
-        //fs.unlinkSync(ran)
-} else {
-        console.log('sukses')
-
-        path = ran
-        uplod = await Ra.UploadFile(path)
-        console.log(uplod)
-        data = await ameapi.generate(asu, {url: uplod.result.namaFile})
-        console.log(data)
-        buff = Buffer.from(data, 'base64')
-        await fs.writeFileSync(`./${asu}.jpg`, buff)
-        ples = `./${asu}.jpg`
-        createSticker(ples, sender, asu)
-	}
- })
-}
-else if(!tod.message.extendedTextMessage.contextInfo.participant == ''){
-	reply(mess.wait)
-        try{
-	ppk = await zynn.getProfilePicture(tod.message.extendedTextMessage.contextInfo.participant)
-        }catch{
-	 return reply('Foto profil tidak ada/diprivate')
-	}
-	data = await ameapi.generate(asu, {url: ppk})
-        console.log(data)
-        buff = Buffer.from(data, 'base64')
-        await fs.writeFileSync(`./${asu}.jpg`, buff)
-        ples = `./${asu}.jpg`
-        createSticker(ples, sender, asu)
-}
-else{
-	reply(`reply gambar dengan caption ${prefix}${command}`)
-}
-}catch(e){
-reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
-}
-break
-*/
 case 'pinterest':
 if(!q) return reply('Mau cari apa dipinterest?')
 reply(mess.wait)
