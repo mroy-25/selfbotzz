@@ -25,7 +25,7 @@ function nocache(module, cb = () => { }) {
 }
 const connects = async(zynn) => {
     let authofile = './session.json'
-    zynn.version = [2, 2119, 6]
+    //zynn.version = [2, 2119, 6]
     zynn.logger.level = 'warn'
 	zynn.on('qr', qr => {
         qrcode.generate(qr, { small: true })
