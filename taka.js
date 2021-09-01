@@ -6,7 +6,7 @@
 	Presence,
 	MessageOptions,
 	Mimetype,
-	 WALocationMessage,
+	WALocationMessage,
 	WA_MESSAGE_STUB_TYPES,
 	ReconnectMode,
 	ProxyAgent,
@@ -950,7 +950,7 @@ else{
 }
 break
 case 'sc':
-reply('Bot ini menggunakan Script bot https://github.com/zennn08/BaseSelfBot')
+reply(`Bot ini menggunakan Script bot\n${shp} https://github.com/zennn08/BaseSelfBot\n${shp} https://github.com/Hexagonz/SELF-HX`)
 break
 case 'stickmenu':
 case 'stickermenu':
