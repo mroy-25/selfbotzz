@@ -2820,7 +2820,7 @@ if(!q) return reply('Masukkan linknya!')
 reply(mess.wait)
 try{
 if(args[0] == 'wm'){
-	lapi = await wa.fetchJson(`https://api.dhnjing.xyz/downloader/tiktok/watermark?url=${args[1]}`)
+	lapi = await wa.fetchJson(`https://api.dhnjing.xyz/downloader/tiktok/watermark?url=${args[1]}&apikey=8e315a11fae412`)
 	buff = await wa.getBuffer(lapi.result.media_resources.video.videoUrl)
     wa.sendVideo(from, buff, tod, monospace('T I K T O K  W I T H  W A T E R M A R K'))
 }
@@ -2832,7 +2832,7 @@ else if(args[0] == 'music'){
 	wa.sendFileFromUrl(from, args[1], tod)
 }
 else{
-data = await wa.fetchJson(`https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${q}`)
+data = await wa.fetchJson(`https://api.dhnjing.xyz/downloader/tiktok/nowatermark?url=${q}&apikey=8e315a11fae412`)
 buff = await wa.getBuffer(data.result.media_resources.image.contentUrl)
 cap = monospace(`T I K T O K  D O W N L O A D E R`) + '\n\n'
 cap += shp + ' Username : ' + data.result.author_metadata.username + '\n'
@@ -3082,7 +3082,7 @@ case 'igstalk':
 if(!q) return reply('Masukkan usernamenya!')
 reply(mess.wait)
 try{
-	hdata = await wa.fetchJson('https://api.dhnjing.xyz/stalk/instagram?user=' + q)
+	hdata = await wa.fetchJson('https://api.dhnjing.xyz/stalk/instagram?user=' + q + '&apikey=8e315a11fae412')
 	data = hdata.result
 	verify = data.verified == false ? '' : '✓'
 	privet = data.private == false ? '×' : '✓'
