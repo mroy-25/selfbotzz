@@ -2886,7 +2886,6 @@ case 'ytmp3':
 try{
     var mp3 = async(link, nama) => {
         reply(mess.wait)
-        buff = await wa.getBuffer(link)
         zynn.sendFile(from, link, nama + '.mp3', nama, m, false, { fakeimage, asDocument: false})
     }
     var doc = async(link, nama) => {
