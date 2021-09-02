@@ -5,6 +5,36 @@ const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
 
+exports.igstalk = async(username) => {
+    return new Promise(async(resolve, reject) => {
+    let {data} = await axios('https://www.instagram.com/'+username+'/?__a=1', {
+        'method': 'GET',
+        'headers': {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+        'cookie': 'ig_did=EA7DC112-2D2C-45CF-9B49-911C077DC4CB; mid=X93bwQAEAAHzC4NGbr6c9GYzt-3Y; ig_nrcb=1; shbid="10275\0548779859677\0541661946092:01f7424bc919399c1dc38f4eac6e8d8160709204e1344a7194bbd6582cace763d309b43e"; shbts="1630410092\0548779859677\0541661946092:01f7f9f9b9d96f9609bf67a9231b46b3d57b4b00e5490f411cd28f129c8434e32f4c5b09"; csrftoken=jcEYSDhU18NVlrs6wN4BHnH9gnRSBHlP; ds_user_id=49121569472; sessionid=49121569472%3AOOQibX82GkZK5W%3A25; rur="EAG\05449121569472\0541661946359:01f74f4d54dfde5712dc7d9b67f4b85b9b028952a12e14d704146184b4df470026d96097',
+        }
+    })
+    let user = data.graphql.user
+    let json = {
+        creator: '"hardianto02_',
+        status: 'ok',
+        code: 200,
+        username: user.username,
+        fullname: user.full_name,
+        verified: user.is_verified,
+        video_count_reel: user.highlight_reel_count,
+        followers: user.edge_followed_by.count,
+        follow: user.edge_follow.count,
+        is_bussines: user.is_business_account,
+        is_professional: user.is_professional_account,
+        category: user.category_name,
+        thumbnail: user.profile_pic_url_hd,
+        bio: user.biography,
+        info_account: data.seo_category_infos
+    }
+    resolve(json)
+})
+}
 exports.gempa = async() => {
 	        return new Promise(async(resolve,reject) => {
                 axios.get('https://www.bmkg.go.id/gempabumi/gempabumi-dirasakan.bmkg')
