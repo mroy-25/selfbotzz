@@ -3082,12 +3082,10 @@ case 'igstalk':
 if(!q) return reply('Masukkan usernamenya!')
 reply(mess.wait)
 try{
-	hdata = await wa.fetchJson('https://api.dhnjing.xyz/stalk/instagram?user=' + q + '&apikey=8e315a11fae412')
-	data = hdata.result
+	data = await skrep.igstalk(q)
 	verify = data.verified == false ? '' : '✓'
-	privet = data.private == false ? '×' : '✓'
-	teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username} ${verify}\n${shp} Fullname : ${data.user_fullname}\n${shp} Followers : ${torupiah(data.user_followers)}\n${shp} Following : ${torupiah(data.user_following)}\n${shp} Private : ${privet}\n${shp} Url : ${data.user_url}\n${shp} Bio : ${data.user_bio}`
-	sendMediaURL(from, data.user_profile_hd, teks)
+	teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username} ${verify}\n${shp} Fullname : ${data.fullname}\n${shp} Followers : ${torupiah(data.followers)}\n${shp} Following : ${torupiah(data.follow)}\n${shp} Url : https://www.instagram.com/${data.username}/\n${shp} Bio : ${data.bio}`
+	sendMediaURL(from, data.thumbnail, teks)
 }catch{
 	reply(mess.error.api)
 }
