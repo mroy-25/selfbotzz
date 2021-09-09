@@ -893,9 +893,6 @@ zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, 
 			quoted: rep
 })
 }
-else if(setting.menu == 'flink2'){
-	flink2(help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), fakec, `Halo ${await wa.getPushname(sender, tod)}`, fakeimage, 'https://www.youtube.com/watch?v=yK7a99NwG5E', sender)
-}
 else if(setting.menu == 'polos'){
 	wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), [sender], tod)
 }
@@ -1025,37 +1022,6 @@ case 'stiker':
             break
 case 'swm':
 			case 'stickerwm':
-					if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
-						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-						owgi = await zynn.downloadMediaMessage(encmedia)
-	await fs.writeFileSync(`./media/${sender}.jpeg`, owgi)
-	var imgbb = require('imgbb-uploader')
-	anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", `./media/${sender}.jpeg`)
-	res = `${anu.display_url}`
-	fs.unlinkSync(`./media/${sender}.jpeg`)
-	try{
-		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(packname)}&pack=${encodeUrl(author)}&apikey=hardianto`)
-		wa.sendSticker(from, data, tod)
-	}catch{
-		reply(mess.error.api)
-	}
-					} else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
-						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-						//const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-            					owgi = await zynn.downloadMediaMessage(encmedia)
-            					res = await uploadImages(owgi, false)
-	try{
-		data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(packname)}&pack=${encodeUrl(author)}&apikey=hardianto`)
-		wa.sendSticker(from, data, tod)
-	}catch{
-		reply(mess.error.api)
-	}
-					} else {
-						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
-					}
-            break
-/*case 'swm':
-			case 'stickerwm':
 				if (isMedia && !tod.message.videoMessage || isQuotedImage) {
 					if (!arg.includes('|')) return reply(`Kirim gambar atau reply gambar dengan caption *${prefix}stickerwm nama|author*`)
 					var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
@@ -1122,7 +1088,7 @@ case 'swm':
 					reply(`Kirim gambar/video dengan caption ${prefix}stickerwm nama|author atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`, id)
 				}
 				break
-/*case 'colong':
+case 'colong':
 if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}colong*`)
 var encmediia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 const meidia = await zynn.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
@@ -1148,8 +1114,8 @@ fs.unlinkSync(media)
 fs.unlinkSync(`./sticker/takestick_${sender}.exif`)
 })
 break
-*/
-case 'colong':
+
+/*case 'colong':
 if(isQuotedSticker){
 	boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
 	owgi = await zynn.downloadMediaMessage(boij)
@@ -1189,6 +1155,7 @@ var imgbb = require('imgbb-uploader')
 		reply(mess.error.api)
 	}
 break
+*/
 case 'tovideo':
 case 'tomp4':
 if (isQuotedSticker) {
