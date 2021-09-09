@@ -81,7 +81,6 @@ const gcprefix = JSON.parse(fs.readFileSync('./src/gcprefix.json'))
 const gchange = JSON.parse(fs.readFileSync('./src/gupdated.json'))
 const note = JSON.parse(fs.readFileSync('./src/notes.json'))
 const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
-const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot')
 const { addcmd, getcmd, getcmdpos } = require('./lib/setcmd')
 stickerdb = JSON.parse(fs.readFileSync('./src/stickerdb.json'))
 const error = JSON.parse(fs.readFileSync('./src/error.json'))
@@ -1927,23 +1926,7 @@ try{
 	reply('Gambar tidak ditemukan/error')
 }
 break
-/*case 'jadibot':
-const kon = new WAConnection()
- jadibot(kon, zynn, from, sender)
-break*/
-/*case 'listbot':
-const djadibot2 = JSON.parse(fs.readFileSync('./src/djadibot.json'))
-tag = []
-   teks = 'List ZBOT:\n'
-   for (let i of djadibot2) {
-   teks += `${shp} User : @${i.jid.split('@')[0]}\n`
-   teks += `${shp} Status : ${i.public}\n\n-----------------------\n\n`
-   tag.push(i.jid)
-}
-   teks += `Total : ${djadibot.length}`
-wa.Mentions(from, teks, tag, tod)
-break
-*/
+
 case 'nulis':
 reply(`*Pilihan*\n${prefix}nuliskiri\n${prefix}nuliskanan\n${prefix}foliokiri\n${prefix}foliokanan`)
 break
