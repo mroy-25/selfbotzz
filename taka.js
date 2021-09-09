@@ -5178,6 +5178,9 @@ if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if (isQuotedSticker) {
     if (!q) return reply(`Cara Penggunaan : Reply sticker dengan caption ${command} commandnya\nContoh : ${command} .help`)
     var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
+    for(let i of stickerdb){
+	    if(kodenya.includes(i.id)) return reply('sticker sudah terdaftar didatabase')
+    }
     addcmd(kodenya, q, m.quoted.fakeObj.message, reply)
 } else {
     reply('tag stickernya')
@@ -5202,6 +5205,11 @@ case 'delcmd':{
 if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 //if (!isQuotedSticker) return reply(`reply stickernya`)
 var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
+diti = [];
+for(let i of stickerdb){
+	    diti.push(i.id)
+    }
+if(!kodenya.includes(diti)) return reply('sticker sudah terdaftar didatabase')
 del = await getcmdpos(kodenya)
 stickerdb.splice(del, 1)
 await fs.writeFileSync('./src/stickerdb.json', JSON.stringify(stickerdb))
@@ -5212,7 +5220,7 @@ case 'listcmd':
 let teksnyee = monospace(`\`\`\`「 LIST STICKER CMD 」\`\`\``)
 let cemde = [];
 for (let i of stickerdb) {
-teksnyee += `\n\n*${shp} ID :* ${i.id}\n*${shp} Cmd* : ${i.chats}`
+teksnyee += `\n\n*${shp} ID :* ${i.id}\n*${shp} Cmd* : ${i.cmd}`
 }
 reply(teksnyee)
 break
