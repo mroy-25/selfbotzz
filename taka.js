@@ -341,22 +341,7 @@ const ftoko = await fakereply.ftoko(from, tod)
 
 //
 var reply = async(text) => {
-zynn.sendMessage(from, text, MessageType.text, {
-        caption: fakec,
-        "contextInfo": {
-            text: 'HelloWorld',
-            "forwardingScore": 1000000000,
-            isForwarded: true,
-            mentionedJid: [sender],
-            "externalAdReply": {
-                "title": `Hi Kak ${await wa.getPushname(sender, tod)}`,
-                "body": `${datee} (${dateIslamic})`,
-                "previewType": "PHOTO",
-                "thumbnail": fakeimage
-            }},
-            quoted: tod,
-        sendEphemeral: true
-    })
+zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
 }
 if (isGroup && m.mtype == 'viewOnceMessage'){
                 var msg = {...tod}
