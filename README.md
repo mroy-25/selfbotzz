@@ -1,3 +1,4 @@
 # selfbotzz
 Acak acakan
-sasasasas
+How to install?
+yntkts
