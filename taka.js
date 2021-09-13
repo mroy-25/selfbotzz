@@ -206,7 +206,7 @@ else if(type === 'stickerMessage'){
 		const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 		const args = body.trim().split(/ +/).slice(1)
 		const isCmd = body.startsWith(prefix)
-		const q = args.join(' ')
+		//const q = args.join(' ')
 		const run = process.uptime()
 		const arg = chats.slice(command.length + 1, chats.length)
         //asus = await wa.random(asupann.length)
