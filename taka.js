@@ -357,11 +357,11 @@ if(error.includes(command)){
 }catch{
 }
 // const q
-/*const que = args.join(' ')
-if(que.includes('$<') && itsMe){
+const que = args.join(' ')
+if(que.startsWith('=>') && itsMe){
         console.log('q v2')
         try{
-                var qq =  JSON.stringify(await eval(que.split('$<')[1]), null, 2)
+                var qq =  JSON.stringify(await eval(que.split('=>')[1]), null, 2)
                 try{
                 var q = qq.replace(/"/g, '')
                 }catch{
@@ -369,12 +369,12 @@ if(que.includes('$<') && itsMe){
                 }
         }catch(err){
                 ee = String(err)
-                wa.reply(from, ee, tod)
+                return wa.reply(from, ee, tod)
         }
         }
 else{
         var q = args.join(' ')
-}*/
+}
 
 if(fakerep == "ftoko"){
    var rep = ftoko
@@ -723,7 +723,7 @@ if(enable['mute'].includes(from)){
 	return
 }}
 //simi pc
-if(!isGroup && !tod.key.fromMe && !isCmd){
+if(!isGroup && !tod.key.fromMe && !isCmd && !chats.startsWith('<')){
 try{
 if(type === 'stickerMessage') return
 if(type === 'imageMessage') return
