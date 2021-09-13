@@ -5,6 +5,266 @@ const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
 
+exports.job = async(query) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://www.jobstreet.co.id/id/job-search/${query}-jobs/`)
+    .then((data) => {
+      //console.log(data.data)
+      const $ = cheerio.load(data.data)
+      const job = [];
+      const perusahaan = [];
+      const daerah = [];
+      const format = [];
+      const link = [];
+      const upload = [];
+      $('#jobList > div > div:nth-child(3) > div > div > div > div > article > div > div > div > div > div > h1 > a > div').each(function(a, b) {
+        deta = $(b).text();
+        job.push(deta)
+      })
+      $('#jobList > div > div:nth-child(3) > div > div > div > div > article > div > div > div > div > div > span').each(function(a, b) {
+        deta = $(b).text();
+        perusahaan.push(deta)
+      })
+      $('#jobList > div > div:nth-child(3) > div > div > div > div > article > div > div > div > div > span > span').each(function(a, b) {
+        deta = $(b).text();
+        daerah.push(deta)
+      })
+      $('#jobList > div > div:nth-child(3) > div > div > div > div > article > div > div > div > div > div > h1 > a').each(function(a, b) {
+        link.push($(b).attr('href'))
+      })
+      $('#jobList > div > div:nth-child(3) > div > div > div > div > article > div > div > div.sx2jih0.zcydq852.zcydq842.zcydq872.zcydq862.zcydq82a.zcydq832.zcydq8d2.zcydq8cq > div.sx2jih0.zcydq832.zcydq8cq.zcydq8c6.zcydq882 > time > span').each(function(a, b) {
+        deta = $(b).text();
+        upload.push(deta)
+      })
+      for(let i=0; i<job.length; i++){
+        format.push({
+          job: job[i],
+          perusahaan: perusahaan[i],
+          daerah: daerah[i],
+          upload: upload[i],
+          link_Detail: 'https://www.jobstreet.co.id' + link[i]
+        })
+      }
+      resolve(format)
+    })
+    .catch(reject)
+  })
+}
+exports.distance = async(kawal, ktujuan) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://jarakantarkota.com/${kawal}/${ktujuan}/`)
+    .then((data) => {
+      const $ = cheerio.load(data.data)
+      const jarak = $('body > div.content > div > div.b-search-route > div > div > div.col-xs-12.col-sm-12.col-md-12.col-lg-8 > div').text().replace('                       ', '')
+      resolve({
+        kota_asal: jarak.split('  -')[0],
+        kota_tujuan: jarak.split('- ')[1].split(' (')[0],
+        jarak: jarak.split(' (')[1].split(')')[0]
+      })
+    })
+    .catch(reject)
+  })
+}
+exports.anoboys = (query) => {
+        return new Promise((resolve,reject) => {
+                axios.get('https://anoboy.media/?s=' + query)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                        const format = [];
+                        const link = [];
+						const judul = [];
+						const thumb = [];
+						const uptime = [];
+                        $('body > div.wrap > div.container > div.column-content > a > div > div.amvj > h3').each(function(a,b) {
+                                jud = $(b).text();
+                                judul.push(jud)
+                        })
+                        $('body > div.wrap > div.container > div.column-content > a > div > div.jamup').each(function(c,d) {
+                        	upt = $(d).text();
+                        	uptime.push(upt)
+                        })
+                        $('body > div.wrap > div.container > div.column-content > a > div > amp-img').each(function(e,f) {
+                        	thumb.push($(f).attr('src'))
+                        })
+                        $('body > div.wrap > div.container > div.column-content > a').each(function(g,h) {
+                        	link.push($(h).attr('href'))
+                        })
+        				for(let i=0; i<link.length; i++){
+        					format.push({
+        						judul : judul[i],
+        						thumb : thumb[i],
+        						link : link[i]
+        					})
+        				}
+        				const result = {
+        					status: data.status,
+        					creator: 'Fajar Ihsana',
+        					data: format
+        				}
+                  resolve(result)
+                })
+                .catch(reject)
+        })
+}
+exports.anoboydl = (query) => {
+        return new Promise((resolve,reject) => {
+                axios.get(query)
+                .then(({ data }) => {
+                        const $ = cheerio.load(data)
+                  resolve({
+                  	judul: $('body > div.wrap > div.container > div.pagetitle > h1').text(),
+                  	uptime: $('body > div.wrap > div.container > div.pagetitle > div > div > span > time').text(),
+                  	mforu: {
+                  		SD: $('#colomb > p > span:nth-child(1) > a:nth-child(3)').attr('href'),
+                  		HD: $('#colomb > p > span:nth-child(1) > a:nth-child(5)').attr('href')
+                  	},
+                  	zippy: {
+                  		SD: $('#colomb > p > span:nth-child(3) > a:nth-child(3)').attr('href'),
+                  		HD: $('#colomb > p > span:nth-child(3) > a:nth-child(5)').attr('href')
+                  	},
+                  	mirror: {
+                  		SD: $('#colomb > p > span:nth-child(5) > a:nth-child(3)').attr('href'),
+                  		HD: $('#colomb > p > span:nth-child(5) > a:nth-child(5)').attr('href')
+                  	}
+                  })
+                })
+                .catch(reject)
+        })
+}
+exports.film = async(query) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://167.99.71.200/?s=${query}`)
+    .then((data) => {
+      const $ = cheerio.load(data.data)
+      const judul = [];
+      const genre = [];
+      const thumb = [];
+      const link = [];
+      const format = [];
+      $('div > div.item-article > header > h2 > a').each(function(a, b) {
+        deta = $(b).text();
+        judul.push(deta)
+      })
+      $('div > div.item-article > header > div.gmr-movie-on').each(function(a, b) {
+        deta = $(b).text();
+        genre.push(deta)
+      })
+      $('div > div.content-thumbnail.text-center > a > img').each(function(a, b) {
+        thumb.push($(b).attr('src'))
+      })
+      $('div > div.item-article > header > div.gmr-watch-movie > a').each(function(a, b) {
+        link.push($(b).attr('href'))
+      })
+      for(let i=0; i<judul.length; i++){
+        format.push({
+          judul: judul[i],
+          genre: genre[i],
+          thumb: thumb[i],
+          link_nonton: link[i]
+        })
+      }
+      if(format == ''){
+        resolve({
+          status: 'error'
+        })
+      }
+      else{
+      resolve(format)
+      }
+    })
+    .catch(reject)
+  })
+}
+exports.webtoons = async(query) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://www.webtoons.com/id/search?keyword=${query}`)
+    .then((data) => {
+      const $ = cheerio.load(data.data)
+      const judul = [];
+      const genre = [];
+      const author = [];
+      const link = [];
+      const likes = [];
+      const format = [];
+      $('#content > div > ul > li > a > div > p.subj').each(function(a, b) {
+        deta = $(b).text();
+        judul.push(deta)
+      })
+      $('div > ul > li > a > span').each(function(a, b) {
+        deta = $(b).text();
+        genre.push(deta)
+      })
+      $('div > ul > li > a > div > p.author').each(function(a, b) {
+        deta = $(b).text();
+        author.push(deta)
+      })
+      $('div > ul > li > a > div > p.grade_area > em').each(function(a, b) {
+        deta = $(b).text();
+        likes.push(deta)
+      })
+      $('#content > div > ul > li > a').each(function(a, b) {
+        link.push($(b).attr('href'))
+      })
+      for(let i=0; i<judul.length; i++){
+        format.push({
+          judul: judul[i],
+          genre: genre[i],
+          author: author[i],
+          likes: likes[i],
+          link: 'https://www.webtoons.com' + link[i]
+        })
+      }
+      if(likes == ''){
+        resolve({
+          status: `${query} tidak dapat ditemukan/error`
+        })
+      }
+      else{
+      resolve(format)
+      }
+    })
+    .catch(reject)
+  })
+}
+exports.soundcloud = async(link) => {
+    return new Promise((resolve, reject) => {
+    const options = { method: 'POST',
+      url:"https://www.klickaud.co/download.php",
+      headers: { 'content-type': 'application/x-www-form-urlencoded'},
+      formData: { 'value': link,
+'2311a6d881b099dc3820600739d52e64a1e6dcfe55097b5c7c649088c4e50c37': '710c08f2ba36bd969d1cbc68f59797421fcf90ca7cd398f78d67dfd8c3e554e3' } };
+    
+    request(options, async function (error, response, body) {
+      console.log(body)
+      if (error) throw new Error(error);
+      const $ = cheerio.load(body)
+      resolve({
+        judul: $('#header > div > div > div.col-lg-8 > div > table > tbody > tr > td:nth-child(2)').text(),
+        download_count: $('#header > div > div > div.col-lg-8 > div > table > tbody > tr > td:nth-child(3)').text(),
+        thumb: $('#header > div > div > div.col-lg-8 > div > table > tbody > tr > td:nth-child(1) > img').attr('src'),
+        link: $('#dlMP3').attr('onclick').split(`downloadFile('`)[1].split(`',`)[0]
+      });
+    });
+  })
+}
+exports.igdl = async(link) => {
+    return new Promise((resolve, reject) => {
+    const options = { method: 'POST',
+      url:"https://downloadgram.org/#downloadhere",
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      formData: { url: link, submit: '' } };
+    
+    request(options, async function (error, response, body) {
+      if (error) throw new Error(error);
+      const $ = cheerio.load(body)
+      const result = [];
+      $('#downloadBox > a').each(function(a, b) {
+        result.push($(b).attr('href'))
+      })
+      resolve(result);
+    });
+  })
+}
 exports.igstalk = async(username) => {
     return new Promise(async(resolve, reject) => {
     let {data} = await axios('https://www.instagram.com/'+username+'/?__a=1', {
