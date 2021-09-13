@@ -704,7 +704,7 @@ wa.Mentions(from, ini_txt, [x], tod)
 	    //endafk
 	if (afkuser.hasOwnProperty(sender.split('@')[0])) {
                 reply("Anda telah keluar dari mode afk.")
-                delete afkuser[orang.split('@')[0]]
+                delete afkuser[sender.split('@')[0]]
                 fs.writeFileSync("./src/afk.json", JSON.stringify(afkuser))
             }
 afkuser = JSON.parse(fs.readFileSync('./src/afk.json'))
