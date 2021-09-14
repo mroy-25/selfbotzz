@@ -2623,8 +2623,8 @@ Links = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/
 if (!Links) return reply(mess.error.Iv)
 reply(mess.wait)
 butt = [
-    {buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: 'MP4'}, type: 1},
-    {buttonId: `${prefix}ytmp3 ${q}`, buttonText: {displayText: 'MP3'}, type: 1}
+    {buttonId: `ytmp4 ${q}`, buttonText: {displayText: 'MP4'}, type: 1},
+    {buttonId: `ytmp3 ${q}`, buttonText: {displayText: 'MP3'}, type: 1}
 ]
 try{
 yutup = await yta(q)
