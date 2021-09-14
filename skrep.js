@@ -5,6 +5,92 @@ const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
 
+exports.chara = async(query) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://www.anime-planet.com/characters/all?name=${query}&sort=likes&order=desc`)
+    .then((data) => {
+      const $ = cheerio.load(data.data)
+      const linkp = $('#siteContainer > table > tbody > tr:nth-child(1) > td.tableCharInfo > a').attr('href')
+      axios.get('https://www.anime-planet.com' + linkp)
+      .then((data) => {
+        //console.log(data.data)
+        const $$ = cheerio.load(data.data)
+      resolve({
+        nama: $$('#siteContainer > h1').text(),
+        gender: $$('#siteContainer > section.pure-g.entryBar > div:nth-child(1)').text().split('\nGender: ')[1],
+        warna_rambut: $$('#siteContainer > section.pure-g.entryBar > div:nth-child(2)').text().split('\nHair Color: ')[1],
+        warna_mata: $$('#siteContainer > section:nth-child(11) > div > div > div > div > div:nth-child(1) > div').text().split('\n')[1],
+        gol_darah: $$('#siteContainer > section:nth-child(11) > div > div > div > div > div:nth-child(2) > div').text().split('\n')[1],
+        birthday: $$('#siteContainer > section:nth-child(11) > div > div > div > div > div:nth-child(3) > div').text().split('\n')[1],
+        description: $$('#siteContainer > section:nth-child(11) > div > div > div > div:nth-child(1) > p').text()
+      })
+    })
+    })
+    .catch(reject)
+  })
+}
+exports.anime = async(query) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://www.anime-planet.com/anime/all?name=${query}`)
+    .then((data) => {
+      const $ = cheerio.load(data.data)
+      const result = [];
+      const judul = [];
+      const link = [];
+      const thumb = [];
+      $('#siteContainer > ul.cardDeck.cardGrid > li > a > h3').each(function(a, b) {
+        deta = $(b).text();
+        judul.push(deta)
+      })
+      $('#siteContainer > ul.cardDeck.cardGrid > li > a').each(function(a, b) {
+        link.push('https://www.anime-planet.com' + $(b).attr('href'))
+      })
+      $('#siteContainer > ul.cardDeck.cardGrid > li > a > div.crop > img').each(function(a, b) {
+        thumb.push('https://www.anime-planet.com' + $(b).attr('src'))
+      })
+      for(let i=0; i<judul.length; i++){
+        result.push({
+          judul: judul[i],
+          thumb: thumb[i],
+          link: link[i]
+        })
+      }
+      resolve(result)
+    })
+    .catch(reject)
+  })
+}
+exports.manga = async(query) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`https://www.anime-planet.com/manga/all?name=${query}`)
+    .then((data) => {
+      const $ = cheerio.load(data.data)
+      const result = [];
+      const judul = [];
+      const link = [];
+      const thumb = [];
+      $('#siteContainer > ul.cardDeck.cardGrid > li > a > h3').each(function(a, b) {
+        deta = $(b).text();
+        judul.push(deta)
+      })
+      $('#siteContainer > ul.cardDeck.cardGrid > li > a').each(function(a, b) {
+        link.push('https://www.anime-planet.com' + $(b).attr('href'))
+      })
+      $('#siteContainer > ul.cardDeck.cardGrid > li > a > div.crop > img').each(function(a, b) {
+        thumb.push('https://www.anime-planet.com' + $(b).attr('src'))
+      })
+      for(let i=0; i<judul.length; i++){
+        result.push({
+          judul: judul[i],
+          thumb: thumb[i],
+          link: link[i]
+        })
+      }
+      resolve(result)
+    })
+    .catch(reject)
+  })
+}
 exports.job = async(query) => {
   return new Promise((resolve, reject) => {
     axios.get(`https://www.jobstreet.co.id/id/job-search/${query}-jobs/`)
@@ -376,18 +462,9 @@ exports.cariresep = async(query) => {
                         	jud = $(d).text();
                         	judul.push(jud)
                         })
-                        $('body > div.all-wrapper.with-animations > div:nth-child(5) > div > div.archive-posts.masonry-grid-w.per-row-2 > div.masonry-grid > div > article > div > div.archive-item-content > div.archive-item-author-meta > div > div').each(function(e,f){
-                        	upl = $(f).text();
-                        	upload_date.push(upl)
-                        })
-                        $('body > div.all-wrapper.with-animations > div:nth-child(5) > div > div.archive-posts.masonry-grid-w.per-row-2 > div.masonry-grid > div > article > div > div.archive-item-media > a').each(function(g,h){
-                        	thumb.push($(h).attr('src'))
-                        })
                         for( let i = 0; i < link.length; i++){
 							format.push({
 								judul : judul[i],
-								upload_date : upload_date[i],
-								thumb : thumb[i],
 								link : link[i]
 							})
 						}
@@ -408,7 +485,6 @@ exports.bacaresep = async(query) => {
                         const abahan = [];
                         const atakaran = [];
                         const atahap = [];
-                        num = 1
                         $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-details > div > div.single-recipe-ingredients-nutritions > div > table > tbody > tr > td:nth-child(2) > span.ingredient-name').each(function(a,b) {
                         	bh = $(b).text();
                         	abahan.push(bh)
@@ -419,14 +495,13 @@ exports.bacaresep = async(query) => {
                         })
                         $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-content > div.single-steps > table > tbody > tr > td.single-step-description > div > p').each(function(e,f) {
                         	th = $(f).text();
-                        	atahap.push(num + '. ' + th)
-                        	num += 1
+                        	atahap.push(th)
                         })
                         const judul = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-title.title-hide-in-desktop > h1').text();
                         const waktu = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-meta > ul > li.single-meta-cooking-time > span').text();
                         const hasil = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-meta > ul > li.single-meta-serves > span').text().split(': ')[1]
                         const level = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-main > div.single-meta > ul > li.single-meta-difficulty > span').text().split(': ')[1]
-                        const thumb = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-details > div > div.single-main-media > div > img').attr('src')
+                        const thumb = $('body > div.all-wrapper.with-animations > div.single-panel.os-container > div.single-panel-details > div > div.single-main-media > img').attr('src')
                         tbahan = 'bahan\n'
                         for( let i = 0; i < abahan.length; i++){
 							tbahan += abahan[i] + ' ' + atakaran[i] + '\n' 
