@@ -109,10 +109,10 @@ baterai = {
 tmp_hit = []
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
 //welkam/left
-app.use('/', (req, res) => {  
+/*app.use('/', (req, res) => {  
 conn.connects()
 console.log("on bang bot nya")
-})
+})*/
 const tzy = conn.zynn
 tzy.on('CB:action,,battery', json => {
 const a = json[2][0][1].value
