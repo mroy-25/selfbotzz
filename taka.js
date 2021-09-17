@@ -310,7 +310,7 @@ const runtime = function(seconds) {
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
  	        const botNumber = zynn.user.jid
-		const Owner = ['6287798005230@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
+		const Owner = ['13345183054@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
         const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
 		const totalchat = await zynn.chats.all()
 		const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
