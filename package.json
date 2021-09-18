@@ -46,6 +46,7 @@
     "socket.io": "^4.1.2",
     "swiftcord": "^2.1.7",
     "tiktok-scraper": "^1.4.25",
+    "wa-sticker-formatter": "^4.0.14",
     "wget": "0.0.1",
     "yt-search": "^2.8.0",
     "zahir-api": "^1.0.3",
