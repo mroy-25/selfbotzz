@@ -1036,7 +1036,7 @@ if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takes
         ] 
   }
 if(isQuotedSticker){
-  boij = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+  boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
   owgi = await zynn.downloadMediaMessage(boij)
   try{
     const sticker = await createSticker(owgi, takestik)
@@ -2948,7 +2948,11 @@ try{
     data = await Ra.StickerSearch(q)
     for(let i=0; i<10; i++){
         if(data.data.sticker[i] === undefined) return console.log('Sticker habis, pengiriman diberhentikan')
-        wa.sendStickerFromUrl(from, data.data.sticker[i], tod)
+        wa.getBuffer(data.data.sticker[i]).then(res => {
+         createSticker(res, stickermetadata).then(stik => {
+          wa.sendSticker(from, stik, tod)
+          })
+         })
         await wa.sleep(3000)
     }
 }catch(e){
@@ -3577,7 +3581,11 @@ break
 case 'ttp':
 if(!q) return reply('Masukkan teksnya!')
 try{
-    await wa.sendStickerFromUrl(from, `https://xteam.xyz/ttp?file&text=${encodeUrl(q)}`, tod)
+    wa.getBuffer(`https://xteam.xyz/ttp?file&text=${encodeUrl(q)}`).then(res => {
+     createSticker(res, stickermetadata).then(stik => {
+      wa.sendSticker(from, stik, tod)
+     })
+    })
 }catch(e){
     reply(mess.error.api)
 }
@@ -3585,8 +3593,11 @@ break
 case 'attp':
 if(!q) return reply('Masukkan teksnya!')
 try{
-    buff = await wa.getBuffer(`https://xteam.xyz/attp?file&text=${encodeUrl(q)}`)
-    wa.sendSticker(from, buff, tod)
+    wa.getBuffer(`https://xteam.xyz/attp?file&text=${encodeUrl(q)}`).then(res => {
+     createSticker(res, stickermetadata).then(stik => {
+      wa.sendSticker(from, stik, tod)
+     })
+    })
 }catch(e){
     reply(mess.error.api)
 }
