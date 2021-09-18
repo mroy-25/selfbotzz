@@ -98,7 +98,7 @@ const stickermetadata = {
             '🌹'
         ]
 }
-const {createSticker}  = require('wa-sticker-formatter')
+
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
