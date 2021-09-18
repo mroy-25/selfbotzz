@@ -992,7 +992,7 @@ case 'stiker':
               })
               .on('end', function async() {
                 console.log('Finish')
-                zynn.prepareMessage(from, ran, sticker).then(res => {
+                zynn.prepareMessage(from, fs.readFileSync(ran), sticker).then(res => {
                   reply(JSON.stringify(res, null, 2))
                   zynn.downloadMediaMessage(res).then(stik => {
                     createSticker(stik, stickermetadata).then(asu => {
