@@ -974,7 +974,6 @@ case 'stiker':
             const media = await zynn.downloadMediaMessage(encmedia)
             stik = await createSticker(media, stickermetadata)
             await wa.sendSticker(from, stik, tod)
-            fs.unlinkSync(media)
           } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
             const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
             const media = await zynn.downloadAndSaveMediaMessage(encmedia)
@@ -994,8 +993,9 @@ case 'stiker':
               .on('end', function async() {
                 console.log('Finish')
                 zynn.prepareMessage(from, ran, sticker).then(res => {
-                  zynn.downloadMediaMessage(res).then(data => {
-                    createSticker(data, stickermetadata).then(asu => {
+                  reply(JSON.stringify(res, null, 2))
+                  zynn.downloadMediaMessage(res).then(stik => {
+                    createSticker(stik, stickermetadata).then(asu => {
                       wa.sendSticker(from, asu, tod)
                     })
                   })
