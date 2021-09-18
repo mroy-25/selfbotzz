@@ -57,7 +57,6 @@ const app = express()
 const simple = require('./lib/simple')
 const PORT = process.env.PORT || 3000
 const imageToBase64 = require('image-to-base64')
-const {createSticker}  = require('wa-sticker-formatter')
 const translate = require('@vitalets/google-translate-api')
 const { yta, ytv, igdl, upload } = require('./lib/ytdl')
 const fetch = require('node-fetch');
@@ -99,6 +98,7 @@ const stickermetadata = {
             '🌹'
         ]
 }
+const {createSticker}  = require('wa-sticker-formatter')
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
@@ -977,7 +977,7 @@ case 'stiker':
         case 'sticker':
           if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
             const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-            const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+            const media = await zynn.downloadMediaMessage(encmedia)
             stik = await createSticker(media, stickermetadata)
             await wa.sendSticker(from, stik, tod)
             fs.unlinkSync(media)
@@ -999,6 +999,7 @@ case 'stiker':
               })
               .on('end', function async() {
                 console.log('Finish')
+		
                 createSticker(fs.readFileSync(ran), stickermetadata).then(stik => {
                 wa.sendSticker(from, stik, tod)
                 })
