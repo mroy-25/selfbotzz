@@ -57,6 +57,7 @@ const app = express()
 const simple = require('./lib/simple')
 const PORT = process.env.PORT || 3000
 const imageToBase64 = require('image-to-base64')
+const {createSticker}  = require('wa-sticker-formatter')
 const translate = require('@vitalets/google-translate-api')
 const { yta, ytv, igdl, upload } = require('./lib/ytdl')
 const fetch = require('node-fetch');
@@ -90,7 +91,14 @@ const vcard = 'BEGIN:VCARD\n'
             + 'ORG:</ Hi there, Im using Telegram;\n'
             + 'TEL;type=CELL;type=VOICE;waid=32495947149:+32-495-9471-49\n'
             + 'END:VCARD'
-
+const stickermetadata = {
+   type: 'full',
+        pack: setting.packname,
+        author: setting.author,
+        categories: [
+            '🌹'
+        ]
+}
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
