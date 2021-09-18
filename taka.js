@@ -993,7 +993,6 @@ case 'stiker':
               .on('end', function async() {
                 console.log('Finish')
                 zynn.prepareMessage(from, fs.readFileSync(ran), sticker).then(res => {
-                  reply(JSON.stringify(res, null, 2))
                   zynn.downloadMediaMessage(res).then(stik => {
                     createSticker(stik, stickermetadata).then(asu => {
                       wa.sendSticker(from, asu, tod)
@@ -1010,142 +1009,45 @@ case 'stiker':
             reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
           }
             break
-case 'swm':
-            case 'stickerwm':
-                if (isMedia && !tod.message.videoMessage || isQuotedImage) {
-                    if (!arg.includes('|')) return reply(`Kirim gambar atau reply gambar dengan caption *${prefix}stickerwm nama|author*`)
-                    var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
-                    var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-                    const packname1 = arg.split('|')[0]
-                    const author1 = arg.split('|')[1]
-                    exif.create(packname1, author1, `stickwm_${sender}`)
-                    await ffmpeg(`${media}`)
-                            .input(media)
-                            .on('start', function (cmd) {
-                                console.log(`Started : ${cmd}`)
-                            })
-                            .on(mess.error.api, function (err) {
-                                console.log(`Error : ${err}`)
-                                fs.unlinkSync(media)
-                                reply(mess.error.api)
-                            })
-                            .on('end', function () {
-                                console.log('Finish')
-                                exec(`webpmux -set exif ./sticker/stickwm_${sender}.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-                                    if (error) return reply(mess.error.api)
-                                    wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
-                                    fs.unlinkSync(media)    
-                                    fs.unlinkSync(`./sticker/${sender}.webp`)   
-                                    fs.unlinkSync(`./sticker/stickwm_${sender}.exif`)
-                                })
-                            })
-                            .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-                            .toFormat('webp')
-                            .save(`./sticker/${sender}.webp`)
-                } else if ((isMedia && tod.message.videoMessage.fileLength < 10000000 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 10000000)) {
-                    if (!arg.includes('|')) return reply(`Kirim gambar atau reply gambar dengan caption *${prefix}stickerwm nama|author*`)
-                    var encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
-                    var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-                    const packname1 = arg.split('|')[0]
-                    const author1 = arg.split('|')[1]
-                    exif.create(packname1, author1, `stickwm_${sender}`)
-                    reply(mess.wait)
-                        await ffmpeg(`${media}`)
-                            .inputFormat(media.split('.')[4])
-                            .on('start', function (cmd) {
-                                console.log(`Started : ${cmd}`)
-                            })
-                            .on(mess.error.api, function (err) {
-                                console.log(`Error : ${err}`)
-                                fs.unlinkSync(media)
-                                tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-                                reply(mess.error.api)
-                            })
-                            .on('end', function () {
-                                console.log('Finish')
-                                exec(`webpmux -set exif ./sticker/stickwm_${sender}.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-                                    if (error) return reply(mess.error.api)
-                                    wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)                                  
-                                    fs.unlinkSync(media)
-                                    fs.unlinkSync(`./sticker/${sender}.webp`)
-                                    fs.unlinkSync(`./sticker/stickwm_${sender}.exif`)
-                                })
-                            })
-                            .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-                            .toFormat('webp')
-                            .save(`./sticker/${sender}.webp`)
-                } else {
-                    reply(`Kirim gambar/video dengan caption ${prefix}stickerwm nama|author atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`, id)
-                }
-                break
 case 'colong':
-if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}colong*`)
-var encmediia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-const meidia = await zynn.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
-exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-if (error) return reply(mess.error.api)
-wa.sendSticker(from,fs.readFileSync(`./sticker/${sender}.webp`), tod)
-fs.unlinkSync(meidia)
-})
-break
-case 'takestick':
-if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
-const pembawm = body.slice(11)
-if (!pembawm.includes('|')) return reply(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
-var encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-const packname = q.split('|')[0]
-const author = q.split('|')[1]
-exif.create(packname, author, `takestick_${sender}`)
-exec(`webpmux -set exif ./sticker/takestick_${sender}.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-if (error) return reply(mess.error.api)
-wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
-fs.unlinkSync(media)
-fs.unlinkSync(`./sticker/takestick_${sender}.exif`)
-})
-break
-
-/*case 'colong':
 if(isQuotedSticker){
-    boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-    owgi = await zynn.downloadMediaMessage(boij)
-    idc = await GenerateSerialNumber('0000')
-    path = `./media/colong_${idc}.jpeg`
-    await fs.writeFileSync(path, owgi)
-    var imgbb = require('imgbb-uploader')
-    anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", path)
-    res = `${anu.display_url}`
-    fs.unlinkSync(path)
-    try{
-        data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(setting.packname)}&pack=${encodeUrl(setting.author)}&apikey=hardianto`)
-        wa.sendSticker(from, data, tod)
-    }catch{
-        reply(mess.error.api)
-    }
-}break
+  boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+  owgi = await zynn.downloadMediaMessage(boij)
+  try{
+    const sticker = await createSticker(owgi, stickermetadata)
+    wa.sendSticker(from, sticker, tod)
+  }catch{
+    reply(mess.error.api)
+  }
+}
+else{
+reply(`reply sticker dengan caption ${prefix}${command}`)
+}
+break
+case 'take':
 case 'takestick':
 if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
-const pembawm = body.slice(11)
-if (!pembawm.includes('|')) return reply(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
-    boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-    owgi = await zynn.downloadMediaMessage(boij)
-idc = await GenerateSerialNumber('0000')
-    path = `./media/takestick_${idc}.jpeg`
-    await fs.writeFileSync(path, owgi)
-const packname = q.split('|')[0]
-const author = q.split('|')[1]
-var imgbb = require('imgbb-uploader')
-    anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", path)
-    res = `${anu.display_url}`
-    fs.unlinkSync(path)
-    try{
-        data = await wa.getBuffer(`https://hardianto-chan.herokuapp.com/api/tools/stickerwm?urlFile=${res}&author=${encodeUrl(packname)}&pack=${encodeUrl(author)}&apikey=hardianto`)
-        wa.sendSticker(from, data, tod)
-    }catch{
-        reply(mess.error.api)
-    }
+  const takestik = {
+    type: 'full',
+        pack: q.split('|')[0],
+        author: q.split('|')[1],
+        categories: [
+            '🌹'
+        ] 
+  }
+if(isQuotedSticker){
+  boij = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+  owgi = await zynn.downloadMediaMessage(boij)
+  try{
+    const sticker = await createSticker(owgi, takestik)
+    wa.sendSticker(from, sticker, tod)
+  }catch{
+    reply(mess.error.api)
+  }
+}else{
+  reply(`reply sticker dengan caption ${prefix}${command} packname|author`)
+}
 break
-*/
 case 'tovideo':
 case 'tomp4':
 if (isQuotedSticker) {
