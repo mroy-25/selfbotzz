@@ -966,58 +966,43 @@ await sticker.stickerCase(tod, reply, zynn, args)
 break
 case 's':
 case 'stiker':
-				case 'sticker':
-					if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
-						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-						const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-						ran = wa.getRandom('.webp')
-						await ffmpeg(`./${media}`)
-							.input(media)
-							.on('start', function (cmd) {
-								console.log(`Started : ${cmd}`)
-							})
-							.on('error', function (err) {
-								console.log(`Error : ${err}`)
-								fs.unlinkSync(media)
-								reply(mess.error.stick)
-							})
-							.on('end', function async() {
-								console.log('Finish')
-								wa.sendSticker(from, fs.readFileSync(ran), tod)
-								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)
-					} else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
-						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-						const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-						ran = wa.getRandom('.webp')
-						reply(mess.wait)
-						await ffmpeg(`./${media}`)
-							.inputFormat(media.split('.')[1])
-							.on('start', function (cmd) {
-								console.log(`Started : ${cmd}`)
-							})
-							.on('error', function (err) {
-								console.log(`Error : ${err}`)
-								fs.unlinkSync(media)
-								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
-							})
-							.on('end', function async() {
-								console.log('Finish')
-								wa.sendSticker(from, fs.readFileSync(ran), tod)
-								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)
-					} else {
-						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
-					}
+        case 'sticker':
+          if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
+            const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+            const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+            stik = await createSticker(media, stickermetadata)
+            await wa.sendSticker(from, stik, tod)
+            fs.unlinkSync(media)
+          } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+            const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+            const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+            ran = wa.getRandom('.webp')
+            reply(mess.wait)
+            await ffmpeg(`./${media}`)
+              .inputFormat(media.split('.')[1])
+              .on('start', function (cmd) {
+                console.log(`Started : ${cmd}`)
+              })
+              .on('error', function (err) {
+                console.log(`Error : ${err}`)
+                fs.unlinkSync(media)
+                tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+                reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
+              })
+              .on('end', function async() {
+                console.log('Finish')
+                createSticker(fs.readFileSync(ran), stickermetadata).then(stik => {
+                wa.sendSticker(from, stik, tod)
+                })
+                fs.unlinkSync(media)
+                fs.unlinkSync(ran)
+              })
+              .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+              .toFormat('webp')
+              .save(ran)
+          } else {
+            reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
+          }
             break
 case 'swm':
 			case 'stickerwm':
