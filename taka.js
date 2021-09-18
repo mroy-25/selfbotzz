@@ -966,19 +966,13 @@ reply(`  ┏━━⬣ 𝙏𝙃𝘼𝙉𝙆𝙎 𝙏𝙊
   ┗⬣ 𝙕𝘽𝙊𝙏`)
 break
 */
-case 'sticker2':
-const sticker = require('./src/stickercase')
-var encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
-var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-await sticker.stickerCase(tod, reply, zynn, args)
-break
 case 's':
 case 'stiker':
         case 'sticker':
           if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
             const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
             const media = await zynn.downloadMediaMessage(encmedia)
-            stik = await csticker(media, stickermetadata)
+            stik = await createSticker(media, stickermetadata)
             await wa.sendSticker(from, stik, tod)
             fs.unlinkSync(media)
           } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
@@ -999,12 +993,15 @@ case 'stiker':
               })
               .on('end', function async() {
                 console.log('Finish')
-        
-                csticker(fs.readFileSync(ran), stickermetadata).then(stik => {
-                wa.sendSticker(from, stik, tod)
+                zynn.prepareMessage(from, ran, sticker).then(res => {
+                  zynn.downloadMediaMessage(res).then(data => {
+                    createSticker(data, stickermetadata).then(asu => {
+                      wa.sendSticker(from, asu, tod)
+                    })
+                  })
                 })
                 fs.unlinkSync(media)
-                //fs.unlinkSync(ran)
+                fs.unlinkSync(ran)
               })
               .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
               .toFormat('webp')
