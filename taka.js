@@ -969,10 +969,18 @@ break
 case 's':
 case 'stiker':
         case 'sticker':
+        const stickerdata = {
+        type: 'full',
+        pack: setting.packname,
+        author: 'wa.me/' + sender.split('@')[0],
+        categories: [
+            '🌹'
+        ]
+        }
           if ((isMedia && !tod.message.videoMessage || isQuotedImage) && args.length == 0) {
             const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
             const media = await zynn.downloadMediaMessage(encmedia)
-            stik = await createSticker(media, stickermetadata)
+            stik = await createSticker(media, stickerdata)
             await wa.sendSticker(from, stik, tod)
           } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
             const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
@@ -994,7 +1002,7 @@ case 'stiker':
                 console.log('Finish')
                 zynn.prepareMessage(from, fs.readFileSync(ran), sticker).then(res => {
                   zynn.downloadMediaMessage(res).then(stik => {
-                    createSticker(stik, stickermetadata).then(asu => {
+                    createSticker(stik, stickerdata).then(asu => {
                       wa.sendSticker(from, asu, tod)
                     })
                   })
