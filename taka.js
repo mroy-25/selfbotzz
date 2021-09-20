@@ -819,6 +819,7 @@ teks = `${fakec}
 + ${shep} Runtime : 「 ${runtime(run)} 」
 + ${shep} Mode : 「 ${ispublic} 」
 + ${shep} Total Hit : 「 ${hit} 」
++ ${shep} Rest Api's : https://beta-restapi.herokuapp.com/
 + 
 ◪ 𝙄𝙉𝙁𝙊 𝘿𝙀𝙑𝙄𝘾𝙀
 + 
