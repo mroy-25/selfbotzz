@@ -3295,44 +3295,43 @@ else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVide
   }
   break
 case 'getpic':
-try{
-  if(!tod.message.extendedTextMessage.contextInfo.mentionedJid[0] == ''){
-   if (tod.message.extendedTextMessage === undefined || tod.message.extendedTextMessage === null) return reply('Tag orangnya!')
-   var org = q.split('@')[1]
+if(m.quoted){
+  try{
+    buff = await wa.getBuffer(await zynn.getProfilePicture(m.quoted.sender))
+    wa.sendImage(from, buff, tod)
+  }catch{
+    return reply('foto profil tidak ada/private')
   }
-  else if(!tod.message.extendedTextMessage.contextInfo.participant == ''){
-   var org = tod.message.extendedTextMessage.contextInfo.participant.split('@')[0]  
+}
+else if(!m.mentionedJid == ''){
+  try{
+    buff = await wa.getBuffer(await zynn.getProfilePicture(m.mentionedJid[0]))
+    wa.sendImage(from, buff, tod)
+  }catch{
+    return reply('foto profil tidak ada/private')
+  }
 }
 else{
-reply(`tag orangnya/reply pesan dengan caption ${prefix}getpic`)
-}
-   data = await zynn.getProfilePicture(org)
-   console.log(data)
-   buff = await wa.getBuffer(data)
-   wa.sendImage(from,buff, tod)
-}catch(e){
-   reply('Foto profile private/Tidak ada')
+  reply(`tag orangnya/reply pesan dengan caption ${prefix}getpic`)
 }
 break
 case 'getstatus':
-try{
-  if(!tod.message.extendedTextMessage.contextInfo.mentionedJid[0] == ''){
-   if (tod.message.extendedTextMessage === undefined || tod.message.extendedTextMessage === null) return reply('Tag/Reply pesan orangnya!')
-   var org1 = q.split('@')[1]
+if(m.quoted){
+  try{
+    data = await zynn.getStatus(m.quoted.sender)
+    reply(`${shp} Status : ${data.status == 401 ? 'Private' : data.status}`)
+  }catch{
   }
- else if(!tod.message.extendedTextMessage.contextInfo.participant == ''){
-   var org1 = tod.message.extendedTextMessage.contextInfo.participant.split('@')[0]
-  }
-else{
-reply(`tag orangnya/reply pesan dengan caption ${prefix}getpic`)
 }
-
-  data = await zynn.getStatus(org1)
-   console.log(data)
-   reply(q.split('@')[1])
-   reply(`${shp} Status : ${data.status}`)
-}catch(e){
-   reply('Status private/Tidak ada')
+else if(!m.mentionedJid == ''){
+  try{
+    data = await zynn.getStatus(m.mentionedJid[0])
+    reply(`${shp} Status : ${data.status == 401 ? 'Private' : data.status}`)
+  }catch{
+  }
+}
+else{
+  reply(`tag orangnya/reply pesan dengan caption ${prefix}getpic`)
 }
 break
 case 'setfake':
