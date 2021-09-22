@@ -5,6 +5,89 @@ const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
 
+exports.zerochan = (query) => {
+	return new Promise((resolve,reject) => {
+		axios.get('https://www.zerochan.net/search?q=' + query)
+		.then(({ data }) => {
+			const $ = cheerio.load(data)
+			const judul = [];
+      const result = [];
+      const id = [];
+			$('#thumbs2 > li > a > img').each(function(a,b) {
+        if(!$(b).attr('alt').startsWith('https://static.zerochan.net/')){
+				judul.push($(b).attr('alt'))
+        }
+			})
+      $('#thumbs2 > li > a').each(function(a, b) {
+        id.push($(b).attr('href'))
+      })
+      for(let i=0; i<judul.length; i++){
+        result.push('https://s1.zerochan.net/' + judul[i].replace(/\ /g, '.') + '.600.' + id[i].split('/')[1] + '.jpg')
+      }
+		  resolve({
+        creator: 'Fajar Ihsana',
+        result: result
+      })
+		})
+		.catch(reject)
+	})
+}
+exports.happymoddl = (link) => {
+	return new Promise((resolve,reject) => {
+		axios.get(link)
+		.then(({ data }) => {
+			const $ = cheerio.load(data)
+      const link = [];
+      const jlink = [];
+      const result = [];
+			const title = $('body > div > div.container-left > section:nth-child(1) > div > h1').text()
+      const info = $('body > div > div.container-left > section:nth-child(1) > div > ul').text()
+      $('body > div.container-row.clearfix.container-wrap.pdt-font-container > div.container-left > section:nth-child(1) > div:nth-child(11) > div:nth-child(3) > div > p > a').each(function(a, b) {
+        deta = $(b).text();
+        jlink.push(deta)
+        if($(b).attr('href').startsWith('/')){
+        link.push('https://happymod.com' + $(b).attr('href'))
+        }
+        else{
+          link.push($(b).attr('href'))
+        }
+      })
+      for(let i=0; i<link.length; i++){
+        result.push({
+          title: jlink[i],
+          dl_link: link[i]
+        })
+      }
+		  resolve({
+        creator: 'Fajar Ihsana',
+        title: title,
+        info: info.replace(/\t|- /g, ''),
+        download: result
+      })
+		})
+		.catch(reject)
+	})
+}
+exports.goredl = async(link) => {
+	        return new Promise(async(resolve,reject) => {
+            axios.get(link)
+						.then(({ data }) => {
+							const $$ = cheerio.load(data)
+							const format = {
+								judul : $$('div.single-main-container > div > div.bb-col.col-content > div > div > div > div > header > h1').text(),
+								views : $$('div.single-main-container > div > div.bb-col.col-content > div > div > div > div > div.s-post-meta-block.bb-mb-el > div > div > div.col-r.d-table-cell.col-md-6.col-sm-6.text-right-sm > div > span > span.count').text(),
+								comment : $$('div.single-main-container > div > div.bb-col.col-content > div > div > div > div > div.s-post-meta-block.bb-mb-el > div > div > div.col-r.d-table-cell.col-md-6.col-sm-6.text-right-sm > div > a > span.count').text(),
+								link : $$('video > source').attr('src')
+							}
+							const result = {
+								creator: 'Fajar Ihsana',
+								data : format
+							}
+                  resolve(result)
+                })
+                .catch(reject)
+            })
+}
 exports.chara = async(query) => {
   return new Promise((resolve, reject) => {
     axios.get(`https://www.anime-planet.com/characters/all?name=${query}&sort=likes&order=desc`)
