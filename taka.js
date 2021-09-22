@@ -2730,12 +2730,12 @@ try{
         zynn.sendFile(from, link, nama + '.mp3', nama, m, true, { fakeimage, asDocument: true})
     }
     if(args[0] == 'mp3'){
-        downm = await yta(q..replace('shorts', 'embed'))
+        downm = await yta(q.replace('shorts', 'embed'))
     const { dl_link, title } = downm
     return mp3(dl_link, title)
     }
     else if(args[0] == 'doc'){
-        downm = await yta(q..replace('shorts', 'embed'))
+        downm = await yta(q.replace('shorts', 'embed'))
     const { dl_link, title } = downm
     return doc(dl_link, title)
     }
@@ -2797,12 +2797,12 @@ try{
         zynn.sendFile(from, link, nama + '.mp4', nama, m, true, { fakeimage, asDocument: true})
     }
     if(args[0] == 'mp4'){
-        downm = await ytv(q..replace('shorts', 'embed'))
+        downm = await ytv(q.replace('shorts', 'embed'))
     const { dl_link } = downm
     return mp4(dl_link)
     }
     else if(args[0] == 'doc'){
-        downm = await ytv(q..replace('shorts', 'embed'))
+        downm = await ytv(q.replace('shorts', 'embed'))
     const { dl_link, title } = downm
     return doc(dl_link, title)
     }
