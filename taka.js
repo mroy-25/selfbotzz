@@ -2529,7 +2529,7 @@ butt = [
     {buttonId: `ytmp3 ${q}`, buttonText: {displayText: 'MP3'}, type: 1}
 ]
 try{
-yutup = await yta(q)
+yutup = await yta(q.replace('shorts', 'embed'))
 buff = await wa.getBuffer(yutup.thumb)
 teks = 'Y O U T U B E  D O W N L O A D E R\n\n'
 teks += shp + ' Judul : ' + yutup.title
@@ -2743,7 +2743,7 @@ try{
     Links = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
     if (!Links) return reply(mess.error.Iv)
     reply(mess.wait)
-    downm = await yta(q)
+    downm = await yta(q.replace('shorts', 'embed'))
     filesizeF = downm.filesizeF
     const { dl_link, thumb, title, filesize } = downm
 if(filesizeF == ' <a href=\"javascript:void(0)\" rel=\"nofollow\" type=\"button\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#progress\" data-ftype=\"3gp\" data-fquality=\"144p\"> <i class=\"glyphicon glyphicon-download-alt\"></i>&nbsp; Download </a> '){
@@ -2810,7 +2810,7 @@ try{
     Links = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
     if (!Links) return reply(mess.error.Iv)
     reply(mess.wait)
-    downm = await ytv(q)
+    downm = await ytv(q.replace('shorts', 'embed'))
 filesizeF = downm.filesizeF
     const { dl_link, thumb, title, filesize } = downm
     if(filesizeF == ' <a href=\"javascript:void(0)\" rel=\"nofollow\" type=\"button\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#progress\" data-ftype=\"3gp\" data-fquality=\"144p\"> <i class=\"glyphicon glyphicon-download-alt\"></i>&nbsp; Download </a> '){
