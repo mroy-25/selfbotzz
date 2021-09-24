@@ -1822,8 +1822,7 @@ reply(mess.wait)
 try{
     data = await wa.fetchJson(`https://api.zeks.xyz/api/pinimg?apikey=iloveyou3000&q=${q}`)
     media = await data.data[Math.floor(Math.random() * data.data.length)]
-    console.log(media)
-    sendMediaURL(from, media, `Hasil Pencarian : ${q}`)
+    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(media), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch(e){
     reply('Gambar tidak ditemukan/error')
 }
@@ -2477,7 +2476,7 @@ try{
 gis(q, async (error, result) => {
 n = result
 images = n[Math.floor(Math.random() * n.length)].url
-wa.sendFileFromUrl(from, images, tod)
+wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(images), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 });
 }catch(e){
     reply('Gambar tidak ditemukan')
@@ -4444,7 +4443,7 @@ reply(mess.wait)
 try{
     data = await skrep.wallpapercave(q)
     rand = Math.floor(Math.random() * data.length) + 1
-    wa.sendFileFromUrl(from, data[rand], tod, "nih Wallpapernya")
+    wa.sendButtonWithImage(from, bold('Hasil pencarian Wallpaper ' + q), 'Next ga nih?', await wa.getBuffer(data[rand]), ['NEXT ▶️'], [`wall ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
