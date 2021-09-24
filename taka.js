@@ -360,7 +360,7 @@ if (isGroup && m.mtype == 'viewOnceMessage'){
 // error
 try{
 if(error.includes(command)){
-    return reply('Fitur Tersebut sedang error\nKami akan segera memperbaikinya!')
+    return
 }
 }catch{
 }
