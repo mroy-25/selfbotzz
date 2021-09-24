@@ -3856,7 +3856,19 @@ try{
     data = await skrep.konachan(q)
     if(data == '') return reply(`Gambar ${q} tidak ditemukan`)
     rand = data[Math.floor(Math.random() * data.length)]
-    wa.sendFileFromUrl(from, rand, tod, `Hasil Pencarian : ${q}`)
+    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(rand), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+}catch{
+    reply(mess.error.api)
+}
+break
+case 'zerochan':
+if(!q) return reply('Masukkan kata kuncinya!')
+reply(mess.wait)
+try{
+    data = await skrep.zerochan(q)
+    if(data == '') return reply(`Gambar ${q} tidak ditemukan`)
+    rand = data.result[Math.floor(Math.random() * data.result.length)]
+    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(rand), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4704,7 +4716,7 @@ try{
     data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/random.txt')
     rand = Math.floor(Math.random() * 1585) + 1
     img = data.data.split('\n')[rand]
-    wa.sendFileFromUrl(from, img, tod, monospace('RANDOM ANIME'))
+    wa.sendButtonWithImage(from, bold('RANDOM ANIME'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4715,7 +4727,7 @@ try{
     data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/husbu.txt')
     rand = Math.floor(Math.random() * 100) + 1
     img = data.data.split('\n')[rand]
-    wa.sendFileFromUrl(from, img, tod, 'NIH HUSBU')
+    wa.sendButtonWithImage(from, bold('RANDOM HUSBU'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4728,7 +4740,7 @@ console.log(rand)
     if(rand < 100){
         rand = '0' + rand
     }
-    wa.sendFileFromUrl(from, 'http://randomwaifu.altervista.org/images/0' + rand + '.png', tod, 'Nih waifu')
+    wa.sendButtonWithImage(from, bold('RANDOM WAIFU'), 'Next ga nih?', await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4738,8 +4750,8 @@ reply(mess.wait)
 try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/loli.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
-teks = data.data[rand]
-wa.sendFileFromUrl(from, teks, tod, 'CINTAI LOLIMU')
+loli = data.data[rand]
+wa.sendButtonWithImage(from, bold('RANDOM LOLI'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4749,8 +4761,8 @@ reply(mess.wait)
 try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/shota.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
-teks = data.data[rand]
-wa.sendFileFromUrl(from, teks, tod, 'NIH BANG')
+img = data.data[rand]
+wa.sendButtonWithImage(from, bold('RANDOM SHOTA'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4759,8 +4771,8 @@ case 'darkjoke':
 try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/darkjokes.txt')
 rand = Math.floor(Math.random() * 249) + 1
-teks = data.data.split('\n')[rand]
-wa.sendFileFromUrl(from, teks, tod)
+img = data.data.split('\n')[rand]
+wa.sendButtonWithImage(from, bold('DARKJOKE'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
