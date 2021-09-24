@@ -1675,18 +1675,18 @@ zynn.sendMessage(from, `Mau ngapain minta nomor owner\nNih nomornya wa.me/${own.
 }})
 break
 case 'owner':
-kont = []
+ kont = [];
 for(let i of Owner){
-  nm = await zynn.getName(i)
-  bio = await zynn.getStatus(i)
   kont.push({
-      "displayName": nm,
-      "vcard": await vcard(i.split('@')[0], nm, bio)
+    displayName: await zynn.getName(i),
+    vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
   })
 }
-zynn.sendMessage(from, {displayName: kont.length + ' Kontak', contacts: kont}, MessageType.contactsArrayMessages, {quoted: tod}).then(res => {
-  wa.reply(from, 'Ini Nomor Owner saya ><', res)
-})
+hehex = await zynn.sendMessage(from, {
+        "displayName": `3 kontak`,
+        "contacts": kont
+        }, 'contactsArrayMessage', { quoted: tod })
+        zynn.sendMessage(from,'Ini Nomor Owner Saya ><',text,{quoted: hehex})
 break
 case 'caripesan':
             if(!q)return reply('pesannya apa bang?')
