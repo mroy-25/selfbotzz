@@ -1679,13 +1679,13 @@ kont = []
 for(let i of Owner){
   kont.push({
       "displayName": await zynn.getName(i),
-      "vcard": vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
+      "vcard": await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
   })
 }
-zynn.sendMessage(from, {displayName: kont.length + ' Kontak', contacts: kont}, 'contactsArrayMessages', {quoted: tod}).then(res => {
+zynn.sendMessage(from, {displayName: kont.length + ' Kontak', contacts: kont}, MessageType.contactsArrayMessages, {quoted: tod}).then(res => {
   wa.reply(from, 'Ini Nomor Owner saya ><', res)
 })
-break
+  break
 case 'caripesan':
             if(!q)return reply('pesannya apa bang?')
             let v = await zynn.searchMessages(q,from,15,1)
