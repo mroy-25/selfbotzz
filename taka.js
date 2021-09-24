@@ -1677,15 +1677,17 @@ break
 case 'owner':
 kont = []
 for(let i of Owner){
+  nm = await zynn.getName(i)
+  bio = await zynn.getStatus(i)
   kont.push({
-      "displayName": await zynn.getName(i),
-      "vcard": await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
+      "displayName": nm,
+      "vcard": await vcard(i.split('@')[0], nm, bio)
   })
 }
 zynn.sendMessage(from, {displayName: kont.length + ' Kontak', contacts: kont}, MessageType.contactsArrayMessages, {quoted: tod}).then(res => {
   wa.reply(from, 'Ini Nomor Owner saya ><', res)
 })
-  break
+break
 case 'caripesan':
             if(!q)return reply('pesannya apa bang?')
             let v = await zynn.searchMessages(q,from,15,1)
