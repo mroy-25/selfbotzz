@@ -4655,12 +4655,13 @@ reply(mess.wait)
 try{
   data = await skrep.anoboys(q)
   teks = bold('Anoboy Search') + '\n\n'
-  for(let i of data){
+  for(let i of data.data){
     dl = await skrep.anoboydl(i.link)
     teks += shp + ' Judul : ' + i.judul + '\n'
     teks += shp + ' Detail : ' + i.link + '\n'
     teks += shp + ' Link Download : ' + JSON.stringify(dl.mirror, null, 2) + '\n\n-----------------------------\n\n'
   }
+ wa.sendFileFromUrl(from, data.data[0].thumb, tod, teks)
 }catch{
   reply(`${command} tidak ditemukan/error`)
 }
