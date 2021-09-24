@@ -84,12 +84,15 @@ const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
 const { addcmd, getcmd, getcmdpos } = require('./lib/setcmd')
 stickerdb = JSON.parse(fs.readFileSync('./src/stickerdb.json'))
 const error = JSON.parse(fs.readFileSync('./src/error.json'))
-const vcard = 'BEGIN:VCARD\n'
+const vcard = async(nomor, nama, bio) => 
+        kon = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n'
-            + 'FN:Ownerbot\n'
-            + 'ORG:</ Hi there, Im using Telegram;\n'
-            + 'TEL;type=CELL;type=VOICE;waid=32495947149:+32-495-9471-49\n'
+            + `FN:${nama}\n`
+            + `ORG:${bio.status};\n`
+            + `TEL;type=CELL;type=VOICE;waid=${nomor}:${nomor}\n`
             + 'END:VCARD'
+return kon
+}
 const stickermetadata = {
    type: 'full',
         pack: setting.packname,
@@ -1672,8 +1675,15 @@ zynn.sendMessage(from, `Mau ngapain minta nomor owner\nNih nomornya wa.me/${own.
 }})
 break
 case 'owner':
-zynn.sendMessage(from, {displayname: 'Fajar_Ihsana', vcard: vcard}, MessageType.contact, {contextInfo: {mentionedJid: [sender]}, quoted: tod}).then(res => {
-wa.reply(from, 'Ini Nomor Owner saya><', res)
+kont = []
+for(let i of Owner){
+  kont.push({
+      "displayName": await tzy.getName(i),
+      "vcard": vcard(i.split('@')[0], await tzy.getName(i), await zynn.getStatus(i))
+  })
+}
+zynn.sendMessage(from, {displayName: kont.length + ' Kontak', contacts: kont}, 'contactsArrayMessages', {quoted: tod}).then(res => {
+  wa.reply(from, 'Ini Nomor Owner saya ><', res)
 })
 break
 case 'caripesan':
@@ -3951,7 +3961,7 @@ try{
     reply('Resep tidak ditemukan')
 }
 break
-case 'ptl':
+/*case 'ptl':
 if(!q) return reply('Username tiktoknya apa?')
 reply(mess.wait)
 try{
@@ -3968,6 +3978,7 @@ try{
     reply(mess.error.api)
 }
 break
+*/
 case 'asupan':
 if(!q){
         po = zynn.prepareMessageFromContent(from, {
