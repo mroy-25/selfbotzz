@@ -84,7 +84,7 @@ const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
 const { addcmd, getcmd, getcmdpos } = require('./lib/setcmd')
 stickerdb = JSON.parse(fs.readFileSync('./src/stickerdb.json'))
 const error = JSON.parse(fs.readFileSync('./src/error.json'))
-const vcard = async(nomor, nama, bio) => 
+const vcard = async(nomor, nama, bio) => {
         kon = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n'
             + `FN:${nama}\n`
