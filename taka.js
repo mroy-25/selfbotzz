@@ -348,7 +348,7 @@ const ftoko = await fakereply.ftoko(from, tod)
 
 //
 var reply = async(text) => {
-zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
+tunggu = type === 'buttonsResponseMessage' ? '' : zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
 }
 if (isGroup && m.mtype == 'viewOnceMessage'){
                 var msg = {...tod}
@@ -2471,7 +2471,7 @@ reply(mess.error.api)
 break
 case 'image':
 if (args.length < 1) return reply('Masukan teks!')
-tunggu = type === 'buttonsResponseMessage' ? '' : reply(mess.wait)
+reply(mess.wait)
 try{
 gis(q, async (error, result) => {
 n = result
