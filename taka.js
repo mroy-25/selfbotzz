@@ -2471,7 +2471,7 @@ reply(mess.error.api)
 break
 case 'image':
 if (args.length < 1) return reply('Masukan teks!')
-reply(mess.wait)
+tunggu = type === 'buttonsResponseMessage' ? '' : reply(mess.wait)
 try{
 gis(q, async (error, result) => {
 n = result
