@@ -4602,6 +4602,69 @@ try{
     reply(mess.error.notfound)
 }
 break
+case 'manga':
+if(!q) return reply('Masukkan query!')
+reply(mess.wait)
+try{
+  data = await skrep.manga(q)
+  teks = bold('Manga Search') + '\n\n'
+  for(let i of data){
+    teks += shp + ' Judul : ' + i.judul + '\n'
+    teks += shp + ' Link : ' + i.link + '\n\n-----------------------------\n\n'
+  }
+  wa.sendFileFromUrl(from, data[0].thumb, tod, teks)
+}catch{
+  reply(`${command} tidak ditemukan/error`)
+}
+break
+case 'anime':
+if(!q) return reply('Masukkan query!')
+reply(mess.wait)
+try{
+  data = await skrep.anime(q)
+  teks = bold('Anime Search') + '\n\n'
+  for(let i of data){
+    teks += shp + ' Judul : ' + i.judul + '\n'
+    teks += shp + ' Link : ' + i.link + '\n\n-----------------------------\n\n'
+  }
+  wa.sendFileFromUrl(from, data[0].thumb, tod, teks)
+}catch{
+  reply(`${command} tidak ditemukan/error`)
+}
+break
+case 'job':
+if(!q) return reply('Masukkan bidang pekerjaan!')
+reply(mess.wait)
+try{
+  data = await skrep.job(q)
+  teks = bold('Job Search') + '\n\n'
+  for(let i of data){
+    teks += shp + ' Job : ' + i.job + '\n'
+    teks += shp + ' Perusahaan : ' + i.perusahaan + '\n'
+    teks += shp + ' Daerah : ' + i.daerah + '\n'
+    teks += shp + ' Upload Date : ' + i.upload + '\n'
+    teks += shp + ' Detail : ' + i.link_Detail + '\n\n-----------------------------\n\n'
+  }
+}catch{
+  reply(`${command} tidak ditemukan/error`)
+}
+break
+case 'anoboy':
+if(!q) return reply('Masukkan query')
+reply(mess.wait)
+try{
+  data = await skrep.anoboys(q)
+  teks = bold('Anoboy Search') + '\n\n'
+  for(let i of data){
+    dl = await skrep.anoboydl(i.link)
+    teks += shp + ' Judul : ' + i.judul + '\n'
+    teks += shp + ' Detail : ' + i.link + '\n'
+    teks += shp + ' Link Download : ' + JSON.stringify(dl.mirror, null, 2) + '\n\n-----------------------------\n\n'
+  }
+}catch{
+  reply(`${command} tidak ditemukan/error`)
+}
+break
 case 'palingmurah':
 if(!q) return reply('Masukkan kata kuncinya!')
 reply(mess.wait)
