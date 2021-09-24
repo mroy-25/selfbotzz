@@ -1678,8 +1678,8 @@ case 'owner':
 kont = []
 for(let i of Owner){
   kont.push({
-      "displayName": await tzy.getName(i),
-      "vcard": vcard(i.split('@')[0], await tzy.getName(i), await zynn.getStatus(i))
+      "displayName": await zynn.getName(i),
+      "vcard": vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
   })
 }
 zynn.sendMessage(from, {displayName: kont.length + ' Kontak', contacts: kont}, 'contactsArrayMessages', {quoted: tod}).then(res => {
