@@ -5,7 +5,7 @@ const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
 
-const pinterest = async(querry) => {
+exports.pinterest = async(querry) => {
 	return new Promise(async(resolve,reject) => {
 		 axios.get('https://id.pinterest.com/search/pins/?autologin=true&q=' + querry, {
 			headers: {
