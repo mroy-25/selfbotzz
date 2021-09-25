@@ -101,7 +101,7 @@ const stickermetadata = {
             '🌹'
         ]
 }
-const {createSticker} = require('wa-sticker-formatter')
+//const {createSticker} = require('wa-sticker-formatter')
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
@@ -731,13 +731,11 @@ for(let i of zynn.blocklist){
 if(i === senjid) return
 }
 if(isGroup && !itsMe){
- mute = await db.showdata('mute', {id: from})
-         try{
-        var ismute = mute[0].id == from ? true : false
-        }catch{
-         var ismute = false
-         }
- if(ismute) return
+mute = await db.showdata('mute', {id: from})
+try{
+  if(mute[0].id === from) return
+}catch{
+}
 }
 //simi pc
 if(!isGroup && !tod.key.fromMe && !isCmd && !chats.startsWith('<')){
@@ -3630,24 +3628,23 @@ break
 case 'welcome':
 if (!isGroup) return reply(mess.OnlyGrup)
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-if(!q){
-if (enable['welcome'].includes(from)){
-    welkomm = 'Aktif'
-}
-else{
-    welkomm = 'Nonaktif'
-}
-return wa.sendButton(from, bold('WELCOME') + '\n' + bold(`Status : ${welkomm}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
-}
 if (q == 'on') {
-    if (enable['welcome'].includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-    enable['welcome'].push(from)
-    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+  wel = await db.showdata('welcome', {id: from})
+try{
+  if(wel[0].id === from) return reply('Sudah Aktif')
+}catch{
+}
+    db.adddata('welcome', {id: from})
     reply('_Sukses mengaktifkan Welcome digroup ini_')
 } else if (q == 'off') {
-    off = enable['welcome'].indexOf(from)
-    enable['welcome'].splice(off, 1)
-    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+    wel = await db.showdata('welcome', {id: from})
+try{
+  if(wel[0].id === from){
+    db.delete('welcome', {id: from})
+  }
+}catch{
+  return reply('Welcome tidak diaktifkan!')
+}
     reply('_Sukses menonaktifkan Welcome digroup ini_')
 } else {
     reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}welcome on`)
@@ -3656,20 +3653,25 @@ break
 case 'left':
 if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if (!isGroup) return reply(mess.OnlyGrup)
-if(!q){
-leff = enable['left'].includes(from) ? 'Aktif' : 'Nonaktif'
-wa.sendButton(from, bold('LEFT') + '\n' + bold(`Status : ${leff}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
-}
 if (q == 'on') {
-    if (enable['left'].includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-    enable['left'].push(from)
-    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
-    reply('_Sukses mengaktifkan left digroup ini_')
+  lep = await db.showdata('left', {id: from})
+try{
+  if(lep[0].id === from) return reply('Sudah Aktif')
+}catch{
+}
+    db.adddata('left', {id: from})
+    reply('_Sukses mengaktifkan Left digroup ini_')
 } else if (q == 'off') {
-    off = enable['left'].indexOf(from)
-    enable['left'].splice(off, 1)
-    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
-    reply('_Sukses menonaktifkan left digroup ini_')
+    lep = await db.showdata('left', {id: from})
+try{
+  if(lep[0].id === from){
+    db.delete('left', {id: from})
+        reply('_Sukses menonaktifkan Left digroup ini_')
+  }
+}catch{
+  return reply('Left tidak diaktifkan!')
+}
+
 } else {
     reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}left on`)
 }
@@ -3682,15 +3684,22 @@ isluar = enable['antiluar'].includes(from) ? 'Aktif' : 'Nonaktif'
 return wa.sendButton(from, bold('ANTILUAR') + '\n' + bold(`Status : ${isluar}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
 }
 if (q == 'on') {
-    if (enable['antiluar'].includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-    enable['antiluar'].push(from)
-    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+deta = await db.showdata('antiluar', {id: from})
+try{
+  if(deta[0].id === from) return reply('Sudah Aktif')
+}catch{
+}
+db.adddata('antiluar', {id: from})
     reply('_Sukses mengaktifkan Antiluar digroup ini_')
 } else if (q == 'off') {
-    off = enable['antiluar'].indexOf(from)
-    enable['antiluar'].splice(off, 1)
-    fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+deta = await db.showdata('antiluar', {id: from})
+try{
+  if(deta[0].id === from){
+    db.delete('antiluar', {id: from})
     reply('_Sukses menonaktifkan Antiluar digroup ini_')
+  }
+}catch{
+}
 } else {
     reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}antiluar on`)
 }
@@ -3698,67 +3707,51 @@ break
 case 'antidelete':
 if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 const groupId = isGroup ? groupMetadata.jid : ''
-const dataRevoke = JSON.parse(fs.readFileSync('./src/gc-revoked.json'))
-const isRevoke = enable['antidelete'].includes(from)
-if(!q){
-antidel = enable['antidelete'].includes(from) ? 'Aktif' : 'Nonaktif'
-return wa.sendButton(from, bold('ANTIDELETE') + '\n' + bold(`Status : ${antidel}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
-}
 if (q == 'on') {
-        if (isRevoke) return reply(`Antidelete telah diaktifkan di grup ini sebelumnya!`)
-        enable['antidelete'].push(from)
-        fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+        deta = await db.showdata('antidelete', {id: from})
+try{
+  if(del[0].id === from) return reply('Sudah Aktif')
+}catch{
+}
+        db.adddata('antidelete', {id: from})
         reply(`Succes Enable Antidelete Grup!`)
 } else if (q == 'off') {
-        if (!isRevoke) return reply('Anti delete sudah di nonaktifkan')
-        const index = dataRevoke.indexOf(from)
-        enable['antidelete'].splice(index, 1)
-        fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
-        reply(`Succes disable Antidelete Grup!`)
+        deta = await db.showdata('antidelete', {id: from})
+try{
+  if(deta[0].id === from){
+    db.delete('antidelete', {id:from})
+    reply('Sukses disable antidelete Group')
+  }
+}catch{
+  reply('Antidelete tidak diaktifkan!')
+}
 }
 break
 case 'detector':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if (!isGroup) return reply(mess.only.group)
 if (args.length < 1) return reply('𝗜𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴')
-if(!q){
-ehem = enable['detector'].includes(from) ? 'Aktif' : 'Nonaktif'
-return wa.sendButton(from, bold('DETECTOR') + '\n' + bold(`Status : ${ehem}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
-}
 if (args[0] == 'on') {
-    if (enable['detector'].includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-        enable['detector'].push(from)
-        fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+    deta = await db.showdata('detector', {id: from})
+try{
+  if(deta[0].id === from) return reply('Sudah Aktif')
+}catch{
+}
+        db.adddata('detector', {id: from})
         reply('_Sukses mengaktifkan Group Update Detector digroup ini_')
     } else if (args[0] == 'off') {
-        let off = enable['detector'].indexOf(from)
-        enable['detector'].splice(off, 1)
-        fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
-        reply('_Sukses menonaktifkan Group Update Detector digroup ini_')
+        deta = await db.showdata('detector', {id: from})
+try{
+  if(deta[0].id === from) {
+    db.delete('detector', {id: from})
+    reply('_Sukses menonaktifkan Group Update Detector digroup ini_')
+  }
+}catch{
+  reply('Detector tidak diaktifkan!')
+}
     } else {
         reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}detector on`)
     }
-break
-case 'antihidetag':
-if (!isGroup) return reply(mess.OnlyGrup)
-if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-if(!q){
-ahidetag = antihidetag.includes(from) ? 'Aktif' : 'Nonaktif'
-return wa.sendButton(from, bold('ANTI HIDETAG') + '\n' + bold(`Status : ${ahidetag}`), 'Pilih Enable / Disable', ['ENABLE', 'DISABLE'], [`${command} on`, `${command} off`], sender, tod)
-}
-if (q == 'on') {
-    if (antihidetag.includes(from)) return reply('𝘀𝘂𝗱𝗮𝗵 𝗮𝗸𝘁𝗶𝗳!!!')
-    antihidetag.push(from)
-    fs.writeFileSync('./src/antihidetag.json', JSON.stringify(antihidetag))
-    reply('_Sukses mengaktifkan Anti Hidetag digroup ini_')
-} else if (q == 'off') {
-    off = antihidetag.indexOf(from)
-    antihidetag.splice(off, 1)
-    fs.writeFileSync('./src/antihidetag.json', JSON.stringify(antihidetag))
-    reply('_Sukses menonaktifkan Anti Hidetag digroup ini_')
-} else {
-    reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}antihidetag on`)
-}
 break
 case 'picdetec':
 if(!itsMe) return
@@ -4780,16 +4773,26 @@ break
 case 'mute':
 if(!itsMe && !isGroupAdmins) return
 if(!isGroup) return
-if(ismute) return reply('Bot telah dimute di Group ini sebelumnya!')
+mut = await db.showdata('mute', {id: from})
+try{
+  if(mut[0].id === from) return reply('Bot telah dimute di Group ini sebelumnya!')
+}catch{
+}
 db.adddata('mute', {id: from})
 reply('Sukses Mute Bot')
 break
 case 'unmute':
 if(!itsMe && !isGroupAdmins) return
 if(!isGroup) return
-if(!ismute) return reply('Bot tidak dimute pada chat ini!')
-db.delete('mute', {id: from})
+mut = await db.showdata('mute', {id: from})
+try{
+  if(mut[0].id === from){
+    db.delete('mute', {id: from})
 reply('Sukses Unmute Bot')
+  }
+}catch{
+  return reply('Bot tidak dimute di Group ini!')
+}
 break
 case 'randomanime':
 reply(mess.wait)
