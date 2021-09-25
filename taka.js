@@ -147,7 +147,7 @@ tzy.on('CB:Presence', async (asd) => {
     }
 })
 let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
-module.exports = zynn = async (zynn, tod) => {
+module.exports = zynn = async (zynn, tod, db) => {
     try {
         if (!tod.hasNewMessage) return
         tod = tod.messages.all()[0]
@@ -335,6 +335,16 @@ const runtime = function(seconds) {
         const groupOwner = isGroup ? groupMetadata.owner : ''
         const itsMe = Owner.includes(m.sender)
         const isGroupAdmins = groupAdmins.includes(m.sender) || false
+        const ismute = async() => {
+  db.showdata('mute', {id: from}).then(mut => {
+    if(mut[0].id === from){
+      return true
+    }
+    else{
+      return false
+    }
+  })
+}
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = await fakereply.fdocu(from, tod)
 const troli = await fakereply.troli(from, tod)
@@ -731,9 +741,8 @@ for(let i of zynn.blocklist){
 if(i === senjid) return
 }
 if(isGroup && !itsMe){
-if(enable['mute'].includes(from)){
-    return
-}}
+ if(ismute) return
+}
 //simi pc
 if(!isGroup && !tod.key.fromMe && !isCmd && !chats.startsWith('<')){
 try{
@@ -4775,18 +4784,15 @@ break
 case 'mute':
 if(!itsMe && !isGroupAdmins) return
 if(!isGroup) return
-if(enable['mute'].includes(from)) return reply('Bot telah dimute di Group ini sebelumnya!')
-enable['mute'].push(from)
-fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+if(ismute) return reply('Bot telah dimute di Group ini sebelumnya!')
+db.adddata('mute', {id: from})
 reply('Sukses Mute Bot')
 break
 case 'unmute':
 if(!itsMe && !isGroupAdmins) return
 if(!isGroup) return
-if(!enable['mute'].includes(from)) return reply('Bot tidak dimute pada chat ini!')
-del = enable['mute'].indexOf(from)
-enable['mute'].splice(del, 1)
-fs.writeFileSync('./src/enable.json', JSON.stringify(enable))
+if(!ismute) return reply('Bot tidak dimute pada chat ini!')
+db.delete('mute', {id: from})
 reply('Sukses Unmute Bot')
 break
 case 'randomanime':
