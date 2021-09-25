@@ -336,7 +336,11 @@ const runtime = function(seconds) {
         const itsMe = Owner.includes(m.sender)
         const isGroupAdmins = groupAdmins.includes(m.sender) || false
         mute = db.showdata('mute', {id: from}).then(mut => {
-        ismute = mut[0].id == '' ? false : true
+         try{
+        var ismute = mut[0].id == from ? true : false
+        }catch{
+         var ismute = false
+         }
         })
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = await fakereply.fdocu(from, tod)
