@@ -4648,6 +4648,7 @@ try{
     teks += shp + ' Upload Date : ' + i.upload + '\n'
     teks += shp + ' Detail : ' + i.link_Detail + '\n\n-----------------------------\n\n'
   }
+reply(teks)
 }catch{
   reply(`${command} tidak ditemukan/error`)
 }
