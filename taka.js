@@ -337,12 +337,13 @@ const runtime = function(seconds) {
         const isGroupAdmins = groupAdmins.includes(m.sender) || false
         const ismute = async() => {
   db.showdata('mute', {id: from}).then(mut => {
+   try{
     if(mut[0].id === from){
       return true
     }
-    else{
-      return false
-    }
+   }catch{
+    return false
+   }
   })
 }
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
