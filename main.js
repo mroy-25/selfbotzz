@@ -53,20 +53,20 @@ fs.writeFileSync('./src/batre.json' , JSON.stringify(json[2][0], null , 2))
 })
 zynn.on('group-participants-update', async (msg) => {
 if(setting.canvas == 'swiftcord'){
-    require('./lib/swiftcord.js')(zynn, msg)    
+    require('./lib/swiftcord.js')(zynn, msg, client)    
 }
 else{
-require('./lib/detection.js')(zynn, msg)
+require('./lib/detection.js')(zynn, msg, client)
 }
 })
 zynn.on('group-update', async (msg) => {
-require('./lib/gupdate.js')(zynn, msg)
+require('./lib/gupdate.js')(zynn, msg, client)
 })
 zynn.on('chat-update', async (message) => {
 require('./taka.js')(zynn, message, client)
 })
 zynn.on('message-delete', async (message) => {
-require('./lib/antidelete.js')(zynn, message)
+require('./lib/antidelete.js')(zynn, message, client)
 })
 
 
