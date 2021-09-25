@@ -335,17 +335,8 @@ const runtime = function(seconds) {
         const groupOwner = isGroup ? groupMetadata.owner : ''
         const itsMe = Owner.includes(m.sender)
         const isGroupAdmins = groupAdmins.includes(m.sender) || false
-        const ismute = async() => {
-  db.showdata('mute', {id: from}).then(mut => {
-   try{
-    if(mut[0].id === from){
-      return true
-    }
-   }catch{
-    return false
-   }
-  })
-}
+        mute = await db.showdata('mute', {id: from})
+        ismute = mute[0].id == '' ? false : true
       //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
 const fdocu = await fakereply.fdocu(from, tod)
 const troli = await fakereply.troli(from, tod)
