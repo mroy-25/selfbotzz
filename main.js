@@ -5,6 +5,7 @@ const {
     Mimetype,
     GroupSettingChange
 } = require('@adiwajshing/baileys')
+const client = require('./lib/database')
 const simple = require('./lib/simple')
 let WAConnection = simple.WAConnection(_WAConnection)
 const qrcode = require("qrcode-terminal")
@@ -62,7 +63,7 @@ zynn.on('group-update', async (msg) => {
 require('./lib/gupdate.js')(zynn, msg)
 })
 zynn.on('chat-update', async (message) => {
-require('./taka.js')(zynn, message)
+require('./taka.js')(zynn, message, client)
 })
 zynn.on('message-delete', async (message) => {
 require('./lib/antidelete.js')(zynn, message)
