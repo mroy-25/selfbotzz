@@ -772,7 +772,7 @@ try{
     ''
   }
 }catch{
-  db.adddata('user', {id: sender})
+  db.adddata('user', {username: await zynn.getName(sender), id: sender})
 }
 }
  /*if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
