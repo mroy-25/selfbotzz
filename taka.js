@@ -763,14 +763,16 @@ var isephe = true
 }
 isephemeral = isephe == false ? true : false
 if(isCmd){
-tothit.push(command)
-fs.writeFileSync('./src/hit.json', JSON.stringify(tothit))
+db.adddata('hit', {cmd: command})
 }
 if(isCmd){
-if(!pendaftar.includes(sender)){
-console.log('Ada user baru nih....')
-    pendaftar.push(sender)
-    fs.writeFileSync('./src/pendaftar.json',JSON.stringify(pendaftar))
+deta = await db.showdata('user', {id: sender})
+try{
+  if(deta[0].id === sender){
+    ''
+  }
+}catch{
+  db.adddata('user', {id: sender})
 }
 }
  /*if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
@@ -799,7 +801,8 @@ teks += `${shp} Nama : ${namaewa}\n${shp} Tag : @${i.split('@')[0]}\n\n---------
 wa.Mentions(from, teks, pendaftar, tod)
 break
 case 'help':
-hit = tothit.length
+deta = await db.showdata('hit')
+  hit = deta.length
 ispublic = publicc === true ? 'Public' : 'Self'
 shep = shp
 if(nopref == 'no'){
@@ -845,7 +848,8 @@ teks2 = monospace(`Halo ${await wa.getPushname(sender, tod)}👋\nSaya ZBOT, Bot
 wa.sendButtonWithloc(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
-hit = tothit.length
+deta = await db.showdata('hit')
+  hit = deta.length
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
            try{
