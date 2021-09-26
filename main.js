@@ -5,7 +5,7 @@ const {
     Mimetype,
     GroupSettingChange
 } = require('@adiwajshing/baileys')
-const client = require('../lib/database')
+const client = require('./lib/database')
 const simple = require('./lib/simple')
 const wa = require('./whatsapp/message')
 let WAConnection = simple.WAConnection(_WAConnection)
