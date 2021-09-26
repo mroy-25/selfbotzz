@@ -790,6 +790,7 @@ teks += `${shp} Nama : ${namaewa}\n${shp} Tag : @${i.split('@')[0]}\n\n---------
 wa.Mentions(from, teks, pendaftar, tod)
 break
 case 'help':
+ tothit = await db.showdata('hit')
 hit = tothit.length
 ispublic = publicc === true ? 'Public' : 'Self'
 shep = shp
@@ -836,6 +837,7 @@ teks2 = monospace(`Halo ${await wa.getPushname(sender, tod)}👋\nSaya ZBOT, Bot
 wa.sendButtonWithloc(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
+  tothit = await db.showdata('hit')
 hit = tothit.length
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
