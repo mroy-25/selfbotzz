@@ -809,33 +809,47 @@ else{
 bateraiii = baterai.baterai
 isday = baterai.cas == true ? "Charging ⚡" : "Not Charged"
 ispowersave = baterai.powersave == true ? "Aktif" : "Nonaktif"
+    let i = []
+                let giid = []
+                for (mem of totalchat){
+                    i.push(mem.jid)
+                }
+                for (id of i){
+                    if (id && id.includes('g.us')){
+                        giid.push(id)
+                    }
+                }
+                let timestampi = speed();
+                let latensii = speed() - timestampi
 teks = `${fakec}
 
-◪ 𝙄𝙉𝙁𝙊 𝘽𝙊𝙏 
-+ 
-+ ${shep} Creator : 「 Aqul 」
-+ ${shep} Recode : 「 Fajar 」
-+ ${shep} Library : 「 Baileys 」
-+ ${shep} Version :「 5.0 」
-+ ${shep} Prefix : 「 ${isprefix} 」
-+ ${shep} Runtime : 「 ${runtime(run)} 」
-+ ${shep} Mode : 「 ${ispublic} 」
-+ ${shep} Total Hit : 「 ${hit} 」
-+ ${shep} Rest Api's : https://beta-restapi.herokuapp.com/
-+ 
-◪ 𝙄𝙉𝙁𝙊 𝘿𝙀𝙑𝙄𝘾𝙀
-+ 
-+ ${shep} Versi Whatsapp : ${wa_version}
-+ ${shep} Versi OS : ${os_version}
-+ ${shep} Versi Hp : ${device_model}
-+ ${shep} Merek Device : ${device_manufacturer}
-+ ${shep} Ram : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-+ ${shep} Mcc : ${mcc}
-+ ${shep} Mnc : ${mnc}
-+ ${shep} Baterai : ${bateraiii}%
-+ ${shep} Status Baterai : ${isday}
-+ ${shep} Penghemat Baterai : ${ispowersave}
-+ `
+◪ 𝑰𝑵𝑭𝑶 𝑩𝑶𝑻
+
+𝑪𝒓𝒆𝒂𝒕𝒐𝒓 : Aqul
+𝑹𝒆𝒄𝒐𝒅𝒆 : Fajar
+𝑳𝒊𝒃𝒓𝒂𝒓𝒚 : Baileys
+𝑽𝒆𝒓𝒔𝒊𝒐𝒏 : 5.0
+𝑷𝒓𝒆𝒇𝒊𝒙 : ${isprefix}
+𝑴𝒐𝒅𝒆 : ${ispublic}
+𝑻𝒐𝒕𝒂𝒍 𝑯𝒊𝒕 : ${hit}
+𝑮𝒓𝒐𝒖𝒑 𝑪𝒉𝒂𝒕 : ${giid.length}
+𝑷𝒆𝒓𝒔𝒐𝒏𝒂𝒍 𝑪𝒉𝒂𝒕 : ${totalchat.length - giid.length}
+𝑻𝒐𝒕𝒂𝒍 𝑪𝒉𝒂𝒕 : ${totalchat.length}
+𝑺𝒑𝒆𝒆𝒅 : ${latensii.toFixed(4)} Second
+𝑹𝒖𝒏𝒕𝒊𝒎𝒆 : ${runtime(run)}
+𝑹𝒆𝒔𝒕 𝑨𝒑𝒊'𝒔 : https://beta-restapi.herokuapp.com/
+
+◪ 𝑰𝑵𝑭𝑶 𝑫𝑬𝑽𝑰𝑪𝑬
+
+𝑽. 𝑾𝒉𝒂𝒕𝒔𝒂𝒑𝒑 : ${wa_version}
+𝑩𝒂𝒕𝒆𝒓𝒂𝒊 : ${baterai.baterai}%
+𝑪𝒉𝒂𝒓𝒈𝒆 : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
+𝑹𝑨𝑴 : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+𝑴𝑪𝑪 : ${mcc}
+𝑴𝑵𝑪 : ${mnc}
+𝑽𝒆𝒓𝒔𝒊 𝑶𝑺 : ${os_version}
+𝑴𝒆𝒓𝒌 𝑯𝑷 : ${device_manufacturer}
+𝑽𝒆𝒓𝒔𝒊 𝑯𝑷 : ${device_model}`
 teks2 = monospace(`Halo ${await wa.getPushname(sender, tod)}👋\nSaya ZBOT, Bot yang dibuat untuk memudahkan dalam berbagai hal\nSilahkan klik menu untuk melihat fitur bot\n\nNote : Tidak semua fitur work, Maklum saya noob`)
 wa.sendButtonWithloc(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
@@ -908,34 +922,7 @@ else if(setting.menu == 'polos'){
     wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
-    let i = []
-                let giid = []
-                for (mem of totalchat){
-                    i.push(mem.jid)
-                }
-                for (id of i){
-                    if (id && id.includes('g.us')){
-                        giid.push(id)
-                    }
-                }
-                let timestampi = speed();
-                let latensii = speed() - timestampi
-    teks = helpb(ucselamat, ttag, shp, prefix)
-    footer = `\nSTATS BOT
-${shp} V. Whatsapp : ${wa_version}
-${shp} Baterai : ${baterai.baterai}%
-${shp} Charge : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
-${shp} RAM : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-${shp} MCC : ${mcc}
-${shp} MNC : ${mnc}
-${shp} Versi OS : ${os_version}
-${shp} Merk HP : ${device_manufacturer}
-${shp} Versi HP : ${device_model}
-${shp} Group Chat : ${giid.length}
-${shp} Personal Chat : ${totalchat.length - giid.length}
-${shp} Total Chat : ${totalchat.length}
-${shp} Speed : ${latensii.toFixed(4)} Second
-${shp} Runtime : ${runtime(run)}`
+    teks = help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep)
     wa.sendButtonWithImage(from, teks, footer, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
