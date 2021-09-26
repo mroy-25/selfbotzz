@@ -894,7 +894,7 @@ var shep = shp
             "itemCount": 1,
             "status": "INQUIRY",
             "surface": "CATALOG",
-            "message": help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep),
+            "message": help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep),
             "orderTitle": "</ Hanya Orang Biasa",
             "sellerJid": "6281990498472@s.whatsapp.net",
             "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
@@ -904,7 +904,7 @@ var shep = shp
 zynn.relayWAMessage(res)
 }
 else if(setting.menu == 'flink'){
-zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), MessageType.text, {
+zynn.sendMessage(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), MessageType.text, {
         thumbnail: '',
         "contextInfo": {
 "mentionedJid": [sender],
@@ -924,14 +924,14 @@ zynn.sendMessage(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, 
 })
 }
 else if(setting.menu == 'polos'){
-    wa.Mentions(from, help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), [sender], tod)
+    wa.Mentions(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
-    teks = help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep)
-    wa.sendButtonWithImage(from, teks, fakec, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
+    teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep)
+    wa.sendButtonWithloc(from, teks, fakec, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
-            zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+            zynn.sendMessage(from, fakeimage, image, {caption: help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
 break
 case 'sc':
