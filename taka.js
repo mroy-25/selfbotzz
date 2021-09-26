@@ -823,6 +823,12 @@ ispowersave = baterai.powersave == true ? "Aktif" : "Nonaktif"
                 let latensii = speed() - timestampi
 teks = `${fakec}
 
+Halo ${await wa.getPushname(sender, tod)}👋
+Saya ZBOT, Bot yang dibuat untuk memudahkan dalam berbagai hal
+Silahkan klik menu untuk melihat fitur bot
+
+Note : Tidak semua fitur work, Maklum saya noob
+
 ◪ 𝑰𝑵𝑭𝑶 𝑩𝑶𝑻
 
 𝑪𝒓𝒆𝒂𝒕𝒐𝒓 : Aqul
@@ -850,8 +856,7 @@ teks = `${fakec}
 𝑽𝒆𝒓𝒔𝒊 𝑶𝑺 : ${os_version}
 𝑴𝒆𝒓𝒌 𝑯𝑷 : ${device_manufacturer}
 𝑽𝒆𝒓𝒔𝒊 𝑯𝑷 : ${device_model}`
-teks2 = monospace(`Halo ${await wa.getPushname(sender, tod)}👋\nSaya ZBOT, Bot yang dibuat untuk memudahkan dalam berbagai hal\nSilahkan klik menu untuk melihat fitur bot\n\nNote : Tidak semua fitur work, Maklum saya noob`)
-wa.sendButtonWithloc(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
+wa.sendButtonWithloc(from, teks, fakec, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
   tothit = await db.showdata('hit')
