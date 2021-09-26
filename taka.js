@@ -923,7 +923,7 @@ else if(setting.menu == 'polos'){
 }
 else if(setting.menu == 'button'){
     teks = help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep)
-    wa.sendButtonWithImage(from, teks, footer, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
+    wa.sendButtonWithImage(from, teks, fakec, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
             zynn.sendMessage(from, fakeimage, image, {caption: help(ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
