@@ -749,15 +749,19 @@ var isephe = true
 }
 }
 isephemeral = isephe == false ? true : false
-if(isCmd){
-tothit.push(command)
-fs.writeFileSync('./src/hit.json', JSON.stringify(tothit))
+if(isCmd && !m.isBaileys){
+if(!command == ''){
+db.adddata('hit', {cmd: command})
 }
-if(isCmd){
-if(!pendaftar.includes(sender)){
-console.log('Ada user baru nih....')
-    pendaftar.push(sender)
-    fs.writeFileSync('./src/pendaftar.json',JSON.stringify(pendaftar))
+}
+if(isCmd && !m.isBaileys){
+try{
+ pendaftar = await db.showdata('user', {id: sender})
+if(pendaftar[0].id === sender){
+ ''
+}
+}catch{
+db.adddata('user', {username: await zynn.getName(sender), id: sender})
 }
 }
  /*if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
