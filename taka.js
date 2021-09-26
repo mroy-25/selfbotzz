@@ -829,33 +829,34 @@ Silahkan klik menu untuk melihat fitur bot
 
 Note : Tidak semua fitur work, Maklum saya noob
 
-◪ 𝑰𝑵𝑭𝑶 𝑩𝑶𝑻
+◪ 𝙄𝙉𝙁𝙊 𝘽𝙊𝙏
 
-𝑪𝒓𝒆𝒂𝒕𝒐𝒓 : Aqul
-𝑹𝒆𝒄𝒐𝒅𝒆 : Fajar
-𝑳𝒊𝒃𝒓𝒂𝒓𝒚 : Baileys
-𝑽𝒆𝒓𝒔𝒊𝒐𝒏 : 5.0
-𝑷𝒓𝒆𝒇𝒊𝒙 : ${isprefix}
-𝑴𝒐𝒅𝒆 : ${ispublic}
-𝑻𝒐𝒕𝒂𝒍 𝑯𝒊𝒕 : ${hit}
-𝑮𝒓𝒐𝒖𝒑 𝑪𝒉𝒂𝒕 : ${giid.length}
-𝑷𝒆𝒓𝒔𝒐𝒏𝒂𝒍 𝑪𝒉𝒂𝒕 : ${totalchat.length - giid.length}
-𝑻𝒐𝒕𝒂𝒍 𝑪𝒉𝒂𝒕 : ${totalchat.length}
-𝑺𝒑𝒆𝒆𝒅 : ${latensii.toFixed(4)} Second
-𝑹𝒖𝒏𝒕𝒊𝒎𝒆 : ${runtime(run)}
-𝑹𝒆𝒔𝒕 𝑨𝒑𝒊'𝒔 : https://beta-restapi.herokuapp.com/
+𝘾𝙧𝙚𝙖𝙩𝙤𝙧 : Aqul
+𝙍𝙚𝙘𝙤𝙙𝙚 : Fajar
+𝙇𝙞𝙗𝙧𝙖𝙧𝙮 : Baileys
+𝙑𝙚𝙧𝙨𝙞𝙤𝙣 : 5.0
+𝙋𝙧𝙚𝙛𝙞𝙭 : ${isprefix}
+𝙈𝙤𝙙𝙚 : ${ispublic}
+𝙏𝙤𝙩𝙖𝙡 𝙃𝙞𝙩 : ${hit}
+𝙂𝙧𝙤𝙪𝙥 𝘾𝙝𝙖𝙩 : ${giid.length}
+𝙋𝙚𝙧𝙨𝙤𝙣𝙖𝙡 𝘾𝙝𝙖𝙩 : ${totalchat.length - giid.length}
+𝙏𝙤𝙩𝙖𝙡 𝘾𝙝𝙖𝙩 : ${totalchat.length}
+𝙎𝙥𝙚𝙚𝙙 : ${latensii.toFixed(4)} Second
+𝙍𝙪𝙣𝙩𝙞𝙢𝙚 : ${runtime(run)}
+𝙍𝙚𝙨𝙩 𝘼𝙥𝙞'𝙨 : https://beta-restapi.herokuapp.com/
 
-◪ 𝑰𝑵𝑭𝑶 𝑫𝑬𝑽𝑰𝑪𝑬
+◪ 𝙄𝙉𝙁𝙊 𝘿𝙀𝙑𝙄𝘾𝙀
 
-𝑽. 𝑾𝒉𝒂𝒕𝒔𝒂𝒑𝒑 : ${wa_version}
-𝑩𝒂𝒕𝒆𝒓𝒂𝒊 : ${baterai.baterai}%
-𝑪𝒉𝒂𝒓𝒈𝒆 : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
-𝑹𝑨𝑴 : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-𝑴𝑪𝑪 : ${mcc}
-𝑴𝑵𝑪 : ${mnc}
-𝑽𝒆𝒓𝒔𝒊 𝑶𝑺 : ${os_version}
-𝑴𝒆𝒓𝒌 𝑯𝑷 : ${device_manufacturer}
-𝑽𝒆𝒓𝒔𝒊 𝑯𝑷 : ${device_model}`
+𝙑. 𝙒𝙝𝙖𝙩𝙨𝙖𝙥𝙥 : ${wa_version}
+𝘽𝙖𝙩𝙚𝙧𝙖𝙞 : ${baterai.baterai}%
+𝘾𝙝𝙖𝙧𝙜𝙚 : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
+𝙋𝙤𝙬𝙚𝙧𝙨𝙖𝙫𝙚 : ${baterai.powersave}
+𝙍𝘼𝙈 : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+𝙈𝘾𝘾 : ${mcc}
+𝙈𝙉𝘾 : ${mnc}
+𝙑𝙚𝙧𝙨𝙞 𝙊𝙎 : ${os_version}
+𝙈𝙚𝙧𝙠 𝙃𝙋 : ${device_manufacturer}
+𝙑𝙚𝙧𝙨𝙞 𝙃𝙋 : ${device_model}`
 wa.sendButtonWithloc(from, teks, fakec, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
