@@ -57,7 +57,7 @@ if(setting.canvas == 'swiftcord'){
     require('./lib/swiftcord.js')(zynn, msg, client)    
 }
 else{
-require('./lib/detection.js')(zynn, msg)
+require('./lib/detection.js')(zynn, msg, client)
 }
 })
 zynn.on('CB:Presence', async (asd) => {
