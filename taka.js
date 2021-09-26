@@ -329,7 +329,7 @@ const ftoko = await fakereply.ftoko(from, tod)
 
 //
 var reply = async(text) => {
-tunggu = type === 'buttonsResponseMessage' ? '' : zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
+tunggu = type === 'buttonsResponseMessage' && text == mess.wait ? '' : zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
 }
 if (isGroup && m.mtype == 'viewOnceMessage'){
   viewo = await db.showdata('antiviewonce', {id: from})
