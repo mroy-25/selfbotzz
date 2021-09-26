@@ -4080,7 +4080,7 @@ case 'resetprefix':
 try{
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 deta = await db.showdata('prefix', {id: from})
-if(deta[0}.id === from){
+if(deta[0].id === from){
   db.delete('prefix', {id: from})
   return reply('Prefix berhasil direset')
 }
