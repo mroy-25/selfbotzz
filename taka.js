@@ -171,8 +171,11 @@ module.exports = zynn = async (zynn, tod, db) => {
 var gprefix = prefix
 if(isGroup){
 try{
-var prefa = gcprefix[from] == 'noprefix' ? '' : gcprefix[from]
+pref = await db.showdata('prefix', {id: from})
+if(pref[0].id === from){
+var prefa = pref[0].prefix == 'noprefix' ? '' : pref[0].prefix
 var prefix = prefa
+}
 if(prefa == undefined){
 var prefix = gprefix
 }
