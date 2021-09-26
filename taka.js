@@ -133,20 +133,7 @@ const a = json[2][0][1].value
     baterai.cas = b
     baterai.powersave = c
 })
-tzy.on('CB:Presence', async (asd) => {
-    const wa = require('./whatsapp/message')
-    const afk = require('./lib/afk')
-    asd = asd[1]
-    if (!asd.id.endsWith('@g.us')) return
-    cekafk = await afk.isafk(asd.participant, afkuser)
-    if((asd.type == 'composing' || asd.type == 'recording') && cekafk) {
-    console.log(asd.participant)
-    tzy.sendMessage(asd.id, `@${asd.participant.split('@')[0]} Terdeteksi melakukan aktivitas!, Status afkMu telah dihapus`, MessageType.text, {contextInfo: {mentionedJid: [asd.participant.split('@')[0] + '@s.whatsapp.net']}})
-    delete afkuser[asd.participant.split('@')[0]]
-    await fs.writeFileSync("./src/afk.json", JSON.stringify(afkuser))
-    }
-})
-let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+//let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod, db) => {
     try {
         if (!tod.hasNewMessage) return
@@ -175,7 +162,7 @@ module.exports = zynn = async (zynn, tod, db) => {
         const type = Object.keys(tod.message)[0]
         const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
         const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-        const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (getcmd(tod.message.stickerMessage.fileSha256.toString('hex')) !== null && getcmd(tod.message.stickerMessage.fileSha256.toString('hex')) !== undefined) ? getcmd(tod.message.stickerMessage.fileSha256.toString('hex')) : "".slice(1).trim().split(/ +/).shift().toLowerCase()
+        const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : "".slice(1).trim().split(/ +/).shift().toLowerCase()
         const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/gi) : '.'
         noprefix = ''
         if(nopref == 'no'){
@@ -211,7 +198,7 @@ else if(type === 'stickerMessage'){
    var prefix = ''
 }
 
-        body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (getcmd(tod.message.stickerMessage.fileSha256.toString('hex')) !== null && getcmd(tod.message.stickerMessage.fileSha256.toString('hex')) !== undefined) ? (getcmd(tod.message.stickerMessage.fileSha256.toString('hex')).startsWith(prefix) ? getcmd(tod.message.stickerMessage.fileSha256.toString('hex')) : '') : ""
+        body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) ? await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : '') : ""
         chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
         //const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
         const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
@@ -694,31 +681,34 @@ if(time2 < "23:59:00"){
 }*/
 //afk
 if(!tod.key.fromMe && !m.isBaileys){
-                mentionByTag = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.mentionedJid : []
-                mentionByReply = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.participant || "" : ""
-                mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
-                mention != undefined ? mention.push(mentionByReply) : []
-                mentionUser = mention != undefined ? mention.filter(n => n) : []
-        for (let x of mentionUser) {
-                if (afkuser.hasOwnProperty(x.split('@')[0])) {
-            afktime = afkuser[x.split('@')[0]].afktime
-                    afkreason = afkuser[x.split('@')[0]].reason
-                    const cekafk = ms(Date.now() - afktime)
-                    ini_txt = `@${x.split('@')[0]} sedang afk.\n\n`
-                    if (afkuser[x.split('@')[0]] != "") {
-                        ini_txt += `${shp} Reason : ${afkreason}\n${shp} Since : _${cekafk.hours} Jam  ${cekafk.minutes} Menit  ${cekafk.seconds} Detik  Yang lalu_`
-                    }
-wa.Mentions(from, ini_txt, [x], tod)
-                }
-            }
+  mentionByTag = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.mentionedJid : []
+  mentionByReply = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.participant || "" : ""
+  mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
+  mention != undefined ? mention.push(mentionByReply) : []
+  mentionUser = mention != undefined ? mention.filter(n => n) : []
+  for (let x of mentionUser) {
+  deta = await db.showdata('afk', {user: x})
+  try{
+    if (deta[0].user === x) {
+    afktime = deta[0].afktime
+    afkreason = deta[0].reason
+    const cekafk = ms(Date.now() - afktime)
+    ini_txt = `@${x.split('@')[0]} sedang afk.\n\n`
+    ini_txt += `${shp} Reason : ${afkreason == '' ? 'Nothing' : afkreason}\n${shp} Since : _${cekafk.hours} Jam  ${cekafk.minutes} Menit  ${cekafk.seconds} Detik  Yang lalu_`
+  wa.Mentions(from, ini_txt, [x], tod)
+  }
+}catch{
+}
+}
 
-        //endafk
-    if (afkuser.hasOwnProperty(sender.split('@')[0])) {
-                reply("Anda telah keluar dari mode afk.")
-                delete afkuser[sender.split('@')[0]]
-                fs.writeFileSync("./src/afk.json", JSON.stringify(afkuser))
-            }
-afkuser = JSON.parse(fs.readFileSync('./src/afk.json'))
+efk = await db.showdata('afk', {user: sender})
+try{
+if (efk[0].user === sender) {
+  reply("Anda telah keluar dari mode afk.")
+  db.delete('afk', {user: sender})
+  }
+}catch{
+}
 }
 if (!publicc){
     if (!itsMe) return
@@ -763,16 +753,14 @@ var isephe = true
 }
 isephemeral = isephe == false ? true : false
 if(isCmd){
-db.adddata('hit', {cmd: command})
+tothit.push(command)
+fs.writeFileSync('./src/hit.json', JSON.stringify(tothit))
 }
 if(isCmd){
-deta = await db.showdata('user', {id: sender})
-try{
-  if(deta[0].id === sender){
-    ''
-  }
-}catch{
-  db.adddata('user', {username: await zynn.getName(sender), id: sender})
+if(!pendaftar.includes(sender)){
+console.log('Ada user baru nih....')
+    pendaftar.push(sender)
+    fs.writeFileSync('./src/pendaftar.json',JSON.stringify(pendaftar))
 }
 }
  /*if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
@@ -801,8 +789,7 @@ teks += `${shp} Nama : ${namaewa}\n${shp} Tag : @${i.split('@')[0]}\n\n---------
 wa.Mentions(from, teks, pendaftar, tod)
 break
 case 'help':
-deta = await db.showdata('hit')
-  hit = deta.length
+hit = tothit.length
 ispublic = publicc === true ? 'Public' : 'Self'
 shep = shp
 if(nopref == 'no'){
@@ -848,8 +835,7 @@ teks2 = monospace(`Halo ${await wa.getPushname(sender, tod)}👋\nSaya ZBOT, Bot
 wa.sendButtonWithloc(from, teks2, teks, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
-deta = await db.showdata('hit')
-  hit = deta.length
+hit = tothit.length
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
            try{
@@ -3714,7 +3700,7 @@ const groupId = isGroup ? groupMetadata.jid : ''
 if (q == 'on') {
         deta = await db.showdata('antidelete', {id: from})
 try{
-  if(del[0].id === from) return reply('Sudah Aktif')
+  if(deta[0].id === from) return reply('Sudah Aktif')
 }catch{
 }
         db.adddata('antidelete', {id: from})
@@ -3728,6 +3714,29 @@ try{
   }
 }catch{
   reply('Antidelete tidak diaktifkan!')
+}
+}
+break
+case 'antiviewonce':
+if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+const groupId = isGroup ? groupMetadata.jid : ''
+if (q == 'on') {
+        deta = await db.showdata('antiviewonce', {id: from})
+try{
+  if(deta[0].id === from) return reply('Sudah Aktif')
+}catch{
+}
+        db.adddata('antiviewonce', {id: from})
+        reply(`Succes Enable Antiviewonce!`)
+} else if (q == 'off') {
+        deta = await db.showdata('antiviewonce', {id: from})
+try{
+  if(deta[0].id === from){
+    db.delete('antiviewonce', {id:from})
+    reply('Sukses disable antiviewonce')
+  }
+}catch{
+  reply('Antiviewonce tidak diaktifkan!')
 }
 }
 break
@@ -4254,95 +4263,79 @@ break
 case 'setwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q) return reply(`Contoh penggunaan : ${prefix}setwelcome Halo @user, Selamat datang di Group @subject\n\nInfo : \n${shp} @user = Tag Member\n${shp} @subject = Nama Group\n${shp} @desc = deskripsi group`)
-for(let i of welkam){
-  if(from.includes(i.idgc)){
-    let del = welkam.indexOf(i)
-      welkam.splice(del, 1)
-      await fs.writeFileSync('./src/welkam.json', JSON.stringify(welkam))
-      welkamgc = {
-idgc : from,
-textwel : q
+deta = await db.showdata('welcome_mess', {id: from})
+try{
+  if(deta[0].id === from){
+    db.update('welcome_mess', from, q)
+  }
+}catch(error) {
+  console.log('baru')
+  db.adddata('welcome_mess', {id: from, teks: q})
 }
-    welkam.push(welkamgc)
-      fs.writeFileSync('./src/welkam.json', JSON.stringify(welkam))
-      return reply(`Welcome Group diubah menjadi ${q}`)
-    }
-}
-welkamgc = {
-idgc : from,
-textwel : q
-}
-welkam.push(welkamgc)
-fs.writeFileSync('./src/welkam.json', JSON.stringify(welkam))
-reply(`Welcome Group diubah menjadi ${q}`)
+reply(`Welcome berhasil diubah menjadi\n${q}`)
 break
 case 'delwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-for(let i of welkam){
-if(from.includes(i.idgc)){
-   let del = welkam.indexOf(i)
-   welkam.splice(del, 1)
-   fs.writeFileSync('./src/welkam.json', JSON.stringify(welkam))
-   reply(`Sukses Menghapus welcome di group ini`)
+deta = await db.showdata('welcome_mess', {id: from})
+try{
+if(deta[0].id === from){
+  db.delete('welcome_mess', {id: from})
+  reply('Sukses Menghapus Welcome di group ini')
 }
+}catch(error) {
+  return reply('Welcome tidak diset digroup ini!')
 }
 break
 case 'setleft':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q) return reply(`Contoh penggunaan : ${prefix}setleft Sayonara @user, Semoga Tenang dialam sana\n\nInfo : \n${shp} @user = Tag Member\n${shp} @subject = Nama Group\n${shp} @desc = deskripsi group`)
-for(let i of tleft){
-  if(from.includes(i.idgc)){
-    let del = tleft.indexOf(i)
-      tleft.splice(del, 1)
-      await fs.writeFileSync('./src/tleft.json', JSON.stringify(tleft))
-      tleftgc = {
-idgc : from,
-textleft : q
+deta = await db.showdata('left_mess', {id: from})
+try{
+  if(deta[0].id === from){
+    db.update('left_mess', from, q)
+  }
+}catch(error) {
+  console.log('baru')
+  db.adddata('left_mess', {id: from, teks: q})
 }
-    tleft.push(tleftgc)
-      fs.writeFileSync('./src/tleft.json', JSON.stringify(tleft))
-      return reply(`Left Group diubah menjadi ${q}`)
-    }
-}
-tleftgc = {
-idgc : from,
-textleft : q
-}
-tleft.push(tleftgc)
-fs.writeFileSync('./src/tleft.json', JSON.stringify(tleft))
 reply(`Left Group diubah menjadi ${q}`)
 break
 case 'delleft':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-for(let i of tleft){
-if(from.includes(i.idgc)){
-   let del = tleft.indexOf(i)
-   tleft.splice(del, 1)
-   fs.writeFileSync('./src/tleft.json', JSON.stringify(tleft))
-   reply(`Sukses Menghapus Left di group ini`)
+deta = await db.showdata('left_mess', {id: from})
+try{
+if(deta[0].id === from){
+  db.delete('left_mess', {id: from})
+  reply('Sukses Menghapus Left di group ini')
 }
+}catch(error) {
+  return reply('Left tidak diset digroup ini!')
 }
 break
 case 'cekwelcome':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-for(let i of welkam){
-    if(i.idgc.includes(from)){
-        teks = `${shp} Nama Group : ${groupName}\n${shp} Id : ${i.idgc}\n${shp} Text Welcome :\n${i.textwel}`
-        return reply(teks)
-    }
+deta = await db.showdata('welcome_mess', {id: from})
+try{
+  if(deta[0].id === from){
+    var wel = deta[0].teks
+  }
+}catch{
+  var wel = 'Default Bot'
 }
-teks = `${shp} Nama Group : ${groupName}\n${shp} Id : ${from}\n${shp} Text Welcome : Default Bot`
+teks = `${shp} Nama Group : ${groupName}\n${shp} Id : ${from}\n${shp} Text Welcome : ${wel}`
 reply(teks)
 break
 case 'cekleft':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-for(let i of tleft){
-    if(i.idgc.includes(from)){
-        teks = `${shp} Nama Group : ${groupName}\n${shp} Id : ${i.idgc}\n${shp} Text Left :\n${i.textleft}`
-        return reply(teks)
-    }
+deta = await db.showdata('left_mess', {id: from})
+try{
+  if(deta[0].id === from){
+    var wel = deta[0].teks
+  }
+}catch{
+  var wel = 'Default Bot'
 }
-teks = `${shp} Nama Group : ${groupName}\n${shp} Id : ${from}\n${shp} Text Left : Default Bot`
+teks = `${shp} Nama Group : ${groupName}\n${shp} Id : ${from}\n${shp} Text Left : ${wel}`
 reply(teks)
 break
 case 'ssweb':
@@ -5124,48 +5117,26 @@ if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if (isQuotedSticker) {
     if (!q) return reply(`Cara Penggunaan : Reply sticker dengan caption ${command} commandnya\nContoh : ${command} .help`)
     var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
-    for(let i of stickerdb){
-        if(kodenya.includes(i.id)) return reply('sticker sudah terdaftar didatabase')
-    }
-    addcmd(kodenya, q, m.quoted.fakeObj.message, reply)
+    addcmd(kodenya, q.startsWith(prefix) ? q.replace(prefix, ''): q, reply, db)
 } else {
     reply('tag stickernya')
-}
-break
-case 'getsticker':
-if(!q) return reply('Nama commandya apa?')
-anu = [];
-for(let i=0; i<stickerdb.length; i++){
-if(stickerdb[i].chats === q){
-anu.push(i)
-}
-}
-console.log(anu)
-if(anu === undefined) return reply(`Sticker dengan command ${q} tidak ada di database`)
-for(let i of anu){
-po = await zynn.prepareMessageFromContent(from, stickerdb[i].sticker, {quoted: tod})
-zynn.relayWAMessage(po)
 }
 break
 case 'delcmd':{
 if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 //if (!isQuotedSticker) return reply(`reply stickernya`)
 var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
-diti = [];
-for(let i of stickerdb){
-        diti.push(i.id)
-    }
-if(!kodenya.includes(diti)) return reply('sticker sudah terdaftar didatabase')
-del = await getcmdpos(kodenya)
-stickerdb.splice(del, 1)
-await fs.writeFileSync('./src/stickerdb.json', JSON.stringify(stickerdb))
-reply("Done")
+db.delete('stickerdb', {id: kodenya}).then((res) => {
+  if(res.deletedCount === 0) return reply('Sticker tidak terdaftar didatabase')
+  reply('Sticker berhasil dihapus')
+})
 }
 break
 case 'listcmd':
 let teksnyee = monospace(`\`\`\`「 LIST STICKER CMD 」\`\`\``)
 let cemde = [];
-for (let i of stickerdb) {
+deta = await db.showdata('stickerdb')
+for (let i of deta) {
 teksnyee += `\n\n*${shp} ID :* ${i.id}\n*${shp} Cmd* : ${i.cmd}`
 }
 reply(teksnyee)
@@ -5178,15 +5149,21 @@ if(!tod.message.extendedTextMessage.contextInfo.participant === zynn.user.jid) r
 zynn.deleteMessage(from, { id: tod.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 break
 case 'afk':
-                    alasan = args.join(" ")
-                    afktime = Date.now()
-            afk[sender.split('@')[0]] = {reason: q, afktime: afktime}
-                    fs.writeFileSync("./src/afk.json", JSON.stringify(afk))
-                    ini_txt = "Anda telah afk. "
-                    if (alasan != "") {
-                        ini_txt += "Dengan alasan " + alasan
-                    }
-                    reply(ini_txt)
+alasan = args.join(" ")
+afktime = Date.now()
+deta = await db.showdata('afk', {user: sender})
+try{
+  if(deta[0].user === sender){
+    db.delete('afk', {user: sender})
+  }
+}catch{
+  db.adddata('afk', {user: sender, reason: q, afktime: afktime})
+}
+ini_txt = "Anda telah afk. "
+if (alasan != "") {
+  ini_txt += "Dengan alasan " + alasan
+}
+reply(ini_txt)
 break
 case 'infobisnis':
 if(!q) return reply(`Cara penggunaan : ${prefix}infobisnis tag orang/masukkan nomor whatsapp/n/nContoh : ${prefix}infobisnis 6281990498472\n\nNote : Nomor harus diawali dengan kode negara`)
