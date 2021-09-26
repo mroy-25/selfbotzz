@@ -101,7 +101,7 @@ const stickermetadata = {
             '🌹'
         ]
 }
-const {createSticker} = require('wa-sticker-formatter')
+//const {createSticker} = require('wa-sticker-formatter')
 fakecap = setting.fakecap
 fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
 fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
@@ -341,6 +341,14 @@ var reply = async(text) => {
 tunggu = type === 'buttonsResponseMessage' ? '' : zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
 }
 if (isGroup && m.mtype == 'viewOnceMessage'){
+  viewo = await db.showdata('antiviewonce', {id: from})
+  try{
+    if(viewo[0].id === from){
+      ''
+    }
+  }catch{
+    return
+  }
                 var msg = {...tod}
                 msg.message = tod.message.viewOnceMessage.message
                 msg.message[Object.keys(msg.message)[0]].viewOnce = false
@@ -349,7 +357,8 @@ if (isGroup && m.mtype == 'viewOnceMessage'){
             }
 // error
 try{
-if(error.includes(command)){
+error = await db.showdata('error', {cmd: command})
+if(error[0].cmd === command){
     return
 }
 }catch{
@@ -3719,7 +3728,6 @@ try{
 break
 case 'antiviewonce':
 if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
-const groupId = isGroup ? groupMetadata.jid : ''
 if (q == 'on') {
         deta = await db.showdata('antiviewonce', {id: from})
 try{
@@ -4202,26 +4210,34 @@ case 'stopjadibot':
 case 'adderror':
 if(!itsMe) return
 if(!q) return reply('Masukkan nama fitur yang error!')
-if(error.includes(q)) return reply(`Fitur ${q} telah ditambahkan ke daftar error sebelumnya!`)
-error.push(q)
-await fs.writeFileSync('./src/error.json', JSON.stringify(error))
+deta = await db.showdata('error', {cmd: q})
+try{
+  if(deta[0].cmd === q) return reply(`Fitur ${q} telah ditambahkan ke daftar error sebelumnya!`)
+}catch{
+db.adddata('error', {cmd: q})
 reply('Done')
+}
 break
 
 case 'delerror':
 if(!itsMe) return
 if(!q) return reply('Masukkan nama fiturnya!')
-if(!error.includes(q)) return reply('Fitur tersebut tidak masuk ke list error!')
-del = error.indexOf(q)
-error.splice(del, 1)
-await fs.writeFileSync('./src/error.json', JSON.stringify(error))
-reply('Done')
+deta = await db.showdata('error', {cmd: q})
+try{
+if(deta[0].cmd === q){
+  db.delete('error', {cmd: q})
+  return reply('Done')
+}
+}catch{
+  reply('Fitur tidak terdaftar di listerror')
+}
 break
 
 case 'listerror':
-teks = monospace(`List Fitur Error\n${shp} Total : ${error.length}\n\n`)
-for(let i of error){
-    teks += shp + ' ' + i + '\n'
+deta = await db.showdata('error')
+teks = monospace(`List Fitur Error\n${shp} Total : ${deta.length}\n\n`)
+for(let i of deta){
+    teks += shp + ' ' + i.cmd + '\n'
 }
 reply(teks)
 break
