@@ -61,7 +61,6 @@ const translate = require('@vitalets/google-translate-api')
 const { yta, ytv, igdl, upload } = require('./lib/ytdl')
 const fetch = require('node-fetch');
 const { EmojiAPI } = require("emoji-api");
-pendaftar = JSON.parse(fs.readFileSync('./src/pendaftar.json'))
 const emoji = new EmojiAPI();
 const base64Img = require('base64-img')
 const fakeUa = require('fake-useragent');
@@ -71,19 +70,8 @@ const exif = new Exif();
 const tovid = require('./lib/tovideo')
 setting = JSON.parse(fs.readFileSync('./setting.json'))
 const { uploadimg } = require('./lib/uploadimg');
-const afk = require('./lib/afk')
-afkuser = JSON.parse(fs.readFileSync('./src/afk.json'))
-let tothit = JSON.parse(fs.readFileSync('./src/hit.json'))
-const enable = JSON.parse(fs.readFileSync('./src/enable.json'))
-const welkam = JSON.parse(fs.readFileSync('./src/welkam.json'))
-const tleft = JSON.parse(fs.readFileSync('./src/tleft.json'))
-const gcprefix = JSON.parse(fs.readFileSync('./src/gcprefix.json'))
-const gchange = JSON.parse(fs.readFileSync('./src/gupdated.json'))
-const note = JSON.parse(fs.readFileSync('./src/notes.json'))
 const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
-const { addcmd, getcmd, getcmdpos } = require('./lib/setcmd')
-stickerdb = JSON.parse(fs.readFileSync('./src/stickerdb.json'))
-const error = JSON.parse(fs.readFileSync('./src/error.json'))
+const { addcmd, getcmd } = require('./lib/setcmd')
 const vcard = async(nomor, nama, bio) => {
         kon = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n'
@@ -4078,17 +4066,26 @@ else{
 var gcpref = args[0]
 heh = args[0]
 }
-gcprefix[from] = gcpref
-await fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
+deta = await db.showdata('prefix', {id: from})
+try{
+  if(deta[0].id === from){
+    db.uprefix(from, gcpref)
+  }
+}catch{
+  db.adddata('prefix', {id: from, prefix: gcpref})
+}
 return reply(`Prefix Bot di Group ini diubah menjadi ${heh}`)
 break
 case 'resetprefix':
 try{
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-delete gcprefix[from]
-   fs.writeFileSync('./src/gcprefix.json', JSON.stringify(gcprefix))
-   reply(`Prefix bot direset`)
+deta = await db.showdata('prefix', {id: from})
+if(deta[0}.id === from){
+  db.delete('prefix', {id: from})
+  return reply('Prefix berhasil direset')
+}
 }catch{
+  reply('Prefix tidak diset digroup ini')
 }
 break
     case 'listmem':
