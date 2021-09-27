@@ -2867,7 +2867,16 @@ try{
         wa.sendFileFromUrl(from, i.url, tod, monospace(`INSTAGRAM DOWNLOADER\n\n${shp} Username : ${data.user.username}\n${shp} Type Media : ${i.type}`))
 }
 }catch(e){
-    reply(mess.error.api)
+    reply('Server 1 error\nTunggu sebentar, mencoba menggunakan server 2...')
+    try{
+     data = await skrep.igdl(q)
+     for(let i of data){
+     wa.sendFileFromUrl(from, i, tod, fakec)
+      await wa.sleep(3000)
+     }
+    }catch(e){
+     return reply('Server 2 error!\nOperasi dihentikan')
+    }
 }
 break
 case 'igstalk':
