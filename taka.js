@@ -817,8 +817,8 @@ else{
                         giid.push(id)
                     }
                 }
-                let timestampi = speed();
-                let latensii = speed() - timestampi
+                timestampi = speed();
+                latensii = speed() - timestampi
 teks = `${fakec}
 
 Halo ${await wa.getPushname(sender, tod)}👋
@@ -896,18 +896,18 @@ break
 case 'mystat':
 tothit = await db.showdata('hit')
 reg = await db.showdata('user')
-    let i = []
-                let giid = []
+    let u = []
+                let gid = []
                 for (mem of totalchat){
-                    i.push(mem.jid)
+                    u.push(mem.jid)
                 }
                 for (id of i){
                     if (id && id.includes('g.us')){
-                        giid.push(id)
+                        gid.push(id)
                     }
                 }
-                let timestampi = speed();
-                let latensii = speed() - timestampi
+                timestampi = speed();
+                latensii = speed() - timestampi
 if(nopref == 'no'){
     isprefix = 'Noprefix'
 }
@@ -922,8 +922,8 @@ teks = `*B O T  S T A T*
 *› Prefix* : ${isprefix}
 *› Mode* : ${ispublic}
 *› Total Hit* : ${tothit.length}
-*› Group Chat* : ${giid.length}
-*› Personal Chat* : ${totalchat.length - giid.length}
+*› Group Chat* : ${gid.length}
+*› Personal Chat* : ${totalchat.length - gid.length}
 *› Total Chat* : ${totalchat.length}
 *> Total User : ${reg.length} Registered User
 *› Speed* : ${latensii.toFixed(4)} Second
