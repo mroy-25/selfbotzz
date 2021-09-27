@@ -4847,7 +4847,7 @@ try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/loli.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
 loli = data.data[rand]
-wa.sendButtonWithImage(from, bold('RANDOM LOLI'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+wa.sendButtonWithImage(from, bold('RANDOM LOLI'), 'Next ga nih?', await wa.getBuffer(loli), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
