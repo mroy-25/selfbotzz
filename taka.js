@@ -896,18 +896,22 @@ break
 case 'mystat':
 tothit = await db.showdata('hit')
 reg = await db.showdata('user')
-    let u = []
-                let gid = []
+    u = []
+                gid = []
                 for (mem of totalchat){
                     u.push(mem.jid)
                 }
-                for (id of i){
+                for (id of u){
                     if (id && id.includes('g.us')){
                         gid.push(id)
                     }
                 }
                 timestampi = speed();
                 latensii = speed() - timestampi
+nom = 0
+for(let i of totalchat){
+nom += i.count
+}
 if(nopref == 'no'){
     isprefix = 'Noprefix'
 }
@@ -925,7 +929,8 @@ teks = `*B O T  S T A T*
 *› Group Chat* : ${gid.length}
 *› Personal Chat* : ${totalchat.length - gid.length}
 *› Total Chat* : ${totalchat.length}
-*> Total User : ${reg.length} Registered User
+*› Unread Message* : ${num.toString()}
+*› Total User* : ${reg.length} Registered User
 *› Speed* : ${latensii.toFixed(4)} Second
 *› Runtime* : ${runtime(run)}
 
