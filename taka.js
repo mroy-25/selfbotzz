@@ -807,9 +807,6 @@ else if(nopref == 'multi'){
 else{
     isprefix = nopref
 }
-bateraiii = baterai.baterai
-isday = baterai.cas == true ? "Charging ⚡" : "Not Charged"
-ispowersave = baterai.powersave == true ? "Aktif" : "Nonaktif"
     let i = []
                 let giid = []
                 for (mem of totalchat){
@@ -830,35 +827,35 @@ Silahkan klik menu untuk melihat fitur bot
 
 Note : Tidak semua fitur work, Maklum saya noob
 
-◪ *INFO BOT*
+*I N F O  B O T*
 
-*Creator* : Aqul
-*Recode* : Fajar
-*Library* : Baileys
-*Version* : 5.0
-*Prefix* : ${isprefix}
-*Mode* : ${ispublic}
-*Total Hit* : ${hit}
-*Group Chat* : ${giid.length}
-*Personal Chat* : ${totalchat.length - giid.length}
-*Total Chat* : ${totalchat.length}
-*Speed* : ${latensii.toFixed(4)} Second
-*Runtime* : ${runtime(run)}
-*Rest Api's* : https://beta-restapi.herokuapp.com/
+*› Creator* : Aqul
+*› Recode* : Fajar
+*› Library* : Baileys
+*› Version* : 5.0
+*› Prefix* : ${isprefix}
+*› Mode* : ${ispublic}
+*› Total Hit* : ${hit}
+*› Group Chat* : ${giid.length}
+*› Personal Chat* : ${totalchat.length - giid.length}
+*› Total Chat* : ${totalchat.length}
+*› Speed* : ${latensii.toFixed(4)} Second
+*› Runtime* : ${runtime(run)}
+*› Rest Api's* : https://beta-restapi.herokuapp.com/
 
-◪ *INFO DEVICE*
+*I N F O  D E V I C E*
 
-*V. WHATSAPP* : ${wa_version}
-*Baterai* : ${baterai.baterai}%
-*Charge* : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
-*POwersave* : ${baterai.powersave === true ? 'Aktif' : 'Nonaktif'}
-*RAM* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-*MCC* : ${mcc}
-*MNC* : ${mnc}
-*Versi OS* : ${os_version}
-*Merk HP* : ${device_manufacturer}
-*Versi HP* : ${device_model}`
-wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
+*› V. WHATSAPP* : ${wa_version}
+*› Baterai* : ${baterai.baterai}%
+*› Charge* : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
+*› Powersave* : ${baterai.powersave === true ? 'Aktif' : 'Nonaktif'}
+*› RAM* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+*› MCC* : ${mcc}
+*› MNC* : ${mnc}
+*› Versi OS* : ${os_version}
+*› Merk HP* : ${device_manufacturer}
+*› Versi HP* : ${device_model}`
+wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`⋮☰ MENU`, `🤴🏻 OWNER`, '🧾 SCRIPT'], [`menu`, `owner`, 'sc'], sender, tod)
 break
 case 'menu':
 tothit = await db.showdata('hit')
@@ -876,14 +873,14 @@ var shep = shp
             isprefix = nopref
            }
 if(setting.menu == 'polos'){
-    wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), ['O W N E R', 'S C'], ['owner', 'sc'], sender, rep)
+    wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '📈 STAT'], ['owner', 'sc', 'mystat'], sender, tod)
 }
 else if(setting.menu == 'button'){
     teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep)
-    wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
+    wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '📈 STAT'], ['owner', 'sc', 'mystat'], sender, rep)
 }
 else{
-            wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), ['O W N E R','S C'], ['owner', 'sc'], sender, rep)
+            wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '📈 STAT'], ['owner', 'sc', 'mystat'], sender, rep)
 }
 break
 case 'sc':
@@ -896,24 +893,56 @@ break
 case 'groupbot':
 reply('https://chat.whatsapp.com/Dt8Icyz3eIK4m1bUm593sR')
 break
-/*case 'thanksto':
-reply(`  ┏━━⬣ 𝙏𝙃𝘼𝙉𝙆𝙎 𝙏𝙊
-  ┃
-  ┃${shp} Allah SWT
-  ┃${shp} Kedua Orang Tua
-  ┃${shp} Aqul
-  ┃${shp} Vean
-  ┃${shp} Elios
-  ┃${shp} Hexagon
-  ┃${shp} Hardianto
-  ┃${shp} Team
-  ┃${shp} Ra-api
-  ┃${shp} Zahir-api
-  ┃${shp} Dan semua penyedia module
-  ┃
-  ┗⬣ 𝙕𝘽𝙊𝙏`)
+case 'mystat':
+tothit = await db.showdata('hit')
+reg = await db.showdata('user')
+    let i = []
+                let giid = []
+                for (mem of totalchat){
+                    i.push(mem.jid)
+                }
+                for (id of i){
+                    if (id && id.includes('g.us')){
+                        giid.push(id)
+                    }
+                }
+                let timestampi = speed();
+                let latensii = speed() - timestampi
+if(nopref == 'no'){
+    isprefix = 'Noprefix'
+}
+else if(nopref == 'multi'){
+    isprefix = 'Multiprefix'
+}
+else{
+    isprefix = nopref
+}
+teks = `*B O T  S T A T*
+
+*› Prefix* : ${isprefix}
+*› Mode* : ${ispublic}
+*› Total Hit* : ${tothit.length}
+*› Group Chat* : ${giid.length}
+*› Personal Chat* : ${totalchat.length - giid.length}
+*› Total Chat* : ${totalchat.length}
+*> Total User : ${reg.length} Registered User
+*› Speed* : ${latensii.toFixed(4)} Second
+*› Runtime* : ${runtime(run)}
+
+*I N F O  D E V I C E*
+
+*› V. WHATSAPP* : ${wa_version}
+*› Baterai* : ${baterai.baterai}%
+*› Charge* : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
+*› Powersave* : ${baterai.powersave === true ? 'Aktif' : 'Nonaktif'}
+*› RAM* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+*› MCC* : ${mcc}
+*› MNC* : ${mnc}
+*› Versi OS* : ${os_version}
+*› Merk HP* : ${device_manufacturer}
+*› Versi HP* : ${device_model}`
+reply(teks)
 break
-*/
 case 's':
 case 'stiker':
         case 'sticker':
