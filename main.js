@@ -78,7 +78,7 @@ try{
     }
 })
 zynn.on('group-update', async (msg) => {
-require('./lib/gupdate.js')(zynn, msg)
+require('./lib/gupdate.js')(zynn, msg, client)
 })
 zynn.on('chat-update', async (message) => {
 require('./taka.js')(zynn, message, client)
