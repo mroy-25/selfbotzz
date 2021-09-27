@@ -445,7 +445,7 @@ else if(inv[0].code == 500){
 return reply('Tidak dapat menambahkan peserta\nGroup sudah penuh saat ini!')
 }
 }
-exports.sendButton = async(from, teks, footer, display, buttonid, sender) => {
+exports.sendButton = async(from, teks, footer, display, buttonid, sender, tod) => {
 datai = [];
 for(let i=0; i<display.length; i++){
         datai.push({
@@ -462,7 +462,8 @@ return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
 contextInfo: {
 text: 'hi',
 mentionedJid: [sender]
-}
+},
+quoted: tod
 })
 }
 exports.sendButtonWithImage = async(from, teks, footer, img, display, buttonid, sender, tod) => {
