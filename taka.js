@@ -929,7 +929,7 @@ teks = `*B O T  S T A T*
 *› Group Chat* : ${gid.length}
 *› Personal Chat* : ${totalchat.length - gid.length}
 *› Total Chat* : ${totalchat.length}
-*› Unread Message* : ${num.toString()}
+*› Unread Message* : ${nom.toString()}
 *› Total User* : ${reg.length} Registered User
 *› Speed* : ${latensii.toFixed(4)} Second
 *› Runtime* : ${runtime(run)}
