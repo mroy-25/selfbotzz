@@ -795,6 +795,7 @@ break
 case 'help':
  tothit = await db.showdata('hit')
 hit = tothit.length
+reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 shep = shp
 if(nopref == 'no'){
@@ -857,11 +858,12 @@ Note : Tidak semua fitur work, Maklum saya noob
 *Versi OS* : ${os_version}
 *Merk HP* : ${device_manufacturer}
 *Versi HP* : ${device_model}`
-wa.sendButtonWithloc(from, teks, fakec, fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
+wa.sendButtonWithloc(from, teks, fakec + '|| ' + reg.length + ' Registered User', fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
   tothit = await db.showdata('hit')
 hit = tothit.length
+reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
            try{
@@ -929,7 +931,7 @@ else if(setting.menu == 'polos'){
 }
 else if(setting.menu == 'button'){
     teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep)
-    wa.sendButtonWithloc(from, teks, fakec, fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
+    wa.sendButtonWithloc(from, teks, fakec + '|| ' + reg.length + ' Registered User', fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
             zynn.sendMessage(from, fakeimage, image, {caption: help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
@@ -4254,7 +4256,7 @@ case 'cuaca':
 if(!q) return reply('Masukkan nama daerahnya!')
 reply(mess.wait)
 try{
-    data = await wa.fetchJson('http://zekais-api.herokuapp.com/cuaca?daerah=' + q)
+    data = await wa.fetchJson('http://zekais-api.herokuapp.com/cuaca?daerah=' + q + '&apikey=zekais')
     teks = `INFO CUACA\n\n`
     teks += shp + ' Tempat : ' + data.Nama + '\n'
     teks += shp + ' Suhu : ' + data.Suhu + '\n'
