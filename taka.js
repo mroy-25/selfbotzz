@@ -292,16 +292,14 @@ const runtime = function(seconds) {
     var h = Math.floor(seconds % (3600 * 24) / 3600);
     var m = Math.floor(seconds % 3600 / 60);
     var s = Math.floor(seconds % 60);
-    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " d, ") : "";
-    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " h, ") : "";
-    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " m, ") : "";
-    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " s") : "";
+    var dDisplay = d > 0 ? d + (d == 1 ? " hari, " : " hari, ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? " jam, " : " jam, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " menit, " : " menit, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " detik" : " detik") : "";
     return dDisplay + hDisplay + mDisplay + sDisplay;
 }
             const botNumber = zynn.user.jid
         const Owner = ['13345183054@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
-        const tothit = db.showdata('hit')
-        const reg = db.showdata('user')
         const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
         const totalchat = await zynn.chats.all()
         const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
@@ -795,9 +793,9 @@ teks += `${shp} Nama : ${namaewa}\n${shp} Tag : @${i.split('@')[0]}\n\n---------
 wa.Mentions(from, teks, pendaftar, tod)
 break
 case 'help':
-// tothit = await db.showdata('hit')
+tothit = await db.showdata('hit')
 hit = tothit.length
-//reg = await db.showdata('user')
+reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 shep = shp
 if(nopref == 'no'){
@@ -860,11 +858,12 @@ Note : Tidak semua fitur work, Maklum saya noob
 *Versi OS* : ${os_version}
 *Merk HP* : ${device_manufacturer}
 *Versi HP* : ${device_model}`
-wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User', fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
+wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
+tothit = await db.showdata('hit')
 hit = tothit.length
-//reg = await db.showdata('user')
+reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
            if(nopref == 'no'){
@@ -881,10 +880,10 @@ if(setting.menu == 'polos'){
 }
 else if(setting.menu == 'button'){
     teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep)
-    wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User', fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
+    wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
-            zynn.sendMessage(from, fakeimage, image, {caption: help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+            wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), ['O W N E R','S C'], ['owner', 'sc'], sender, rep)
 }
 break
 case 'sc':
