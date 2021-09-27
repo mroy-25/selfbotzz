@@ -61,11 +61,10 @@ require('./lib/detection.js')(zynn, msg, client)
 }
 })
 zynn.on('CB:Presence', async (asd) => {
-  await wa.sleep(10000)
+try{
     asd = asd[1]
     if (!asd.id.endsWith('@g.us')) return
     aefka = await client.showdata('afk', {user: asd.participant.replace('@c.us', '@s.whatsapp.net')})
-    try{
       if(aefka[0].user === asd.participant.replace('@c.us', '@s.whatsapp.net')){
         if((asd.type == 'composing' || asd.type == 'recording')) {
         console.log('user unafk')
