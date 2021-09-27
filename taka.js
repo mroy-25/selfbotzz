@@ -924,7 +924,7 @@ else{
 teks = `*B O T  S T A T*
 
 *› Prefix* : ${isprefix}
-*› Mode* : ${ispublic}
+*› Mode* : ${publicc === true ? 'PUBLIC' : 'SELF'}
 *› Total Hit* : ${tothit.length}
 *› Group Chat* : ${gid.length}
 *› Personal Chat* : ${totalchat.length - gid.length}
