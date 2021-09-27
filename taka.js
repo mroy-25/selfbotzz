@@ -876,7 +876,7 @@ var shep = shp
             isprefix = nopref
            }
 if(setting.menu == 'polos'){
-    wa.Mentions(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), [sender], tod)
+    wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), ['O W N E R', 'S C'], ['owner', 'sc'], sender, rep)
 }
 else if(setting.menu == 'button'){
     teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep)
