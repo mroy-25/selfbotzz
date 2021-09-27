@@ -858,7 +858,7 @@ Note : Tidak semua fitur work, Maklum saya noob
 *Versi OS* : ${os_version}
 *Merk HP* : ${device_manufacturer}
 *Versi HP* : ${device_model}`
-wa.sendButtonWithloc(from, teks, fakec + '|| ' + reg.length + ' Registered User', fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
+wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User', fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
   tothit = await db.showdata('hit')
@@ -866,12 +866,6 @@ hit = tothit.length
 reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
-           try{
-            pppc = await zynn.getProfilePicture(sender)
-           ppimg = await wa.getBuffer(pppc)
-           }catch(e){
-            ppimg = await fs.readFileSync('./media/zynn.jpeg')
-           }
            if(nopref == 'no'){
             isprefix = 'Noprefix'
            }
@@ -881,60 +875,15 @@ var shep = shp
            else{
             isprefix = nopref
            }
-           if(itsMe){
-            ttag = zynn.user.jid.split('@')[0]
-            tag = zynn.user.jid
-           }
-           else{
-            ttag = sender.split('@')[0]
-            tag = sender
-           }
-    if(setting.menu == 'catalog'){
-    res = await zynn.prepareMessageFromContent(from,{
-  "orderMessage": {
-            "orderId": "501374481143681",
-            "thumbnail": fakeimage,
-            "itemCount": 1,
-            "status": "INQUIRY",
-            "surface": "CATALOG",
-            "message": help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep),
-            "orderTitle": "</ Hanya Orang Biasa",
-            "sellerJid": "6281990498472@s.whatsapp.net",
-            "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
-            }
-}, {quoted: rep, contextInfo:{mentionedJid: [sender]}}) 
-
-zynn.relayWAMessage(res)
-}
-else if(setting.menu == 'flink'){
-zynn.sendMessage(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), MessageType.text, {
-        thumbnail: '',
-        "contextInfo": {
-"mentionedJid": [sender],
-            text: 'hi',
-            "forwardingScore": 1000000000,
-            isForwarded: true,
-            sendEphemeral: true,
-            "externalAdReply": {
-                "title": fakec,
-                "body": "𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡",
-                "previewType": "",
-                "thumbnailUrl": "",
-                "thumbnail": fakeimage2,
-                "sourceUrl": 'https://github.com/'
-            }},
-            quoted: rep
-})
-}
-else if(setting.menu == 'polos'){
-    wa.Mentions(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), [sender], tod)
+if(setting.menu == 'polos'){
+    wa.Mentions(from, help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), [sender], tod)
 }
 else if(setting.menu == 'button'){
-    teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep)
-    wa.sendButtonWithloc(from, teks, fakec + '|| ' + reg.length + ' Registered User', fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
+    teks = help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep)
+    wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User', fakeimage, ['OWNER', 'SC'], ['owner', 'sc'], sender, rep)
 }
 else{
-            zynn.sendMessage(from, fakeimage, image, {caption: help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, ttag, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
+            zynn.sendMessage(from, fakeimage, image, {caption: help(totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix, shep), quoted: rep, contextInfo:{mentionedJid: [sender]}, /*thumbnail: fs.readFileSync('./media/zynn.jpeg')*/})
 }
 break
 case 'sc':
