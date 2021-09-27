@@ -300,6 +300,8 @@ const runtime = function(seconds) {
 }
             const botNumber = zynn.user.jid
         const Owner = ['13345183054@s.whatsapp.net', '6281990498472@s.whatsapp.net', zynn.user.jid]
+        const tothit = db.showdata('hit')
+        const reg = db.showdata('user')
         const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
         const totalchat = await zynn.chats.all()
         const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
@@ -793,9 +795,9 @@ teks += `${shp} Nama : ${namaewa}\n${shp} Tag : @${i.split('@')[0]}\n\n---------
 wa.Mentions(from, teks, pendaftar, tod)
 break
 case 'help':
- tothit = await db.showdata('hit')
+// tothit = await db.showdata('hit')
 hit = tothit.length
-reg = await db.showdata('user')
+//reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 shep = shp
 if(nopref == 'no'){
@@ -861,9 +863,8 @@ Note : Tidak semua fitur work, Maklum saya noob
 wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User', fakeimage, [`</ MENU`, `</ OWNER`], [`menu`, `owner`], sender, tod)
 break
 case 'menu':
-  tothit = await db.showdata('hit')
 hit = tothit.length
-reg = await db.showdata('user')
+//reg = await db.showdata('user')
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
            if(nopref == 'no'){
