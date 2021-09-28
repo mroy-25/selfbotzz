@@ -1685,9 +1685,6 @@ teks = `*I N F O  G R O U P*
 *Admin Group :*
 ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 
-*Pesan Sementara :*
-› ${isephemeral}
-
 *Deskripsi Group :*
 › ${groupDesc}
 
