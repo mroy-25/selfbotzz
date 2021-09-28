@@ -908,10 +908,7 @@ reg = await db.showdata('user')
                 }
                 timestampi = speed();
                 latensii = speed() - timestampi
-nom = 0
-for(let i of totalchat){
-nom += i.count
-}
+unread = await zynn.loadAllUnreadMessages()
 if(nopref == 'no'){
     isprefix = 'Noprefix'
 }
@@ -929,7 +926,7 @@ teks = `*B O T  S T A T*
 *› Group Chat* : ${gid.length}
 *› Personal Chat* : ${totalchat.length - gid.length}
 *› Total Chat* : ${totalchat.length}
-*› Unread Message* : ${nom.toString()}
+*› Unread Message* : ${unread.length.toString()}
 *› Total User* : ${reg.length} Registered User
 *› Speed* : ${latensii.toFixed(4)} Second
 *› Runtime* : ${runtime(run)}
