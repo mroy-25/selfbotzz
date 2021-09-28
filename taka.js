@@ -1622,14 +1622,88 @@ wa.Mentions(from,teks, tagg, tod)
     }
 break
 case 'infogc':
-teks = `*I N F O  G R O U P*\n\n${shp} Nama Group : ${groupName}\n${shp} Dibuat : ${moment(`${groupMetadata.creation}` * 1000).tz('Asia/Jakarta').format('DD/MM/YYYY HH:mm:ss')}\n${shp} Jumlah Member : ${groupMembers.length}\n${shp} Jumlah Admin : ${groupAdmins.length}\n${shp} Pesan Sementara : ${isephemeral}\n${shp} Deskripsi Group :\n${groupDesc}`
+ case 'infogroup':
+tag = []
+try{
+  deta = await db.showdata('antidelete', {id: from})
+  if(deta[0].id === from){
+    var andel = '✅'
+  }
+}catch{
+  var andel = '❌'
+}
+try{
+  deta = await db.showdata('welcome', {id: from})
+  if(deta[0].id === from){
+    var welc = '✅'
+  }
+}catch{
+  var welc = '❌'
+}
+try{
+  deta = await db.showdata('left', {id: from})
+  if(deta[0].id === from){
+    var lep = '✅'
+  }
+}catch{
+  var lep = '❌'
+}
+try{
+  deta = await db.showdata('detector', {id: from})
+  if(deta[0].id === from){
+    var detc = '✅'
+  }
+}catch{
+  var detc = '❌'
+}
+try{
+  deta = await db.showdata('antiviewonce', {id: from})
+  if(deta[0].id === from){
+    var anvo = '✅'
+  }
+}catch{
+  var anvo = '❌'
+}
+for(let i of groupAdmins){
+  tag.push(i)
+}
+tag.push(from.split('-')[0] + '@s.whatsapp.net')
+teks = `*I N F O  G R O U P*
+
+*Nama Group :*
+› ${groupName} ( ${from} )
+
+*Dibuat :*
+› ${moment(`${groupMetadata.creation}` * 1000).tz('Asia/Jakarta').format('DD/MM/YYYY HH:mm:ss')}
+
+*Total Member :*
+› ${groupMembers.length}
+
+*Owner Group :*
+› @${from.split('-')[0]}
+
+*Admin Group :*
+${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
+
+*Pesan Sementara :*
+› ${isephemeral}
+
+*Deskripsi Group :*
+› ${groupDesc}
+
+*Group Setting*
+› Pesan Sementara : ${isephemeral === true ? '✅' : '❌'}
+› Antidelete : ${andel}
+› Antiviewonce : ${anvo}
+› Detector : ${detc}
+› Welcome : ${welc}
+› Left : ${lep}`
 try{
 pp = await zynn.getProfilePicture(from)
 }catch(e){
-   pp = await fs.readFileSync('./media/aqul.jpeg')
-   return sendImage(pp, teks)
+   return zynn.sendMessage(from, fakeimage, MessageType.image, {quoted: tod, caption: teks, contextInfo: {mentionedJid: tag}})
 }
-sendMediaURL(from, pp, teks)
+wa.sendFileFromUrl(from, pp, tod, teks, tag)
 break
 case 'ownergc':
 own = groupMetadata.owner
