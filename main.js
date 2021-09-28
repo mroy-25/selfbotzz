@@ -25,7 +25,7 @@ function nocache(module, cb = () => { }) {
         cb(module)
     })
 }
-const connects = async(zynn) => {
+exports.connects = async(zynn) => {
     let authofile = './session.json'
     zynn.version = [2, 2119, 6]
     zynn.logger.level = 'warn'
@@ -114,5 +114,5 @@ function uncache(module = '.') {
         }
     })
 }
-connects(zynn)
-module.exports.connects = connects;
+//connects(zynn)
+//module.exports.connects = connects;
