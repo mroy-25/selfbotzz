@@ -2892,7 +2892,7 @@ case 'ig':
 case 'instagram':
 if(!q) return reply('Masukkan link instagram!')
 if(!isUrl(q)) return reply('Masukkan url dengan benar!')
-fake(mess.wait)
+reply(mess.wait)
 try{
     data = await hx.igdl(q)
     teks = `*I N S T A G R A M  D O W N L O A D E R*\n\n${shp} Username : ${data.user.username}\n${shp} Fullname : ${data.user.fullName}\n${shp} Jumlah Media : ${data.medias.length}\n\ntunggu Sebentar\nMedia akan segera dikirim...`
