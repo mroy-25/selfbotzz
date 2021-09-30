@@ -727,22 +727,7 @@ try{
 }catch{
 }
 }
-	//autocorrect
-var words = JSON.parse(fs.readFileSync('./src/correct.json'))
-var autocorrect = require('autocorrect')({words: words})
-var similar = require('similarity')
-var math = require('mathjs')
-correct = await autocorrect(command)
-simi = await similar(command, correct)
-persen = await math.evaluate(`${simi.toString()}*100`)
-if(persen.toString() > 50){
-if(simi === 1){
-''
-}else{
-console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
-return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
-}
-}
+
 //simi pc
 if(!isGroup && !tod.key.fromMe && !isCmd && !chats.startsWith('<')){
 try{
@@ -5284,6 +5269,22 @@ reply(require('util').format(eval(`(async () => { ${ras} })()`)))
 } catch(err) {
 e = String(err)
 reply(e)
+}
+}
+//autocorrect
+var words = JSON.parse(fs.readFileSync('./src/correct.json'))
+var autocorrect = require('autocorrect')({words: words})
+var similar = require('similarity')
+var math = require('mathjs')
+correct = await autocorrect(command)
+simi = await similar(command, correct)
+persen = await math.evaluate(`${simi.toString()}*100`)
+if(persen.toString() > 50){
+if(simi === 1){
+''
+}else{
+console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
+return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
 }
 }
 break
