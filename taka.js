@@ -740,7 +740,7 @@ if(simi === 1){
 ''
 }else{
 console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
-reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
+return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
 }
 }
 //simi pc
