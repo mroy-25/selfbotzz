@@ -1371,7 +1371,7 @@ if (!arg) return reply(`Penggunaan ${prefix}kick @tag atau nomor`)
 if (tod.message.extendedTextMessage != undefined){
     mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid[0]
     await reply(`Otw...`)
-    return wa.kick(from, mentioned)
+    return wa.kick(from, [mentioned])
 } else {
     await reply(`Otw...`)
     wa.kick(from, [args[0] + '@s.whatsapp.net'])
@@ -1382,7 +1382,7 @@ if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
 if(m.quoted){
 reply('otw')
-wa.add2(from, m.quoted.sender, tod, reply)
+wa.add2(from, m.quoted.sender.split('@'), tod, reply)
 }
 else{
 if (!arg) return reply(`Penggunaan ${prefix}add 62xxxxx atau reply pesan`)
