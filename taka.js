@@ -5134,6 +5134,7 @@ const res = `${anu.display_url}`
 fs.unlinkSync(path)
         const addnote = {
                 groupId : from,
+		group: groupName,
                 creator : sender,
                 namanote : nnote,
                 date : date,
@@ -5150,6 +5151,7 @@ fs.unlinkSync(path)
 console.log(uplod)
         const addnote = {
                 groupId : from,
+		group: groupName,
                 creator : sender,
                 namanote : nnote,
                 date : date,
@@ -5164,6 +5166,7 @@ reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
 else{
         const addnote = {
                 groupId : from,
+		group: groupName,
                 creator : sender,
                 namanote : nnote,
                 date : date,
@@ -5211,7 +5214,7 @@ try{
 		teks += shp + ' Tanggal dibuat : ' + deta[0].date + '\n'
 		teks += shp + ' Type Note : ' + deta[0].type + '\n\n'
 		teks += `Note akan dikirim setelah pesan ini\nMohon tunggu...`
-		await Mentions(from, teks, [deta[0].creator], tod)
+		await wa.Mentions(from, teks, [deta[0].creator], tod)
 		if(deta[0].type == 'teks'){
 			reply(deta[0].caption)
 		}
