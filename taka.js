@@ -731,6 +731,7 @@ try{
 var words = JSON.parse(fs.readFileSync('./src/correct.json'))
 var autocorrect = require('autocorrect')({words: words})
 var similar = require('similarity')
+var math = require('mathjs')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
 if(simi.toString().split('.')[1] > 25){
@@ -738,7 +739,8 @@ if(simi === 1){
 ''
 }else{
 console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
-return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
+persen = await math.evaluate(`${simi.toString()}*100`)
+reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
 }
 }
 //simi pc
