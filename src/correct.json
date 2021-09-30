@@ -1,5 +1,7 @@
 [
   "addnote",
+  "menu",
+  "help",
   "listnotes",
   "delnote",
   "getnote",
@@ -104,6 +106,7 @@
   "kick",
   "promote",
   "demote",
+  "owner",
   "ownergc",
   "link",
   "resetlink",
