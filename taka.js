@@ -208,8 +208,9 @@ var autocorrect = require('autocorrect')({dictionary: './src/correct.json'})
 var similar = require('similarity')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
-if(simi.toString().split('.')[1] > 25 && !simi.toString().split('.')[1] == 1){
-console.log('autocorrect ' + command + '> ' + correct)
+console.log('Autocorrect ' + command + ' > ' + correct)
+if(simi.toString().split('.')[1] > 25){
+console.log('autocorrect ' + command + ' > ' + correct)
 return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
 }
         const sendText = (text) => {
