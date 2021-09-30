@@ -733,10 +733,11 @@ var autocorrect = require('autocorrect')({words: words})
 var similar = require('similarity')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
-console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
 if(simi.toString().split('.')[1] > 25){
-if(!simi.toString().split('.')[1] == 1){
-console.log('Autocorrect ' + command + ' > ' + correct)
+if(simi === 1){
+''
+}else{
+console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
 return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
 }
 }
