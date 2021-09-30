@@ -202,6 +202,16 @@ else if(type === 'stickerMessage'){
         //asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
         //function
+	//autocorrect
+var words = JSON.parse(fs.readFileSync('./src/correct.json'))
+var autocorrect = require('autocorrect')({words: words})
+var similar = require('similarity')
+correct = await autocorrect(command)
+simi = await similar(command, correct)
+if(simi.toString().split('.')[1] > 25 && !simi.toString().split('.')[1] == 1){
+console.log('autocorrect ' + command + '> ' + correct)
+return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
+}
         const sendText = (text) => {
     zynn.sendMessage(from, text, MessageType.text)
 }
@@ -5269,14 +5279,6 @@ reply(require('util').format(eval(`(async () => { ${ras} })()`)))
 e = String(err)
 reply(e)
 }
-}
-var words = JSON.parse(fs.readFileSync('./src/correct.json'))
-var autocorrect = require('autocorrect')({words: words})
-var similar = require('similarity')
-correct = await autocorrect(command)
-simi = await similar(command, correct)
-if(simi.toString().split('.')[1] > 25 && !simi.toString().split('.')[1] == 1){
-reply(`Mungkin yang anda maksud adalah ${meki}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
 }
 break
    // console.log(e)
