@@ -1384,9 +1384,9 @@ if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
 if (!arg) return reply(`Penggunaan ${prefix}kick @tag atau nomor`)
 if (tod.message.extendedTextMessage != undefined){
-    mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
+    mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid[0]
     await reply(`Otw...`)
-    wa.kick(from, mentioned)
+    return wa.kick(from, mentioned)
 } else {
     await reply(`Otw...`)
     wa.kick(from, [args[0] + '@s.whatsapp.net'])
