@@ -734,12 +734,12 @@ var similar = require('similarity')
 var math = require('mathjs')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
-if(simi.toString().split('.')[1] > 25){
+persen = await math.evaluate(`${simi.toString()}*100`)
+if(persen.toString() > 50){
 if(simi === 1){
 ''
 }else{
 console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
-persen = await math.evaluate(`${simi.toString()}*100`)
 reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
 }
 }
