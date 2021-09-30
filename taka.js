@@ -5263,6 +5263,148 @@ const util = require('util')
         await imguy.load(await m.quoted.download())
         reply(util.format(JSON.parse(imguy.exif.slice(22).toString())))
 break
+case 'addnote':
+case 'addnotes':
+if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if(!q) return reply(`Example : ${prefix + command} teks1|teks2`)
+if(!itsMe) return
+try{
+if(tod.message.extendedTextMessage.contextInfo.quotedMessage.documentMessage && tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage) return
+}catch(e){
+}
+nnote = q.split('|')[0]
+isi = q.split('|')[1]
+try{
+	nama = await db.showdata('note', {namanote: nnote})
+	if(nama[0].namanote === nnote){
+		return reply(`Note dengan nama ${nnote} sudah ada didatabase`)
+	}
+}catch{
+}
+if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo)) {
+reply(mess.wait)
+boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+owgi = await zynn.downloadMediaMessage(boij)
+rname = await GenerateSerialNumber('000000')
+if(isQuotedImage){
+await fs.writeFileSync(`./media/${rname}.jpg`, owgi)
+path = `./media/${rname}.jpg`
+var imgbb = require('imgbb-uploader')
+anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", `./media/${rname}.jpg`)
+const res = `${anu.display_url}`
+fs.unlinkSync(path)
+        const addnote = {
+                groupId : from,
+                creator : sender,
+                namanote : nnote,
+                date : date,
+                type : 'image',
+                media : anu.display_url,
+                caption : isi
+        }
+db.adddata('note', addnote)
+reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
+}
+else if(isQuotedVideo){
+res = await uploadImages(owgi, false)
+fs.unlinkSync(path)
+console.log(uplod)
+        const addnote = {
+                groupId : from,
+                creator : sender,
+                namanote : nnote,
+                date : date,
+                type : 'video',
+                media : res,
+                caption : isi
+        }
+db.adddata('note', addnote)
+reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
+}
+}
+else{
+        const addnote = {
+                groupId : from,
+                creator : sender,
+                namanote : nnote,
+                date : date,
+                type : 'teks',
+                media : '',
+                caption : isi
+        }
+db.adddata('note', addnote)
+reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
+}
+break
+
+case 'listnotes':
+case 'listnote':
+idgcc = []
+tagc = []
+try{
+deta = await db.showdata('note', {groupId: from})
+if(deta[0].groupId === from){
+teks = `L I S T  N O T E  G R O U P\n\n`
+for(let icx of deta){
+	teks += shp + ` Nama Note : ` + icx.namanote + '\n'
+	teks += shp + ` Creator : @` + icx.creator.split('@')[0] + '\n'
+	teks += shp + ` Tanggal : ` + icx.date + '\n'
+	teks += shp + ` Type Note : ` + icx.type + '\n'
+	teks += shp + ` Media : ` + icx.media + '\n\n---------------------------------\n\n'
+	tagc.push(icx.creator)
+}
+}
+}catch{
+	return reply('Tidak ada note di Group ini!')
+}
+else{
+Mentions(from, teks, tagc, tod)
+}
+break
+case 'getnote':
+case 'getnotes':
+if(!q) return reply(`Example : ${prefix + command} zynn`)
+nnote = [];
+try{
+	deta = await db.showdata('note', {groupId: from, namanote: q})
+	if(deta[0].groupId === from){
+		teks = `N O T E\n\n`
+		teks += shp + ' Nama Note : ' + deta[0].namanote + '\n'
+		teks += shp + ' Pembuat : @' + deta[0].creator.split('@')[0] + '\n'
+		teks += shp + ' Tanggal dibuat : ' + deta[0].date + '\n'
+		teks += shp + ' Type Note : ' + deta[0].type + '\n\n'
+		teks += `Note akan dikirim setelah pesan ini\nMohon tunggu...`
+		await Mentions(from, teks, [deta[0].creator], tod)
+		if(deta[0].type == 'teks'){
+			reply(deta[0].caption)
+		}
+		else{
+			wa.sendFileFromUrl(from, deta[0].media, tod, `${deta[0].caption}`)
+		}
+	}
+}catch{
+	return reply(`Note dengan nama ${q} tidak ditemukan digroup Ini!`)
+}
+break
+
+case 'delnote':
+case 'delnotes':
+case 'dellnote':
+case 'dellnotes':
+if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if(!q) return reply(`Example : ${prefix + command} zynn`)
+nnote = []
+try{
+	deta = await db.showdata('note', {groupId: from, namanote: q})
+	if(deta[0].groupId === from){
+		db.delete('note', {groupId: from, namanote: q})
+		reply(`Note dengan nama ${q} berhasil dihapus`)
+	}
+}catch{
+	return reply(`Note dengan nama ${q} tidak ada di database`)
+}
+
+break
 default:
     if (chats.startsWith('>')){
     if(!itsMe) return
