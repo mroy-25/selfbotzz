@@ -5353,12 +5353,10 @@ for(let icx of deta){
 	teks += shp + ` Media : ` + icx.media + '\n\n---------------------------------\n\n'
 	tagc.push(icx.creator)
 }
+wa.Mentions(from, teks, tagc, tod)
 }
 }catch{
 	return reply('Tidak ada note di Group ini!')
-}
-else{
-Mentions(from, teks, tagc, tod)
 }
 break
 case 'getnote':
