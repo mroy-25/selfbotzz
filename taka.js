@@ -204,7 +204,7 @@ else if(type === 'stickerMessage'){
         //function
 	//autocorrect
 var words = JSON.parse(fs.readFileSync('./src/correct.json'))
-var autocorrect = require('autocorrect')({words: words})
+var autocorrect = require('autocorrect')({dictionary: './src/correct.json'})
 var similar = require('similarity')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
