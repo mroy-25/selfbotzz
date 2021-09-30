@@ -733,6 +733,7 @@ var autocorrect = require('autocorrect')({words: words})
 var similar = require('similarity')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
+console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
 if(simi.toString().split('.')[1] > 25){
 if(!simi.toString().split('.')[1] == 1){
 console.log('Autocorrect ' + command + ' > ' + correct)
