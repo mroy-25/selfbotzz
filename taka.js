@@ -202,17 +202,6 @@ else if(type === 'stickerMessage'){
         //asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
         //function
-	//autocorrect
-var words = JSON.parse(fs.readFileSync('./src/correct.json'))
-var autocorrect = require('autocorrect')({dictionary: './src/correct.json'})
-var similar = require('similarity')
-correct = await autocorrect(command)
-simi = await similar(command, correct)
-console.log('Autocorrect ' + command + ' > ' + correct)
-if(simi.toString().split('.')[1] > 25){
-console.log('autocorrect ' + command + ' > ' + correct)
-return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
-}
         const sendText = (text) => {
     zynn.sendMessage(from, text, MessageType.text)
 }
@@ -736,6 +725,19 @@ mute = await db.showdata('mute', {id: from})
 try{
   if(mute[0].id === from) return
 }catch{
+}
+}
+	//autocorrect
+var words = JSON.parse(fs.readFileSync('./src/correct.json'))
+var autocorrect = require('autocorrect')({dictionary: './src/correct.json'})
+var similar = require('similarity')
+correct = await autocorrect(command)
+simi = await similar(command, correct)
+console.log('Autocorrect ' + command + ' > ' + correct)
+if(simi.toString().split('.')[1] > 25){
+if(!simi.toString().split('.')[1] == 1){
+console.log('Autocorrect ' + command + ' > ' + correct)
+return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${simi.toString().split('.')[1].length == 1 ? `${simi.toString().split('.')[1]}0` : simi.toString().split('.')[1]}%`)
 }
 }
 //simi pc
