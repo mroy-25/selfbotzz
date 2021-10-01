@@ -711,6 +711,20 @@ if (efk[0].user === sender) {
 }catch{
 }
 }
+//bugreport
+try{
+if(m.quoted && itsMe && !isGroup){
+if(m.quoted.text.startsWith('BUG REPORT') && chats.startsWith('balas')){
+	teks = `Terima kasih atas laporan anda mengenai bug pada bot kami @${m.quoted.text.split('Pelapor : @')[1].split('\n')[0]}\n`
+	teks += 'Detail Laporan : \n'
+	teks += shp + ' Deskripsi Bug : ' + m.quoted.text.split('Deskripsi Bug : ')[1] + '\n'
+	teks += shp + ' Tanggal Laporan : ' + m.quoted.text.split('Waktu : ')[1].split('\n')[0] + '\n\n'
+	teks += shp + ' Owner Said : ' + chats.split('balas ')[1]
+	return wa.Mentions(m.quoted.text.split('IdGroup : ')[1].split('\n')[0], teks, [m.quoted.text.split('Pelapor : @')[1].split('\n')[0] + '@s.whatsapp.net'], m.quoted.fakeObj.message)
+}
+}
+}catch{
+}
 if (!publicc){
     if (!itsMe) return
 }
@@ -5246,6 +5260,16 @@ try{
 	return reply(`Note dengan nama ${q} tidak ada di database`)
 }
 
+break
+case 'bugreport':
+teks = 'BUG REPORT\n\n'
+teks += shp + ' Pelapor : @' + sender.split('@')[0] + '\n'
+teks += shp + ' Group : ' + groupName + '\n'
+teks += shp + ' IdGroup : ' + from + '\n'
+teks += shp + ' Waktu : ' + date + ` ( ${time} )` + '\n'
+teks += shp + ' Deskripsi Bug : ' + q
+wa.reply(Owner[0], teks, tod)
+reply('Masalah telah dilaporkan ke owner!')
 break
 default:
     if (chats.startsWith('>')){
