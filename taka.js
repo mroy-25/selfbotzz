@@ -192,8 +192,8 @@ else if(type === 'stickerMessage'){
         body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) ? await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : '') : ""
         chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
         //const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
-        //const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
-	const command = body.replace(prefix, '').toLowerCase()
+        const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
+	//const command = body.replace(prefix, '').toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
         const isCmd = body.startsWith(prefix)
         //const q = args.join(' ')
