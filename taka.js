@@ -69,6 +69,7 @@ setting = JSON.parse(fs.readFileSync('./setting.json'))
 const { uploadimg } = require('./lib/uploadimg');
 const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
 const { addcmd, getcmd } = require('./lib/setcmd')
+const words = JSON.parse(fs.readFileSync('./src/correct.json'))
 const vcard = async(nomor, nama, bio) => {
         kon = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n'
@@ -766,8 +767,12 @@ var isephe = true
 }
 isephemeral = isephe == false ? true : false
 if(isCmd && !m.isBaileys){
-if(!command == ''){
+try{
+hitp = words.filter(mek => mek === command)
+if(hitp[0] === command && !command == ''){
 db.adddata('hit', {sender: sender, cmd: command})
+}
+}catch{
 }
 }
 if(isCmd && !m.isBaileys){
@@ -5255,7 +5260,6 @@ reply(e)
 }
 }
 //autocorrect
-var words = JSON.parse(fs.readFileSync('./src/correct.json'))
 var autocorrect = require('autocorrect')({words: words})
 var similar = require('similarity')
 var math = require('mathjs')
