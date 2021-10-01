@@ -2982,8 +2982,8 @@ case 'lirik':
 if(!q) return reply('Mau cari lirik lagu apa?')
 try{
     data = await wa.fetchJson(`https://some-random-api.ml/lyrics?title=${q}`)
-    teks = `*L I R I K  L A G U*\n\n${shp} Judul : ${data.title}\n${shp} Author : ${data.author}\n${shp} Lirik : \n${hdata.lirik}`
-    wa.sendFileFromUrl(from, data.thumbnail, tod, teks)
+    teks = `*L I R I K  L A G U*\n\n${shp} Judul : ${data.title}\n${shp} Author : ${data.author}\n${shp} Lirik : \n${data.lyrics}`
+    wa.sendFileFromUrl(from, data.thumbnail.genius, tod, teks)
 }catch(e){
     reply(mess.error.api)
 }
@@ -5312,7 +5312,7 @@ break
 case 'meme':
 try{
 	wa.fetchJson('https://some-random-api.ml/meme').then(async res => {
-		wa.sendImage(from, await getBuffer(res.image), tod, `"${res.caption}"\n${shp} Category : ${res.category}`)
+		wa.sendImage(from, await wa.getBuffer(res.image), tod, `"${res.caption}"\n${shp} Category : ${res.category}`)
 	})
 }catch{
 	reply(mess.error.api)
