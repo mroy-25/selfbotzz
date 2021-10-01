@@ -720,7 +720,7 @@ if(m.quoted.text.startsWith('BUG REPORT') && chats.startsWith('balas')){
 	teks += shp + ' Deskripsi Bug : ' + m.quoted.text.split('Deskripsi Bug : ')[1] + '\n'
 	teks += shp + ' Tanggal Laporan : ' + m.quoted.text.split('Waktu : ')[1].split('\n')[0] + '\n\n'
 	teks += shp + ' Owner Said : ' + chats.split('balas ')[1]
-	return wa.Mentions(m.quoted.text.split('IdGroup : ')[1].split('\n')[0], teks, [m.quoted.text.split('Pelapor : @')[1].split('\n')[0] + '@s.whatsapp.net'], m.quoted.fakeObj.message)
+	return wa.Mentions(m.quoted.text.split('IdGroup : ')[1].split('\n')[0], teks, [m.quoted.text.split('Pelapor : @')[1].split('\n')[0] + '@s.whatsapp.net'], tod)
 }
 }
 }catch{
