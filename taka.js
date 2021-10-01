@@ -2773,15 +2773,16 @@ try{
 		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n' + fakec)	
 	}
 	else if(args[0] == 'audio'){
-		run = wa.getRandom('.mp4')
-		fs.writeFileSync(`./media/${run}`, await wa.getBuffer(args[1]))
+		rann = wa.getRandom('.mp4')
+		fs.writeFileSync(`./media/${rann}`, await wa.getBuffer(args[1]))
 		ran = wa.getRandom('.mp4')
-		exec(`ffmpeg -i ./media/${run} ${ran}`, (err) => {
+		exec(`ffmpeg -i ./media/${rann} ${ran}`, (err) => {
     		if (err) return reply(mess.error.api)
     		buffer = fs.readFileSync(ran)
-    		zynn.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: tod})
+    		zynn.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: tod}).then(res => {
     		fs.unlinkSync(ran)
-    		fs.unlinkSync(run)
+    		fs.unlinkSync(rann)
+		})
 		})
 	}
 	else{
