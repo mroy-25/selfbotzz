@@ -5262,6 +5262,7 @@ try{
 
 break
 case 'bugreport':
+if(!q) return reply('Silahkan masukkan deskripsi bugnya!')
 teks = 'BUG REPORT\n\n'
 teks += shp + ' Pelapor : @' + sender.split('@')[0] + '\n'
 teks += shp + ' Group : ' + groupName + '\n'
