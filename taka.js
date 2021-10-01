@@ -2767,10 +2767,10 @@ if(!isUrl(q)) return reply(mess.error.lv)
 reply(mess.wait)
 try{
 	if(args[0] == 'wm'){
-		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + fakec)
+		sendMediaURL(from, args[1], 'TIKTOK WITH WATERMARK\n' + fakec)
 	}
 	else if(args[0] == 'nowm'){
-		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n' + fakec)	
+		sendMediaURL(from, args[1], 'TIKTOK NOWATERMARK\n' + fakec)	
 	}
 	else if(args[0] == 'audio'){
 		rann = wa.getRandom('.mp4')
