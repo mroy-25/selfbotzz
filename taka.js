@@ -5234,6 +5234,69 @@ teks += shp + ' Deskripsi Bug : ' + q
 wa.reply(Owner[0], teks, tod)
 reply('Masalah telah dilaporkan ke owner!')
 break
+case 'dashboard':
+hit_global = []
+hit_user = []
+//globalhit
+dhit_global = await db.showdata('hit')
+filt_global = dhit_global.map(res => res.cmd)
+nar_global = new Set(filt_global);
+cmd_global = [...nar_global]
+for(let i of cmd_global){
+	try{
+		filtc_global = await dhit_global.filter(hcm => hcm.cmd === i)
+		hit_global.push({
+			cmd: i,
+			hit: filtc_global.length
+		})
+	}catch{
+	}
+}
+hglobal = hit_global.sort(function(a, b){return b.hit - a.hit})
+//userhit
+dhit_user = await db.showdata('hit', {sender: sender})
+filt_user = dhit_user.map(res => res.cmd)
+nar_user = new Set(filt_user);
+cmd_user = [...nar_user]
+for(let i of cmd_user){
+	try{
+		filtc_user = await dhit_user.filter(hcm => hcm.cmd === i)
+		hit_user.push({
+			cmd: i,
+			hit: filtc_user.length
+		})
+	}catch{
+	}
+}
+huser = hit_user.sort(function(a, b){return b.hit - a.hit})
+tg = ''
+for(let i=0; i<6; i++){
+	tg += `› ${prefix}${hglobal[i].cmd} : ${hglobal[i].hit}\n`
+}
+tu = ''
+if(huser.length < 6){
+	for(let i=0; i<huser.length; i++){
+		tu += `› ${prefix}${huser[i].cmd} : ${huser[i].hit}\n`
+	}
+}
+else{
+	for(let i=0; i<6; i++){
+		tu += `› ${prefix}${huser[i].cmd} : ${huser[i].hit}\n`
+	}
+}
+var dash = `*DASHBOARD*
+
+*HIT*
+› Global : ${dhit_global.length}
+› User : ${dhit_user.length}
+
+*MOST COMMAND GLOBAL*
+${tg}
+*MOST COMMAND USER*
+${tu}`
+
+reply(dash)
+break
 default:
     if (chats.startsWith('>')){
     if(!itsMe) return
