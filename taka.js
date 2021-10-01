@@ -2981,10 +2981,9 @@ break
 case 'lirik':
 if(!q) return reply('Mau cari lirik lagu apa?')
 try{
-    data = await Ra.Musikmatch(q)
-    hdata = data.result
-    teks = `*L I R I K  L A G U*\n\n${shp} Judul : ${hdata.judul}\n${shp} Penyanyi : ${hdata.penyanyi}\n${shp} Lirik : \n${hdata.lirik}`
-    reply(teks)
+    data = await wa.fetchJson(`https://some-random-api.ml/lyrics?title=${q}`)
+    teks = `*L I R I K  L A G U*\n\n${shp} Judul : ${data.title}\n${shp} Author : ${data.author}\n${shp} Lirik : \n${hdata.lirik}`
+    wa.sendFileFromUrl(from, data.thumbnail, tod, teks)
 }catch(e){
     reply(mess.error.api)
 }
