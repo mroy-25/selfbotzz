@@ -767,7 +767,7 @@ var isephe = true
 isephemeral = isephe == false ? true : false
 if(isCmd && !m.isBaileys){
 if(!command == ''){
-db.adddata('hit', {cmd: command})
+db.adddata('hit', {sender: sender, cmd: command})
 }
 }
 if(isCmd && !m.isBaileys){
