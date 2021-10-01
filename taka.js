@@ -859,7 +859,6 @@ Note : Tidak semua fitur work, Maklum saya noob
 *› Total Chat* : ${totalchat.length}
 *› Speed* : ${latensii.toFixed(4)} Second
 *› Runtime* : ${runtime(run)}
-*› Rest Api's* : https://beta-restapi.herokuapp.com/
 
 *I N F O  D E V I C E*
 
