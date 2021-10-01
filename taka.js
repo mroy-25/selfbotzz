@@ -38,7 +38,6 @@ const mess = JSON.parse(fs.readFileSync('./whatsapp/mess.json'));
 const axios = require('axios');
 const ms = require('parse-ms');
 const { removeBackgroundFromImageFile } = require('remove.bg')
-const tiktod = require('tiktok-scraper')
 const hx = require('hxz-api')
 const akaneko = require('akaneko')
 const ame = require('amethyste-api')
@@ -2944,23 +2943,6 @@ google({ 'query': q }).then(results => {
     reply('Google Error')
 })
 break
-case 'brainly':
-if(!q) return reply('Apa yang mau anda cari?')
-   reply(mess.wait)
-try{
-jwbn = await brainly(q)
-hdata = jwbn.data
-console.log(jwbn)
-teks = `*B R A I N L Y*\n${shp} Query : ${q}\n${shp} Jumlah Jawaban : ${hdata.length}\n\n`
-for(let i of hdata){
-   console.log(i.jawaban[0].text)
-   teks += `${shp} Pertanyaan : ${i.pertanyaan}\n\n${shp} Jawaban : ${i.jawaban[0].text}\n\n-----------------------------\n\n`
-}
-reply(teks)
-}catch(e){
-   reply(mess.error.api)
-}
-break
 case 'infogempa':
 reply(mess.wait)
 try{
@@ -3035,18 +3017,6 @@ try{
     teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username} ${verify}\n${shp} Fullname : ${data.fullname}\n${shp} Followers : ${torupiah(data.followers)}\n${shp} Following : ${torupiah(data.follow)}\n${shp} Url : https://www.instagram.com/${data.username}/\n${shp} Bio : ${data.bio}`
     sendMediaURL(from, data.thumbnail, teks)
 }catch{
-    reply(mess.error.api)
-}
-break
-case 'tiktokstalk':
-try {
-    if (args.length < 1) return reply('Masukkan username!')
-    let { user, stats } = await tiktod.getUserProfileInfo(q)
-    teks = `*T I K T O K  S T A L K*\n\n${shp} *ID* : ${user.id}\n${shp} *Username* : ${user.uniqueId}\n${shp} *Nickname* : ${user.nickname}\n${shp} *Followers* : ${torupiah(stats.followerCount)}\n${shp} *Followings* : ${torupiah(stats.followingCount)}\n${shp} *Posts* : ${torupiah(stats.videoCount)}\n${shp} *Luv* : ${torupiah(stats.heart)}`
-    buffer = await wa.getBuffer(user.avatarLarger)
-    wa.sendImage(from, buffer, tod, teks)
-} catch (e) {
-    console.log(`Error :`, color(e,'red'))
     reply(mess.error.api)
 }
 break
