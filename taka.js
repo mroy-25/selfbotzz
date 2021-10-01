@@ -5296,6 +5296,28 @@ ${tu}`
 
 reply(dash)
 break
+case 'dog':
+case 'fox':
+case 'panda':
+case 'cat':
+case 'pikachu':
+try{
+	wa.fetchJson('https://some-random-api.ml/animal/' + command).then(async res => {
+		wa.sendImage(from, await wa.getBuffer(res.image), tod, `Fact : ${res.fact}`)
+	})
+}catch{
+	reply(mess.error.api)
+}
+break
+case 'meme':
+try{
+	wa.fetchJson('https://some-random-api.ml/meme').then(async res => {
+		wa.sendImage(from, await getBuffer(res.image), tod, `"${res.caption}"\n${shp} Category : ${res.category}`)
+	})
+}catch{
+	reply(mess.error.api)
+}
+break
 default:
     if (chats.startsWith('>')){
     if(!itsMe) return
