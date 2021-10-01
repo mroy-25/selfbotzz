@@ -2723,7 +2723,7 @@ try{
     reply(mess.error.api)
 }
 break*/
-case 'tiktok':
+/*case 'tiktok':
 if(!q) return reply('Masukkan linknya!')
 reply(mess.wait)
 try{
@@ -2761,6 +2761,39 @@ return wa.sendButtonWithImage(from, cap, 'Silahkan pilih WM / NOWM / MUSIC', buf
 }
 }catch{
     reply(mess.error.api)
+}
+break
+*/
+case 'tiktok':
+if(!q) return reply('Masukkan linknya!')
+if(!isUrl(q)) return reply(mess.error.lv)
+reply(mess.wait)
+try{
+	if(q == 'wm'){
+		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + fakec)
+	}
+	else if(q == 'nowm'){
+		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n' + fakec)	
+	}
+	else if(q == 'audio'){
+		run = wa.getRandom('.mp4')
+		fs.writeFileSync(`./media/${run}`, await wa.getBuffer(args[1]))
+		ran = wa.getRandom('.mp4')
+		exec(`ffmpeg -i ./media/ttaudio.mp4 ${ran}`, (err) => {
+    		if (err) return reply(mess.error.api)
+    		buffer = fs.readFileSync(ran)
+    		zynn.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: tod})
+    		fs.unlinkSync(ran)
+    		fs.unlinkSync(run)
+		})
+	}
+	else{
+		data = await hx.ttdownloader(q)
+		teks = bold(`TIKTOK DOWNLOADER\n${shp} Request By : @${sender.split('@')[0]}`)
+		wa.sendButton(from, teks, 'Silahkan Pilih WM/NOWM/AUDIO', ['WM', 'NOWM', 'AUDIO'], ['tiktok wm ' + data.wm, 'tiktok nowm ' + data.nowm, 'tiktok audio ' + data.nowm], sender, tod)	
+	}
+}catch{
+	reply(mess.error.api)
 }
 break
 case 'play':
