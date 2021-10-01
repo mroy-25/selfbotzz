@@ -33,7 +33,7 @@ const imgbb = require('imgbb-uploader')
 const request = require('request');
 const conn = require('./main');
 const {color} = require('./lib/color');
-const {help, stickmenu, helpb} = require('./lib/help');
+const {help} = require('./lib/help');
 const mess = JSON.parse(fs.readFileSync('./whatsapp/mess.json'));
 const axios = require('axios');
 const ms = require('parse-ms');
@@ -49,7 +49,6 @@ const gis = require('g-i-s')
 const zrapi = require('zrapi')
 const Ra = require('ra-api')
 const zahir = require('zahir-api')
-const brainly = require('brainly-scraper-v2')
 const qrcode = require("qrcode-terminal")
 const infotlp = require('no-telp')
 const express = require('express')
@@ -62,7 +61,6 @@ const { yta, ytv, igdl, upload } = require('./lib/ytdl')
 const fetch = require('node-fetch');
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI();
-const base64Img = require('base64-img')
 const fakeUa = require('fake-useragent');
 const SocketIO = require('socket.io')
 const Exif = require('./lib/exif');
@@ -2779,7 +2777,7 @@ try{
 		run = wa.getRandom('.mp4')
 		fs.writeFileSync(`./media/${run}`, await wa.getBuffer(args[1]))
 		ran = wa.getRandom('.mp4')
-		exec(`ffmpeg -i ./media/ttaudio.mp4 ${ran}`, (err) => {
+		exec(`ffmpeg -i ./media/${run} ${ran}`, (err) => {
     		if (err) return reply(mess.error.api)
     		buffer = fs.readFileSync(ran)
     		zynn.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: tod})
@@ -3080,51 +3078,6 @@ try{
 }catch(e){
     reply('Sticker tidak ditemukan')
 }
-break
-case 'facebook':
-case 'fb':
-if(!q) return reply('Masukkan link facebook')
-if(!isUrl(q)) return reply(mess.error.Iv)
-reply(mess.wait)
-try{
-    data = await wa.fetchJson(`https://leyscoders-api.herokuapp.com/api/facebook-dl?url=` + q + `&apikey=dappakntlll`)
-console.log(data)
-    wa.sendFileFromUrl(from, data.result.urlDownload, tod, monospace('FACEBOOK DOWNLOADER'))
-}catch(e){
-    reply(mess.error.api)
-}
-break
-case 'facebookaudio':
-case 'fbaudio':
-if(!q) return reply('Masukkan link facebook')
-if(!isUrl(q)) return reply(mess.error.Iv)
-reply(mess.wait)
-//try{
-    data = await wa.fetchJson(`https://x-restapi.herokuapp.com/api/fbdl?url=${q}&apikey=BETA`)
-console.log(data)
-    teks = `*F A C E B O O K  A U D I O  D O W N L O A D E R*\n\n${shp} Judul : ${data.title}]\n\nTunggu Sebentar\nAudio akan segera dikirim`
-    await reply(teks)
-    media = './media/fb.mp4'
-    headers = getHeader()
-    var writeStream = await fs.createWriteStream(media)
-    request({
-        uri: data.urlmp3,
-        headers: headers,
-        method: 'GET'
-      })
-      .pipe(writeStream);
-    ran = wa.getRandom('.mp4')
-                    exec(`ffmpeg -i ${media} ${ran}`, (err) => {
-                        fs.unlinkSync(media)
-                        if (err) return reply('Gagal, pada saat mengkonversi video ke mp3')
-                        buffer = fs.readFileSync(ran)
-                        wa.sendAudio(from, buffer, tod)
-                        fs.unlinkSync(ran)
-                    })
-
-/*}catch(e){
-    reply(mess.error.api)
-}*/
 break
 case 'tts':
 if (args.length < 1) return reply(`Cara Penggunaan : ${prefix}tts kodebahasa text\nexample : ${prefix}tts id halo`)
