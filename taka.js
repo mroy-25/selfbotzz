@@ -888,7 +888,7 @@ Note : Tidak semua fitur work, Maklum saya noob
 *› Versi OS* : ${os_version}
 *› Merk HP* : ${device_manufacturer}
 *› Versi HP* : ${device_model}`
-wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`⋮☰ MENU`, `🤴🏻 OWNER`, '⋮☰ DASHBOARD'], [`menu`, `owner`, 'dashboard'], sender, tod)
+wa.sendButtonWithDocument(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`⋮☰ MENU`, `🤴🏻 OWNER`, '⋮☰ DASHBOARD'], [`menu`, `owner`, 'dashboard'], sender, tod)
 break
 case 'menu':
 tothit = await db.showdata('hit')
@@ -915,6 +915,10 @@ else if(setting.menu == 'buttonloc'){
 else if(setting.menu == 'buttonimage'){
     teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
     wa.sendButtonWithImage(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
+}
+else if(setting.menu == 'buttondocument'){
+    teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
+    wa.sendButtonWithDocument(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else{
             wa.sendButton(from, help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
@@ -1235,6 +1239,12 @@ reply(`Sukses`)
 }
 else if(args[0] == 'buttonimage'){
 setting.menu = 'buttonimage'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+reply(`Sukses`)
+}
+else if(args[0] == 'buttondoc'){
+setting.menu = 'buttondocument'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 reply(`Sukses`)
