@@ -189,6 +189,7 @@ else if(type === 'stickerMessage'){
         //const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
         const comon = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 	const command = comon.replace(' ', '')
+	if(command.includes(' ')) return
         const args = body.trim().split(/ +/).slice(1)
         const isCmd = body.startsWith(prefix)
         //const q = args.join(' ')
@@ -786,7 +787,7 @@ db.adddata('user', {username: await zynn.getName(sender), id: sender})
 }
 */
         //if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
-if(command == '') return
+if(command == '' && !chats.startsWith('<') && !chats.startsWith('>') && !chats.startsWith('$')) return
         if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
 
@@ -5270,17 +5271,27 @@ try{
 }
 break
 default:
-    if (chats.startsWith('>')){
+    if (chats.startsWith('$')){
     if(!itsMe) return
         exec(chats.slice(2), (err, stdout) => {
         if (err) return reply(String(err))
         if (stdout) reply(stdout)
                 })
         }
+if (chats.startsWith('>')){
+    if(!itsMe) return
+	console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval Nonasync`))
+        try{
+		return reply(JSON.stringify(eval(chats.slice(2)), null, 2))
+	}catch(err){
+		e = String(err)
+		reply(e)
+	}
+}
 if (chats.startsWith('<')){
 if(!itsMe) return
 const util = require('util')
-console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval V1 brooo`))
+console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval Async`))
 ras = chats.slice(2)
 function _(rem) {
 ren = JSON.stringify(rem,null,2)
