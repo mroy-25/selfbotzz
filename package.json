@@ -20,6 +20,7 @@
     "autocorrect": "^1.2.0",
     "base64-img": "^1.0.4",
     "base64-to-image": "^1.0.2",
+     "discord-canvas": "^1.4.1",
     "emoji-api": "^1.0.2",
     "encodeurl": "^1.0.2",
     "express": "^4.17.1",
