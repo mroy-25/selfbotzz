@@ -716,6 +716,32 @@ if(m.quoted.text.startsWith('BUG REPORT') && chats.startsWith('balas')){
 if (!publicc){
     if (!itsMe) return
 }
+switch(command){
+case 'mute':
+if(!itsMe && !isGroupAdmins) return
+if(!isGroup) return
+mut = await db.showdata('mute', {id: from})
+try{
+  if(mut[0].id === from) return reply('Bot telah dimute di Group ini sebelumnya!')
+}catch{
+}
+db.adddata('mute', {id: from})
+reply('Sukses Mute Bot')
+break
+case 'unmute':
+if(!itsMe && !isGroupAdmins) return
+if(!isGroup) return
+mut = await db.showdata('mute', {id: from})
+try{
+  if(mut[0].id === from){
+    db.delete('mute', {id: from})
+reply('Sukses Unmute Bot')
+  }
+}catch{
+  return reply('Bot tidak dimute di Group ini!')
+}
+break
+}
 if(!isGroup && !itsMe) return
 if(sender.startsWith('92')) return
 if(m.isBaileys === true) return
@@ -4769,30 +4795,6 @@ break
 case 'wa.me':
 teks = `wa.me/${sender.replace("@s.whatsapp.net","")}`
 reply(teks)
-break
-case 'mute':
-if(!itsMe && !isGroupAdmins) return
-if(!isGroup) return
-mut = await db.showdata('mute', {id: from})
-try{
-  if(mut[0].id === from) return reply('Bot telah dimute di Group ini sebelumnya!')
-}catch{
-}
-db.adddata('mute', {id: from})
-reply('Sukses Mute Bot')
-break
-case 'unmute':
-if(!itsMe && !isGroupAdmins) return
-if(!isGroup) return
-mut = await db.showdata('mute', {id: from})
-try{
-  if(mut[0].id === from){
-    db.delete('mute', {id: from})
-reply('Sukses Unmute Bot')
-  }
-}catch{
-  return reply('Bot tidak dimute di Group ini!')
-}
 break
 case 'randomanime':
 reply(mess.wait)
