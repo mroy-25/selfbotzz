@@ -54,14 +54,11 @@ const express = require('express')
 const app = express()
 const simple = require('./lib/simple')
 const PORT = process.env.PORT || 3000
-const imageToBase64 = require('image-to-base64')
 const translate = require('@vitalets/google-translate-api')
 const { yta, ytv, igdl, upload } = require('./lib/ytdl')
 const fetch = require('node-fetch');
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI();
-const fakeUa = require('fake-useragent');
-const SocketIO = require('socket.io')
 const Exif = require('./lib/exif');
 const exif = new Exif();
 const tovid = require('./lib/tovideo')
@@ -222,13 +219,6 @@ var yyyy = today.getFullYear();
 today = dd + '/' + mm + '/' + yyyy;
 return today;
  }
-function getHeader() {
-  var headers = {
-    "User-Agent": fakeUa()
-  };
-  //console.log('headers', headers);
-  return headers;
-}
 let localee = 'id'
 let e = new Date(new Date + 3600000)
 let dateIslamic = Intl.DateTimeFormat(localee + '-TN-u-ca-islamic', {
@@ -3305,16 +3295,6 @@ for (let mem of groupMembers) {
 teks += `┃\n`
 teks += `┗━⬣ ZBOT SELFBOT`
 wa.Mentions(from, teks, members_id, tod)
-break
-case 'stourl':
-boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-        owgi = await zynn.downloadMediaMessage(boij)
-        datae = await imageToBase64(JSON.stringify(owgi).replace(/\"/gi, ''))
-        await fs.writeFileSync(`./tourl.jpeg`,datae, 'base64')
-        var imgbb = require('imgbb-uploader')
-        anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", './tourl.jpeg')
-        res = `${anu.display_url}`
-        reply(res)
 break
 case 'tourl':
 if(isQuotedSticker){
