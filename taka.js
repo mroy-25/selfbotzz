@@ -893,13 +893,6 @@ break
 case 'sc':
 reply(`Bot ini menggunakan Script bot\n${shp} https://github.com/zennn08/BaseSelfBot\n${shp} https://github.com/Hexagonz/SELF-HX`)
 break
-case 'stickmenu':
-case 'stickermenu':
-reply(stickmenu(shp, prefix))
-break
-case 'groupbot':
-reply('https://chat.whatsapp.com/Dt8Icyz3eIK4m1bUm593sR')
-break
 case 'mystat':
 tothit = await db.showdata('hit')
 reg = await db.showdata('user')
@@ -1144,13 +1137,6 @@ if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isA
 })
 }
 break
-/*case 'exif':
-if(!itsMe) return
-if (args.length < 1) return reply(`Penggunaan ${prefix}exif nama|author`)
-if (!arg.split('|')) return reply(`Penggunaan ${prefix}exif nama|author`)
-exif.create(arg.split('|')[0], arg.split('|')[1])
-reply('sukses')
-break*/
 case 'exif':
 if(!itsMe) return
 if (args.length < 1) return reply(`Penggunaan ${prefix}exif nama|author`)
@@ -1205,30 +1191,7 @@ break
 case 'setmenu':
 if(!itsMe) return
 if (!arg) return reply(`Penggunaan ${prefix}setmenu jenis`)
-if(args[0] == 'catalog'){
-setting.menu = 'catalog'
-await fs.writeFileSync('./setting.json', JSON.stringify(setting))
-setting = await JSON.parse(fs.readFileSync('./setting.json'))
-reply(`Sukses`)
-}
-else if(args[0] == 'flink'){
-setting.menu = 'flink'
-await fs.writeFileSync('./setting.json', JSON.stringify(setting))
-setting = await JSON.parse(fs.readFileSync('./setting.json'))
-reply(`Sukses`)
-}else if(args[0] == 'flink2'){
-setting.menu = 'flink2'
-await fs.writeFileSync('./setting.json', JSON.stringify(setting))
-setting = await JSON.parse(fs.readFileSync('./setting.json'))
-reply(`Sukses`)
-}
-else if(args[0] == 'flink2'){
-setting.menu = 'flink2'
-await fs.writeFileSync('./setting.json', JSON.stringify(setting))
-setting = await JSON.parse(fs.readFileSync('./setting.json'))
-reply(`Sukses`)
-}
-else if(args[0] == 'polos'){
+if(args[0] == 'polos'){
 setting.menu = 'polos'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
@@ -1240,7 +1203,6 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 reply(`Sukses`)
 }
-
 else{
 setting.menu = 'biasa'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
