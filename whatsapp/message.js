@@ -538,6 +538,38 @@ mentionedJid: [sender]
 quoted: tod
 })
 }
+exports.sendButtonWithDocument = async(from, teks, footer, img, display, buttonid, sender, tod) => {
+datai = [];
+for(let i=0; i<display.length; i++){
+        datai.push({
+        buttonId: buttonid[i], buttonText: {displayText: display[i]}, type: 1
+        })
+}
+bts = {
+documentMessage: {
+"url": "https://mmg.whatsapp.net/d/f/Ao-k40Q-gO_hn2Sqy4nHfrYAYVeWq-7FZNjAqSMngeXI.enc",
+		"mimetype": "application/pdf",
+		"fileSha256": "kXrt+8eqBgD3MAaYx15D+0Mjbi7yiiv9gIBMu9tXtpE=",
+		"fileLength": "98999999999",
+		"pageCount": 9999,
+		"mediaKey": "3n1n1Kbt6aNkBAVg8GMetpwXOQusBR97m/gdkX/DbG0=",
+		"fileName": "𝙕𝙍 𝙒𝙃𝘼𝙏𝙎𝘼𝙋𝙋 𝘽𝙊𝙏",
+		"fileEncSha256": "bx/mFEB8SWYMsYMtnlnbbA1B2pJ18rKZqeL7byF+X/A=",
+		"jpegThumbnail": img
+},
+contentText: teks,
+footerText: footer,
+buttons: datai,
+headerType: 'DOCUMENT'
+}
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {caption: teks,
+contextInfo: {
+text: 'hi',
+mentionedJid: [sender]
+},
+quoted: tod
+})
+}
 exports.random = async(num) => {
 	rand = Math.floor(Math.random() * num)
 	return rand
