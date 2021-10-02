@@ -56,6 +56,9 @@ zynn.on('group-participants-update', async (msg) => {
 if(setting.canvas == 'swiftcord'){
     require('./lib/swiftcord.js')(zynn, msg, client)    
 }
+else if(setting.canvas == 'discord'){
+    require('./lib/greetings.js')(zynn, msg, client)    
+}
 else{
 require('./lib/detection.js')(zynn, msg, client)
 }
