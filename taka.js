@@ -146,7 +146,7 @@ module.exports = zynn = async (zynn, tod, db) => {
         const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
         const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
         const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : "".slice(1).trim().split(/ +/).shift().toLowerCase()
-        const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#$%^&./\\©^]/gi) : '.'
+        const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#%^&./\\©^]/gi) : '.'
         noprefix = ''
         if(nopref == 'no'){
             prefix = noprefix
