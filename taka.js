@@ -5306,6 +5306,7 @@ reply(e)
 }
 }
 //autocorrect
+if(!prefix == ''){
 var autocorrect = require('autocorrect')({words: words})
 var similar = require('similarity')
 var math = require('mathjs')
@@ -5318,6 +5319,7 @@ if(simi === 1){
 }else{
 console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
 return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
+}
 }
 }
 break
