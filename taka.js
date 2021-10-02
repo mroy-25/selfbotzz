@@ -882,9 +882,13 @@ var shep = shp
 if(setting.menu == 'polos'){
     wa.sendButton(from, help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, tod)
 }
-else if(setting.menu == 'button'){
+else if(setting.menu == 'buttonloc'){
     teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
     wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
+}
+else if(setting.menu == 'buttonimage'){
+    teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
+    wa.sendButtonWithImage(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else{
             wa.sendButton(from, help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
@@ -1197,8 +1201,14 @@ await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 reply(`Sukses`)
 }
-else if(args[0] == 'button'){
-setting.menu = 'button'
+else if(args[0] == 'buttonloc'){
+setting.menu = 'buttonloc'
+await fs.writeFileSync('./setting.json', JSON.stringify(setting))
+setting = await JSON.parse(fs.readFileSync('./setting.json'))
+reply(`Sukses`)
+}
+else if(args[0] == 'buttonimage'){
+setting.menu = 'buttonimage'
 await fs.writeFileSync('./setting.json', JSON.stringify(setting))
 setting = await JSON.parse(fs.readFileSync('./setting.json'))
 reply(`Sukses`)
