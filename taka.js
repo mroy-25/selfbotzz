@@ -5305,7 +5305,7 @@ e = String(err)
 reply(e)
 }
 }
-//autocorrect
+/*autocorrect
 if(!prefix == ''){
 var autocorrect = require('autocorrect')({words: words})
 var similar = require('similarity')
@@ -5321,7 +5321,7 @@ console.log('Autocorrect ' + command + ' > ' + correct + ` (${simi})`)
 return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan mencapai ${persen.toString().split('.')[0]}%`)
 }
 }
-}
+}*/
 break
    // console.log(e)
 
