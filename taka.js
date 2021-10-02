@@ -5252,7 +5252,6 @@ case 'dog':
 case 'fox':
 case 'panda':
 case 'cat':
-case 'pikachu':
 try{
 	wa.fetchJson('https://some-random-api.ml/animal/' + command).then(async res => {
 		wa.sendImage(from, await wa.getBuffer(res.image), tod, `Fact : ${res.fact}`)
@@ -5312,7 +5311,7 @@ var math = require('mathjs')
 correct = await autocorrect(command)
 simi = await similar(command, correct)
 persen = await math.evaluate(`${simi.toString()}*100`)
-if(persen.toString() > 50){
+if(persen.toString() > 60){
 if(simi === 1){
 ''
 }else{
