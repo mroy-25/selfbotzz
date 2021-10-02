@@ -739,10 +739,10 @@ if(type === 'imageMessage') return
 if(type === 'audioMessage') return
 if(type === 'videoMessage') return
 console.log(sender + ' : ' + chats)
-data = await wa.fetchJson(`https://api.zeks.xyz/api/simi?apikey=iloveyou3000&text=${chats}`)
+data = await wa.fetchJson(`https://api.zeks.me/api/simi?apikey=iloveyou3000&text=${chats}`)
 console.log('Simi : ' + data.result)
 await zynn.updatePresence(from, Presence.composing)
-return reply(`Bot : _${data.result}_`)
+return reply(`Bot : ${data.result.split(' - please update to api v2')[0]}`)
 }catch{
 }
 }
