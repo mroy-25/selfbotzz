@@ -5212,7 +5212,7 @@ try{
 break
 case 'tohidetag':
 if(m.quoted){
-	zynn.copyNForward(from, m.quoted.fakeObj.message, {mentionedJid: groupMembers.map(i => i.jid)})
+	m.quoted.copyNForward(from, true, {contextInfo: {mentionedJid: groupMembers.map(i => i.jid)}})
 }
 else{
 	reply('Reply pesan yang akan dijadikan hidetag!')
