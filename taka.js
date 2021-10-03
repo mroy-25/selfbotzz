@@ -55,7 +55,7 @@ const app = express()
 const simple = require('./lib/simple')
 const PORT = process.env.PORT || 3000
 const translate = require('@vitalets/google-translate-api')
-const { yta, ytv, igdl, upload } = require('./lib/ytdl')
+const { yta, ytv } = require('./lib/ytdl')
 const fetch = require('node-fetch');
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI();
@@ -194,8 +194,8 @@ else if(type === 'stickerMessage'){
         //const q = args.join(' ')
         const run = process.uptime()
         const arg = chats.slice(command.length + 1, chats.length)
-        //asus = await wa.random(asupann.length)
-        //asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
+        asus = await wa.random(asupann.length)
+        global.asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
         //function
         const sendText = (text) => {
