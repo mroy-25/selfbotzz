@@ -5,7 +5,6 @@
   "fox",
   "cat",
   "panda",
-  "pikachu",
   "dashboard",
   "bugreport",
   "menu",
@@ -67,7 +66,6 @@
   "getvideo",
   "totag",
   "hidetag",
-  "kontag",
   "nulis",
   "nuliskanan",
   "nuliskiri",
@@ -228,6 +226,7 @@
   "tr",
   "getexif",
   "q",
-  "x",
-  ">"
+  "$",
+  ">",
+  "<"
 ]
