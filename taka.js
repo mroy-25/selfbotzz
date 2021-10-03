@@ -3278,8 +3278,8 @@ reply('Error\nPastikan input sudah benar!')
 break
 case 'hidetag':
 if (!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-if (!arg) return reply(`Penggunaan ${prefix}hidetag teks`)
-wa.hideTag(from, arg)
+if (!q) return reply(`Penggunaan ${prefix}hidetag teks`)
+wa.hideTag(from, q)
 break
 case 'tagall':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
