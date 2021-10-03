@@ -4373,7 +4373,7 @@ case 'ssweb':
 if(!q) return reply('Masukkan urlnya!')
 reply(mess.wait)
 try{
-    zynn.sendFile(from, `http://nurutomo.herokuapp.com/api/ssweb?url=${q}&full=true&type=png`, 'ss.png', q, m, true, {asDocument: true})
+    zynn.sendFile(from, `http://nurutomo.herokuapp.com/api/ssweb?url=${q}&full=true&type=png`, q + '.png', q, m, true, {asDocument: true})
 }catch(e){
     reply(mess.error.api)
 }
