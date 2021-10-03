@@ -4371,6 +4371,7 @@ reply(teks)
 break
 case 'ssweb':
 if(!q) return reply('Masukkan urlnya!')
+if(!isUrl(q)) return reply(mess.error.Iv)
 reply(mess.wait)
 try{
     zynn.sendFile(from, `http://nurutomo.herokuapp.com/api/ssweb?url=${q}&full=true&type=png`, q + '.png', q, m, true, {asDocument: true})
