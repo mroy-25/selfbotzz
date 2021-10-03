@@ -5210,7 +5210,7 @@ try{
 	reply(mess.error.api)
 }
 break
-case 'tohidetag':
+case 'totag':
 if(m.quoted){
 	m.quoted.copyNForward(from, true, {contextInfo: {mentionedJid: groupMembers.map(i => i.jid)}})
 }
