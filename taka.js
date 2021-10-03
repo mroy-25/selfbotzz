@@ -4373,7 +4373,7 @@ case 'ssweb':
 if(!q) return reply('Masukkan urlnya!')
 reply(mess.wait)
 try{
-    zynn.sendFile(from, `http://nurutomo.herokuapp.com/api/ssweb?url=${q}&full=true&type=png`, 'ss.png',q, m, true {asDocument: true})
+    zynn.sendFile(from, `http://nurutomo.herokuapp.com/api/ssweb?url=${q}&full=true&type=png`, 'ss.png', q, m, true, {asDocument: true})
 }catch(e){
     reply(mess.error.api)
 }
@@ -4397,53 +4397,6 @@ try{
     reply(mess.error.api)
 }
 break
-    case 'tourl2':
- if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo || isQuotedSticker || isQuotedAudio || isQuotedDocument) && args.length == 0) {
-    reply(mess.wait)
-    boij = isQuotedImage || isQuotedVideo || isQuotedSticker || isQuotedAudio || isQuotedDocument? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-owgi = await zynn.downloadMediaMessage(boij)
-rname = await GenerateSerialNumber('000000')
-        if(isQuotedImage){
-        await fs.writeFileSync(`./media/${rname}.jpg`, owgi)
-        path = `./media/${rname}.jpg`
-        uplod = await Ra.UploadFile(path)
-        console.log(uplod)
-    teks = `M E D I A  T O  U R L\n\n${shp} Nama File : ${uplod.result.url}\n${shp} Type : Image/jpg\n${shp} Url : ${uplod.result.namaFile}\n${shp} Size : ${uplod.result.size}\n${shp} Hash : ${uplod.result.hash}`
-    reply(teks)
-    fs.unlinkSync(path)
-        }
-        else if(isQuotedVideo){
-        await fs.writeFileSync(`./media/${rname}.mp4`, owgi)
-        path = `./media/${rname}.mp4`
-        uplod = await Ra.UploadFile(path)
-        console.log(uplod)
-        teks = `M E D I A  T O  U R L\n\n${shp} Nama File : ${uplod.result.url}\n${shp} Type : Video/mp4\n${shp} Url : ${uplod.result.namaFile}\n${shp} Size : ${uplod.result.size}\n${shp} Hash : ${uplod.result.hash}`
-        reply(teks)
-        fs.unlinkSync(`./media/${rname}.mp4`)
-        }
-        else if(isQuotedSticker){
-        await fs.writeFileSync(`./media/${rname}.webp`, owgi)
-        path = `./media/${rname}.webp`
-        uplod = await Ra.UploadFile(path)
-        console.log(uplod)
-        teks = `M E D I A  T O  U R L\n\n${shp} Nama File : ${uplod.result.url}\n${shp} Type : Sticker/webp\n${shp} Url : ${uplod.result.namaFile}\n${shp} Size : ${uplod.result.size}\n${shp} Hash : ${uplod.result.hash}`
-        reply(teks)
-        fs.unlinkSync(path)
-        }
-        else if(isQuotedAudio){
-        await fs.writeFileSync(`./media/${rname}.mp3`, owgi)
-        path = `./media/${rname}.mp3`
-        uplod = await Ra.UploadFile(path)
-        console.log(uplod)
-        teks = `M E D I A  T O  U R L\n\n${shp} Nama File : ${uplod.result.url}\n${shp} Type : Audio/mp3\n${shp} Url : ${uplod.result.namaFile}\n${shp} Size : ${uplod.result.size}\n${shp} Hash : ${uplod.result.hash}`
-        reply(teks)
-        fs.unlinkSync(path)
-        }
-    else{
-    reply(`Reply Image/Sticker/Video/Audio dengan caption ${prefix}tourl2`)
-    }
-}
- break
 case 'qrcode':
 if(!q) return reply('Masukkan teksnya!')
 await reply(mess.wait)
