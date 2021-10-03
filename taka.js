@@ -4373,7 +4373,7 @@ case 'ssweb':
 if(!q) return reply('Masukkan urlnya!')
 reply(mess.wait)
 try{
-    sendMediaURL(from, `https://api.apiflash.com/v1/urltoimage?access_key=5608da775fec43ccab391d3ed75484ba&url=${q}`, `SSWEB : ${q}`)
+    zynn.sendFile(from, `http://nurutomo.herokuapp.com/api/ssweb?url=${q}&full=true&type=png`, 'ss.png',q, m, true {asDocument: true})
 }catch(e){
     reply(mess.error.api)
 }
