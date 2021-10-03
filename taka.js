@@ -4913,7 +4913,7 @@ try{
 break
 case 'addcmd': 
 case 'setcmd':
-if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if (!itsMe) return reply(mess.only.Bowner)
 if (isQuotedSticker) {
     if (!q) return reply(`Cara Penggunaan : Reply sticker dengan caption ${command} commandnya\nContoh : ${command} .help`)
     var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
@@ -4923,7 +4923,7 @@ if (isQuotedSticker) {
 }
 break
 case 'delcmd':{
-if (!itsMe && !isGroupAdmins) return reply(mess.only.admin)
+if (!itsMe) return reply(mess.only.Bowner)
 //if (!isQuotedSticker) return reply(`reply stickernya`)
 var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
 db.delete('stickerdb', {id: kodenya}).then((res) => {
@@ -4965,22 +4965,6 @@ if (alasan != "") {
 }
 reply(ini_txt)
 break
-case 'infobisnis':
-if(!q) return reply(`Cara penggunaan : ${prefix}infobisnis tag orang/masukkan nomor whatsapp/n/nContoh : ${prefix}infobisnis 6281990498472\n\nNote : Nomor harus diawali dengan kode negara`)
-if(isNaN(body.slice(13))) return reply('Input harus berupa nomor whatsapp!')
-mentioned = args[0].replace('@', '') + '@s.whatsapp.net'
-data = await isBusiness(mentioned)
-console.log(data)
-if(data == false) return reply('Nomor yang anda masukkan bukan akun bisnis!')
-data2 = await wa.getbusinessprof(mentioned)
-reply(JSON.stringify(data2, null, 2))
-break
-case 'q':
-    if (!m.quoted) reply('reply pesan!')
-    let o = zynn.serializeM(await m.getQuotedObj())
-    if (!o.quoted) throw 'pesan yang anda reply tidak mengandung reply!'
-    await o.quoted.copyNForward(m.chat, true)
-    break
 case 'getexif':
 let webpv = require('node-webpmux')
 const util = require('util')
@@ -5224,6 +5208,14 @@ try{
 	})
 }catch{
 	reply(mess.error.api)
+}
+break
+case 'tohidetag':
+if(m.quoted){
+	zynn.copyNForward(from, m.quoted.fakeObj.message, {mentionedJid: groupMembers.map(i => i.jid)})
+}
+else{
+	reply('Reply pesan yang akan dijadikan hidetag!')
 }
 break
 default:
