@@ -29,7 +29,6 @@ const ffmpeg = require('fluent-ffmpeg');
 const { fromBuffer } = require('file-type');
 const FormData = require('form-data');
 const encodeUrl = require('encodeurl');
-const imgbb = require('imgbb-uploader')
 const request = require('request');
 const conn = require('./main');
 const {color} = require('./lib/color');
@@ -1618,8 +1617,7 @@ if(!q) return reply('teksnya mana?')
 owgi = await zynn.downloadMediaMessage(ger)
 if(isQuotedSticker){
     await fs.writeFileSync(`./stickmeme.jpeg`, owgi)
-    var imgbb = require('imgbb-uploader')
-    anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", './stickmeme.jpeg')
+    anu = await wa.imgbb('./stickmeme.jpeg')
     const res = `${anu.display_url}`
     await wa.sendStickerFromUrl(from, `https://pecundang.herokuapp.com/api/stickermeme?url=${res}&teks=${q}`, tod)
     fs.unlinkSync('./stickmeme.jpeg')
@@ -2922,8 +2920,7 @@ if(isQuotedSticker){
     boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
     owgi = await zynn.downloadMediaMessage(boij)
     await fs.writeFileSync(`./tourl.jpeg`, owgi)
-    var imgbb = require('imgbb-uploader')
-    anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", './tourl.jpeg')
+    anu = await wa.imgbb('./tourl.jpeg')
     res = `${anu.display_url}`
     reply(res)
 }
@@ -4038,7 +4035,7 @@ boij = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).me
         owgi = await zynn.downloadMediaMessage(boij)
         await fs.writeFileSync(`./media/qr.jpeg`, owgi)
         var imgbb = require('imgbb-uploader')
-        anu = await imgbb("7943be468a5e670fbbb4854ac73d1b78", './media/qr.jpeg')
+        anu = await wa.imgbb('./media/qr.jpeg')
         res = `${anu.display_url}`
         data = await wa.fetchJson(`https://docs-jojo.herokuapp.com/api/qr_read?image_url=${res}`)
     teks = `Q R  R E A D E R\n\n${shp} Result : ${data.result.raw_text}`
@@ -4622,8 +4619,7 @@ rname = await GenerateSerialNumber('000000')
 if(isQuotedImage){
 await fs.writeFileSync(`./media/${rname}.jpg`, owgi)
 path = `./media/${rname}.jpg`
-var imgbb = require('imgbb-uploader')
-anu = await imgbb("7943be468a5e670fbbb4854ac73d1b78", `./media/${rname}.jpg`)
+anu = await wa.imgbb(`./media/${rname}.jpg`)
 const res = `${anu.display_url}`
 fs.unlinkSync(path)
         const addnote = {
