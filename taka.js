@@ -1206,7 +1206,7 @@ if(!isGroupAdmins) return reply(mess.only.admin)
 if(!isBotGroupAdmins) return reply(mess.only.Badmin)
 if(m.quoted){
 reply('otw')
-wa.add2(from, m.quoted.sender.split('@'), tod, reply)
+wa.add2(from, m.quoted.sender.split('@')[0], tod, reply)
 }
 else{
 if (!arg) return reply(`Penggunaan ${prefix}add 62xxxxx atau reply pesan`)
