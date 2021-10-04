@@ -1615,7 +1615,7 @@ case 'approved3000years':
 try{
     if(isMedia && !zynn.message.videoMessage || isQuotedImage){
     reply(mess.wait)
-        const encmedia = isMedia || isQuotedImage &&  ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+        const encmedia = isMedia || isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
         const media = await zynn.downloadMediaMessage(encmedia)
         res = await uploadImages(media, false)
         data = await ameapi.generate(command, {url: res})
