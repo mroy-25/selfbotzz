@@ -1625,7 +1625,7 @@ try{
 	const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
     	const media = await zynn.downloadAndSaveMediaMessage(encmedia)
     	ran = wa.getRandom('.jpeg')
-    	exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+    	exec(`ffmpeg -i ${media} ${ran}`, async(err) => {
         fs.unlinkSync(media)
         if (err) {
             reply(`gagal`)
