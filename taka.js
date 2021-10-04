@@ -1860,7 +1860,7 @@ if(!q){
 }
 else{
 	value = args[0]
-	if(isNaN(args[0]) return reply('Input harus berupa nomor')
+	if(isNaN(args[0])) return reply('Input harus berupa nomor')
 }
 encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await zynn.downloadAndSaveMediaMessage(encmedia)
