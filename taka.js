@@ -2554,10 +2554,10 @@ if(!isUrl(q)) return reply(mess.error.lv)
 reply(mess.wait)
 try{
 	if(args[0] == 'wm'){
-		sendMediaURL(from, args[1], 'TIKTOK WITH WATERMARK\n' + fakec)
+		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n')
 	}
 	else if(args[0] == 'nowm'){
-		sendMediaURL(from, args[1], 'TIKTOK NOWATERMARK\n' + fakec)	
+		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n')	
 	}
 	else if(args[0] == 'audio'){
 		rann = wa.getRandom('.mp4')
@@ -2568,13 +2568,13 @@ try{
     		buffer = fs.readFileSync(ran)
     		zynn.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: tod}).then(res => {
     		fs.unlinkSync(ran)
-    		fs.unlinkSync(rann)
+    		fs.unlinkSync(`./media/${rann}`)
 		})
 		})
 	}
 	else{
 		data = await hx.ttdownloader(q)
-		teks = bold(`TIKTOK DOWNLOADER\n${shp} Request By : @${sender.split('@')[0]}`)
+		teks = `*TIKTOK DOWNLOADER*\n*${shp} Request By : @${sender.split('@')[0]}*`)
 		wa.sendButton(from, teks, 'Silahkan Pilih WM/NOWM/AUDIO', ['WM', 'NOWM', 'AUDIO'], ['tiktok wm ' + data.wm, 'tiktok nowm ' + data.nowm, 'tiktok audio ' + data.nowm], sender, tod)	
 	}
 }catch{
