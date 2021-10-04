@@ -1211,71 +1211,24 @@ wa.add2(from, m.quoted.sender.split('@')[0], tod, reply)
 else{
 if (!arg) return reply(`Penggunaan ${prefix}add 62xxxxx atau reply pesan`)
 reply('otw')
-wa.add2(from, args[0], tod, reply)
-}
-break
-case 'fakethumb':
-if ((isMedia && !tod.message.videoMessage || isQuotedImage)) {
-let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-let media = await zynn.downloadMediaMessage(encmedia)
-var b = fs.readFileSync(`./media/zynn.jpeg`)
-option = {
-    "thumbnail": b, quoted: rep}
-zynn.sendMessage(from, media, "imageMessage", option)
-}
-else{
-    reply('Reply gambarnya!')
+wa.add2(from, q.replace(/\D+/g, ''), tod, reply)
 }
 break
 case 'open':
 if (!isGroup) return reply(mess.only.group)
 if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 if (!isGroupAdmins) return reply(mess.only.admin)
-if(!q){
-    await zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
-    reply(`_Berhasil Membuka Group_`)
-}
-else{
-    zynn.updatePresence(from, Presence.composing) 
-
-    if (args[1]=="s") {var timer = args[0]+"000"
-        } else if (args[1]=="m") {var timer = args[0]+"0000"
-        } else if (args[1]=="h") {var timer = args[0]+"00000"
-        } else {return fakestatus(`*pilih:*\ns = second\nm = minute\nh = hour\n\n*contoh*\n${prefix}open 10 s`)}
-                setTimeout( () => {
-
-                teks = `*ᴛᴇᴘᴀᴛ ᴡᴀᴋᴛᴜ* ɢʀᴜᴘ ᴅɪʙᴜᴋᴀ ᴏʟᴇʜ ᴀᴅᴍɪɴ @${sender.split("@")[0]}\nꜱᴇᴋᴀʀᴀɴɢ *ᴍᴇᴍʙᴇʀ* ᴅᴀᴘᴀᴛ ᴍᴇɴɢɪʀɪᴍ ᴘᴇꜱᴀɴ`
-                zynn.groupSettingChange (from, GroupSettingChange.messageSend, false);
-                setTimeout( () => {
-                    wa.Mentions(from, teks, [sender], tod)
-                    }, 2000)
-                }, timer)
-                        }
+await zynn.groupSettingChange(from, GroupSettingChange.messageSend, false)
+await wa.sleep(3000)
+reply(`_Berhasil Membuka Group_`)
 break
 case 'close':
 if (!isGroup) return reply(mess.only.group)
 if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 if (!isGroupAdmins) return reply(mess.only.admin)
-if(!q){
-    await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
-    reply(`_Berhasil Menutup Group_`)
-}
-else{
-    zynn.updatePresence(from, Presence.composing) 
-
-    if (args[1]=="s") {var timer = args[0]+"000"
-        } else if (args[1]=="m") {var timer = args[0]+"0000"
-        } else if (args[1]=="h") {var timer = args[0]+"00000"
-        } else {return fakestatus(`*pilih:*\ns = second\nm = minute\nh = hour\n\n*contoh*\n${prefix}open 10 s`)}
-                setTimeout( () => {
-
-                teks = `*ᴛᴇᴘᴀᴛ ᴡᴀᴋᴛᴜ* ɢʀᴜᴘ ᴅɪᴛᴜᴛᴜᴘ ᴏʟᴇʜ ᴀᴅᴍɪɴ @${sender.split("@")[0]}\nꜱᴇᴋᴀʀᴀɴɢ *ʜᴀɴʏᴀ ᴀᴅᴍɪɴ* ᴅᴀᴘᴀᴛ ᴍᴇɴɢɪʀɪᴍ ᴘᴇꜱᴀɴ`
-                zynn.groupSettingChange (from, GroupSettingChange.messageSend, true);
-                setTimeout( () => {
-                    wa.Mentions(from, teks, [sender], tod)
-                    }, 2000)
-                }, timer)
-                        }
+await zynn.groupSettingChange(from, GroupSettingChange.messageSend, true)
+await wa.sleep(3000)
+reply(`_Berhasil Menutup Group_`)
 break
 case 'githubstalk':
 if(!q) return reply('Masukkan username githubnya!')
