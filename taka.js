@@ -704,37 +704,42 @@ Note : Tidak semua fitur work, Maklum saya noob
 wa.sendButtonWithDocument(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage2, [`⋮☰ MENU`, `🤴🏻 OWNER`, '⋮☰ DASHBOARD'], [`menu`, `owner`, 'dashboard'], sender, tod)
 break
 case 'menu':
-tothit = await db.showdata('hit')
-hit = tothit.length
 reg = await db.showdata('user')
+prefi = await db.showdata('prefix', {id: from})
 ispublic = publicc === true ? 'Public' : 'Self'
 var shep = shp
-           if(nopref == 'no'){
-            isprefix = 'Noprefix'
-           }
-           else if(nopref == 'multi'){
-            isprefix = 'Multiprefix'
-           }
-           else{
-            isprefix = nopref
-           }
+try{
+if(prefi[0].id === from){
+	isprefix = prefi[0].prefix
+}
+}catch{
+	if(nopref == 'no'){
+		isprefix = 'Noprefix'
+	}
+	else if(nopref == 'multi'){
+		isprefix = 'Multiprefix'
+	}
+	else{
+		isprefix = nopref
+	}
+}
 if(setting.menu == 'polos'){
-    wa.sendButton(from, help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, tod)
+    wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, tod)
 }
 else if(setting.menu == 'buttonloc'){
-    teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
+    teks = help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
     wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else if(setting.menu == 'buttonimage'){
-    teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
+    teks = help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
     wa.sendButtonWithImage(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else if(setting.menu == 'buttondocument'){
-    teks = help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix)
+    teks = help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
     wa.sendButtonWithDocument(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage2, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else{
-            wa.sendButton(from, help(db, totalchat, ispublic, timee, date, dateIslamic, hit, ucselamat, runtime, run, prefix, wa_version, mcc, mnc, os_version, device_manufacturer, device_model, process, baterai, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
+            wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 break
 case 'sc':
