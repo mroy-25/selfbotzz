@@ -2400,7 +2400,7 @@ try{
 	}
 	else{
 		data = await hx.ttdownloader(q)
-		teks = `*TIKTOK DOWNLOADER*\n*${shp} Request By : @${sender.split('@')[0]}*`)
+		teks = `*TIKTOK DOWNLOADER*\n*${shp} Request By : @${sender.split('@')[0]}*`
 		wa.sendButton(from, teks, 'Silahkan Pilih WM/NOWM/AUDIO', ['WM', 'NOWM', 'AUDIO'], ['tiktok wm ' + data.wm, 'tiktok nowm ' + data.nowm, 'tiktok audio ' + data.nowm], sender, tod)	
 	}
 }catch{
