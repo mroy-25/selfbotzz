@@ -4834,6 +4834,22 @@ else{
 	reply('Reply pesan yang akan dijadikan hidetag!')
 }
 break
+case 'soundcloud':
+if(!q) return reply('Masukkan Linknya!')
+if(!isUrl(q)) return reply(mess.error.Iv)
+reply(mess.wait)
+try{
+	data = await skrep.soundcloud(q)
+	teks = bold('SOUNDCLOUD DOWNLOADER\n\n')
+	teks += shp + ' Judul : ' + data.judul + '\n'
+	teks += shp + ' Download Count : ' + data.download_count + '\n'
+	teks += shp + ' Link : ' + await wa.tiny(data.link)
+	await wa.sendFileFromUrl(from, data.thumb, tod, teks)
+	wa.sendFileFromUrl(from, data.link, tod)
+}catch{
+	reply(mess.error.api)
+}
+break
 default:
     if (chats.startsWith('$')){
     if(!itsMe) return
