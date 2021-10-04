@@ -474,8 +474,9 @@ for(let i=0; i<display.length; i++){
         buttonId: buttonid[i], buttonText: {displayText: display[i]}, type: 1
         })
 }
-po = await zynn.prepareMessage(from, img, 'imageMessage')
+po = await zynn.prepareMessage(from, img, 'imageMessage', {thumbnail: img})
 po.message = (Object.keys(po.message)[0] === 'ephemeralMessage') ? po.message.ephemeralMessage.message : po.message
+po.message.imageMessage.fileLength = '1'
 bts = {
 imageMessage: po.message.imageMessage,
 contentText: teks,
@@ -483,9 +484,8 @@ footerText: footer,
 buttons: datai,
 headerType: 4
 }
-return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {caption: teks,
+return zynn.sendMessage(from, bts, MessageType.buttonsMessage, {
 contextInfo: {
-text: 'hi',
 mentionedJid: [sender]
 },
 quoted: tod
