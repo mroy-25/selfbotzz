@@ -724,22 +724,22 @@ if(prefi[0].id === from){
 	}
 }
 if(setting.menu == 'polos'){
-    wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, tod)
+    wa.sendButton(from, help(ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, tod)
 }
 else if(setting.menu == 'buttonloc'){
-    teks = help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
+    teks = help(ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
     wa.sendButtonWithloc(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else if(setting.menu == 'buttonimage'){
-    teks = help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
+    teks = help(ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
     wa.sendButtonWithImage(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else if(setting.menu == 'buttondocument'){
-    teks = help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
+    teks = help(ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix)
     wa.sendButtonWithDocument(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage2, [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 else{
-            wa.sendButton(from, help(totalchat, ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
+            wa.sendButton(from, help(ispublic, timee, date, dateIslamic, ucselamat, prefix, sender, isprefix), fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), [`🤴🏻 OWNER`, '🧾 SCRIPT', '⋮☰ DASHBOARD'], ['owner', 'sc', 'dashboard'], sender, rep)
 }
 break
 case 'sc':
