@@ -100,9 +100,7 @@ baterai = {
     cas: false,
     powersave: false
 }
-tmp_hit = []
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
-//welkam/left
 app.use('/', (req, res) => {  
 conn.connects()
 console.log("on bang bot nya")
@@ -123,8 +121,7 @@ module.exports = zynn = async (zynn, tod, db) => {
         tod = tod.messages.all()[0]
         if (!tod.message) return
         if (tod.key && tod.key.remoteJid == 'status@broadcast') return
-            global.Prefix
-        global.wa
+	global.Prefix
         if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3 && !tod.key.fromMe) {
                 teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
                 teks += '\n'.repeat(100)
@@ -134,8 +131,8 @@ module.exports = zynn = async (zynn, tod, db) => {
         }catch{
         }
         zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-                zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-}
+        zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+	}
         tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
         const content = JSON.stringify(tod.message)
         const from = tod.key.remoteJid
@@ -402,83 +399,6 @@ else if(fakerep == 'kontak2'){
 else if(fakerep == 'kontak3'){
     var rep = fkontak3
 }
-const flink2 = (teks, title, body, img, url) => {
-     zynn.sendMessage(from, img, image, {
-    contextInfo: {
-        mentionedJid: [tag],
-        externalAdReply: {
-            "title": title,
-            "body": body,
-            "mediaType": "VIDEO",
-            "mediaType": 2,
-            "mediaUrl": url
-        }
-    },
-caption: teks,
-quoted: rep
-})
-}
-const flink3 = (img1, img2, url, teks) => {
-     zynn.sendMessage(from, img1, MessageType.image, {
-        thumbnail: img1,
-        caption: teks,
-        "contextInfo": {
-"mentionedJid": [sender],
-            text: 'hi',
-            "forwardingScore": 1000000000,
-            isForwarded: true,
-            sendEphemeral: true,
-            "externalAdReply": {
-                "title": fakec,
-                "body": "𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡",
-                "previewType": "PHOTO",
-                "thumbnailUrl": "",
-                "thumbnail": img2,
-                "sourceUrl": url
-            }},
-            quoted: rep
-})
-}
-const fek = (buff, thumb, url, title) => {
-if(!rep === tod){
-     zynn.sendMessage(from, buff, MessageType.audio, {mimetype: Mimetype.mp4Audio,
-        "contextInfo": {
-    mentionedJid: [sender],
-            text: 'hi',
-            "forwardingScore": 1000000000,
-            isForwarded: true,
-            sendEphemeral: true,
-            "externalAdReply": {
-                "title": title,
-                "body": "",
-                "previewType": "PHOTO",
-                "thumbnailUrl": "",
-                "thumbnail": thumb,
-                "sourceUrl": url
-            }},
-            quoted: rep
-})
-}
-else{
-    zynn.sendMessage(from, buff, MessageType.audio, {
-        "contextInfo": {
-mimetype: 'audio/mp4',
-            text: 'hi',
-            "forwardingScore": 1000000000,
-            isForwarded: true,
-            sendEphemeral: true,
-            "externalAdReply": {
-                "title": title,
-                "body": "",
-                "previewType": "PHOTO",
-                "thumbnailUrl": "",
-                "thumbnail": thumb,
-                "sourceUrl": url
-            }},
-            quoted: rep
-})
-}
-}
 const fake = async(text) =>{
 if(!rep === tod){
     zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{mentionedJid: [sender], forwardingScore: 508, isForwarded: true}, sendEphemeral: true})
@@ -489,56 +409,9 @@ else{
     zynn.updatePresence(from, Presence.composing)
 }
 }
-const csticker = async(path) => {
-ran = wa.getRandom('.webp')
-                        await ffmpeg(`${path}`)
-                            .input(path)
-                            .on('start', function (cmd) {
-                                console.log(`Started : ${cmd}`)
-                            })
-                            .on('error', function (err) {
-                                console.log(`Error : ${err}`)
-                                fs.unlinkSync(path)
-                                reply(mess.error.stick)
-                            })
-                            .on('end', function () {
-                                console.log('Finish')
-                                wa.sendSticker(from, fs.readFileSync(ran), tod)
-                                fs.unlinkSync(path)
-                                fs.unlinkSync(ran)
-                            })
-                            .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-                            .toFormat('webp')
-                            .save(ran)
-}
 const bypasephe = async(anu) => {
 anu.message = (Object.keys(anu.message)[0] === 'ephemeralMessage') ? anu.message.ephemeralMessage.message : anu.message
 return anu.message
-}
-const isBusiness = async(orangnya) => {
-bus = await zynn.query({json: ['query', 'exist', orangnya], requiresPhoneConnection: false})
-try{
-    if(bus.biz === true){
-    var busines = true
-    }
-}catch{
-    var busines = false
-}
-return busines
-}
-const sendStickerFromUrlWithWM = async(url) => {
-   ranp = wa.getRandom('.gif')
-   rano = wa.getRandom('.webp')
-   exec(`wget ${url} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (err) => {
- //fs.unlinkSync(ranp)
- if (err) return reply(`Error: ${err}`)
- exec(`webpmux -set exif ./sticker/data.exif ${rano} -o ${rano}`, async (error) => {
-    if (error) return reply(`Error: ${error}`)
-    await wa.sendSticker(from, fs.readFileSync(rano), tod)
-    fs.unlinkSync(rano)
-    fs.unlinkSync(ranp)
- })
- })
 }
 const sendMediaURL = async(to, url, text="", mids=[]) =>{
                 if(mids.length > 0){
@@ -647,27 +520,6 @@ if(time2 < "23:59:00"){
       if(autoread){
       zynn.chatRead(tod.key.remoteJid)
    }
-// antihidetag
-/*if(isGroup){
-    if(m.isBaileys === true){
-    try{
-    if(!tod.key.fromMe && m.mentionedJid.length === groupMembers.length){
-    console.log('tembus 1')
-        if (chats.match(`@${m.mentionedJid[0].split('@')[0]}`)) return 
-    console.log('tembus 2')
-        if(isGroupAdmins) return reply('Admin mah bebas')
-        if(!isBotGroupAdmins){
-            return reply('Jangan Main Hidetag Woy\nUntung Bot bukan admin')
-        }
-        else{
-            reply(`Dilarang Main hidetag digroup ${groupName}\n\nKarena melanggar aturan, Anda akan dikick!`)
-            wa.kick(from, [m.sender])
-        }
-    }
-}catch{
-}
-}
-}*/
 //afk
 if(!tod.key.fromMe && !m.isBaileys){
   mentionByTag = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.mentionedJid : []
@@ -757,21 +609,6 @@ try{
 }
 }
 
-//simi pc
-if(!isGroup && !tod.key.fromMe && !isCmd && !chats.startsWith('<')){
-try{
-if(type === 'stickerMessage') return
-if(type === 'imageMessage') return
-if(type === 'audioMessage') return
-if(type === 'videoMessage') return
-console.log(sender + ' : ' + chats)
-data = await wa.fetchJson(`https://api.zeks.me/api/simi?apikey=iloveyou3000&text=${chats}`)
-console.log('Simi : ' + data.result)
-await zynn.updatePresence(from, Presence.composing)
-return reply(`Bot : ${data.result.split(' - please update to api v2')[0]}`)
-}catch{
-}
-}
 if(isGroup){
     try{
 if(!tod.message.extendedTextMessage.contextInfo.expiration == ''){
@@ -812,20 +649,11 @@ db.adddata('user', {username: await zynn.getName(sender), id: sender})
 }
 */
         //if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
-if(command == '' && !chats.startsWith('<') && !chats.startsWith('>') && !chats.startsWith('$')) return
+	if(command == '' && !chats.startsWith('<') && !chats.startsWith('>') && !chats.startsWith('$')) return
         if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
 
 switch (command) {
-case 'listuser':
-if(!itsMe) return
-teks = 'List User\n\n'
-for(let i of pendaftar){
-namaewa = await wa.getPushname(i, tod)
-teks += `${shp} Nama : ${namaewa}\n${shp} Tag : @${i.split('@')[0]}\n\n-------------------------\n\n`
-}
-wa.Mentions(from, teks, pendaftar, tod)
-break
 case 'help':
 tothit = await db.showdata('hit')
 hit = tothit.length
@@ -4210,7 +4038,7 @@ boij = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).me
         owgi = await zynn.downloadMediaMessage(boij)
         await fs.writeFileSync(`./media/qr.jpeg`, owgi)
         var imgbb = require('imgbb-uploader')
-        anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", './media/qr.jpeg')
+        anu = await imgbb("7943be468a5e670fbbb4854ac73d1b78", './media/qr.jpeg')
         res = `${anu.display_url}`
         data = await wa.fetchJson(`https://docs-jojo.herokuapp.com/api/qr_read?image_url=${res}`)
     teks = `Q R  R E A D E R\n\n${shp} Result : ${data.result.raw_text}`
@@ -4483,7 +4311,6 @@ data = await skrep.corona('indonesia')
 else{
 data = await skrep.corona(q)
 }
-console.log(data.status)
 if(data.status == 'error') return reply('Negara tidak ditemukan!')
 teks = `*I N F O  C O V I D*\n${shp} Negara : ${data.negara}\n\n`
 teks += shp + ` Total Kasus : ` + data.total_kasus + '\n'
@@ -4513,11 +4340,16 @@ rbg = await removeBackgroundFromImageFile({
   scale: "100%",
   path 
 })
-console.log(rbg)
 await fs.unlinkSync(path)
 buff = await Buffer.from(rbg.base64img, 'base64')
 await fs.writeFileSync(path, buff)
-await csticker(path, sender, command)
+zynn.prepareMessage(from, fs.readFileSync(path), 'imageMessage').then(res => {
+	zynn.downloadMediaMessage(res).then(stik => {
+		createSticker(stik, stickermetadata).then(asu => {
+			wa.sendSticker(from, asu, tod)
+                })
+	})
+})
 }
 })
 }
@@ -4696,7 +4528,7 @@ try{
     data = await skrep.mediafire(q)
     teks = `M E D I A F I R E  D I R E C T\n\n`
     teks += shp + ' Nama : ' + data.judul + '\n'
-        teks += shp + ' Size : ' + data.size + '\n'
+    teks += shp + ' Size : ' + data.size + '\n'
     teks += shp + ' Tanggal Upload : ' + data.upload_date + '\n'
     teks += shp + ' Link Direct : ' + data.link
     reply(teks)
@@ -4737,8 +4569,8 @@ break
 case 'delete':
 case 'del':
 case 'd':
-if (!isGroup)return reply(mess.only.group)
-if(!tod.message.extendedTextMessage.contextInfo.participant === zynn.user.jid) return
+if (!isGroup) return reply(mess.only.group)
+if(!m.quoted.sender === zynn.user.jid) return
 zynn.deleteMessage(from, { id: tod.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 break
 case 'afk':
@@ -4766,7 +4598,6 @@ const util = require('util')
         reply(util.format(JSON.parse(imguy.exif.slice(22).toString())))
 break
 case 'addnote':
-case 'addnotes':
 if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if(!q) return reply(`Example : ${prefix + command} teks1|teks2`)
 if(!itsMe) return
@@ -4792,7 +4623,7 @@ if(isQuotedImage){
 await fs.writeFileSync(`./media/${rname}.jpg`, owgi)
 path = `./media/${rname}.jpg`
 var imgbb = require('imgbb-uploader')
-anu = await imgbb("68cb5bee517bce4f74b0e910a5d96346", `./media/${rname}.jpg`)
+anu = await imgbb("7943be468a5e670fbbb4854ac73d1b78", `./media/${rname}.jpg`)
 const res = `${anu.display_url}`
 fs.unlinkSync(path)
         const addnote = {
@@ -4843,7 +4674,6 @@ reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
 break
 
 case 'listnotes':
-case 'listnote':
 idgcc = []
 tagc = []
 try{
@@ -4891,9 +4721,6 @@ try{
 break
 
 case 'delnote':
-case 'delnotes':
-case 'dellnote':
-case 'dellnotes':
 if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if(!q) return reply(`Example : ${prefix + command} zynn`)
 nnote = []
@@ -5064,13 +4891,6 @@ return reply(`Mungkin yang anda maksud adalah ${correct}\nPersentase keakuratan 
 }
 }*/
 break
-   // console.log(e)
-
-       /* }
-    } catch (err) {
-        console.log(color('[ERROR]', 'red'), err)
-    }
-}*/
 if (isGroup && budy != undefined) {
     } else {
     console.log(color('[TEXT]', 'red'), 'SELF-MODE', color(sender.split('@')[0]))
