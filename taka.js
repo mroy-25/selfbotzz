@@ -19,7 +19,6 @@
 } = require('@adiwajshing/baileys');
 const wa = require('./whatsapp/message')
 const fakereply = require('./lib/fake')
-const { msgFilter } = require('./lib/antispam.js')
 const skrep = require('./skrep')
 const moment = require("moment-timezone");
 const fs = require("fs");
@@ -635,16 +634,6 @@ if(pendaftar[0].id === sender){
 db.adddata('user', {username: await zynn.getName(sender), id: sender})
 }
 }
- /*if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && !isGroup) {
-        return console.log('[', color('SPAM', 'red'), ']', time, color(`${command}`), 'from', color(sender.split('@')[0]), 'args :', color(args.length)),
-        reply('[ SPAM ] Tunggu 3 detik!')}
-        if (!itsMe && !tod.key.fromMe && isCmd && msgFilter.isFiltered(from) && isGroup) {
-        return console.log('[', color('SPAM', 'red'), ']', time, color(`${command}`), 'from', color(sender.split('@')[0]), 'in', color(groupName), 'args :', color(args.length)),
-        reply('[ SPAM ] Tunggu 3 detik!')}
-        // [BETA] Avoid Spam Message
-        msgFilter.addFilter(from)
-}
-*/
         //if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
 	if(command == '' && !chats.startsWith('<') && !chats.startsWith('>') && !chats.startsWith('$')) return
         if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
