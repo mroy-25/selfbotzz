@@ -1615,12 +1615,39 @@ case 'approved3000years':
 try{
     if(isMedia && !zynn.message.videoMessage || isQuotedImage){
     reply(mess.wait)
-        const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+        const encmedia = isMedia || isQuotedImage &&  ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
         const media = await zynn.downloadMediaMessage(encmedia)
         res = await uploadImages(media, false)
         data = await ameapi.generate(command, {url: res})
         wa.sendImage(from, data, tod)
     }
+	else if(isQuotedSticker){
+	const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+    	const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+    	ran = wa.getRandom('.jpeg')
+    	exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+        fs.unlinkSync(media)
+        if (err) {
+            reply(`gagal`)
+            fs.unlinkSync(ran)
+        } else {
+            	anu = await wa.imgbb(ran)
+		data = await ameapi.generate(command, {url: anu.url})
+		weem = {
+   			type: 'full',
+        		pack: command,
+        		author: setting.packname,
+        		categories: [
+            			'🌹'
+        		]
+		}
+		buff = await Buffer.from(data, 'base64')
+		stik = await createSticker(buff, weem)
+		wa.sendSticker(from, stik, tod)
+           	fs.unlinkSync(ran)
+        }
+})
+	}
     else if(m.quoted){
     reply(mess.wait)
         try{
@@ -1800,113 +1827,6 @@ for(let i of hdata){
     reply(mess.error.api)
 }
 break
-case 'test':
-if(!itsMe) return
-const downloadM = async(save) => {
-
-encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-
-encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-if (save) return await zynn.downloadAndSaveMediaMessage(encmedia)
-return await zynn.downloadMediaMessage(encmedia)
-  }
-
-buf = await downloadM() 
-imeu = await zynn.prepareMessage('0@s.whatsapp.net', buf, image) 
-
-imeg = imeu.message.imageMessage
-res = await zynn.prepareMessageFromContent(from,{
-  "orderMessage": {
-            "orderId": "501374481143681",
-            "thumbnail": imeg,
-            "itemCount": 9999,
-            "status": "INQUIRY",
-            "surface": 404,
-            "message": "Selfbot",
-            "orderTitle": "</ Hanya Orang Biasa",
-            "sellerJid": "6281990498472@s.whatsapp.net",
-            "token": "AR6eHHZTvi8k3qMfxWHBCvAXO+vG5VW/1QtpiPpxL3Tfyg=="
-            }
-}, {quoted: imeu, contextInfo:{}}) 
-
-zynn.relayWAMessage(res)
-break
-case 'product':
-if(!itsMe) return
-const downloadMM = async(save) => {
-
-encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-
-encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-if (save) return await zynn.downloadAndSaveMediaMessage(encmedia)
-return await zynn.downloadMediaMessage(encmedia)
-  }
-
-buf = await downloadMM() 
-imeu = await zynn.prepareMessage('0@s.whatsapp.net', buf, image) 
-
-imeg = imeu.message.imageMessage
-res = await zynn.prepareMessageFromContent(from,{
-  "productMessage": {
-    "product": {
-      "productImage": imeg,
-      "productId": "3656809567780692",
-      "title": "Selfbot",
-      "currencyCode": "IDR",
-      "priceAmount1000": "999999990",
-      "productImageCount": 1
-    },
-    "businessOwnerJid": zynn.user.jid,
-    "contextInfo": {
-      "forwardingScore": 3,
-      "isForwarded": true
-    }
-  }
-}, {quoted:imeu, contextInfo:{}}) 
-
-zynn.relayWAMessage(res)
-break
-/*case 'loli':
-try{
-    data = await loli.getSFWLoli()
-    sendMediaURL(from, data.url, 'LOLI')
-}catch(e){
-    reply(mess.error.api)
-}
-break
-case 'shota':
-try{
-    data = await loli.getSFWShota()
-    sendMediaURL(from, data.url, 'SHOTA')
-}catch(e){
-    reply(mess.error.api)
-}
-break
-*/
-case 'toptt':
-if(isQuotedAudio){
-reply(mess.wait)
-   boij = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-   media = await zynn.downloadMediaMessage(boij)
-   await fs.writeFileSync(`./src/audio/toptt.mp3`, media)
-   buffer = fs.readFileSync(`./src/audio/toptt.mp3`)
-   await wa.sendptt(from, buffer, tod)
-   fs.unlinkSync('./src/audio/toptt.mp3')
-}
-break
-case 'toaudio':
-if(isQuotedAudio){
-reply(mess.wait)
-   boij = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-   media = await zynn.downloadMediaMessage(boij)
-   await fs.writeFileSync(`./src/audio/toaudio.mp3`, media)
-   buffer = fs.readFileSync(`./src/audio/toaudio.mp3`)
-   await wa.sendAudio(from, buffer, tod)
-   fs.unlinkSync('./src/audio/toaudio.mp3')
-}
-break
 case 'tomp3':
 zynn.updatePresence(from, Presence.composing) 
 if (!isQuotedVideo) return reply('reply videonya um')
@@ -1934,11 +1854,18 @@ exec(`ffmpeg -i ${media} -filter:a "atempo=0.7,asetrate=44100" ${ran}`, (err, st
     fs.unlinkSync(ran)
 })
 break
-case 'bass':  
+case 'bass':
+if(!q){
+	value = '100'
+}
+else{
+	value = args[0]
+	if(isNaN(args[0]) return reply('Input harus berupa nomor')
+}
 encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await zynn.downloadAndSaveMediaMessage(encmedia)
 ran = wa.getRandom('.mp3')
-exec(`ffmpeg -i ${media} -af equalizer=f=${body.slice(6)}:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+exec(`ffmpeg -i ${media} -af equalizer=f=${value}:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
     fs.unlinkSync(media)
     if (err) return reply('Error!')
     hah = fs.readFileSync(ran)
@@ -2256,27 +2183,6 @@ else{
 }
 }
 break
-/*case 'tiktoknowm':
-if(!q) return reply('Masukkan linknya!')
-if(!isUrl(q)) return reply(mess.error.Iv)
-reply(mess.wait)
-try{
-    //data = await wa.fetchJson(`https://dapuhy-api.herokuapp.com/api/socialmedia/tiktoknowm?url=${q}&apikey=2OcDMwvZ1Uc2S5V`)
-    wa.sendFileFromUrl(from, `https://dapuhy-api.herokuapp.com/api/socialmedia/tiktoknowm?url=${q}&apikey=2OcDMwvZ1Uc2S5V`, tod, '*T I K T O K  N O  W A T E R M A R K*')
-}catch{
-    reply(mess.error.api)
-}
-break
-case 'tiktok':
-if(!q) return reply('Masukkan linknya!')
-if(!isUrl(q)) return reply(mess.error.Iv)
-reply(mess.wait)
-try{
-    wa.sendFileFromUrl(from, `https://dapuhy-api.herokuapp.com/api/socialmedia/tiktokwithwm?url=${q}&apikey=2OcDMwvZ1Uc2S5V`, tod, '*T I K T O K  W A T E R M A R K*')
-}catch{
-    reply(mess.error.api)
-}
-break*/
 /*case 'tiktok':
 if(!q) return reply('Masukkan linknya!')
 reply(mess.wait)
@@ -2664,40 +2570,6 @@ try{
     reply(mess.error.api)
 }
 break
-/*case 'ig':
-case 'instagram':
-if(!q) return reply('Linknya mana?')
-if(!isUrl(q)) return reply('Tolong masukkan link/url dengan benar')
-try{
-    data = await wa.fetchJson(`https://api.zeks.xyz/api/ig?url=${q}&apikey=apivinz`)
-    burn = data.result
-    teks = '*「 I N S T A G R A M  D O W N L O A D E R 」*\n\n'
-    for (let i of burn){
-        if ( i.type == "mp4"){
-            buff = await wa.getBuffer(i.url)
-            wa.sendVideo(from, buff, tod, `${shp} Username : ${data.owner}\n${shp} Caption ; ${data.caption}`)
-        }
-        else{
-            buff = await getBuffer(i.url)
-            wa.sendImage(from, buff, tod, `${shp} Username : ${data.owner}\n${shp} Caption ; ${data.caption}`)
-        }
-    }
-}catch(e){
-    reply(mess.error.api)
-}
-break*/
-case 'igstalk':
-if(!q) return reply('Masukkan username instagram!')
-reply(mess.wait)
-try{
-    data = await ig.fetchUser(q)
-    console.log(data)
-    teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username}\n${shp} Fullname : ${data.full_name}\n${shp} Followers : ${data.following}\n${shp} Following : ${data.followers}\n${shp} Verified : ${data.is_verified}\n${shp} Private : ${data.is_private}\n${shp} Biografi : ${data.biography}`
-    sendMediaURL(from, data.profile_pic_url_hd, teks)
-}catch(e){
-    return reply(mess.error.api)
-}
-break
 case 'tr':
 if(!q) return reply(`Cara Penggunaan ${prefix}tr [kodebahasa teks]/reply pesan dengan ${prefix}tr kodebahasa\nExample : ${prefix}tr id I Love you`)
 if(!args[0]) return reply(`Masukkan kode bahasanya om`)
@@ -2870,7 +2742,7 @@ if(isQuotedSticker){
 }
 else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo || isQuotedSticker) && args.length == 0) {
     reply(mess.wait)
-            boij = isQuotedImage || isQuotedVideo || isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+            boij = isMedia || isQuotedImage || isQuotedVideo || isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
             owgi = await zynn.downloadMediaMessage(boij)
             res = await uploadImages(owgi, false)
             reply(res)
@@ -3017,29 +2889,6 @@ try {
     reply('SUKSES JOIN GROUP')
 } catch(e) {
     reply(mess.Iv)
-}
-break
-case 'kontak':
-if(!itsMe) return reply(mess.only.ownerB)
-asu = q.split('|')[0]
-asu2 = q.split('|')[1]
-if (!asu) return reply(`Penggunaan ${prefix}kontak @tag atau nomor|nama`)
-if (tod.message.extendedTextMessage != undefined){
-    mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
-    wa.sendKontak(from,mentioned[0].split('@')[0], asu2, tod)
-} else {
-    wa.sendKontak(from,asu, asu2, tod)
-}
-break
-case 'kontag':
-if(!itsMe) return reply(mess.only.ownerB)
-argz = arg.split('|')
-if (!argz) return reply(`Penggunaan ${prefix}kontak @tag atau nomor|nama`)
-if (tod.message.extendedTextMessage != undefined){
-    mentioned = tod.message.extendedTextMessage.contextInfo.mentionedJid
-    wa.hideTagKontak(from,mentioned[0].split('@')[0], argz[1])
-} else {
-    wa.hideTagKontak(from,argz[0], argz[1])
 }
 break
 case 'graffiti':
