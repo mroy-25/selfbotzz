@@ -574,3 +574,11 @@ exports.random = async(num) => {
 	rand = Math.floor(Math.random() * num)
 	return rand
 }
+exports.imgbb = async(path) => {
+	return new Promise((resolve) => {
+		var imgbb = require('imgbb-uploader')
+    		imgbb("68cb5bee517bce4f74b0e910a5d96346", path).then(res => {
+    			resolve(res)
+    	})
+    })
+}
