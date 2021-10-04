@@ -53,7 +53,7 @@ const batteryLevelStr = json[2][0][1].value
 fs.writeFileSync('./src/batre.json' , JSON.stringify(json[2][0], null , 2))
 })
 zynn.on('group-participants-update', async (msg) => {
-require('./lib/detection.js')(zynn, msg, client)
+require('./lib/greetings.js')(zynn, msg, client)
 })
 zynn.on('CB:Presence', async (asd) => {
 try{
