@@ -59,7 +59,6 @@ const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI();
 const tovid = require('./lib/tovideo')
 setting = JSON.parse(fs.readFileSync('./setting.json'))
-const { uploadimg } = require('./lib/uploadimg');
 const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
 const { addcmd, getcmd } = require('./lib/setcmd')
 const words = JSON.parse(fs.readFileSync('./src/correct.json'))
