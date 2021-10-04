@@ -439,7 +439,8 @@ zynn.sendMessage(from, `Mengirim Undangan Group Ke @${orangnya}`, MessageType.te
 zynn.sendGroupV4Invite(from, orang, inv[0].invite_code, inv[0].invite_code_exp, false ,`Invitation to join my WhatsApp group`)
 }
 else if(inv[0].code == 408){
-zynn.sendMessage(from, `Terdeteksi @${orangnya} keluar Group Baru Baru ini\nSilahkan coba beberapa saat lagi`, MessageType.text, {quoted: tod, contextInfo: {mentionedJid: [orang]}})
+zynn.sendMessage(from, `Terdeteksi @${orangnya} keluar Group Baru Baru ini\nMengirim Undangan Group Ke @${orangnya}`, MessageType.text, {quoted: tod, contextInfo: {mentionedJid: [orang]}})
+zynn.sendGroupV4Invite(from, orang, inv[0].invite_code, inv[0].invite_code_exp, false ,`Invitation to join my WhatsApp group`)
 }
 else if(inv[0].code == 500){
 return reply('Tidak dapat menambahkan peserta\nGroup sudah penuh saat ini!')
@@ -581,4 +582,11 @@ exports.imgbb = async(path) => {
     			resolve(res)
     	})
     })
+}
+exports.tiny = async(link) => {
+	return new Promise((resolve) => {
+		axios.get(`https://tinyurl.com/api-create.php?url=${link}`).then(res => {
+			resolve(res.data)
+		})
+	})
 }
