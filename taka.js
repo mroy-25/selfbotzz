@@ -1610,7 +1610,7 @@ case 'approved3000years':
 try{
     if(isMedia && !zynn.message.videoMessage || isQuotedImage){
     reply(mess.wait)
-        const encmedia = isMedia || isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+        const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
         const media = await zynn.downloadMediaMessage(encmedia)
         res = await uploadImages(media, false)
         data = await ameapi.generate(command, {url: res})
@@ -1823,10 +1823,10 @@ for(let i of hdata){
 }
 break
 case 'tomp3':
+if(isQuotedAudio){
 zynn.updatePresence(from, Presence.composing) 
-if (!isQuotedVideo) return reply('reply videonya um')
 reply('tunggu sebentar')
-encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
 media = await zynn.downloadAndSaveMediaMessage(encmedia)
 ran = wa.getRandom('.mp4')
 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -1836,8 +1836,12 @@ exec(`ffmpeg -i ${media} ${ran}`, (err) => {
     zynn.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: tod})
     fs.unlinkSync(ran)
 })
+}else{
+	return reply('reply videonya um')
+}
 break
 case 'slow':
+if (!isQuotedAudio) return reply('reply Audionya um')
 encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await zynn.downloadAndSaveMediaMessage(encmedia)
 ran = wa.getRandom('.mp3')
@@ -1850,6 +1854,7 @@ exec(`ffmpeg -i ${media} -filter:a "atempo=0.7,asetrate=44100" ${ran}`, (err, st
 })
 break
 case 'bass':
+if (!isQuotedAudio) return reply('reply Audionya um')
 if(!q){
 	value = '100'
 }
