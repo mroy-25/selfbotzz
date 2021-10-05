@@ -1,1 +1,1 @@
-worker: node --optimize_for_size --max_old_space_size=460 taka.js
+worker: node --inspect=8080 taka.js
