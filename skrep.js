@@ -5,6 +5,39 @@ const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
 
+exports.trendtwit = (country) => {
+	return new Promise((resolve,reject) => {
+		axios.get(`https://getdaytrends.com/${country}/`)
+		.then(({ data }) => {
+			const $ = cheerio.load(data)
+			const hastag = [];
+      const tweet = [];
+      const result = [];
+      $('#trends > table.table.table-hover.text-left.clickable.ranking.trends.wider.mb-0 > tbody > tr> td.main > a').each(function(a, b){
+        deta = $(b).text()
+        hastag.push(deta)
+      })
+      $('#trends > table.table.table-hover.text-left.clickable.ranking.trends.wider.mb-0 > tbody > tr > td.main > div > span').each(function(a, b){
+        deta = $(b).text()
+        tweet.push(deta)
+      })
+      num = 1
+      for(let i=0; i<hastag.length; i++){
+        result.push({
+          rank: num,
+          hastag: hastag[i],
+          tweet: tweet[i]
+        })
+        num += 1
+      }
+		    resolve({
+          country: country,
+          result: result
+        })
+		})
+		.catch(reject)
+	})
+}
 exports.pinterest = async(querry) => {
 	return new Promise(async(resolve,reject) => {
 		 axios.get('https://id.pinterest.com/search/pins/?autologin=true&q=' + querry, {
