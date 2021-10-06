@@ -531,7 +531,7 @@ if(!tod.key.fromMe && !m.isBaileys){
     const cekafk = ms(Date.now() - afktime)
     ini_txt = `@${x.split('@')[0]} sedang afk.\n\n`
     ini_txt += `${shp} Reason : ${afkreason == '' ? 'Nothing' : afkreason}\n${shp} Since : _${cekafk.hours} Jam  ${cekafk.minutes} Menit  ${cekafk.seconds} Detik  Yang lalu_`
-  wa.Mentions(from, ini_txt, [x], tod)
+  wa.Mentions(from, ini_txt, parseMention(ini_txt), tod)
   }
 }catch{
 }
