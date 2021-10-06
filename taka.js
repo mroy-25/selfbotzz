@@ -1092,7 +1092,7 @@ const { speedz } = require('./lib/speed.js')
 speedz(zynn, reply)
 break
 case 'block':
-if(!itsMe) return reply(mess.only.Bowner)
+if(!itsMe) return reply(mess.only.ownerB)
 try{
 if(m.quoted){
 zynn.blockUser(m.quoted.sender, 'add')
@@ -1118,7 +1118,7 @@ reply(o)
 }
 break
 case 'unblock':
-if(!itsMe) return reply(mess.only.Bowner)
+if(!itsMe) return reply(mess.only.ownerB)
 try{
 if(m.quoted){
 zynn.blockUser(m.quoted.sender, 'remove')
@@ -4271,7 +4271,7 @@ try{
 break
 case 'addcmd': 
 case 'setcmd':
-if (!itsMe) return reply(mess.only.Bowner)
+if (!itsMe) return reply(mess.only.ownerB)
 if (isQuotedSticker) {
     if (!q) return reply(`Cara Penggunaan : Reply sticker dengan caption ${command} commandnya\nContoh : ${command} .help`)
     var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
@@ -4281,7 +4281,7 @@ if (isQuotedSticker) {
 }
 break
 case 'delcmd':{
-if (!itsMe) return reply(mess.only.Bowner)
+if (!itsMe) return reply(mess.only.ownerB)
 //if (!isQuotedSticker) return reply(`reply stickernya`)
 var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
 db.delete('stickerdb', {id: kodenya}).then((res) => {
