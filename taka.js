@@ -2592,7 +2592,7 @@ else{
 break
 case 'asmaulhusna':
 try{
-	if(!q && !isNaN(q)){
+	asmaulhusna = async() => {
     	data = await wa.fetchJson('https://raw.githubusercontent.com/TheSploit/islamic/main/AsmaulHusna.json')
     	teks = '*AsmaulHusna*\n\n'
     	num = 1
@@ -2602,6 +2602,12 @@ try{
     	}
     	reply(teks)
     }
+	if(!q){
+		asmaulhusna()
+	}
+	else if(isNaN){
+		asmaulhusna()
+	}
     else{
     	data = await wa.fetchJson('https://raw.githubusercontent.com/TheSploit/islamic/main/AsmaulHusna.json')
     	urut = q - 1
@@ -3457,8 +3463,8 @@ if(deta[0].id === from){
 break
 case 'listmem':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
-kon = [];
 if(!q){
+kon = [];
 for(let i of groupMembers.map(id => id.jid)){
     bio = await zynn.get
     kont.push({
@@ -3472,6 +3478,7 @@ hehex = await zynn.sendMessage(from, {
     }, 'contactsArrayMessage', { quoted: tod })
 }
 if(q == 'luar'){
+kon = [];
 for(let i of groupMembers.filter(id => !id.jid.startsWith('62')).map(res => res.jid)){
     bio = await zynn.get
     kont.push({
@@ -3485,6 +3492,7 @@ hehex = await zynn.sendMessage(from, {
     }, 'contactsArrayMessage', { quoted: tod })
 }
 else{
+kon = [];
 for(let i of groupMembers.filter(id => !id.jid.startsWith(args[0])).map(res => res.jid)){
     bio = await zynn.get
     kont.push({
