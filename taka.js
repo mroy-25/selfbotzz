@@ -4578,6 +4578,30 @@ try{
 	reply(mess.error.api)
 }
 break
+case 'trendtweet':
+try{
+	if(!q){
+		data = await skrep.trendtwit('indonesia')
+		teks = bold('TRENDING TWITTER') + `\n${shp} Negara : Indonesia\n\n`
+		for(let i of data.result){
+			teks += shp + ' Rank ' + i.rank + '\n'
+			teks += shp + ' Hastag ' + i.hastag + '\n'
+			teks += shp + ' Tweet ' + i.tweet + '\n\n---------------------------------\n\n'
+		}
+		reply(teks)
+	}
+	else{
+		data = await skrep.trendtwit(args[0])
+		teks = bold('TRENDING TWITTER') + `\n${shp} Negara : ${args[0]}\n\n`
+		for(let i of data.result){
+			teks += shp + ' Rank ' + i.rank + '\n'
+			teks += shp + ' Hastag ' + i.hastag + '\n'
+			teks += shp + ' Tweet ' + i.tweet + '\n\n---------------------------------\n\n'
+		}
+		reply(teks)
+	}
+}
+break
 default:
     if (chats.startsWith('$')){
     if(!itsMe) return
