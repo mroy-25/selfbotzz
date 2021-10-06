@@ -4324,7 +4324,7 @@ ini_txt = "Anda telah afk. "
 if (alasan != "") {
   ini_txt += "Dengan alasan " + alasan
 }
-reply(ini_txt)
+wa.Mentions(from, ini_txt, parseMention(ini_txt), tod)
 break
 case 'getexif':
 let webpv = require('node-webpmux')
