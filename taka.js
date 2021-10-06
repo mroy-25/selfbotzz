@@ -2592,7 +2592,7 @@ else{
 break
 case 'asmaulhusna':
 try{
-	asmaulhusna = async() => {
+	const asmaulhusna = async() => {
     	data = await wa.fetchJson('https://raw.githubusercontent.com/TheSploit/islamic/main/AsmaulHusna.json')
     	teks = '*AsmaulHusna*\n\n'
     	num = 1
@@ -2600,13 +2600,17 @@ try{
     		teks += `${num}\n${shp} Latin : ${i.latin}\n${shp} Arabic : ${i.arab}\n${shp} Id : ${i.translate_id}\n${shp} En : ${i.translate_en}\n\n---------------------------------\n\n`
     		num += 1
     	}
-    	reply(teks)
+    	return teks
     }
 	if(!q){
-		asmaulhusna()
+		asmaulhusna().then(res => {
+		reply(res)
+		})
 	}
-	else if(isNaN){
-		asmaulhusna()
+	else if(isNaN(q)){
+		asmaulhusna().then(res => {
+		reply(res)
+		})
 	}
     else{
     	data = await wa.fetchJson('https://raw.githubusercontent.com/TheSploit/islamic/main/AsmaulHusna.json')
