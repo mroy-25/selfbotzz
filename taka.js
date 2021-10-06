@@ -4600,6 +4600,8 @@ try{
 		}
 		reply(teks)
 	}
+}catch{
+	reply(mess.error.api)
 }
 break
 default:
