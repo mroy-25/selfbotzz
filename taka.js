@@ -2597,7 +2597,7 @@ try{
     	teks = '*AsmaulHusna*\n\n'
     	num = 1
     	for(let i of data.result){
-    		teks += `${num}\n${shp} Latin : ${hdata.latin}\n${shp} Arabic : ${hdata.arab}\n${shp} Id : ${hdata.translate_id}\n${shp} En : ${hdata.translate_en}\n\n---------------------------------\n\n`
+    		teks += `${num}\n${shp} Latin : ${i.latin}\n${shp} Arabic : ${i.arab}\n${shp} Id : ${i.translate_id}\n${shp} En : ${i.translate_en}\n\n---------------------------------\n\n`
     		num += 1
     	}
     	reply(teks)
@@ -3464,7 +3464,7 @@ break
 case 'listmem':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q){
-kon = [];
+kont = [];
 for(let i of groupMembers.map(id => id.jid)){
     bio = await zynn.get
     kont.push({
@@ -3478,7 +3478,7 @@ hehex = await zynn.sendMessage(from, {
     }, 'contactsArrayMessage', { quoted: tod })
 }
 if(q == 'luar'){
-kon = [];
+kont = [];
 for(let i of groupMembers.filter(id => !id.jid.startsWith('62')).map(res => res.jid)){
     bio = await zynn.get
     kont.push({
@@ -3492,7 +3492,7 @@ hehex = await zynn.sendMessage(from, {
     }, 'contactsArrayMessage', { quoted: tod })
 }
 else{
-kon = [];
+kont = [];
 for(let i of groupMembers.filter(id => !id.jid.startsWith(args[0])).map(res => res.jid)){
     bio = await zynn.get
     kont.push({
