@@ -43,9 +43,9 @@ const ameapi = new ame('4e5ede2d81e0aee98dec15ee01500d63171662b8ddc3b0dc99bdbd41
 const google = require('google-it')
 const yts = require('yt-search')
 const gis = require('g-i-s')
-const zrapi = require('zrapi')
 const Ra = require('ra-api')
 const zahir = require('zahir-api')
+const textmaker = require('./lib/textmaker.js')
 const qrcode = require("qrcode-terminal")
 const infotlp = require('no-telp')
 const express = require('express')
@@ -2895,7 +2895,7 @@ case 'graffiti':
 if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
-    data = await zrapi.textpro('https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html', [q])
+    data = await textmaker.textpro('https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html', [q])
     sendMediaURL(from, data)
 }catch(e){
     reply(mess.error.api)
@@ -2905,7 +2905,7 @@ case 'neon':
 if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
-    data = await zrapi.textpro('https://textpro.me/create-a-futuristic-technology-neon-light-text-effect-1006.html', [q])
+    data = await textmaker.textpro('https://textpro.me/create-a-futuristic-technology-neon-light-text-effect-1006.html', [q])
     sendMediaURL(from, data)
 }catch(e){
     reply(mess.error.api)
@@ -2915,7 +2915,7 @@ case 'blackpink':
 if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
-    data = await zrapi.textpro('https://textpro.me/create-blackpink-logo-style-online-1001.html', [q])
+    data = await textmaker.textpro('https://textpro.me/create-blackpink-logo-style-online-1001.html', [q])
     sendMediaURL(from, data)
 }catch(e){
     reply(mess.error.api)
@@ -2925,7 +2925,7 @@ case 'blood':
 if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
-    data = await zrapi.textpro('https://textpro.me/blood-text-on-the-frosted-glass-941.html', [q])
+    data = await textmaker.textpro('https://textpro.me/blood-text-on-the-frosted-glass-941.html', [q])
     sendMediaURL(from, data)
 }catch(e){
     reply(mess.error.api)
@@ -2935,7 +2935,7 @@ case 'papercut':
 if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
-    data = await zrapi.textpro('https://textpro.me/create-art-paper-cut-text-effect-online-1022.html', [q])
+    data = await textmaker.textpro('https://textpro.me/create-art-paper-cut-text-effect-online-1022.html', [q])
     sendMediaURL(from, data)
 }catch(e){
     reply(mess.error.api)
@@ -2945,7 +2945,7 @@ case 'leaves':
 if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
-        data = await zrapi.textpro('https://textpro.me/natural-leaves-text-effect-931.html', [q])
+        data = await textmaker.textpro('https://textpro.me/natural-leaves-text-effect-931.html', [q])
         sendMediaURL(from, data)
 }catch(e){
         reply(mess.error.api)
