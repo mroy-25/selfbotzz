@@ -2591,15 +2591,24 @@ else{
 }
 break
 case 'asmaulhusna':
-if(!q) return reply('masukkan nomor asmaul-husna!')
-if(isNaN(q)) return reply('Harus berupa angka 1-99!')
-if(q > 99) return reply('Harus berupa angka 1-99!')
 try{
-    data = await zahir.Islamic.AsmaulHusna()
-    urut = q - 1
-    hdata = data.data[urut]
-    teks = `*AsmaulHusna*\n\n${shp} Latin : ${hdata.latin}\n${shp} Arabic : ${hdata.arabic}\n${shp} Id : ${hdata.translation_id}\n${shp} En : ${hdata.translation_en}`
-    reply(teks)
+	if(!q && !isNaN(q)){
+    	data = await wa.fetchJson('https://raw.githubusercontent.com/TheSploit/islamic/main/AsmaulHusna.json')
+    	teks = '*AsmaulHusna*\n\n'
+    	num = 1
+    	for(let i of data.result){
+    		teks += `${num}\n${shp} Latin : ${hdata.latin}\n${shp} Arabic : ${hdata.arab}\n${shp} Id : ${hdata.translate_id}\n${shp} En : ${hdata.translate_en}\n\n---------------------------------\n\n`
+    		num += 1
+    	}
+    	reply(teks)
+    }
+    else{
+    	data = await wa.fetchJson('https://raw.githubusercontent.com/TheSploit/islamic/main/AsmaulHusna.json')
+    	urut = q - 1
+    	hdata = data.result[urut]
+    	teks = `*AsmaulHusna*\n\n${shp} Latin : ${hdata.latin}\n${shp} Arabic : ${hdata.arab}\n${shp} Id : ${hdata.translate_id}\n${shp} En : ${hdata.translate_en}`
+    	reply(teks)
+    }
 }catch(e){
     reply(mess.error.api)
 }
@@ -2694,21 +2703,6 @@ teks += shp + ' Tipe Surah : ' + hdata.revelation.id
 reply(teks)
 }catch{
 reply(mess.error.api)
-}
-break
-case 'kisahnabi':
-if(!q) return reply('Masukkan nama nabi!')
-try{
-data = await zahir.Islamic.KisahNabi(q)
-teks = `*K I S A H  N A B I*\n\n`
-teks += shp + ' Nama : ' + data.name + '\n'
-teks += shp + ' Tahun Kelahiran : ' + data.thn_kelahiran + '\n'
-teks += shp + ' Usia : ' + data.usia + '\n'
-teks += shp + ' Tempat : ' + data.tmp + '\n\n'
-teks += data.description
-wa.sendFileFromUrl(from, data.image_url, tod, teks)
-}catch{
-reply('Error\nPastikan input sudah benar!')
 }
 break
 case 'hidetag':
