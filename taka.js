@@ -2951,6 +2951,16 @@ try{
         reply(mess.error.api)
 }
 break
+case 'joker':
+if(!q) return reply('Masukkan teks!')
+reply(mess.wait)
+try{
+        data = await textmaker.textpro('https://textpro.me/create-logo-joker-online-934.html', [q])
+        sendMediaURL(from, data)
+}catch(e){
+        reply(mess.error.api)
+}
+break
 case 'ttp':
 if(!q) return reply('Masukkan teksnya!')
 try{
