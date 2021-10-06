@@ -3461,50 +3461,47 @@ if(deta[0].id === from){
   reply('Prefix tidak diset digroup ini')
 }
 break
-    case 'listmem':
-    if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+case 'listmem':
+if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
+kon = [];
 if(!q){
-    members_id = []
-teks = `⬣ All Member Group ${groupName}\n\n`
-for (let mem of groupMembers) {
-teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
-teks += `  ┗━ ${shp} wa.me/${mem.jid.split('@')[0]}\n\n`
-members_id.push(mem.jid)
+for(let i of groupMembers.map(id => id.jid)){
+    bio = await zynn.get
+    kont.push({
+        displayName: await zynn.getName(i),
+        vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
+    })
 }
-teks += `\n`
-teks += `⬣ ${fakec}`
-return wa.Mentions(from, teks, members_id, tod)
+hehex = await zynn.sendMessage(from, {
+    "displayName": `3 kontak`,
+    "contacts": kont
+    }, 'contactsArrayMessage', { quoted: tod })
 }
 if(q == 'luar'){
-      members_id = []
-teks = `⬣ All Non Indonesian Member in Group ${groupName}\n\n`
-for (let mem of groupMembers) {
-if(!mem.jid.startsWith('62')){
-teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
-teks += `  ┗━ ${shp} wa.me/${mem.jid.split('@')[0]}\n\n`
-members_id.push(mem.jid)
-var y = mem.jid.length
+for(let i of groupMembers.filter(id => !id.jid.startsWith('62')).map(res => res.jid)){
+    bio = await zynn.get
+    kont.push({
+        displayName: await zynn.getName(i),
+        vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
+    })
 }
-}
-teks += `\n`
-teks += `⬣ ${fakec}`
-wa.Mentions(from, teks, members_id, tod)
+hehex = await zynn.sendMessage(from, {
+    "displayName": `3 kontak`,
+    "contacts": kont
+    }, 'contactsArrayMessage', { quoted: tod })
 }
 else{
-      members_id = []
-teks = `⬣ All Member Group ${groupName}\n⬣ Kode Negara : ${args[0]}\n\n`
-for (let mem of groupMembers) {
-if(mem.jid.startsWith(`${args[0]}`)){
-teks += `  ${shp} @${mem.jid.split('@')[0]}\n`
-teks += `  ┗━ ${shp} wa.me/${mem.jid.split('@')[0]}\n\n`
-members_id.push(mem.jid)
-var y = mem.jid.length
+for(let i of groupMembers.filter(id => !id.jid.startsWith(args[0])).map(res => res.jid)){
+    bio = await zynn.get
+    kont.push({
+        displayName: await zynn.getName(i),
+        vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
+    })
 }
-}
-teks += `\n`
-teks += `⬣ ${fakec}`
-if(members_id == '') return reply('Tidak ditemukan')
-wa.Mentions(from, teks, members_id, tod)
+hehex = await zynn.sendMessage(from, {
+    "displayName": `3 kontak`,
+    "contacts": kont
+    }, 'contactsArrayMessage', { quoted: tod })
 }
 break
 case 'autoread':
