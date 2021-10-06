@@ -3470,7 +3470,6 @@ if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
 if(!q){
 kont = [];
 for(let i of groupMembers.map(id => id.jid)){
-    bio = await zynn.get
     kont.push({
         displayName: await zynn.getName(i),
         vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
@@ -3484,7 +3483,7 @@ hehex = await zynn.sendMessage(from, {
 if(q == 'luar'){
 kont = [];
 for(let i of groupMembers.filter(id => !id.jid.startsWith('62')).map(res => res.jid)){
-    bio = await zynn.get
+    
     kont.push({
         displayName: await zynn.getName(i),
         vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
@@ -3497,8 +3496,8 @@ hehex = await zynn.sendMessage(from, {
 }
 else{
 kont = [];
-for(let i of groupMembers.filter(id => !id.jid.startsWith(args[0])).map(res => res.jid)){
-    bio = await zynn.get
+for(let i of groupMembers.filter(id => id.jid.startsWith(args[0])).map(res => res.jid)){
+    
     kont.push({
         displayName: await zynn.getName(i),
         vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
