@@ -4430,31 +4430,57 @@ wa.Mentions(from, teks, tagc, tod)
 }
 break
 case 'getnote':
-case 'getnotes':
 if(!q) return reply(`Example : ${prefix + command} zynn`)
 nnote = [];
-try{
-	deta = await db.showdata('note', {groupId: from, namanote: q})
-	if(deta[0].groupId === from){
-		teks = `N O T E\n\n`
-		teks += shp + ' Nama Note : ' + deta[0].namanote + '\n'
-		teks += shp + ' Pembuat : @' + deta[0].creator.split('@')[0] + '\n'
-		teks += shp + ' Tanggal dibuat : ' + deta[0].date + '\n'
-		teks += shp + ' Type Note : ' + deta[0].type + '\n\n'
-		teks += `Note akan dikirim setelah pesan ini\nMohon tunggu...`
-		await wa.Mentions(from, teks, [deta[0].creator], tod)
-		if(deta[0].type == 'teks'){
-			reply(deta[0].caption)
+if(args[0] == '-g'){
+	deta = await db.showdata('note', {namanote: q.split('-g ')[1]})
+	try{
+		if(deta[0].namanote === q.split('-g ')[1]){
+			teks = `N O T E\n\n`
+			for(let i of deta){
+				teks += shp + ' Nama Note : ' + i.namanote + '\n'
+				teks += shp + ' Pembuat : @' + i.creator.split('@')[0] + '\n'
+				teks += shp + ' Tanggal dibuat : ' + i.date + '\n'
+				teks += shp + ' Type Note : ' + i.type + '\n\n'
+			}
+			teks += `Note akan dikirim setelah pesan ini\nMohon tunggu...`
+			await wa.Mentions(from, teks, parseMention(teks), tod)
+			for(let i of deta){
+				if(i.type == 'teks'){
+					wa.Mentions(from, i.caption, parseMention(i.caption), tod)
+				}
+				else{
+					wa.sendFileFromUrl(from, i.media, tod, `${i.caption}`, parseMention(i.caption))
+				}
+			}
 		}
-		else{
-			wa.sendFileFromUrl(from, deta[0].media, tod, `${deta[0].caption}`)
-		}
+	}catch{
+		return reply(`Note dengan nama ${q.split('-g ')[1]} tidak ditemukan!`)
 	}
-}catch{
-	return reply(`Note dengan nama ${q} tidak ditemukan digroup Ini!`)
+}
+else{
+	deta = await db.showdata('note', {groupId: from, namanote: q})
+	try{
+		if(deta[0].groupId === from){
+			teks = `N O T E\n\n`
+			teks += shp + ' Nama Note : ' + deta[0].namanote + '\n'
+			teks += shp + ' Pembuat : @' + deta[0].creator.split('@')[0] + '\n'
+			teks += shp + ' Tanggal dibuat : ' + deta[0].date + '\n'
+			teks += shp + ' Type Note : ' + deta[0].type + '\n\n'
+			teks += `Note akan dikirim setelah pesan ini\nMohon tunggu...`
+			await wa.Mentions(from, teks, [deta[0].creator], tod)
+			if(deta[0].type == 'teks'){
+				wa.Mentions(from, deta[0].caption, parseMention(deta[0].caption), tod)
+			}
+			else{
+				wa.sendFileFromUrl(from, deta[0].media, tod, `${deta[0].caption}`, parseMention(deta[0].caption))
+			}
+		}
+	}catch{
+		return reply(`Note dengan nama ${q} tidak ditemukan di group ini!`)
+	}
 }
 break
-
 case 'delnote':
 if(!itsMe && !isGroupAdmins) return reply(mess.only.admin)
 if(!q) return reply(`Example : ${prefix + command} zynn`)
