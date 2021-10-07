@@ -408,7 +408,7 @@ const bypasephe = async(anu) => {
 anu.message = (Object.keys(anu.message)[0] === 'ephemeralMessage') ? anu.message.ephemeralMessage.message : anu.message
 return anu.message
 }
-const sendMediaURL = async(to, url, text="", mids=[]) =>{
+const sendMediaURL = async(to, url, text="", mids) =>{
                 if(mids.length > 0){
                     text = normalizeMention(to, text, mids)
                 }
@@ -605,7 +605,7 @@ try{
 }
 
 if(isGroup){
-    try{
+try{
 if(!tod.message.extendedTextMessage.contextInfo.expiration == ''){
 var isephe = false
 }
@@ -625,7 +625,7 @@ db.adddata('hit', {sender: sender, cmd: command})
 }
 if(isCmd && !m.isBaileys){
 try{
- pendaftar = await db.showdata('user', {id: sender})
+pendaftar = await db.showdata('user', {id: sender})
 if(pendaftar[0].id === sender){
  ''
 }
@@ -701,7 +701,7 @@ Note : Tidak semua fitur work, Maklum saya noob
 *› Versi OS* : ${os_version}
 *› Merk HP* : ${device_manufacturer}
 *› Versi HP* : ${device_model}`
-wa.sendButtonWithDocument(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage2, [`⋮☰ MENU`, `🤴🏻 OWNER`, '⋮☰ DASHBOARD'], [`menu`, `owner`, 'dashboard'], sender, tod)
+wa.sendButtonWithImage(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`⋮☰ MENU`, `🤴🏻 OWNER`, '⋮☰ DASHBOARD'], [`menu`, `owner`, 'dashboard'], sender, tod)
 break
 case 'menu':
 reg = await db.showdata('user')
@@ -4461,7 +4461,7 @@ if(args[0] == '-g'){
 					wa.Mentions(from, i.caption, parseMention(i.caption), tod)
 				}
 				else{
-					wa.sendFileFromUrl(from, i.media, tod, `${i.caption}`, parseMention(i.caption))
+					sendMediaURL(from, i.media, `${i.caption}`, parseMention(i.caption))
 				}
 			}
 		}
@@ -4484,7 +4484,7 @@ else{
 				wa.Mentions(from, deta[0].caption, parseMention(deta[0].caption), tod)
 			}
 			else{
-				wa.sendFileFromUrl(from, deta[0].media, tod, `${deta[0].caption}`, parseMention(deta[0].caption))
+				sendMediaURL(from, deta[0].media,`${deta[0].caption}`, parseMention(deta[0].caption))
 			}
 		}
 	}catch{
