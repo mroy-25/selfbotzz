@@ -3480,7 +3480,7 @@ hehex = await zynn.sendMessage(from, {
     "contacts": kont
     }, 'contactsArrayMessage', { quoted: tod })
 }
-if(q == 'luar'){
+else if(q == 'luar'){
 kont = [];
 for(let i of groupMembers.filter(id => !id.jid.startsWith('62')).map(res => res.jid)){
     
@@ -4355,9 +4355,9 @@ reply(mess.wait)
 boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
 owgi = await zynn.downloadMediaMessage(boij)
 rname = await GenerateSerialNumber('000000')
+path = `./media/${rname}.jpg`
 if(isQuotedImage){
 await fs.writeFileSync(`./media/${rname}.jpg`, owgi)
-path = `./media/${rname}.jpg`
 anu = await wa.imgbb(`./media/${rname}.jpg`)
 const res = `${anu.display_url}`
 fs.unlinkSync(path)
@@ -4407,32 +4407,45 @@ db.adddata('note', addnote)
 reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
 }
 break
-
 case 'listnotes':
-idgcc = []
-tagc = []
+if(args[0] == '-g'){
+	try{
+		deta = await db.showdata('note')
+		teks = `L I S T  N O T E  G L O B A L\n\n`
+		for(let icx of deta){
+			teks += shp + ` Nama Note : ` + icx.namanote + '\n'
+			teks += shp + ` Creator : @` + icx.creator.split('@')[0] + '\n'
+			teks += shp + ` Tanggal : ` + icx.date + '\n'
+			teks += shp + ` Type Note : ` + icx.type + '\n\n---------------------------------\n\n'
+		}
+		wa.Mentions(from, teks, parseMention(teks), tod)
+	}catch{
+		return reply('Tidak ada note yang tersimpan!')
+	}
+}
+else{
 try{
-deta = await db.showdata('note', {groupId: from})
-if(deta[0].groupId === from){
-teks = `L I S T  N O T E  G R O U P\n\n`
-for(let icx of deta){
-	teks += shp + ` Nama Note : ` + icx.namanote + '\n'
-	teks += shp + ` Creator : @` + icx.creator.split('@')[0] + '\n'
-	teks += shp + ` Tanggal : ` + icx.date + '\n'
-	teks += shp + ` Type Note : ` + icx.type + '\n'
-	teks += shp + ` Media : ` + icx.media + '\n\n---------------------------------\n\n'
-	tagc.push(icx.creator)
-}
-wa.Mentions(from, teks, tagc, tod)
-}
+	deta = await db.showdata('note', {groupId: from})
+	if(deta[0].groupId === from){
+		teks = `L I S T  N O T E  G R O U P\n\n`
+		for(let icx of deta){
+			teks += shp + ` Nama Note : ` + icx.namanote + '\n'
+			teks += shp + ` Creator : @` + icx.creator.split('@')[0] + '\n'
+			teks += shp + ` Tanggal : ` + icx.date + '\n'
+			teks += shp + ` Type Note : ` + icx.type + '\n\n---------------------------------\n\n'
+		}
+		wa.Mentions(from, teks, parseMention(teks), tod)
+	}
 }catch{
 	return reply('Tidak ada note di Group ini!')
+}
 }
 break
 case 'getnote':
 if(!q) return reply(`Example : ${prefix + command} zynn`)
 nnote = [];
 if(args[0] == '-g'){
+	if(!itsMe) return
 	deta = await db.showdata('note', {namanote: q.split('-g ')[1]})
 	try{
 		if(deta[0].namanote === q.split('-g ')[1]){
