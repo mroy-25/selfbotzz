@@ -408,7 +408,7 @@ const bypasephe = async(anu) => {
 anu.message = (Object.keys(anu.message)[0] === 'ephemeralMessage') ? anu.message.ephemeralMessage.message : anu.message
 return anu.message
 }
-const sendMediaURL = async(to, url, text="", mids) =>{
+const sendMediaURL = async(to, url, text, mids) =>{
                 if(mids.length > 0){
                     text = normalizeMention(to, text, mids)
                 }
@@ -4460,8 +4460,11 @@ if(args[0] == '-g'){
 				if(i.type == 'teks'){
 					wa.Mentions(from, i.caption, parseMention(i.caption), tod)
 				}
+				else if(i.type == 'image'){
+					wa.sendImage(from, await wa.getBuffer(i.media), tod, i.caption, parseMention(i.caption))
+				}
 				else{
-					sendMediaURL(from, i.media, `${i.caption}`, parseMention(i.caption))
+					wa.sendVideo(from, await wa.getBuffer(i.media), tod, i.caption, parseMention(i.caption))
 				}
 			}
 		}
@@ -4483,8 +4486,11 @@ else{
 			if(deta[0].type == 'teks'){
 				wa.Mentions(from, deta[0].caption, parseMention(deta[0].caption), tod)
 			}
+			else if(deta[0].type == 'image'){
+				wa.sendImage(from, await wa.getBuffer(deta[0].media), tod, deta[0].caption, parseMention(deta[0].caption))
+			}
 			else{
-				sendMediaURL(from, deta[0].media,`${deta[0].caption}`, parseMention(deta[0].caption))
+				wa.sendVideo(from, await wa.getBuffer(deta[0].media), tod, deta[0].caption, parseMention(deta[0].caption))
 			}
 		}
 	}catch{
