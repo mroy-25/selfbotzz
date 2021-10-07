@@ -4376,8 +4376,6 @@ reply(`Sukses Menambahkan Note\nKetik ${prefix}listnotes untuk mengecek`)
 }
 else if(isQuotedVideo){
 res = await uploadImages(owgi, false)
-fs.unlinkSync(path)
-console.log(uplod)
         const addnote = {
                 groupId : from,
 		group: groupName,
