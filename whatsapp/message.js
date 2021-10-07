@@ -224,12 +224,12 @@ zynn.sendMessage(from, filename, MessageType.image, {quoted: tod, contextInfo: {
 else{
 zynn.sendMessage(from, filename, MessageType.image, {quoted: tod,caption: teks, contextInfo: {mentionedJid: tag}})
 }}
-exports.sendVideo = (from, filename, tod, teks) => {
+exports.sendVideo = (from, filename, tod, teks, tag) => {
 	if(teks == ``){
-	zynn.sendMessage(from, filename, MessageType.video, {mimetype: 'video/mp4', filename: 'video.mp4', quoted: tod, duration: 359996400})
+	zynn.sendMessage(from, filename, MessageType.video, {mimetype: 'video/mp4', filename: 'video.mp4', quoted: tod, contextInfo: {mentionedJid: tag}})
 	}
 	else{
-	zynn.sendMessage(from, filename, MessageType.video, {mimetype: 'video/mp4', filename: 'video.mp4', quoted: tod, duration: 359996400,caption: teks})
+	zynn.sendMessage(from, filename, MessageType.video, {mimetype: 'video/mp4', filename: 'video.mp4', quoted: tod,caption: teks, contextInfo: {mentionedJid: tag}})
 }
 }
 exports.sendAudio = (from, filename, tod) => {
