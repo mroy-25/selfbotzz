@@ -590,3 +590,6 @@ exports.tiny = async(link) => {
 		})
 	})
 }
+exports.timer = async(start) => {
+return(' Diproses dalam waktu ' + ((Date.now() - start)/1000).toFixed(1) + " detik")
+}
