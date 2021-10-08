@@ -859,7 +859,6 @@ if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takes
             '🌹'
         ] 
   }
-if(isQuotedSticker){
   boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
   owgi = await zynn.downloadMediaMessage(boij)
   try{
@@ -868,9 +867,6 @@ if(isQuotedSticker){
   }catch{
     reply(mess.error.api)
   }
-}else{
-  reply(`reply sticker dengan caption ${prefix}${command} packname|author`)
-}
 break
 case 'tovideo':
 case 'tomp4':
@@ -943,17 +939,24 @@ if (isQuotedSticker) {
              })
           }
 break
-case 'nowm':
-if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}nowm*`)
-var encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-var media = await zynn.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-exif.create('', '', `takestick_${sender}`)
-exec(`webpmux -set exif ./sticker/takestick_${sender}.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-if (error) return reply(mess.error.api)
-wa.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), tod)
-fs.unlinkSync(media)
-fs.unlinkSync(`./sticker/takestick_${sender}.exif`)
-})
+case 'snowm':
+if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
+  const takestik = {
+    type: 'full',
+        pack: '',
+        author: '',
+        categories: [
+            '🌹'
+        ] 
+  }
+  boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+  owgi = await zynn.downloadMediaMessage(boij)
+  try{
+    const sticker = await createSticker(owgi, takestik)
+    wa.sendSticker(from, sticker, tod)
+  }catch{
+    reply(mess.error.api)
+  }
 break
 case 'toimg':
 if (!isQuotedSticker) return reply('Reply stiker nya')
@@ -1077,14 +1080,6 @@ if(!itsMe) return
         nopref = args[0]
         reply(`Sukses mengubah prefix ke ${args[0]}`)
         }
-break
-case 'term':
-    if(!itsMe) return
-    if (!q) return
-        exec(q, (err, stdout) => {
-        if (err) return reply(String(err))
-        if (stdout) reply(stdout)
-                })
 break
 case 'speed':
 case 'ping':
@@ -2007,10 +2002,19 @@ else{
     return reply(`Silahkan pilih salah satu : \n${shp} apple\n${shp} google\n${shp} samsung\n${shp} microsoft\n${shp} whatsapp\n${shp} twitter\n${shp} facebook\n${shp} joypixels\n${shp} openmoji\n${shp} emojidex\n${shp} lg\n${shp} htc\n\nContoh : ${prefix}emoji ☹️|whatsapp`)
 }
 if(idemot == undefined) return
+const emojidata = {
+    type: 'full',
+        pack: q.split('|')[0],
+        author: setting.packname,
+        categories: [
+            '🌹'
+        ] 
+  }
 emoji.get(emot)
     .then(emoji => {
         console.log(emoji.images[idemot]);
-wa.sendStickerFromUrl(from,emoji.images[idemot].url, tod)
+createSticker(emoji.images[idemot].url, emojidata).then(res => {
+	wa.sendSticker(from, res, tod)
     })
 break
 case 'resend':
