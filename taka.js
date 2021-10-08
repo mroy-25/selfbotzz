@@ -3818,7 +3818,9 @@ try{
     data = await skrep.wattpad(q)
     teks = `W A T T P A D  S E A R C H\n${shp} Query : ${q}\n\n`
     for(let i of data){
-        teks += shp + ' Judul : ' + i.creator + '\n'
+        teks += shp + ' Judul : ' + i.judul + '\n'
+	teks += shp + ' Dibaca : ' + i.dibaca + '\n'
+	teks += shp + ' Divote : ' + i.divote + '\n'
         teks += shp + ' Link : ' + i.link + '\n\n------------------------------\n\n'
     }
     wa.sendFileFromUrl(from, data[0].thumb, tod, teks)
