@@ -941,7 +941,7 @@ if (isQuotedSticker) {
 break
 case 'snowm':
 if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takestick nama|author*`)
-  const takestik = {
+  const snowm = {
     type: 'full',
         pack: '',
         author: '',
@@ -952,7 +952,7 @@ if (!isQuotedSticker) return reply(`Reply sticker dengan caption *${prefix}takes
   boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
   owgi = await zynn.downloadMediaMessage(boij)
   try{
-    const sticker = await createSticker(owgi, takestik)
+    const sticker = await createSticker(owgi, snowm)
     wa.sendSticker(from, sticker, tod)
   }catch{
     reply(mess.error.api)
