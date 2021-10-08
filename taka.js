@@ -1823,9 +1823,9 @@ for(let i of hdata){
 }
 break
 case 'tomp3':
-if(isQuotedAudio){
+if(isQuotedVideo && isMedia){
 zynn.updatePresence(from, Presence.composing) 
-reply('tunggu sebentar')
+reply(mess.wait)
 encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
 media = await zynn.downloadAndSaveMediaMessage(encmedia)
 ran = wa.getRandom('.mp4')
