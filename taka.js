@@ -453,7 +453,7 @@ const sendMediaURL = async(to, url, text, mids) =>{
             year: 'numeric'
          })
          var waktu = moment().tz('Asia/Jakarta').format("HH : mm : ss")
-
+        const start = Date.now()
         const isMedia = (type === 'imageMessage' || type === 'videoMessage')
         const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
         const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
