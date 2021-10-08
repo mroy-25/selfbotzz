@@ -2015,7 +2015,8 @@ emoji.get(emot)
         console.log(emoji.images[idemot]);
 createSticker(emoji.images[idemot].url, emojidata).then(res => {
 	wa.sendSticker(from, res, tod)
-    })
+})
+})
 break
 case 'resend':
 if(!m.quoted) return reply('Reply pesannya!')
