@@ -1005,24 +1005,25 @@ exports.apkmody = (query) => {
         return new Promise((resolve,reject) => {
                 axios.get('https://apkmody.io/?s=' + query)
                 .then(({ data }) => {
+                  //console.log(data)
                         const $ = cheerio.load(data)
                         const nama = [];
                         const link = [];
                         const mod = [];
                         const thumb = [];
                         const format = [];
-                        $('#primary > div > div > div.flex-container > div > article > a > div > div > div > h2').each(function(a,b) {
+                        $('#primary > section:nth-child(3) > div > div > div > article > a > div > div > div > h2').each(function(a,b) {
                           nem = $(b).text();
                           nama.push(nem)
                         })
-                        $('#primary > div > div > div.flex-container > div > article > a > div > div > p').each(function(c,d) {
+                        $('#primary > section:nth-child(3) > div > div > div > article > a > div > div > p').each(function(c,d) {
                           modd = $(d).text();
                           mod.push(modd.split('\n')[1])
                         })
-                        $('#primary > div > div > div.flex-container > div > article > a > div > img').each(function(e,f) {
+                        $('#primary > section:nth-child(3) > div > div > div > article > a > div > img').each(function(e,f) {
                           thumb.push($(f).attr('src'))
                         })
-                        $('#primary > div > div > div.flex-container > div > article > a').each(function(g,h) {
+                        $('#primary > section:nth-child(3) > div > div > div > article > a').each(function(g,h) {
                           link.push($(h).attr('href'))
                         })
                         for(let i=0; i<link.length; i++){
