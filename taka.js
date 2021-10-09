@@ -453,7 +453,6 @@ const sendMediaURL = async(to, url, text, mids) =>{
             year: 'numeric'
          })
          var waktu = moment().tz('Asia/Jakarta').format("HH : mm : ss")
-        const start = Date.now()
         const isMedia = (type === 'imageMessage' || type === 'videoMessage')
         const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
         const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
@@ -2233,6 +2232,7 @@ case 'tiktok':
 if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.lv)
 reply(mess.wait)
+const start = Date.now()
 try{
 	if(args[0] == 'wm'){
 		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + await wa.timer(start))
@@ -2456,6 +2456,7 @@ case 'instagram':
 if(!q) return reply('Masukkan link instagram!')
 if(!isUrl(q)) return reply('Masukkan url dengan benar!')
 reply(mess.wait)
+const start = Date.now()
 try{
     data = await hx.igdl(q)
     teks = `*I N S T A G R A M  D O W N L O A D E R*\n\n${shp} Username : ${data.user.username}\n${shp} Fullname : ${data.user.fullName}\n${shp} Jumlah Media : ${data.medias.length}\n\ntunggu Sebentar\nMedia akan segera dikirim...`
