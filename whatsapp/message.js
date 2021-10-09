@@ -217,14 +217,14 @@ exports.setBio = async function(query){
     const response = await zynn.setStatus(query)
     return response
 }
-exports.sendImage = (from, filename, tod, teks, tag) => {
+exports.sendImage = async(from, filename, tod, teks, tag) => {
 	if(teks == ``){
 zynn.sendMessage(from, filename, MessageType.image, {quoted: tod, contextInfo: {mentionedJid: tag}})
 }
 else{
 zynn.sendMessage(from, filename, MessageType.image, {quoted: tod,caption: teks, contextInfo: {mentionedJid: tag}})
 }}
-exports.sendVideo = (from, filename, tod, teks, tag) => {
+exports.sendVideo = async(from, filename, tod, teks, tag) => {
 	if(teks == ``){
 	zynn.sendMessage(from, filename, MessageType.video, {mimetype: 'video/mp4', filename: 'video.mp4', quoted: tod, contextInfo: {mentionedJid: tag}})
 	}
