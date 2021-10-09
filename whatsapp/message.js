@@ -500,6 +500,7 @@ for(let i=0; i<display.length; i++){
 }
 po = await zynn.prepareMessage(from, vid, 'videoMessage')
 po.message = (Object.keys(po.message)[0] === 'ephemeralMessage') ? po.message.ephemeralMessage.message : po.message
+po.message.videoMessage.fileLength = '1'
 bts = {
 videoMessage: po.message.videoMessage,
 contentText: teks,
@@ -591,5 +592,5 @@ exports.tiny = async(link) => {
 	})
 }
 exports.timer = async(start) => {
-return(' Diproses dalam waktu ' + ((Date.now() - start)/1000).toFixed(1) + " detik")
+return('Process in ' + ((Date.now() - start)/1000).toFixed(1) + " Seconds")
 }
