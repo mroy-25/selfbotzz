@@ -109,7 +109,7 @@ const a = json[2][0][1].value
   baterai.cas = b
   baterai.powersave = c
 })
-let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+//let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod, db) => {
   try {
       if (!tod.hasNewMessage) return
