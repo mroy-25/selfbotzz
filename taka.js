@@ -2231,15 +2231,11 @@ break
 case 'tiktok':
 if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.lv)
+start = Date.now()
 reply(mess.wait)
 try{
 	if(args[0] == 'wm'){
-		start = Date.now()
 		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + await wa.timer(start))
-	}
-	else if(args[0] == 'nowm'){
-		start = Date.now()
-		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n' + await wa.timer(start))	
 	}
 	else if(args[0] == 'audio'){
 		rann = wa.getRandom('.mp4')
@@ -2256,8 +2252,8 @@ try{
 	}
 	else{
 		data = await hx.ttdownloader(q)
-		teks = `*TIKTOK DOWNLOADER*\n*${shp} Request By : @${sender.split('@')[0]}*`
-		wa.sendButton(from, teks, 'Silahkan Pilih WM/NOWM/AUDIO', ['WM', 'NOWM', 'AUDIO'], ['tiktok wm ' + data.wm, 'tiktok nowm ' + data.nowm, 'tiktok audio ' + data.nowm], sender, tod)	
+		teks = `*TIKTOK DOWNLOADER*\n*${shp} Request By : @${sender.split('@')[0]}*\n`
+		wa.sendButtonWithVideo(from, teks + await wa.timer(start), 'Jika ingin Format lain, Silahkan pilih dibawah ini!',await wa.getBuffer(data.nowm), ['WITH WATERMARK', 'AUDIO ONLY'], ['tiktok wm ' + data.wm, 'tiktok audio ' + data.nowm], sender, tod)	
 	}
 }catch{
 	reply(mess.error.api)
