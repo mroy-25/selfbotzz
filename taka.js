@@ -1705,8 +1705,8 @@ spawn('convert', [
     './media/nulis/images/buku/setelahkiri.jpg'
 ])
 .on(mess.error.api, () => reply(mess.error.api))
-.on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, `${async wa.timer(start)}`)
+.on('exit', async() => {
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, `${await wa.timer(start)}`)
 })
             }
 break
@@ -1732,8 +1732,8 @@ spawn('convert', [
     './media/nulis/images/buku/setelahkanan.jpg'
 ])
 .on(mess.error.api, () => reply(mess.error.api))
-.on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'),tod, `${async wa.timer(start)}`)
+.on('exit', async() => {
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'),tod, `${await wa.timer(start)}`)
 })
 }
 break
