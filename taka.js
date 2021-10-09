@@ -2235,10 +2235,10 @@ if(!isUrl(q)) return reply(mess.error.lv)
 reply(mess.wait)
 try{
 	if(args[0] == 'wm'){
-		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n')
+		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + await wa.timer(start))
 	}
 	else if(args[0] == 'nowm'){
-		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n')	
+		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n' + await wa.timer(start))	
 	}
 	else if(args[0] == 'audio'){
 		rann = wa.getRandom('.mp4')
@@ -2461,14 +2461,14 @@ try{
     teks = `*I N S T A G R A M  D O W N L O A D E R*\n\n${shp} Username : ${data.user.username}\n${shp} Fullname : ${data.user.fullName}\n${shp} Jumlah Media : ${data.medias.length}\n\ntunggu Sebentar\nMedia akan segera dikirim...`
     await wa.sendFileFromUrl(from, data.user.profilePicUrl, tod, teks)
     for(let i of data.medias){
-        wa.sendFileFromUrl(from, i.url, tod, monospace(`INSTAGRAM DOWNLOADER\n\n${shp} Username : ${data.user.username}\n${shp} Type Media : ${i.type}`))
+        wa.sendFileFromUrl(from, i.url, tod, await wa.timer(start))
 }
 }catch(e){
     reply('Server 1 error\nTunggu sebentar, mencoba menggunakan server 2...')
     try{
      data = await skrep.igdl(q)
      for(let i of data){
-     wa.sendFileFromUrl(from, i, tod, fakec)
+     wa.sendFileFromUrl(from, i, tod, await wa.timer(start))
       await wa.sleep(3000)
      }
     }catch(e){
