@@ -973,7 +973,8 @@ if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isA
             fs.unlinkSync(ran)
         } else {
             buffer = fs.readFileSync(ran)
-            wa.sendImage(from, buffer, tod, await wa.timer(start))
+		teks = await wa.timer(start)
+            wa.sendImage(from, buffer, tod, teks)
             fs.unlinkSync(ran)
         }
 })
