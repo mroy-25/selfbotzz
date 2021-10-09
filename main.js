@@ -35,19 +35,6 @@ const connects = async(zynn) => {
         qrcode.generate(qr, { small: true })
         console.log(`QR Siap, Scan Pack`)
     })
-  if (cluster.isMaster) {
-  console.log(`Master ${process.pid} is running`);
-    for (let i = 0; i < 4; i++) {
-    cluster.fork();
-  }
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died`);
-  });
-  } else {
-  // This is Workers can share any TCP connection
-  // It will be initialized using express
-  console.log(`Worker ${process.pid} started`);
-  }
     fs.existsSync(authofile) && zynn.loadAuthInfo(authofile)
     zynn.on('connecting', () => {
         console.log(color('Connecting...'))
