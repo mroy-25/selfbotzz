@@ -1759,7 +1759,7 @@ spawn('convert', [
     './media/nulis/images/folio/setelahkiri.jpg'
 ])
 .on(mess.error.api, () => reply(mess.error.api))
-.on('exit', () => {
+.on('exit', async() => {
     wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'),tod,`${await wa.timer(start)}`)
 })
 }
@@ -1786,7 +1786,7 @@ spawn('convert', [
     './media/nulis/images/folio/setelahkanan.jpg'
 ])
 .on(mess.error.api, () => reply(mess.error.api))
-.on('exit', () => {
+.on('exit', async() => {
     wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'),tod,`${await wa.timer(start)}`)
 })
 }
