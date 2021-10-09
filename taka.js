@@ -27,6 +27,7 @@ const speed = require('performance-now');
 const ffmpeg = require('fluent-ffmpeg');
 const { fromBuffer } = require('file-type');
 const FormData = require('form-data');
+const cluster = require('cluster')
 const encodeUrl = require('encodeurl');
 const request = require('request');
 const conn = require('./main');
@@ -100,6 +101,19 @@ app.use('/', (req, res) => {
 conn.connects()
 console.log("on bang bot nya")
 })
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
+    for (let i = 0; i < 4; i++) {
+    cluster.fork();
+    }
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+  });
+} else {
+  // This is Workers can share any TCP connection
+  // It will be initialized using express
+  console.log(`Worker ${process.pid} started`);
+}
 const tzy = conn.zynn
 tzy.on('CB:action,,battery', json => {
 const a = json[2][0][1].value
