@@ -962,6 +962,7 @@ if (!isQuotedSticker) return reply('Reply stiker nya')
 if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true){
     reply(`Maaf tidak mendukung sticker gif`)
 } else {
+	start = Date.now()
     const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
     const media = await zynn.downloadAndSaveMediaMessage(encmedia)
     ran = wa.getRandom('.png')
@@ -972,7 +973,7 @@ if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isA
             fs.unlinkSync(ran)
         } else {
             buffer = fs.readFileSync(ran)
-            wa.fakethumb(from, buffer, tod, 'NIH ngab')
+            wa.fakethumb(from, buffer, tod, await wa.timer(start))
             fs.unlinkSync(ran)
         }
 })
@@ -1601,6 +1602,7 @@ case 'burn':
 case 'brazzers':
 case 'beautiful':
 case 'approved3000years':
+start = Date.now()
 try{
     if(isMedia && !zynn.message.videoMessage || isQuotedImage){
     reply(mess.wait)
@@ -1608,7 +1610,7 @@ try{
         const media = await zynn.downloadMediaMessage(encmedia)
         res = await uploadImages(media, false)
         data = await ameapi.generate(command, {url: res})
-        wa.sendImage(from, data, tod)
+        wa.sendImage(from, data, tod, await wa.timer(start))
     }
 	else if(isQuotedSticker){
 	const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1645,7 +1647,7 @@ try{
             return reply('Foto profil tidak ada/private')
         }
         data = await ameapi.generate(command, {url: pp})
-        wa.sendImage(from, data, tod)
+        wa.sendImage(from, data, tod, await wa.timer(start))
     }
     else if(!m.mentionedJid == ''){
     if(m.mentionedJid == '') return reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
@@ -1656,7 +1658,7 @@ try{
             return reply('Foto profil tidak ada/private')
         }
         data = await ameapi.generate(command, {url: pp})
-        wa.sendImage(from, data, tod)
+        wa.sendImage(from, data, tod, await wa.timer(start))
     }
     else{
         reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
@@ -1667,11 +1669,12 @@ try{
 break
 case 'pinterest':
 if(!q) return reply('Mau cari apa dipinterest?')
+start = Date.now()
 reply(mess.wait)
 try{
     data = await skrep.pinterest(q)
     media = await data[Math.floor(Math.random() * data.length)]
-    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(media), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(media), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch(e){
     reply('Gambar tidak ditemukan/error')
 }
@@ -1683,6 +1686,7 @@ break
 case 'nuliskiri':{
 if (!q) return reply(`Kirim perintah *${prefix}nuliskiri* teks`)
 reply(mess.wait)
+start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,9}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
 spawn('convert', [
@@ -1702,13 +1706,14 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod,`Jangan malas ngab..!`)
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, await wa.timer(start))
 })
             }
 break
 case 'nuliskanan':{
 if (!q) return reply(`Kirim perintah *${prefix}nuliskanan* teks`)
 reply(mess.wait)
+start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,9}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
 spawn('convert', [
@@ -1728,13 +1733,14 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'),tod,`Jangan malas ngab..!`)
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'),tod, await wa.timer(start))
 })
 }
 break
 case 'foliokiri':{
 if (!q) return reply(`Kirim perintah *${prefix}foliokiri* teks`)
 reply(mess.wait)
+start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,13}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
 spawn('convert', [
@@ -1754,13 +1760,14 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'),tod,`Jangan malas ngab..!`)
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'),tod,await wa.timer(start))
 })
 }
 break
 case 'foliokanan':{
 if (!q) return reply(`Kirim perintah *${prefix}foliokanan* teks`)
 reply(mess.wait)
+start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,13}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
 spawn('convert', [
@@ -1780,7 +1787,7 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'),tod,`Jangan malas ngab..!`)
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'),tod,await wa.timer(start))
 })
 }
 break
@@ -2029,11 +2036,12 @@ break
 case 'image':
 if (args.length < 1) return reply('Masukan teks!')
 reply(mess.wait)
+start = Date.now()
 try{
 gis(q, async (error, result) => {
 n = result
 images = n[Math.floor(Math.random() * n.length)].url
-wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(images), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(images), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 });
 }catch(e){
     reply('Gambar tidak ditemukan')
@@ -4142,45 +4150,49 @@ try{
 break
 case 'waifu':
 reply(mess.wait)
+start = Date.now()
 try{
     rand = Math.floor(Math.random() * 100) + 1
 console.log(rand)
     if(rand < 100){
         rand = '0' + rand
     }
-    wa.sendButtonWithImage(from, bold('RANDOM WAIFU'), 'Next ga nih?', await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendButtonWithImage(from, bold('RANDOM WAIFU'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
 break
 case 'loli':
+start = Date.now()
 reply(mess.wait)
 try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/loli.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
 loli = data.data[rand]
-wa.sendButtonWithImage(from, bold('RANDOM LOLI'), 'Next ga nih?', await wa.getBuffer(loli), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+wa.sendButtonWithImage(from, bold('RANDOM LOLI'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(loli), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
 break
 case 'shota':
+start = Date.now()
 reply(mess.wait)
 try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/shota.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
 img = data.data[rand]
-wa.sendButtonWithImage(from, bold('RANDOM SHOTA'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+wa.sendButtonWithImage(from, bold('RANDOM SHOTA'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
 break
 case 'darkjoke':
+start = Date.now()
 try{
 data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/darkjokes.txt')
 rand = Math.floor(Math.random() * 249) + 1
 img = data.data.split('\n')[rand]
-wa.sendButtonWithImage(from, bold('DARKJOKE'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+wa.sendButtonWithImage(from, bold('DARKJOKE'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
