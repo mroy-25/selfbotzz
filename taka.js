@@ -1096,6 +1096,10 @@ if(!itsMe) return
       }
 break
 case 'speed':
+timestampi = speed();
+latensii = speed() - timestampi
+reply(`*› Speed* : ${latensii.toFixed(4)} Second`)
+break
 case 'ping':
 const { speedz } = require('./lib/speed.js')
 speedz(zynn, reply)
