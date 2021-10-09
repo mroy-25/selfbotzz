@@ -50,10 +50,10 @@ const zahir = require('zahir-api')
 const textmaker = require('./lib/textmaker.js')
 const qrcode = require("qrcode-terminal")
 const infotlp = require('no-telp')
-const express = require('express')
-const app = express()
+//const express = require('express')
+//const app = express()
 const simple = require('./lib/simple')
-const PORT = process.env.PORT || 3000
+//const PORT = process.env.PORT || 3000
 const translate = require('@vitalets/google-translate-api')
 const { yta, ytv } = require('./lib/ytdl')
 const fetch = require('node-fetch');
@@ -98,10 +98,10 @@ baterai = {
   powersave: false
 }
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
-app.use('/', (req, res) => {  
+/*app.use('/', (req, res) => {  
 conn.connects()
 console.log("on bang bot nya")
-})
+})*/
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
     for (let i = 0; i < 2; i++) {
