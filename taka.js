@@ -2549,7 +2549,7 @@ case 'mobilewallanime':
 start = Date.now()
 try{
   akaneko.mobileWallpapers().then(async res => {
-      wa.sendButtonWithImage(from, bold('RANDOM ' + command.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
+      wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM WALLPAPER ANIME') + '\n' + bold(await wa.timer(start)))
   })
 }catch(e){
   reply(mess.error.api)
@@ -2559,7 +2559,7 @@ case 'wallanime':
 start = Date.now()
 try{
   akaneko.wallpapers().then(async res => {
-      wa.sendButtonWithImage(from, bold('RANDOM ' + command.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
+      wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM ' + command.toUpperCase()) + '\n' + bold(await wa.timer(start)))
   })
 }catch(e){
   reply(mess.error.api)
@@ -2569,7 +2569,7 @@ case 'nekonime':
 start = Date.now()
 try{
   akaneko.neko().then(async res => {
-      wa.sendButtonWithImage(from, bold('RANDOM ' + command.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
+      wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM ' + command.toUpperCase()) + '\n' + bold(await wa.timer(start)))
   })
 }catch(e){
   reply(mess.error.api)
@@ -2579,7 +2579,7 @@ case 'foxnime':
 start = Date.now()
 try{
   akaneko.foxgirl().then(async res => {
-      wa.sendButtonWithImage(from, bold('RANDOM ' + command.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
+      wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM ' + command.toUpperCase()) + '\n' + bold(await wa.timer(start)))
   })
 }catch(e){
   reply(mess.error.api)
@@ -4093,7 +4093,7 @@ try{
   data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/random.txt')
   rand = Math.floor(Math.random() * 1585) + 1
   img = data.data.split('\n')[rand]
-  wa.sendButtonWithImage(from, bold('RANDOM ' + command.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command}`], sender, tod)
+  wa.sendImage(from, await wa.getBuffer(img), tod, bold('RANDOM ANIME IMAGE') + '\n' + bold(await wa.timer(start)))
 }catch{
   reply(mess.error.api)
 }
