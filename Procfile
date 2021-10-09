@@ -1,1 +1,2 @@
-worker: node --inspect=8080 taka.js
+worker: node taka.js
+// --inspect=8080
