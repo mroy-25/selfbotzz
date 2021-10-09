@@ -1706,7 +1706,7 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, `${await wa.timer(start)}`)
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, `${wa.timer(start)}`)
 })
             }
 break
