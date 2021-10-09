@@ -973,8 +973,7 @@ if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isA
             fs.unlinkSync(ran)
         } else {
             buffer = fs.readFileSync(ran)
-		teks = await wa.timer(start)
-            wa.sendImage(from, buffer, tod, teks)
+            wa.sendImage(from, buffer, tod, `${await wa.timer(start)}`)
             fs.unlinkSync(ran)
         }
 })
@@ -1611,7 +1610,7 @@ try{
         const media = await zynn.downloadMediaMessage(encmedia)
         res = await uploadImages(media, false)
         data = await ameapi.generate(command, {url: res})
-        wa.sendImage(from, data, tod, await wa.timer(start))
+        wa.sendImage(from, data, tod, `${await wa.timer(start)}`)
     }
 	else if(isQuotedSticker){
 	const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1648,7 +1647,7 @@ try{
             return reply('Foto profil tidak ada/private')
         }
         data = await ameapi.generate(command, {url: pp})
-        wa.sendImage(from, data, tod, await wa.timer(start))
+        wa.sendImage(from, data, tod, `${await wa.timer(start)}`)
     }
     else if(!m.mentionedJid == ''){
     if(m.mentionedJid == '') return reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
@@ -1659,7 +1658,7 @@ try{
             return reply('Foto profil tidak ada/private')
         }
         data = await ameapi.generate(command, {url: pp})
-        wa.sendImage(from, data, tod, await wa.timer(start))
+        wa.sendImage(from, data, tod, `${await wa.timer(start)}`)
     }
     else{
         reply(`Tag orang/reply gambar dengan caption ${prefix}${command}`)
@@ -1707,7 +1706,7 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, await wa.timer(start))
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'),tod, `${await wa.timer(start)}`)
 })
             }
 break
@@ -1734,7 +1733,7 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'),tod, await wa.timer(start))
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'),tod, `${await wa.timer(start)}`)
 })
 }
 break
@@ -1761,7 +1760,7 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'),tod,await wa.timer(start))
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'),tod,`${await wa.timer(start)}`)
 })
 }
 break
@@ -1788,7 +1787,7 @@ spawn('convert', [
 ])
 .on(mess.error.api, () => reply(mess.error.api))
 .on('exit', () => {
-    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'),tod,await wa.timer(start))
+    wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'),tod,`${await wa.timer(start)}`)
 })
 }
 break
