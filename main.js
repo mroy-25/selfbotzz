@@ -5,6 +5,8 @@ const {
     Mimetype,
     GroupSettingChange
 } = require('@adiwajshing/baileys')
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 const client = require('./lib/database')
 const simple = require('./lib/simple')
 const wa = require('./whatsapp/message')
@@ -33,12 +35,19 @@ const connects = async(zynn) => {
         qrcode.generate(qr, { small: true })
         console.log(`QR Siap, Scan Pack`)
     })
-    /*
-    zynn.on('credentials-updated', () => {
-        fs.writeFileSync(authofile, JSON.stringify(zynn.base64EncodedAuthInfo(), null, '\t'))
-        console.log(color('Wait....'))
-    })
-    */
+  if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
+    for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+  });
+  } else {
+  // This is Workers can share any TCP connection
+  // It will be initialized using express
+  console.log(`Worker ${process.pid} started`);
+  }
     fs.existsSync(authofile) && zynn.loadAuthInfo(authofile)
     zynn.on('connecting', () => {
         console.log(color('Connecting...'))
