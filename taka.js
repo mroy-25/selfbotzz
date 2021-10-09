@@ -2232,12 +2232,13 @@ case 'tiktok':
 if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.lv)
 reply(mess.wait)
-start = Date.now()
 try{
 	if(args[0] == 'wm'){
+		start = Date.now()
 		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + await wa.timer(start))
 	}
 	else if(args[0] == 'nowm'){
+		start = Date.now()
 		wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK NOWATERMARK\n' + await wa.timer(start))	
 	}
 	else if(args[0] == 'audio'){
