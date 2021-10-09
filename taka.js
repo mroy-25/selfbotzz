@@ -102,7 +102,7 @@ app.use('/', (req, res) => {
 conn.connects()
 console.log("on bang bot nya")
 })
-    for (let i = 0; i < WORKERS; i++) {
+    for (let i = 0; i < 2; i++) {
     cluster.fork();
     }
 const tzy = conn.zynn
