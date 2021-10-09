@@ -592,5 +592,7 @@ exports.tiny = async(link) => {
 	})
 }
 exports.timer = async(start) => {
-return('Process in ' + ((Date.now() - start)/1000).toFixed(1) + " Seconds")
+return new Promise((resolve,reject) => {
+resolve('Process in ' + ((Date.now() - start)/1000).toFixed(1) + " Seconds")
+})
 }
