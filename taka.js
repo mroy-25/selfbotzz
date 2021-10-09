@@ -2546,36 +2546,40 @@ dtt.length > 300
 }
 break
 case 'mobilewallanime':
+start = Date.now()
 try{
     akaneko.mobileWallpapers().then(res => {
-        sendMediaURL(from, res, 'Nih wallpapernya')
+        wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
     reply(mess.error.api)
 }
 break
 case 'wallanime':
+start = Date.now()
 try{
     akaneko.wallpapers().then(res => {
-        sendMediaURL(from, res, 'Nih wallpapernya')
+        wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
     reply(mess.error.api)
 }
 break
 case 'nekonime':
+start = Date.now()
 try{
-    akaneko.neko().then(res => {
-        sendMediaURL(from, res, 'neko')
+    akaneko.neko().then(async res => {
+        wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
     reply(mess.error.api)
 }
 break
 case 'foxnime':
+start = Date.now()
 try{
     akaneko.foxgirl().then(res => {
-        sendMediaURL(from, res, 'Fox')
+        wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
     reply(mess.error.api)
@@ -3259,12 +3263,13 @@ break
 */
 case 'konachan':
 if(!q) return reply('Masukkan kata kuncinya!')
+start = Date.now()
 reply(mess.wait)
 try{
     data = await skrep.konachan(q)
     if(data == '') return reply(`Gambar ${q} tidak ditemukan`)
     rand = data[Math.floor(Math.random() * data.length)]
-    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(rand), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendImage(from, await wa.getBuffer(rand), tod, 'Hasil pencarian ' + q + `\n${await wa.timer(start)}`)
 }catch{
     reply(mess.error.api)
 }
@@ -3276,7 +3281,7 @@ try{
     data = await skrep.zerochan(q)
     if(data == '') return reply(`Gambar ${q} tidak ditemukan`)
     rand = data.result[Math.floor(Math.random() * data.result.length)]
-    wa.sendButtonWithImage(from, bold('Hasil pencarian ' + q), 'Next ga nih?', await wa.getBuffer(rand), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendImage(from, await wa.getBuffer(rand), tod, 'Hasil pencarian ' + q + `\n${await wa.timer(start)}`)
 }catch{
     reply(mess.error.api)
 }
@@ -3313,33 +3318,6 @@ try{
     reply(mess.error.api)
 }
 break
-case 'speedtest':
-if(!itsMe) return
-reply(mess.wait)
-try{
-    exec('speedtest', async(err, stdout) => {
-        if (err) return reply(String(err))
-        if (stdout){
-server = stdout.split('Server: ')[1].split('\n')[0]
-isp = stdout.split('ISP: ')[1].split('\n')[0]
-latency = stdout.split('Latency:     ')[1].split('\n')[0]
-down= stdout.split('Download:  ')[1].split('\n')[0]
-uploadd = stdout.split('Upload:  ')[1].split('\n')[0]
-url = stdout.split('Result URL: ')[1]
-teks = 'SPEEDTEST\n\n'
-teks += shp + ' Server : ' + server + '\n'
-teks += shp + ' Isp : ' + isp + '\n'
-teks += shp + ' Latensi : ' + latency + '\n'
-teks += shp + ' Download : ' + down + '\n'
-teks += shp + ' Upload : ' + uploadd + '\n'
-teks += shp + ' Url : ' + url + '\n'
-wa.sendFileFromUrl(from, 'https://api.apiflash.com/v1/urltoimage?access_key=5608da775fec43ccab391d3ed75484ba&url=' + url, tod, teks)
-}
-})
-}catch{
-    reply(mess.error.api)
-}
-break
 case 'resep':
 if(!q) return reply('Mau cari resep apa?')
 reply(mess.wait)
@@ -3359,24 +3337,6 @@ try{
     reply('Resep tidak ditemukan')
 }
 break
-/*case 'ptl':
-if(!q) return reply('Username tiktoknya apa?')
-reply(mess.wait)
-try{
-    data = await skrep.asupantiktok(q)
-    hdata = data.media
-    teks = 'PTL TIKTOK\n\n'
-    teks += shp + ' Username : ' + data.username + '\n'
-    teks += shp + ' Caption : ' + hdata.caption + '\n'
-    teks += shp + ' Likes : ' + hdata.likes + '\n'
-    teks += shp + ' Comments : ' + hdata.comments + '\n'
-    teks += shp + ' Share : ' + hdata.share + '\n'
-    wa.sendFileFromUrl(from, hdata.videourl, tod, teks)
-}catch{
-    reply(mess.error.api)
-}
-break
-*/
 case 'asupan':
 if(!q){
         po = zynn.prepareMessageFromContent(from, {
@@ -3418,27 +3378,27 @@ if(!q){
 }
 if(q == '+62'){
 reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupan?apikey=2OcDMwvZ1Uc2S5V`)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupan?apikey=xA1jt74O5PUtdUs`)
 }else
 if(q == 'santuy'){
 reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupansantuy?apikey=2OcDMwvZ1Uc2S5V`)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupansantuy?apikey=xA1jt74O5PUtdUs`)
 }else
 if(q == 'bocil'){
 reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanbocil?apikey=2OcDMwvZ1Uc2S5V`)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanbocil?apikey=xA1jt74O5PUtdUs`)
 }else
 if(q == 'ukhti'){
 reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanukhty?apikey=2OcDMwvZ1Uc2S5V`)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanukhty?apikey=xA1jt74O5PUtdUs`)
 }else
 if(q == 'rikagustiani'){
 reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanrikagusriani?apikey=2OcDMwvZ1Uc2S5V`)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanrikagusriani?apikey=xA1jt74O5PUtdUs`)
 }else
 if(q == 'ghea'){
 reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey=2OcDMwvZ1Uc2S5V`)
+sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey=xA1jt74O5PUtdUs`)
 }/*else{
 reply(`Cara Penggunaan : ${prefix + command} ghea\n\nTersedia\n• +62\n• santuy\n• bocil\n• ukhti\n• rikagusriani\n• ghea`)
 }*/
@@ -4127,23 +4087,25 @@ teks = `wa.me/${sender.replace("@s.whatsapp.net","")}`
 reply(teks)
 break
 case 'randomanime':
+start = Date.now()
 reply(mess.wait)
 try{
     data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/random.txt')
     rand = Math.floor(Math.random() * 1585) + 1
     img = data.data.split('\n')[rand]
-    wa.sendButtonWithImage(from, bold('RANDOM ANIME'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
 break
 case 'husbu':
+start = Date.now()
 reply(mess.wait)
 try{
     data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/husbu.txt')
     rand = Math.floor(Math.random() * 100) + 1
     img = data.data.split('\n')[rand]
-    wa.sendButtonWithImage(from, bold('RANDOM HUSBU'), 'Next ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command}`], sender, tod)
 }catch{
     reply(mess.error.api)
 }
@@ -4157,7 +4119,7 @@ console.log(rand)
     if(rand < 100){
         rand = '0' + rand
     }
-    wa.sendButtonWithImage(from, bold('RANDOM WAIFU'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
+    wa.sendImage(from, await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), tod, bold('RANDOM WAIFU') + '\n' + bold(await wa.timer(start))
 }catch{
     reply(mess.error.api)
 }
