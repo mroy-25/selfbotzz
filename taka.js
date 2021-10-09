@@ -2548,7 +2548,7 @@ break
 case 'mobilewallanime':
 start = Date.now()
 try{
-    akaneko.mobileWallpapers().then(res => {
+    akaneko.mobileWallpapers().then(async res => {
         wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
@@ -2558,7 +2558,7 @@ break
 case 'wallanime':
 start = Date.now()
 try{
-    akaneko.wallpapers().then(res => {
+    akaneko.wallpapers().then(async res => {
         wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
@@ -2578,7 +2578,7 @@ break
 case 'foxnime':
 start = Date.now()
 try{
-    akaneko.foxgirl().then(res => {
+    akaneko.foxgirl().then(async res => {
         wa.sendButtonWithImage(from, bold('RANDOM ' + ${command}.toUpperCase()), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(res), ['NEXT ▶️'], [`${command}`], sender, tod)
     })
 }catch(e){
