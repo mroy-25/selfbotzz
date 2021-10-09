@@ -4119,7 +4119,7 @@ console.log(rand)
   if(rand < 100){
       rand = '0' + rand
   }
-  wa.sendImage(from, await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), tod, bold('RANDOM WAIFU') + '\n' + bold(await wa.timer(start))
+  wa.sendImage(from, await wa.getBuffer('http://randomwaifu.altervista.org/images/0' + rand + '.png'), tod, bold('RANDOM WAIFU') + '\n' + bold(await wa.timer(start)))
 }catch{
   reply(mess.error.api)
 }
