@@ -1272,9 +1272,10 @@ exports.mediafire = (query) => {
 		  	const upload_date = $('body > div.mf-dlr.page.ads-alternate > div.content > div.center > div > div.dl-info > ul > li:nth-child(2) > span').text();
 		  	const link = $('#downloadButton').attr('href')
 		  	const hsil = {
-		  		judul : judul,
+		  		judul : link.split('/')[5],
 		  		upload_date : upload_date,
 		  		size : size,
+                                mime : link.split('/')[5].split('.')[1],
 		  		link : link
 		  	}
 		  resolve(hsil)
