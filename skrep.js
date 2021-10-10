@@ -887,10 +887,10 @@ exports.sfiledown = async(link) => {
                         const link = $('#download').attr('href')
 			other = link.split('/')[7].split('&is')[0]
                         const format = {
-                          judul: nama + other.substr(po.length - 6).split('.')[1],
+                          judul: nama + other.substr(other.length - 6).split('.')[1],
                           size: size[1].split('(')[1].split(')')[0],
                           type: type,
-			  mime: other.substr(po.length - 6).split('.')[1],
+			  mime: other.substr(other.length - 6).split('.')[1],
                           desc: desc,
                           uploader: uploader,
                           uploaded: upload.split('\n - Uploaded: ')[1],
