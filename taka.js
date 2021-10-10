@@ -3850,7 +3850,7 @@ case 'sfiledirect':
 if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.Iv)
 reply(mess.wait)
-try{
+//try{
   data = await skrep.sfiledown(q)
   teks = `SFILE DIRECT\n\n`
   teks += shp + ' Judul : ' + data.data.judul + '\n'
@@ -3870,9 +3870,9 @@ try{
     await reply(teks)
     zynn.sendMessage(from, {url: `${data.data.link}` }, document, { mimetype: `${data.data.mime}`, filename:`${data.data.judul}.${data.data.mime}`, quoted: tod})
   }
-}catch{
+/*}catch{
   reply(mess.error.api)
-}
+}*/
 break
 case 'dewabatch':
 if(!q) return reply('Masukkan kata kunci!')
