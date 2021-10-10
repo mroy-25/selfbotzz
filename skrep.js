@@ -885,10 +885,12 @@ exports.sfiledown = async(link) => {
                         const uploader = $('body > div.w3-row-padding.w3-container.w3-white > div > div:nth-child(4) > a:nth-child(2)').text();
                         const download = $('body > div.w3-row-padding.w3-container.w3-white > div > div:nth-child(6)').text();
                         const link = $('#download').attr('href')
+			other = link.split('/')[7].split('&is')[0]
                         const format = {
-                          judul: nama,
+                          judul: nama + other.substr(po.length - 6).split('.')[1],
                           size: size[1].split('(')[1].split(')')[0],
                           type: type,
+			  mime: other.substr(po.length - 6).split('.')[1],
                           desc: desc,
                           uploader: uploader,
                           uploaded: upload.split('\n - Uploaded: ')[1],
