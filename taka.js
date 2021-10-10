@@ -4226,9 +4226,16 @@ try{
   teks += shp + ' Nama : ' + data.judul + '\n'
   teks += shp + ' Size : ' + data.size + '\n'
   teks += shp + ' Tanggal Upload : ' + data.upload_date + '\n'
-  teks += shp + ' Link Direct : ' + data.link
-  await reply(teks)
-zynn.sendMessage(from, {url: `${data.link}` }, document, { mimetype: `${data.mime}`, filename:`${data.judul}`})
+  if(Number(data.size.split('.')[0]) >= 70){
+teks += shp + ' Link Direct : ' + data.link +'\n\n'
+teks += mess.oversize
+return reply(teks)
+}
+else{
+teks += 'Tunggu sebentar\nBot akan mengirimkan filenya!'
+await reply(teks)
+}
+zynn.sendMessage(from, {url: `${data.link}` }, document, { mimetype: `${data.mime}`, filename:`${data.judul}`, quoted: tod})
 }catch{
   reply(mess.error.api)
 }
