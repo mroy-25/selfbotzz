@@ -23,8 +23,8 @@ exports.sleep = async (ms) => {
 exports.sendText = (from, text) => {
     zynn.sendMessage(from, text, MessageType.text)
 }
-exports.reply = (from, text, tod) => {
-    zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
+exports.reply = (from, text, tod, tag) => {
+    zynn.sendMessage(from, text, MessageType.text, {quoted: tod, contextInfo:{mentionedJid: tag}})
 }
 exports.sendSticker = (from, filename, tod) => {
 	zynn.sendMessage(from, filename, MessageType.sticker, {quoted: tod})
