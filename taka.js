@@ -4261,7 +4261,8 @@ try{
   teks += shp + ' Size : ' + data.size + '\n'
   teks += shp + ' Tanggal Upload : ' + data.upload_date + '\n'
   teks += shp + ' Link Direct : ' + data.link
-  reply(teks)
+  await reply(teks)
+zynn.sendMessage(from, {url: `${data.link}` }, document, { mimetype: `${data.mime}`, filename:`${data.judul}`})
 }catch{
   reply(mess.error.api)
 }
