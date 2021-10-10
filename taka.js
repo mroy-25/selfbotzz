@@ -3858,8 +3858,18 @@ try{
   teks += shp + ' Type : ' + data.data.type + '\n'
   teks += shp + ' Uploader : ' + data.data.uploader + '\n'
   teks += shp + ' Tanggal Upload : ' + data.data.uploaded + '\n'
-  teks += shp + ' Link Direct : ' + data.data.link
-  reply(teks)
+  size = data.data.size.split('.')[0]
+  sizex = data.data.size.split(' ')[1]
+  if(!sizex == 'KB' && Number(size) >= 70){
+   teks += shp + ' Link Direct : ' + await wa.tiny(data.data.link) + '\n\n'
+   teks += mess.oversize
+   return reply(teks)
+  }
+  else{
+    teks += '\nTunggu sebentar\nFile akan segera dikirim'
+    await reply(teks)
+    zynn.sendMessage(from, {url: `${data.data.link}` }, document, { mimetype: `${data.data.mime}`, filename:`${data.data.judul}.${data.data.mime}`, quoted: tod})
+  }
 }catch{
   reply(mess.error.api)
 }
@@ -4222,20 +4232,22 @@ if(!isUrl(q)) return reply(mess.error.Iv)
 reply(mess.wait)
 try{
   data = await skrep.mediafire(q)
-  teks = `M E D I A F I R E  D I R E C T\n\n`
+  teks = `M E D I A F I R E  D O W N L O A D E R\n\n`
   teks += shp + ' Nama : ' + data.judul + '\n'
   teks += shp + ' Size : ' + data.size + '\n'
   teks += shp + ' Tanggal Upload : ' + data.upload_date + '\n'
-  if(Number(data.size.split('.')[0]) >= 70){
+  size = data.size.split('.')[0]
+  sizex = data.size.replace(/\d+/g, '').replace('.', '')
+  if(!sizex == 'KB' && Number(size) >= 70){
 teks += shp + ' Link Direct : ' + data.link +'\n\n'
 teks += mess.oversize
 return reply(teks)
 }
 else{
-teks += 'Tunggu sebentar\nBot akan mengirimkan filenya!'
+teks += '\nTunggu sebentar\nBot akan mengirimkan filenya!'
 await reply(teks)
-}
 zynn.sendMessage(from, {url: `${data.link}` }, document, { mimetype: `${data.mime}`, filename:`${data.judul}`, quoted: tod})
+}
 }catch{
   reply(mess.error.api)
 }
