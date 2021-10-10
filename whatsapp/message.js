@@ -596,3 +596,6 @@ return new Promise((resolve,reject) => {
 resolve('Process in ' + ((Date.now() - start)/1000).toFixed(1) + " Seconds")
 })
 }
+exports.randomarray = async(array) => {
+ return array[Math.floor(Math.random() * array.length)]
+}
