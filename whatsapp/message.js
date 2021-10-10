@@ -4,6 +4,7 @@ const {
     WAConnection
 } = require("@adiwajshing/baileys");
 const fs = require('fs');
+const moment = require("moment-timezone");
 const conn = require('../main');
 const axios = require('axios');
 const fetch = require('node-fetch')
@@ -592,9 +593,7 @@ exports.tiny = async(link) => {
 	})
 }
 exports.timer = async(start) => {
-return new Promise((resolve,reject) => {
-resolve('Process in ' + ((Date.now() - start)/1000).toFixed(1) + " Seconds")
-})
+	return `Process in *${moment.duration(moment().diff(moment(start))).seconds()} Seconds*`
 }
 exports.randomarray = async(array) => {
  return array[Math.floor(Math.random() * array.length)]
