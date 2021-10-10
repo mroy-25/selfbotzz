@@ -415,10 +415,6 @@ else{
   zynn.updatePresence(from, Presence.composing)
 }
 }
-const bypasephe = async(anu) => {
-anu.message = (Object.keys(anu.message)[0] === 'ephemeralMessage') ? anu.message.ephemeralMessage.message : anu.message
-return anu.message
-}
 const sendMediaURL = async(to, url, text, mids) =>{
               if(mids.length > 0){
                   text = normalizeMention(to, text, mids)
@@ -2097,36 +2093,6 @@ po = zynn.prepareMessageFromContent(from, {
                 "listType": "SINGLE_SELECT",
                 "sections": datai}}, {}) 
           zynn.relayWAMessage(po, {waitForAck: true})
-break
-case 'ytdown':
-if(!q) return reply('Masukkan link youtube!')
-Links = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-if (!Links) return reply(mess.error.Iv)
-reply(mess.wait)
-butt = [
-  {buttonId: `ytmp4 ${q}`, buttonText: {displayText: 'MP4'}, type: 1},
-  {buttonId: `ytmp3 ${q}`, buttonText: {displayText: 'MP3'}, type: 1}
-]
-try{
-yutup = await yta(q.replace('shorts', 'embed'))
-buff = await wa.getBuffer(yutup.thumb)
-teks = 'Y O U T U B E  D O W N L O A D E R\n\n'
-teks += shp + ' Judul : ' + yutup.title
-po = await zynn.prepareMessage(from, buff, image)
-await bypasephe(po)
-buttonmes= {
-imageMessage: po.message.imageMessage,
-contentText: teks,
-footerText: "Silahkan Pilih MP4/MP3",
-buttons: butt,
-headerType: 4
-}
-zynn.sendMessage(from, buttonmes, MessageType.buttonsMessage, {
-quoted: tod
-})
-}catch{
-reply(mess.error.api)
-}
 break
 case 'ytsearch':
 if(!q) return reply('Mau cari apa diyoutube?')
