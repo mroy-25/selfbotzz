@@ -3319,70 +3319,9 @@ try{
 }
 break
 case 'asupan':
-if(!q){
-      po = zynn.prepareMessageFromContent(from, {
-                                      "listMessage":{
-                "title": "*ASUPAN*",
-                "description": "Silahkan dipilih kak asupannya:v",
-                "buttonText": "Asupannya Disini",
-                "listType": "SINGLE_SELECT",
-                "sections": [
-                   {
-                      "rows": [
-                         {
-                            "title": "ASUPAN +62",
-                            "rowId": `${prefix}asupan +62`
-                         },
-                         {
-                            "title": "ASUPAN SANTUY",
-                            "rowId": `${prefix}asupan santuy`
-                         },
-                         {
-                            "title": "ASUPAN BOCIL",
-                            "rowId": `${prefix}asupan bocil`
-                         },
-                         {
-                            "title": "ASUPAN UKHTI",
-                            "rowId": `${prefix}asupan ukhti`
-                         },
-                         {
-                            "title": "ASUPAN RIKA GUSTIANI",
-                            "rowId": `${prefix}asupan rikagustiani`
-                         },
-                         {
-                            "title": "ASUPAN GHEA",
-                            "rowId": `${prefix}asupan ghea`
-                         },
-                      ]
-                   }]}}, {}) 
-          zynn.relayWAMessage(po, {waitForAck: true})
-}
-if(q == '+62'){
-reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupan?apikey=xA1jt74O5PUtdUs`)
-}else
-if(q == 'santuy'){
-reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupansantuy?apikey=xA1jt74O5PUtdUs`)
-}else
-if(q == 'bocil'){
-reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanbocil?apikey=xA1jt74O5PUtdUs`)
-}else
-if(q == 'ukhti'){
-reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanukhty?apikey=xA1jt74O5PUtdUs`)
-}else
-if(q == 'rikagustiani'){
-reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanrikagusriani?apikey=xA1jt74O5PUtdUs`)
-}else
-if(q == 'ghea'){
-reply(mess.wait)
-sendMediaURL(from,`https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey=xA1jt74O5PUtdUs`)
-}/*else{
-reply(`Cara Penggunaan : ${prefix + command} ghea\n\nTersedia\n• +62\n• santuy\n• bocil\n• ukhti\n• rikagusriani\n• ghea`)
-}*/
+start = Date.now()
+list = ['https://dapuhy-api.herokuapp.com/api/asupan/asupan?apikey=xA1jt74O5PUtdUs',`https://dapuhy-api.herokuapp.com/api/asupan/asupansantuy?apikey=xA1jt74O5PUtdUs`, `https://dapuhy-api.herokuapp.com/api/asupan/asupanbocil?apikey=xA1jt74O5PUtdUs`, `https://dapuhy-api.herokuapp.com/api/asupan/asupanukhty?apikey=xA1jt74O5PUtdUs`,`https://dapuhy-api.herokuapp.com/api/asupan/asupanrikagusriani?apikey=xA1jt74O5PUtdUs`, `https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey=xA1jt74O5PUtdUs`, asupan]
+wa.sendFileFromUrl(from, await wa.randomarray(list), tod, await wa.timer(start))
 break
 case 'setprefixgc':
 if(!isGroupAdmins && !itsMe) return reply(mess.only.admin)
