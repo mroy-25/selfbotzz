@@ -13,7 +13,6 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install pillow
 
 RUN npm install -g npm@7.20.5
-//RUN npm install -g pm2@latest
 
 WORKDIR /home/frmdev/frmdev
 COPY package.json .
