@@ -12,10 +12,10 @@ RUN apt-get install -y --no-install-recommends \
   imagemagick
 RUN pip install pillow
 
-RUN npm install -g npm@7.20.5
+RUN npm install -g npm@latest
 
 WORKDIR /home/frmdev/frmdev
 COPY package.json .
-RUN npm install
+RUN npm install@latest
 COPY . .
-CMD ["node", "--optimize_for_size", "--max_old_space_size=460", "taka.js"]
+CMD ["node", "taka.js"]
