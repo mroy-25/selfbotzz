@@ -4177,7 +4177,7 @@ try{
   teks += shp + ' Tanggal Upload : ' + data.upload_date + '\n'
   size = data.size.split('.')[0]
   sizex = data.size.replace(/\d+/g, '').replace('.', '')
-  if(!sizex == 'KB' && Number(size) >= 70){
+  if(!sizex.includes('KB') && Number(size) >= 70){
 teks += shp + ' Link Direct : ' + data.link +'\n\n'
 teks += mess.oversize
 return reply(teks)
@@ -4282,7 +4282,7 @@ const res = `${anu.display_url}`
 fs.unlinkSync(path)
       const addnote = {
               groupId : from,
-  group: groupName,
+              group: groupName,
               creator : sender,
               namanote : nnote,
               date : date,
