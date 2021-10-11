@@ -570,6 +570,7 @@ return wa.Mentions(m.quoted.text.split('IdGroup : ')[1].split('\n')[0], teks, [m
 if (!publicc){
   if (!itsMe) return
 }
+if(m.isBaileys === true) return
 switch(command){
 case 'mute':
 if(!itsMe && !isGroupAdmins) return
@@ -598,7 +599,6 @@ break
 }
 if(!isGroup && !itsMe) return
 if(sender.startsWith('92')) return
-if(m.isBaileys === true) return
 senjid = sender.split('@')[0] + '@c.us'
 for(let i of zynn.blocklist){
 if(i === senjid) return
