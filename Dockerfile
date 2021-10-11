@@ -18,6 +18,5 @@ RUN npm install -g pm2@latest
 WORKDIR /home/frmdev/frmdev
 COPY package.json .
 RUN npm install
-RUN pm2 start main.js
 COPY . .
 CMD ["pm2", "taka.js"]
