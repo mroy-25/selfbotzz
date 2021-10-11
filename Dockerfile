@@ -16,6 +16,6 @@ RUN npm install -g npm@latest
 
 WORKDIR /home/frmdev/frmdev
 COPY package.json .
-RUN npm install@latest
+RUN npm install
 COPY . .
 CMD ["node", "taka.js"]
