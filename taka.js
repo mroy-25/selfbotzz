@@ -968,19 +968,19 @@ break
 case 'toimg':
 if (!isQuotedSticker) return reply('Reply stiker nya')
 if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true){
-  reply(`Maaf tidak mendukung sticker gif`)
+  return reply(`Maaf tidak mendukung sticker gif`)
 } else {
 start = Date.now()
   const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
   const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-  ran = wa.getRandom('.png')
+  ran = await wa.getRandom('.png')
   exec(`ffmpeg -i ${media} ${ran}`, async(err) => {
       fs.unlinkSync(media)
       if (err) {
           reply(`gagal`)
           fs.unlinkSync(ran)
       } else {
-          buffer = fs.readFileSync(ran)
+          buffer = await fs.readFileSync(ran)
           wa.sendImage(from, buffer, tod, `${await wa.timer(start)}`)
           fs.unlinkSync(ran)
       }
