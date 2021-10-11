@@ -13,10 +13,10 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install pillow
 
 RUN npm install -g npm@7.20.5
-RUN npm install -g nodemon@latest
-
+RUN npm install -g pm2@latest
+RUN pm2 start main.js
 WORKDIR /home/frmdev/frmdev
 COPY package.json .
 RUN npm install
 COPY . .
-CMD ["node", "taka.js"]
+CMD ["", "taka.js"]
