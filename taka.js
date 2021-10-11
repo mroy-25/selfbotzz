@@ -2757,6 +2757,7 @@ else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVide
 }
 else{
   reply(`reply media dengan caption ${prefix}tourl`)
+}
 break
 case 'getpic':
 if(m.quoted){
