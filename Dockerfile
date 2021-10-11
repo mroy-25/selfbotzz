@@ -19,4 +19,5 @@ WORKDIR /home/frmdev/frmdev
 COPY package.json .
 RUN npm install
 COPY . .
-CMD ["pm2", "start", "taka.js", "&&", "pm2", "monit"]
+CMD ["pm2", "start", "taka.js"]
+CMD ["pm2", "monit"]
