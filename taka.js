@@ -4623,11 +4623,14 @@ if (isQuotedAudio) {
 }
 break
 case 'x':
-  if(!itsMe) return
-      exec(q, (err, stdout) => {
-      if (err) return wa.reply(Owner[0], String(err), tod)
-      if (stdout) reply(Owner[0], stdout, tod)
-              })
+if(!itsMe) return
+console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval Nonasync`))
+try{
+  return wa.reply(Owner[0], JSON.stringify(eval(q), null, 2), tod)
+}catch(err){
+  e = String(err)
+  reply(e)
+}
 break
 default:
   if (chats.startsWith('$')){
