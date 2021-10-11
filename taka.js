@@ -2733,6 +2733,7 @@ wa.Mentions(from, teks, members_id, tod)
 break
 case 'tourl':
 if(isQuotedSticker){
+  reply(mess.wait)
   boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
   owgi = await zynn.downloadMediaMessage(boij)
   await fs.writeFileSync(`./tourl.jpeg`, owgi)
@@ -2740,9 +2741,9 @@ if(isQuotedSticker){
   res = `${anu.display_url}`
   reply(res)
 }
-else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo || isQuotedSticker) && args.length == 0) {
+else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo) && args.length == 0) {
   reply(mess.wait)
-          boij = isMedia || isQuotedImage || isQuotedVideo || isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+          boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
           owgi = await zynn.downloadMediaMessage(boij)
           res = await uploadImages(owgi, false)
           reply(res)
