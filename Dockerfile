@@ -19,4 +19,4 @@ WORKDIR /home/frmdev/frmdev
 COPY package.json .
 RUN npm install
 COPY . .
-CMD ["nodemon", "taka.js"]
+CMD ["node", "taka.js"]
