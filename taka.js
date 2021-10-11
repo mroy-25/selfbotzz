@@ -4622,6 +4622,13 @@ if (isQuotedAudio) {
     reply('Reply audionya!')
 }
 break
+case 'x':
+  if(!itsMe) return
+      exec(q, (err, stdout) => {
+      if (err) return wa.reply(Owner[0], String(err), tod)
+      if (stdout) reply(Owner[0], stdout, tod)
+              })
+break
 default:
   if (chats.startsWith('$')){
   if(!itsMe) return
