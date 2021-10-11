@@ -4208,7 +4208,9 @@ if (!itsMe) return reply(mess.only.ownerB)
 if (isQuotedSticker) {
   if (!q) return reply(`Cara Penggunaan : Reply sticker dengan caption ${command} commandnya\nContoh : ${command} .help`)
   var kodenya = tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.fileSha256.toString('hex')
-  addcmd(kodenya, q.startsWith(prefix) ? q.replace(prefix, ''): q, reply, db)
+  down = await fs.writeFileSync('./media/stikcmd.webp', await m.quoted.download())
+  stikurl = await wa.imgbb('./media/stikcmd.webp')
+  addcmd(kodenya, q.startsWith(prefix) ? q.replace(prefix, ''): q, reply, db, stikurl.url)
 } else {
   reply('tag stickernya')
 }
@@ -4231,6 +4233,18 @@ for (let i of deta) {
 teksnyee += `\n\n*${shp} ID :* ${i.id}\n*${shp} Cmd* : ${i.cmd}`
 }
 reply(teksnyee)
+break
+case 'getsticker':
+if(!q) return reply('Masukkan nama cmdnya!')
+try{
+	data = await db.showdata('stickerdb', {cmd: q})
+	for(let i of data){
+		wa.sendSticker(from, await wa.getBuffer(i.sticker), tod)
+		await wa.sleep(3000)
+	}
+}catch{
+	reply(`Sticker dengan command ${q} tidak ditemukan...`)
+}
 break
 case 'delete':
 case 'del':
