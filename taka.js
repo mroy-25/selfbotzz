@@ -2742,9 +2742,9 @@ if(isQuotedSticker){
   res = `${anu.display_url}`
   reply(res)
 }
-else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo || isQuotedDocument) && args.length == 0) {
+else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo || isQuotedDocument || isQuotedAudio) && args.length == 0) {
   reply(mess.wait)
-          boij = isQuotedImage || isQuotedVideo || isQuotedDocument ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+          boij = isQuotedImage || isQuotedVideo || isQuotedDocument || isQuotedAudio ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
           owgi = await zynn.downloadMediaMessage(boij)
           res = await upload.upload(owgi)
           teks = bold('MEDIA TO URL') + '\n\n'
