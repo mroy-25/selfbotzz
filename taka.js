@@ -2752,7 +2752,7 @@ else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVide
           teks += shp + ' Encoding : ' + res.result.encoding + '\n'
           teks += shp + ' Mimetype : ' + res.result.mimetype + '\n'
           teks += shp + ' Size : ' + res.result.size + '\n'
-          teks += shp + ' Url : ' + await wa.tiny(res.result.originalname)
+          teks += shp + ' Url : ' + await wa.tiny(res.result.url)
           reply(teks)
 }
 else{
