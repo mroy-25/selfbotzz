@@ -276,7 +276,7 @@ exports.fakethumb = (from, teks, tod, yes) => {
 	zynn.sendMessage(from, teks, MessageType.image, {thumbnail:fs.readFileSync('./media/zynn.jpeg'),quoted:tod})
 }
 }
-exports.getRandom = (ext) => {
+exports.getRandom = async(ext) => {
     return `${Math.floor(Math.random() * 10000)}${ext}`
 }
 exports.sendStickerFromUrl = async(from, url, tod) => {
