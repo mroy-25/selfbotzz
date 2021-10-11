@@ -2742,13 +2742,21 @@ if(isQuotedSticker){
   res = `${anu.display_url}`
   reply(res)
 }
-else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo) && args.length == 0) {
+else if ((isMedia && !zynn.message.videoMessage || isQuotedImage || isQuotedVideo || isQuotedDocument) && args.length == 0) {
   reply(mess.wait)
-          boij = isQuotedImage || isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
+          boij = isQuotedImage || isQuotedVideo || isQuotedDocument ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
           owgi = await zynn.downloadMediaMessage(boij)
-          res = await uploadImages(owgi, false)
-          reply(res)
+          res = await upload.upload(owgi)
+          teks = bold('MEDIA TO URL') + '\n\n'
+          teks += shp + ' Nama : ' + res.result.originalname + '\n'
+          teks += shp + ' Encoding : ' + res.result.encoding + '\n'
+          teks += shp + ' Mimetype : ' + res.result.mimetype + '\n'
+          teks += shp + ' Size : ' + res.result.size + '\n'
+          teks += shp + ' Url : ' + await wa.tiny(res.result.originalname)
+          reply(teks)
 }
+else{
+  reply(`reply media dengan caption ${prefix}tourl`)
 break
 case 'getpic':
 if(m.quoted){
@@ -4577,6 +4585,26 @@ else{
 }
 }catch{
 reply(mess.error.api)
+}
+break
+case 'searchmusic':
+if (isQuotedAudio) {
+    try {
+        reply(mess.wait)
+        res = await upload.upload(await m.quoted.download())
+        data = await wa.fetchJson(`https://api.zeks.me/api/searchmusic?apikey=iloveyou3000&audio=${res.result.url}`)
+        teks = bold('SEARCH MUSIC') + '\n\n'
+        teks += shp + ' Title : ' + data.data.title + '\n'
+        teks += shp + ' Artist : ' + data.data.artists + '\n'
+        teks += shp + ' Genre : ' + data.data.genre + '\n'
+        teks += shp + ' Album : ' + data.data.album + '\n'
+        teks += shp + ' Release Date : ' + data.data.release_date
+        reply(teks)
+    } catch {
+        reply('Lagu tidak ditemukan!')
+    }
+} else {
+    reply('Reply audionya!')
 }
 break
 default:
