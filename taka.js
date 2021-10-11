@@ -105,7 +105,7 @@ console.log("on bang bot nya")
 })*/
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
     cluster.fork();
     }
   cluster.on('exit', (worker, code, signal) => {
