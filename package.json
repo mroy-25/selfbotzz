@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node taka.js"
+    "start": "pm2 start taka.js"
   },
   "author": "Fajar",
   "dependencies": {
