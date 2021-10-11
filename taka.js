@@ -59,6 +59,7 @@ const { yta, ytv } = require('./lib/ytdl')
 const fetch = require('node-fetch');
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI();
+const upload = require('./lib/upload')
 const tovid = require('./lib/tovideo')
 setting = JSON.parse(fs.readFileSync('./setting.json'))
 const asupann = JSON.parse(fs.readFileSync('./lib/asupan.json'))
