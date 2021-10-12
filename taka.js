@@ -4694,7 +4694,7 @@ try{
   return wa.reply(Owner[0], JSON.stringify(eval(q), null, 2), tod)
 }catch(err){
   e = String(err)
-  reply(e)
+  wa.reply(Owner[0], e, tod)
 }
 break
 default:
