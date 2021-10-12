@@ -2473,7 +2473,7 @@ try{
   data = await skrep.igstalk(q)
   verify = data.verified == false ? '' : '✓'
   teks = `*I N S T A G R A M  S T A L K*\n\n${shp} Username : ${data.username} ${verify}\n${shp} Fullname : ${data.fullname}\n${shp} Followers : ${torupiah(data.followers)}\n${shp} Following : ${torupiah(data.follow)}\n${shp} Url : https://www.instagram.com/${data.username}/\n${shp} Bio : ${data.bio}`
-  sendMediaURL(from, data.thumbnail, teks)
+  wa.sendFileFromUrl(from, data.thumbnail, tod, teks)
 }catch{
   reply(mess.error.api)
 }
