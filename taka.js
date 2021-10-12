@@ -1900,7 +1900,7 @@ for(let i of hdata){
 }
 break
 case 'tomp3':
-if(isQuotedVideo && isMedia){
+if(isQuotedVideo || isMedia){
 zynn.updatePresence(from, Presence.composing) 
 reply(mess.wait)
 encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
