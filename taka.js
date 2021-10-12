@@ -102,7 +102,7 @@ const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
 conn.connects()
 console.log("on bang bot nya")
 })*/
-if (cluster.isMaster) {
+/*if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
     for (let i = 0; i < 1; i++) {
         cluster.fork();
@@ -111,7 +111,7 @@ if (cluster.isMaster) {
         console.log(`worker ${worker.process.pid} died`);
         cluster.fork();
     });
-}
+}*/
 const tzy = conn.zynn
 tzy.on('CB:action,,battery', json => {
     const a = json[2][0][1].value
