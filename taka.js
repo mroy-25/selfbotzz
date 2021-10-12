@@ -2226,7 +2226,7 @@ start = Date.now()
 reply(mess.wait)
 try{
 if(args[0] == 'wm'){
-  wa.sendFileFromUrl(from, args[1], tod, 'TIKTOK WITH WATERMARK\n' + await wa.timer(start))
+  wa.sendVideo(from, await wa.getBuffer(args[1]), tod, 'TIKTOK WITH WATERMARK\n' + await wa.timer(start))
 }
 else if(args[0] == 'audio'){
   rann = wa.getRandom('.mp4')
@@ -2456,12 +2456,13 @@ try{
   reply('Server 1 error\nTunggu sebentar, mencoba menggunakan server 2...')
   try{
    data = await skrep.igdl(q)
+	if(data == '') return reply('Server 2 error!')
    for(let i of data){
    wa.sendFileFromUrl(from, i, tod, await wa.timer(start))
     await wa.sleep(3000)
    }
   }catch(e){
-   return reply('Server 2 error!\nOperasi dihentikan')
+   return reply('Server 2 error!')
   }
 }
 break
@@ -4070,7 +4071,7 @@ case 'loli':
 start = Date.now()
 reply(mess.wait)
 try{
-data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/loli.json')
+data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/loli.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
 loli = data.data[rand]
 wa.sendButtonWithImage(from, bold('RANDOM LOLI'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(loli), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
@@ -4082,7 +4083,7 @@ case 'shota':
 start = Date.now()
 reply(mess.wait)
 try{
-data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/shota.json')
+data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/shota.json')
 rand = Math.floor(Math.random() * data.data.length) + 1
 img = data.data[rand]
 wa.sendButtonWithImage(from, bold('RANDOM SHOTA'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
@@ -4093,7 +4094,7 @@ break
 case 'darkjoke':
 start = Date.now()
 try{
-data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/darkjokes.txt')
+data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/darkjokes.txt')
 rand = Math.floor(Math.random() * 249) + 1
 img = data.data.split('\n')[rand]
 wa.sendButtonWithImage(from, bold('DARKJOKE'), await wa.timer(start) + '\nNext ga nih?', await wa.getBuffer(img), ['NEXT ▶️'], [`${command} ${q}`], sender, tod)
@@ -4103,7 +4104,7 @@ wa.sendButtonWithImage(from, bold('DARKJOKE'), await wa.timer(start) + '\nNext g
 break
 case 'cerpen':
 try{
-  data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/cerpen.json')
+  data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/cerpen.json')
   rand = Math.floor(Math.random() * data.data.length) + 1
   teks = data.data[rand]
   reply(teks)
@@ -4134,7 +4135,7 @@ break
 case 'ppcouple':
 reply(mess.wait)
 try{
-  data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/couple.json')
+  data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/couple.json')
   var rand = Math.floor(Math.random() * data.data.length) + 1
   await wa.sendFileFromUrl(from, data.data[rand].male, tod, 'MALE')
   wa.sendFileFromUrl(from, data.data[rand].female, tod, 'FEMALE')
@@ -4144,7 +4145,7 @@ try{
 break
 case 'quotes':
 try{
-  data = await axios.get('https://raw.githubusercontent.com/Caliph71/txt/main/quotes.json')
+  data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/quotes.json')
   rand = Math.floor(Math.random() * data.data.length) + 1
   teks = italic(data.data[rand].quotes) + '\n\n'
   teks += '~ ' + italic(data.data[rand].author)
