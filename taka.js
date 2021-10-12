@@ -811,35 +811,34 @@ case 'stiker':
           const media = await zynn.downloadMediaMessage(encmedia)
           stik = await createSticker(media, stickermetadata)
           await wa.sendSticker(from, stik, tod)
-        } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo) && args.length == 0) {
-  if(tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 10) return reply('Maksimal 10 detik!')
-  const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo : tod
-  const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-  ran = wa.getRandom('.webp')
-  reply(mess.wait)
-  await ffmpeg(`./${media}`)
-  .inputFormat(media.split('.')[1])
-  .on('start', function (cmd) {
-    console.log(`Started : ${cmd}`)
-  })
-  .on('error', function (err) {
-    console.log(`Error : ${err}`)
-    fs.unlinkSync(media)
-    tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-    reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
-  })
-  .on('end', function () {
-    console.log('Finish')
-    wa.sendSticker(from, fs.readFileSync(ran), tod)
-    fs.unlinkSync(media)
-    fs.unlinkSync(ran)
-  })
-  .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-  .toFormat('webp')
-  .save(ran)
-  } else {
-          reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
-        }
+        } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+    const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
+    const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+    ran = wa.getRandom('.webp')
+    reply(mess.wait)
+    await ffmpeg(`./${media}`)
+        .inputFormat(media.split('.')[1])
+        .on('start', function(cmd) {
+            console.log(`Started : ${cmd}`)
+        })
+        .on('error', function(err) {
+            console.log(`Error : ${err}`)
+            fs.unlinkSync(media)
+            tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+            reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
+        })
+        .on('end', function() {
+            console.log('Finish')
+            wa.sendSticker(from, fs.readFileSync(ran), tod)
+            fs.unlinkSync(media)
+            fs.unlinkSync(ran)
+        })
+        .addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+        .toFormat('webp')
+        .save(ran)
+} else {
+    reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
+}
           break
 case 'colong':
 if(isQuotedSticker){
