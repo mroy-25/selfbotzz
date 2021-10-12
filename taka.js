@@ -970,7 +970,7 @@ if (!isQuotedSticker) return reply('Reply stiker nya')
 if (tod.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true){
   return reply(`Maaf tidak mendukung sticker gif`)
 } else {
-start = Date.now()
+const start = Date.now()
   const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.extendedTextMessage.contextInfo
   const media = await zynn.downloadAndSaveMediaMessage(encmedia)
   ran = await wa.getRandom('.png')
@@ -1614,7 +1614,7 @@ case 'burn':
 case 'brazzers':
 case 'beautiful':
 case 'approved3000years':
-start = Date.now()
+const start = Date.now()
 try{
   if(isMedia && !zynn.message.videoMessage || isQuotedImage){
   reply(mess.wait)
@@ -1681,7 +1681,7 @@ const encmedia = JSON.parse(JSON.stringify(tod).replace('quotedM','m')).message.
 break
 case 'pinterest':
 if(!q) return reply('Mau cari apa dipinterest?')
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
   data = await skrep.pinterest(q)
@@ -1698,7 +1698,7 @@ break
 case 'nuliskiri':{
 if (!q) return reply(`Kirim perintah *${prefix}nuliskiri* teks`)
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,9}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
 spawn('convert', [
@@ -1725,7 +1725,7 @@ break
 case 'nuliskanan':{
 if (!q) return reply(`Kirim perintah *${prefix}nuliskanan* teks`)
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,9}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
 spawn('convert', [
@@ -1752,7 +1752,7 @@ break
 case 'foliokiri':{
 if (!q) return reply(`Kirim perintah *${prefix}foliokiri* teks`)
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,13}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
 spawn('convert', [
@@ -1779,7 +1779,7 @@ break
 case 'foliokanan':{
 if (!q) return reply(`Kirim perintah *${prefix}foliokanan* teks`)
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 const splitText = q.replace(/(\S+\s*){1,13}/g, '$&\n')
 const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
 spawn('convert', [
@@ -2048,7 +2048,7 @@ break
 case 'image':
 if (args.length < 1) return reply('Masukan teks!')
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 try{
 gis(q, async (error, result) => {
 n = result
@@ -2221,7 +2221,7 @@ break
 case 'tiktok':
 if(!q) return reply('Masukkan linknya!')
 if(!isUrl(q)) return reply(mess.error.lv)
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
 if(args[0] == 'wm'){
@@ -2443,7 +2443,7 @@ case 'instagram':
 if(!q) return reply('Masukkan link instagram!')
 if(!isUrl(q)) return reply('Masukkan url dengan benar!')
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 try{
   data = await hx.igdl(q)
   teks = `*I N S T A G R A M  D O W N L O A D E R*\n\n${shp} Username : ${data.user.username}\n${shp} Fullname : ${data.user.fullName}\n${shp} Jumlah Media : ${data.medias.length}\n\ntunggu Sebentar\nMedia akan segera dikirim...`
@@ -2529,7 +2529,7 @@ dtt.length > 300
 }
 break
 case 'mobilewallanime':
-start = Date.now()
+const start = Date.now()
 try{
   akaneko.mobileWallpapers().then(async res => {
       wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM WALLPAPER ANIME') + '\n' + bold(await wa.timer(start)))
@@ -2539,7 +2539,7 @@ try{
 }
 break
 case 'wallanime':
-start = Date.now()
+const start = Date.now()
 try{
   akaneko.wallpapers().then(async res => {
       wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM ' + command.toUpperCase()) + '\n' + bold(await wa.timer(start)))
@@ -2549,7 +2549,7 @@ try{
 }
 break
 case 'nekonime':
-start = Date.now()
+const start = Date.now()
 try{
   akaneko.neko().then(async res => {
       wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM ' + command.toUpperCase()) + '\n' + bold(await wa.timer(start)))
@@ -2559,7 +2559,7 @@ try{
 }
 break
 case 'foxnime':
-start = Date.now()
+const start = Date.now()
 try{
   akaneko.foxgirl().then(async res => {
       wa.sendImage(from, await wa.getBuffer(res), tod, bold('RANDOM ' + command.toUpperCase()) + '\n' + bold(await wa.timer(start)))
@@ -3256,7 +3256,7 @@ break
 */
 case 'konachan':
 if(!q) return reply('Masukkan kata kuncinya!')
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
   data = await skrep.konachan(q)
@@ -3331,7 +3331,7 @@ try{
 }
 break
 case 'asupan':
-start = Date.now()
+const start = Date.now()
 list = ['https://dapuhy-api.herokuapp.com/api/asupan/asupan?apikey=xA1jt74O5PUtdUs',`https://dapuhy-api.herokuapp.com/api/asupan/asupansantuy?apikey=xA1jt74O5PUtdUs`, `https://dapuhy-api.herokuapp.com/api/asupan/asupanbocil?apikey=xA1jt74O5PUtdUs`, `https://dapuhy-api.herokuapp.com/api/asupan/asupanukhty?apikey=xA1jt74O5PUtdUs`,`https://dapuhy-api.herokuapp.com/api/asupan/asupanrikagusriani?apikey=xA1jt74O5PUtdUs`, `https://dapuhy-api.herokuapp.com/api/asupan/asupanghea?apikey=xA1jt74O5PUtdUs`, asupan]
 wa.sendFileFromUrl(from, await wa.randomarray(list), tod, await wa.timer(start))
 break
@@ -4029,7 +4029,7 @@ teks = `wa.me/${sender.replace("@s.whatsapp.net","")}`
 reply(teks)
 break
 case 'randomanime':
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
   data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/random.txt')
@@ -4041,7 +4041,7 @@ try{
 }
 break
 case 'husbu':
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
   data = await axios.get('https://raw.githubusercontent.com/ArugaZ/scraper-results/main/random/anime/husbu.txt')
@@ -4054,7 +4054,7 @@ try{
 break
 case 'waifu':
 reply(mess.wait)
-start = Date.now()
+const start = Date.now()
 try{
   rand = Math.floor(Math.random() * 100) + 1
 console.log(rand)
@@ -4067,7 +4067,7 @@ console.log(rand)
 }
 break
 case 'loli':
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
 data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/loli.json')
@@ -4079,7 +4079,7 @@ wa.sendButtonWithImage(from, bold('RANDOM LOLI'), await wa.timer(start) + '\nNex
 }
 break
 case 'shota':
-start = Date.now()
+const start = Date.now()
 reply(mess.wait)
 try{
 data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/shota.json')
@@ -4091,7 +4091,7 @@ wa.sendButtonWithImage(from, bold('RANDOM SHOTA'), await wa.timer(start) + '\nNe
 }
 break
 case 'darkjoke':
-start = Date.now()
+const start = Date.now()
 try{
 data = await axios.get('https://raw.githubusercontent.com/fajar55/txt/main/darkjokes.txt')
 rand = Math.floor(Math.random() * 249) + 1
