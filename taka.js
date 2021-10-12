@@ -1,4 +1,3 @@
-
 /*BY FAJAR thx to aqul hexagon */
 const {
   WAConnection,
@@ -104,548 +103,613 @@ conn.connects()
 console.log("on bang bot nya")
 })*/
 if (cluster.isMaster) {
-  console.log(`Master ${process.pid} is running`);
+    console.log(`Master ${process.pid} is running`);
     for (let i = 0; i < 1; i++) {
-    cluster.fork();
+        cluster.fork();
     }
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died`);
-	cluster.fork();
-  });
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`worker ${worker.process.pid} died`);
+        cluster.fork();
+    });
 }
 const tzy = conn.zynn
 tzy.on('CB:action,,battery', json => {
-const a = json[2][0][1].value
-  const b = json[2][0][1].live
-  const c = json[2][0][1].powersave
-  baterai.baterai = a
-  baterai.cas = b
-  baterai.powersave = c
+    const a = json[2][0][1].value
+    const b = json[2][0][1].live
+    const c = json[2][0][1].powersave
+    baterai.baterai = a
+    baterai.cas = b
+    baterai.powersave = c
 })
 //let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports = zynn = async (zynn, tod, db) => {
-  try {
-      if (!tod.hasNewMessage) return
-      tod = tod.messages.all()[0]
-      if (!tod.message) return
-      if (tod.key && tod.key.remoteJid == 'status@broadcast') return
-global.Prefix
-      if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3 && !tod.key.fromMe) {
-              teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
-              teks += '\n'.repeat(100)
-              teks += JSON.stringify(tod, null, 2)
-      try{
-          zynn.groupRemove(from, [tod.participant])
-      }catch{
-      }
-      zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-      zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
-}
-      tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
-      const content = JSON.stringify(tod.message)
-      const from = tod.key.remoteJid
-      global.from
-      const isGroup = from.endsWith('@g.us')
-      const m = simple.smsg(zynn, tod)
-      const type = Object.keys(tod.message)[0]
-      const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
-      const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-      const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : "".slice(1).trim().split(/ +/).shift().toLowerCase()
-      const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#%^&./\\©^]/gi) : '.'
-      noprefix = ''
-      if(nopref == 'no'){
-          prefix = noprefix
-          slc = 0
-          slc2 = 1
-      }
-      else if(nopref == 'multi'){
-          prefix = aprefix
-          slc = 1
-          slc2 = 2
-      }
-      else{
-          prefix = nopref
-          slc = 1
-          slc2 = 2
-          }
-var gprefix = prefix
-if(isGroup){
-try{
-pref = await db.showdata('prefix', {id: from})
-if(pref[0].id === from){
-var prefa = pref[0].prefix == 'noprefix' ? '' : pref[0].prefix
-var prefix = prefa
-}
-if(prefa == undefined){
-var prefix = gprefix
-}
-}catch{
-}
-}
-if(type === 'buttonsResponseMessage'){
-  var prefix = ''
-}
-else if(type === 'stickerMessage'){
- var prefix = ''
-}
+            try {
+                if (!tod.hasNewMessage) return
+                tod = tod.messages.all()[0]
+                if (!tod.message) return
+                if (tod.key && tod.key.remoteJid == 'status@broadcast') return
+                global.Prefix
+                if ((Object.keys(tod.message)[0] === 'ephemeralMessage' && JSON.stringify(tod.message).includes('EPHEMERAL_SETTING')) && tod.message.ephemeralMessage.message.protocolMessage.type === 3 && !tod.key.fromMe) {
+                    teks = 'Tandai Telah Dibaca\nSeseorang mengirim bug'
+                    teks += '\n'.repeat(100)
+                    teks += JSON.stringify(tod, null, 2)
+                    try {
+                        zynn.groupRemove(from, [tod.participant])
+                    } catch {}
+                    zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+                    zynn.sendMessage(tod.key.remoteJid, teks, MessageType.text)
+                }
+                tod.message = (Object.keys(tod.message)[0] === 'ephemeralMessage') ? tod.message.ephemeralMessage.message : tod.message
+                const content = JSON.stringify(tod.message)
+                const from = tod.key.remoteJid
+                global.from
+                const isGroup = from.endsWith('@g.us')
+                const m = simple.smsg(zynn, tod)
+                const type = Object.keys(tod.message)[0]
+                const {
+                    text,
+                    extendedText,
+                    contact,
+                    location,
+                    liveLocation,
+                    image,
+                    video,
+                    sticker,
+                    document,
+                    audio,
+                    product
+                } = MessageType
+                const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+                const cmd = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : "".slice(1).trim().split(/ +/).shift().toLowerCase()
+                const aprefix = /^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#%^&./\\©^]/.test(cmd) ? cmd.match(/^[°${}π÷×¶∆£¢€¥®™✓=|~zZ+×!#%^&./\\©^]/gi) : '.'
+                noprefix = ''
+                if (nopref == 'no') {
+                    prefix = noprefix
+                    slc = 0
+                    slc2 = 1
+                } else if (nopref == 'multi') {
+                    prefix = aprefix
+                    slc = 1
+                    slc2 = 2
+                } else {
+                    prefix = nopref
+                    slc = 1
+                    slc2 = 2
+                }
+                var gprefix = prefix
+                if (isGroup) {
+                    try {
+                        pref = await db.showdata('prefix', {
+                            id: from
+                        })
+                        if (pref[0].id === from) {
+                            var prefa = pref[0].prefix == 'noprefix' ? '' : pref[0].prefix
+                            var prefix = prefa
+                        }
+                        if (prefa == undefined) {
+                            var prefix = gprefix
+                        }
+                    } catch {}
+                }
+                if (type === 'buttonsResponseMessage') {
+                    var prefix = ''
+                } else if (type === 'stickerMessage') {
+                    var prefix = ''
+                }
 
-      body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) ? await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : '') : ""
-      chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
-      //const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
-      const command = body.replace(prefix, '').split(/ +/).shift().toLowerCase()
-//const command = comon.replace(' ', '')
-      const args = body.trim().split(/ +/).slice(1)
-      const isCmd = body.startsWith(prefix)
-      //const q = args.join(' ')
-      const run = process.uptime()
-      const arg = chats.slice(command.length + 1, chats.length)
-      asus = await wa.random(asupann.length)
-      global.asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
+                body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) ? await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : '') : ""
+                chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
+                //const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
+                const command = body.replace(prefix, '').split(/ +/).shift().toLowerCase()
+                //const command = comon.replace(' ', '')
+                const args = body.trim().split(/ +/).slice(1)
+                const isCmd = body.startsWith(prefix)
+                //const q = args.join(' ')
+                const run = process.uptime()
+                const arg = chats.slice(command.length + 1, chats.length)
+                asus = await wa.random(asupann.length)
+                global.asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
 
-      //function
-      const sendText = (text) => {
-  zynn.sendMessage(from, text, MessageType.text)
-}
-function monospace(string) {
-                  return '```' + string + '```'
-              }
-function bold(string) {
-                  return '*' + string + '*'
-              }
-function italic(string) {
-                  return '_' + string + '_'
-              }
+                //function
+                const sendText = (text) => {
+                    zynn.sendMessage(from, text, MessageType.text)
+                }
 
-function today(i) {
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1;
-var yyyy = today.getFullYear();
-today = dd + '/' + mm + '/' + yyyy;
-return today;
-}
-let localee = 'id'
-let e = new Date(new Date + 3600000)
-let dateIslamic = Intl.DateTimeFormat(localee + '-TN-u-ca-islamic', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  }).format(e)
-let datee = e.toLocaleDateString(localee, {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  })
-let timee = moment.tz('Asia/Jakarta').format('HH:mm:ss')
-function formatDate(n, localee) {
-let d = new Date(n)
-return d.toLocaleDateString(locale, {
-  weekday: 'long',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric'
-})
-}
-function parseMention(text) {
-return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')
-}
-function GenerateRandomNumber(min,max){
-          return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-      // Generates a random alphanumberic character
-function GenerateRandomChar() {
-          var chars = "1234567890ABCDEFGIJKLMNOPQRSTUVWXYZ";
-          var randomNumber = GenerateRandomNumber(0,chars.length - 1);
-          return chars[randomNumber];
-      }
-      // Generates a Serial Number, based on a certain mask
-function GenerateSerialNumber(mask){
-          var serialNumber = "";
-          if(mask != null){
-              for(var i=0; i < mask.length; i++){
-                  var maskChar = mask[i];
-                  serialNumber += maskChar == "0" ? GenerateRandomChar() : maskChar;
-              }
-          }
-          return serialNumber;
-      }
-function torupiah(angka)
-      {
-          var rupiah = '';        
-          var angkarev = angka.toString().split('').reverse().join('');
-          for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
-          return rupiah.split('',rupiah.length-1).reverse().join('');
-      }
-const SN = GenerateSerialNumber("0000")
-const runtime = function(seconds) {
-  seconds = Number(seconds);
-  var d = Math.floor(seconds / (3600 * 24));
-  var h = Math.floor(seconds % (3600 * 24) / 3600);
-  var m = Math.floor(seconds % 3600 / 60);
-  var s = Math.floor(seconds % 60);
-  var dDisplay = d > 0 ? d + (d == 1 ? " hari, " : " hari, ") : "";
-  var hDisplay = h > 0 ? h + (h == 1 ? " jam, " : " jam, ") : "";
-  var mDisplay = m > 0 ? m + (m == 1 ? " menit, " : " menit, ") : "";
-  var sDisplay = s > 0 ? s + (s == 1 ? " detik" : " detik") : "";
-  return dDisplay + hDisplay + mDisplay + sDisplay;
-}
-          const botNumber = zynn.user.jid
-      const Owner = ['79636108379@s.whatsapp.net', zynn.user.jid]
-      const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
-      const totalchat = await zynn.chats.all()
-      const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
-      const groupName = isGroup ? groupMetadata.subject : ''
-      const groupId = isGroup ? groupMetadata.jid : ''
-      const groupMembers = isGroup ? groupMetadata.participants : ''
-      const groupDesc = isGroup ? groupMetadata.desc : ''
-      const groupAdmins = isGroup ? wa.getGroupAdmins(groupMembers) : ''
-      const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-      //const isGroupAdmins = groupAdmins.includes(sender) || 
-      const groupOwner = isGroup ? groupMetadata.owner : ''
-      const itsMe = Owner.includes(m.sender)
-      const isGroupAdmins = groupAdmins.includes(m.sender) || false
-    //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
-const fdocu = await fakereply.fdocu(from, tod)
-const troli = await fakereply.troli(from, tod)
-const faudio = await fakereply.faudio(from, tod)
-const fvn = await fakereply.fvn(from, tod)
-const fkontak = await fakereply.fkontak(from, tod)
-const fkontak2 = await fakereply.fkontak2(from, tod)
-const fkontak3 =  await fakereply.fkontak3(from, tod, command)
-const floc = await fakereply.floc(from, tod)
-const fliveloc = await fakereply.fliveloc(from, tod)
-const fakegroup = await fakereply.fakegroup(from, tod, command)
-const finvite = await fakereply.finvite(from, tod)
-const ftoko = await fakereply.ftoko(from, tod)
+                function monospace(string) {
+                    return '```' + string + '```'
+                }
 
-//
-var reply = async(text) => {
-tunggu = type === 'buttonsResponseMessage' && text == mess.wait ? '' : zynn.sendMessage(from, text, MessageType.text, {quoted: tod})
-}
-if (isGroup && m.mtype == 'viewOnceMessage'){
-viewo = await db.showdata('antiviewonce', {id: from})
-try{
-  if(viewo[0].id === from){
-    ''
-  }
-}catch{
-  return
-}
-              var msg = {...tod}
-              msg.message = tod.message.viewOnceMessage.message
-              msg.message[Object.keys(msg.message)[0]].viewOnce = false
-              reply('ViewOnce detected!')
-              zynn.copyNForward(from, msg)
-          }
-// error
-try{
-error = await db.showdata('error', {cmd: command})
-if(error[0].cmd === command){
-  return
-}
-}catch{
-}
-// const q
-const que = args.join(' ')
-if(que.startsWith('=>') && itsMe){
-      console.log('q v2')
-      try{
-              var qq =  JSON.stringify(await eval(que.split('=>')[1]), null, 2)
-              try{
-              var q = qq.replace(/"/g, '')
-              }catch{
-              var q = qq
-              }
-      }catch(err){
-              ee = String(err)
-              return wa.reply(from, ee, tod)
-      }
-      }
-else{
-      var q = args.join(' ')
-}
+                function bold(string) {
+                    return '*' + string + '*'
+                }
 
-if(fakerep == "ftoko"){
- var rep = ftoko
-}
-else if(fakerep == "fgrup"){
- var rep = fakegroup
-}
-else if(fakerep == "reply"){
- var rep = tod
-}
-else if(fakerep == "loc"){
- var rep = floc
-}
-else if(fakerep == "liveloc"){
- var rep = fliveloc
-}
-else if(fakerep == "invite"){
-var rep = finvite
-}
-else if(fakerep == "fdocu"){
- var rep = fdocu
-}
-else if(fakerep == "troli"){
- var rep = troli
-}
-else if(fakerep == "audio"){
- var rep = faudio
-}
-else if(fakerep == "vn"){
- var rep = fvn
-}
-else if(fakerep == "kontak"){
- var rep = fkontak
-}
-else if(fakerep == 'kontak2'){
-  var rep = fkontak2
-}
-else if(fakerep == 'kontak3'){
-  var rep = fkontak3
-}
-const fake = async(text) =>{
-if(!rep === tod){
-  zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{mentionedJid: [sender], forwardingScore: 508, isForwarded: true}, sendEphemeral: true})
-  zynn.updatePresence(from, Presence.composing)
-}
-else{
-  zynn.sendMessage(from, text, MessageType.text, {quoted: rep, contextInfo:{forwardingScore: 508, isForwarded: true}, sendEphemeral: true})
-  zynn.updatePresence(from, Presence.composing)
-}
-}
-const sendMediaURL = async(to, url, text, mids) =>{
-              if(mids.length > 0){
-                  text = normalizeMention(to, text, mids)
-              }
-              const fn = Date.now() / 10000;
-              const filename = fn.toString()
-              let mime = ""
-              var download = function (uri, filename, callback) {
-                  request.head(uri, function (err, res, body) {
-                      mime = res.headers['content-type']
-                      request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-                  });
-              };
-              download(url, filename, async function () {
-                  console.log('done');
-                  let media = fs.readFileSync(filename)
-                  let type = mime.split("/")[0]+"Message"
-                  if(mime === "image/gif"){
-                      type = MessageType.video
-                      mime = Mimetype.gif
-                  }
-                  if(mime.split("/")[0] === "audio"){
-                      mime = Mimetype.mp4Audio
-                  }
-                  zynn.sendMessage(to, media, type, { quoted: tod, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})
-                  
-                  fs.unlinkSync(filename)
-              });
-          }
+                function italic(string) {
+                    return '_' + string + '_'
+                }
 
-      const time2 = moment.tz('Asia/Jakarta').format('HH:mm:ss')
-      const isUrl = (url) => {
-          return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
-      }
-    let d = new Date
-       let locale = 'id'
-       let gmt = new Date(0).getTime() - new Date('1 January 1970').getTime()
-       let weton = ['Pahing', 'Pon','Wage','Kliwon','Legi'][Math.floor(((d * 1) + gmt) / 84600000) % 5]
-       let week = d.toLocaleDateString(locale, { weekday: 'long' })
-       let date = d.toLocaleDateString(locale, {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-       })
-       var waktu = moment().tz('Asia/Jakarta').format("HH : mm : ss")
-      const isMedia = (type === 'imageMessage' || type === 'videoMessage')
-      const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
-      const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
-      const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
-      const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-      const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
-      const isQuotedlocation = type === 'extendedTextMessage' && content.includes('locationMessage')
-      var pes = (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : ''
-      const messagesC = pes.slice(0).trim()
-    const messagesCC = pes.slice(0).trim().split(/ +/).shift()
-    const { wa_version, mcc, mnc, os_version, device_manufacturer, device_model } = zynn.user.phone
-      //Selamat
-      const uploadImages = (buffData, type) => {
-  // eslint-disable-next-line no-async-promise-executor
-  return new Promise(async (resolve, reject) => {
-      const { ext } = await fromBuffer(buffData)
-      const cmd = text.toLowerCase()
-      const filePath = 'utils/tmp.' + ext
-      const _buffData = type ? await resizeImage(buffData, false) : buffData
-     fs.writeFile(filePath, _buffData, { encoding: 'base64' }, (err) => {
-          if (err) return reject(err)
-          console.log('Uploading image to telegra.ph server...')
-          const fileData = fs.readFileSync(filePath)
-          const form = new FormData()
-          form.append('file', fileData, 'tmp.' + ext)
-          fetch('https://telegra.ph/upload', {
-              method: 'POST',
-              body: form
-          })
-              .then(res => res.json())
-              .then(res => {
-                  if (res.error) return reject(res.error)
-                  resolve('https://telegra.ph' + res[0].src)
-              })
-              .then(() => fs.unlinkSync(filePath))
-              .catch(err => reject(err))
-      })
-  })
-}
-if(time2 < "23:59:00"){
-          var sselamat = 'Selamat Malam'
-       }
-       if(time2 < "19:00:00"){
-          var sselamat = 'Selamat Petang'
-       }
-       if(time2 < "18:00:00"){
-          var sselamat = 'Selamat Sore'
-       }
-       if(time2 < "15:00:00"){
-          var sselamat = 'Selamat Siang'
-       }
-       if(time2 < "10:00:00"){
-          var sselamat = 'Selamat Pagi'
-       }
-       if(time2 <= "05:00:00"){
-          var sselamat = 'Jangan Lupa Tidur'
-       }
-       const ucselamat = sselamat
-    if(autoread){
-    zynn.chatRead(tod.key.remoteJid)
- }
-//afk
-if(!tod.key.fromMe && !m.isBaileys){
-mentionByTag = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.mentionedJid : []
-mentionByReply = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.participant || "" : ""
-mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
-mention != undefined ? mention.push(mentionByReply) : []
-mentionUser = mention != undefined ? mention.filter(n => n) : []
-for (let x of mentionUser) {
-deta = await db.showdata('afk', {user: x})
-try{
-  if (deta[0].user === x) {
-  afktime = deta[0].afktime
-  afkreason = deta[0].reason
-  const cekafk = ms(Date.now() - afktime)
-  ini_txt = `@${x.split('@')[0]} sedang afk.\n\n`
-  ini_txt += `${shp} Reason : ${afkreason == '' ? 'Nothing' : afkreason}\n${shp} Since : _${cekafk.hours} Jam  ${cekafk.minutes} Menit  ${cekafk.seconds} Detik  Yang lalu_`
-wa.Mentions(from, ini_txt, parseMention(ini_txt), tod)
-}
-}catch{
-}
-}
+                function today(i) {
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1;
+                    var yyyy = today.getFullYear();
+                    today = dd + '/' + mm + '/' + yyyy;
+                    return today;
+                }
+                let localee = 'id'
+                let e = new Date(new Date + 3600000)
+                let dateIslamic = Intl.DateTimeFormat(localee + '-TN-u-ca-islamic', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                }).format(e)
+                let datee = e.toLocaleDateString(localee, {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                })
+                let timee = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 
-efk = await db.showdata('afk', {user: sender})
-try{
-if (efk[0].user === sender) {
-reply("Anda telah keluar dari mode afk.")
-db.delete('afk', {user: sender})
-}
-}catch{
-}
-}
-//bugreport
-try{
-if(m.quoted && itsMe && !isGroup){
-if(m.quoted.text.startsWith('BUG REPORT') && chats.startsWith('balas')){
-teks = `Terima kasih atas laporan anda mengenai bug pada bot kami @${m.quoted.text.split('Pelapor : @')[1].split('\n')[0]}\n`
-teks += 'Detail Laporan : \n'
-teks += shp + ' Deskripsi Bug : ' + m.quoted.text.split('Deskripsi Bug : ')[1] + '\n'
-teks += shp + ' Tanggal Laporan : ' + m.quoted.text.split('Waktu : ')[1].split('\n')[0] + '\n\n'
-teks += shp + ' Owner Said : ' + chats.split('balas ')[1]
-return wa.Mentions(m.quoted.text.split('IdGroup : ')[1].split('\n')[0], teks, [m.quoted.text.split('Pelapor : @')[1].split('\n')[0] + '@s.whatsapp.net'], tod)
-}
-}
-}catch{
-}
-if (!publicc){
-  if (!itsMe) return
-}
-if(m.isBaileys === true) return
-switch(command){
-case 'mute':
-if(!itsMe && !isGroupAdmins) return
-if(!isGroup) return
-mut = await db.showdata('mute', {id: from})
-try{
-if(mut[0].id === from) return reply('Bot telah dimute di Group ini sebelumnya!')
-}catch{
-}
-db.adddata('mute', {id: from})
-reply('Sukses Mute Bot')
-break
-case 'unmute':
-if(!itsMe && !isGroupAdmins) return
-if(!isGroup) return
-mut = await db.showdata('mute', {id: from})
-try{
-if(mut[0].id === from){
-  db.delete('mute', {id: from})
-reply('Sukses Unmute Bot')
-}
-}catch{
-return reply('Bot tidak dimute di Group ini!')
-}
-break
-}
-if(!isGroup && !itsMe) return
-if(sender.startsWith('92')) return
-senjid = sender.split('@')[0] + '@c.us'
-for(let i of zynn.blocklist){
-if(i === senjid) return
-}
-if(isGroup && !itsMe){
-mute = await db.showdata('mute', {id: from})
-try{
-if(mute[0].id === from) return
-}catch{
-}
-}
+                function formatDate(n, localee) {
+                    let d = new Date(n)
+                    return d.toLocaleDateString(locale, {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric'
+                    })
+                }
 
-if(isGroup){
-try{
-if(!tod.message.extendedTextMessage.contextInfo.expiration == ''){
-var isephe = false
-}
-}catch(e){
-var isephe = true
-}
-}
-isephemeral = isephe == false ? true : false
-if(isCmd && !m.isBaileys){
-try{
-hitp = words.filter(mek => mek === command)
-if(hitp[0] === command && !command == ''){
-db.adddata('hit', {sender: sender, cmd: command})
-}
-}catch{
-}
-}
-if(isCmd && !m.isBaileys){
-try{
-pendaftar = await db.showdata('user', {id: sender})
-if(pendaftar[0].id === sender){
-''
-}
-}catch{
-db.adddata('user', {username: await zynn.getName(sender), id: sender})
-}
-}
-      //if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
-if(command == '' && !chats.startsWith('<') && !chats.startsWith('>') && !chats.startsWith('$')) return
-      if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
-      if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))}
+                function parseMention(text) {
+                    return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(v => v[1] + '@s.whatsapp.net')
+                }
 
+                function GenerateRandomNumber(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                // Generates a random alphanumberic character
+                function GenerateRandomChar() {
+                    var chars = "1234567890ABCDEFGIJKLMNOPQRSTUVWXYZ";
+                    var randomNumber = GenerateRandomNumber(0, chars.length - 1);
+                    return chars[randomNumber];
+                }
+                // Generates a Serial Number, based on a certain mask
+                function GenerateSerialNumber(mask) {
+                    var serialNumber = "";
+                    if (mask != null) {
+                        for (var i = 0; i < mask.length; i++) {
+                            var maskChar = mask[i];
+                            serialNumber += maskChar == "0" ? GenerateRandomChar() : maskChar;
+                        }
+                    }
+                    return serialNumber;
+                }
+
+                function torupiah(angka) {
+                    var rupiah = '';
+                    var angkarev = angka.toString().split('').reverse().join('');
+                    for (var i = 0; i < angkarev.length; i++)
+                        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+                    return rupiah.split('', rupiah.length - 1).reverse().join('');
+                }
+                const SN = GenerateSerialNumber("0000")
+                const runtime = function(seconds) {
+                    seconds = Number(seconds);
+                    var d = Math.floor(seconds / (3600 * 24));
+                    var h = Math.floor(seconds % (3600 * 24) / 3600);
+                    var m = Math.floor(seconds % 3600 / 60);
+                    var s = Math.floor(seconds % 60);
+                    var dDisplay = d > 0 ? d + (d == 1 ? " hari, " : " hari, ") : "";
+                    var hDisplay = h > 0 ? h + (h == 1 ? " jam, " : " jam, ") : "";
+                    var mDisplay = m > 0 ? m + (m == 1 ? " menit, " : " menit, ") : "";
+                    var sDisplay = s > 0 ? s + (s == 1 ? " detik" : " detik") : "";
+                    return dDisplay + hDisplay + mDisplay + sDisplay;
+                }
+                const botNumber = zynn.user.jid
+                const Owner = ['79636108379@s.whatsapp.net', zynn.user.jid]
+                const sender = tod.key.fromMe ? zynn.user.jid : isGroup ? tod.participant : tod.key.remoteJid
+                const totalchat = await zynn.chats.all()
+                const groupMetadata = isGroup ? await zynn.groupMetadata(from) : ''
+                const groupName = isGroup ? groupMetadata.subject : ''
+                const groupId = isGroup ? groupMetadata.jid : ''
+                const groupMembers = isGroup ? groupMetadata.participants : ''
+                const groupDesc = isGroup ? groupMetadata.desc : ''
+                const groupAdmins = isGroup ? wa.getGroupAdmins(groupMembers) : ''
+                const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+                //const isGroupAdmins = groupAdmins.includes(sender) || 
+                const groupOwner = isGroup ? groupMetadata.owner : ''
+                const itsMe = Owner.includes(m.sender)
+                const isGroupAdmins = groupAdmins.includes(m.sender) || false
+                //if(itsMe) return zynn.sendMessage("994407878439-1617840325@g.us", JSON.stringify(tod),MessageType.text)
+                const fdocu = await fakereply.fdocu(from, tod)
+                const troli = await fakereply.troli(from, tod)
+                const faudio = await fakereply.faudio(from, tod)
+                const fvn = await fakereply.fvn(from, tod)
+                const fkontak = await fakereply.fkontak(from, tod)
+                const fkontak2 = await fakereply.fkontak2(from, tod)
+                const fkontak3 = await fakereply.fkontak3(from, tod, command)
+                const floc = await fakereply.floc(from, tod)
+                const fliveloc = await fakereply.fliveloc(from, tod)
+                const fakegroup = await fakereply.fakegroup(from, tod, command)
+                const finvite = await fakereply.finvite(from, tod)
+                const ftoko = await fakereply.ftoko(from, tod)
+
+                //
+                var reply = async (text) => {
+                    tunggu = type === 'buttonsResponseMessage' && text == mess.wait ? '' : zynn.sendMessage(from, text, MessageType.text, {
+                        quoted: tod
+                    })
+                }
+                if (isGroup && m.mtype == 'viewOnceMessage') {
+                    viewo = await db.showdata('antiviewonce', {
+                        id: from
+                    })
+                    try {
+                        if (viewo[0].id === from) {
+                            ''
+                        }
+                    } catch {
+                        return
+                    }
+                    var msg = {
+                        ...tod
+                    }
+                    msg.message = tod.message.viewOnceMessage.message
+                    msg.message[Object.keys(msg.message)[0]].viewOnce = false
+                    reply('ViewOnce detected!')
+                    zynn.copyNForward(from, msg)
+                }
+                // error
+                try {
+                    error = await db.showdata('error', {
+                        cmd: command
+                    })
+                    if (error[0].cmd === command) {
+                        return
+                    }
+                } catch {}
+                // const q
+                const que = args.join(' ')
+                if (que.startsWith('=>') && itsMe) {
+                    console.log('q v2')
+                    try {
+                        var qq = JSON.stringify(await eval(que.split('=>')[1]), null, 2)
+                        try {
+                            var q = qq.replace(/"/g, '')
+                        } catch {
+                            var q = qq
+                        }
+                    } catch (err) {
+                        ee = String(err)
+                        return wa.reply(from, ee, tod)
+                    }
+                } else {
+                    var q = args.join(' ')
+                }
+
+                if (fakerep == "ftoko") {
+                    var rep = ftoko
+                } else if (fakerep == "fgrup") {
+                    var rep = fakegroup
+                } else if (fakerep == "reply") {
+                    var rep = tod
+                } else if (fakerep == "loc") {
+                    var rep = floc
+                } else if (fakerep == "liveloc") {
+                    var rep = fliveloc
+                } else if (fakerep == "invite") {
+                    var rep = finvite
+                } else if (fakerep == "fdocu") {
+                    var rep = fdocu
+                } else if (fakerep == "troli") {
+                    var rep = troli
+                } else if (fakerep == "audio") {
+                    var rep = faudio
+                } else if (fakerep == "vn") {
+                    var rep = fvn
+                } else if (fakerep == "kontak") {
+                    var rep = fkontak
+                } else if (fakerep == 'kontak2') {
+                    var rep = fkontak2
+                } else if (fakerep == 'kontak3') {
+                    var rep = fkontak3
+                }
+                const fake = async (text) => {
+                    if (!rep === tod) {
+                        zynn.sendMessage(from, text, MessageType.text, {
+                            quoted: rep,
+                            contextInfo: {
+                                mentionedJid: [sender],
+                                forwardingScore: 508,
+                                isForwarded: true
+                            },
+                            sendEphemeral: true
+                        })
+                        zynn.updatePresence(from, Presence.composing)
+                    } else {
+                        zynn.sendMessage(from, text, MessageType.text, {
+                            quoted: rep,
+                            contextInfo: {
+                                forwardingScore: 508,
+                                isForwarded: true
+                            },
+                            sendEphemeral: true
+                        })
+                        zynn.updatePresence(from, Presence.composing)
+                    }
+                }
+                const sendMediaURL = async (to, url, text, mids) => {
+                    if (mids.length > 0) {
+                        text = normalizeMention(to, text, mids)
+                    }
+                    const fn = Date.now() / 10000;
+                    const filename = fn.toString()
+                    let mime = ""
+                    var download = function(uri, filename, callback) {
+                        request.head(uri, function(err, res, body) {
+                            mime = res.headers['content-type']
+                            request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                        });
+                    };
+                    download(url, filename, async function() {
+                        console.log('done');
+                        let media = fs.readFileSync(filename)
+                        let type = mime.split("/")[0] + "Message"
+                        if (mime === "image/gif") {
+                            type = MessageType.video
+                            mime = Mimetype.gif
+                        }
+                        if (mime.split("/")[0] === "audio") {
+                            mime = Mimetype.mp4Audio
+                        }
+                        zynn.sendMessage(to, media, type, {
+                            quoted: tod,
+                            mimetype: mime,
+                            caption: text,
+                            contextInfo: {
+                                "mentionedJid": mids
+                            }
+                        })
+
+                        fs.unlinkSync(filename)
+                    });
+                }
+
+                const time2 = moment.tz('Asia/Jakarta').format('HH:mm:ss')
+                const isUrl = (url) => {
+                    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
+                }
+                let d = new Date
+                let locale = 'id'
+                let gmt = new Date(0).getTime() - new Date('1 January 1970').getTime()
+                let weton = ['Pahing', 'Pon', 'Wage', 'Kliwon', 'Legi'][Math.floor(((d * 1) + gmt) / 84600000) % 5]
+                let week = d.toLocaleDateString(locale, {
+                    weekday: 'long'
+                })
+                let date = d.toLocaleDateString(locale, {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                })
+                var waktu = moment().tz('Asia/Jakarta').format("HH : mm : ss")
+                const isMedia = (type === 'imageMessage' || type === 'videoMessage')
+                const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
+                const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
+                const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
+                const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+                const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
+                const isQuotedlocation = type === 'extendedTextMessage' && content.includes('locationMessage')
+                var pes = (type === 'conversation' && tod.message.conversation) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text ? tod.message.extendedTextMessage.text : ''
+                const messagesC = pes.slice(0).trim()
+                const messagesCC = pes.slice(0).trim().split(/ +/).shift()
+                const {
+                    wa_version,
+                    mcc,
+                    mnc,
+                    os_version,
+                    device_manufacturer,
+                    device_model
+                } = zynn.user.phone
+                //Selamat
+                const uploadImages = (buffData, type) => {
+                    // eslint-disable-next-line no-async-promise-executor
+                    return new Promise(async (resolve, reject) => {
+                        const {
+                            ext
+                        } = await fromBuffer(buffData)
+                        const cmd = text.toLowerCase()
+                        const filePath = 'utils/tmp.' + ext
+                        const _buffData = type ? await resizeImage(buffData, false) : buffData
+                        fs.writeFile(filePath, _buffData, {
+                            encoding: 'base64'
+                        }, (err) => {
+                            if (err) return reject(err)
+                            console.log('Uploading image to telegra.ph server...')
+                            const fileData = fs.readFileSync(filePath)
+                            const form = new FormData()
+                            form.append('file', fileData, 'tmp.' + ext)
+                            fetch('https://telegra.ph/upload', {
+                                    method: 'POST',
+                                    body: form
+                                })
+                                .then(res => res.json())
+                                .then(res => {
+                                    if (res.error) return reject(res.error)
+                                    resolve('https://telegra.ph' + res[0].src)
+                                })
+                                .then(() => fs.unlinkSync(filePath))
+                                .catch(err => reject(err))
+                        })
+                    })
+                }
+                if (time2 < "23:59:00") {
+                    var sselamat = 'Selamat Malam'
+                }
+                if (time2 < "19:00:00") {
+                    var sselamat = 'Selamat Petang'
+                }
+                if (time2 < "18:00:00") {
+                    var sselamat = 'Selamat Sore'
+                }
+                if (time2 < "15:00:00") {
+                    var sselamat = 'Selamat Siang'
+                }
+                if (time2 < "10:00:00") {
+                    var sselamat = 'Selamat Pagi'
+                }
+                if (time2 <= "05:00:00") {
+                    var sselamat = 'Jangan Lupa Tidur'
+                }
+                const ucselamat = sselamat
+                if (autoread) {
+                    zynn.chatRead(tod.key.remoteJid)
+                }
+                //afk
+                if (!tod.key.fromMe && !m.isBaileys) {
+                    mentionByTag = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.mentionedJid : []
+                    mentionByReply = type == "extendedTextMessage" && tod.message.extendedTextMessage.contextInfo != null ? tod.message.extendedTextMessage.contextInfo.participant || "" : ""
+                    mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
+                    mention != undefined ? mention.push(mentionByReply) : []
+                    mentionUser = mention != undefined ? mention.filter(n => n) : []
+                    for (let x of mentionUser) {
+                        deta = await db.showdata('afk', {
+                            user: x
+                        })
+                        try {
+                            if (deta[0].user === x) {
+                                afktime = deta[0].afktime
+                                afkreason = deta[0].reason
+                                const cekafk = ms(Date.now() - afktime)
+                                ini_txt = `@${x.split('@')[0]} sedang afk.\n\n`
+                                ini_txt += `${shp} Reason : ${afkreason == '' ? 'Nothing' : afkreason}\n${shp} Since : _${cekafk.hours} Jam  ${cekafk.minutes} Menit  ${cekafk.seconds} Detik  Yang lalu_`
+                                wa.Mentions(from, ini_txt, parseMention(ini_txt), tod)
+                            }
+                        } catch {}
+                    }
+
+                    efk = await db.showdata('afk', {
+                        user: sender
+                    })
+                    try {
+                        if (efk[0].user === sender) {
+                            reply("Anda telah keluar dari mode afk.")
+                            db.delete('afk', {
+                                user: sender
+                            })
+                        }
+                    } catch {}
+                }
+                //bugreport
+                try {
+                    if (m.quoted && itsMe && !isGroup) {
+                        if (m.quoted.text.startsWith('BUG REPORT') && chats.startsWith('balas')) {
+                            teks = `Terima kasih atas laporan anda mengenai bug pada bot kami @${m.quoted.text.split('Pelapor : @')[1].split('\n')[0]}\n`
+                            teks += 'Detail Laporan : \n'
+                            teks += shp + ' Deskripsi Bug : ' + m.quoted.text.split('Deskripsi Bug : ')[1] + '\n'
+                            teks += shp + ' Tanggal Laporan : ' + m.quoted.text.split('Waktu : ')[1].split('\n')[0] + '\n\n'
+                            teks += shp + ' Owner Said : ' + chats.split('balas ')[1]
+                            return wa.Mentions(m.quoted.text.split('IdGroup : ')[1].split('\n')[0], teks, [m.quoted.text.split('Pelapor : @')[1].split('\n')[0] + '@s.whatsapp.net'], tod)
+                        }
+                    }
+                } catch {}
+                if (!publicc) {
+                    if (!itsMe) return
+                }
+                if (m.isBaileys === true) return
+                switch (command) {
+                    case 'mute':
+                        if (!itsMe && !isGroupAdmins) return
+                        if (!isGroup) return
+                        mut = await db.showdata('mute', {
+                            id: from
+                        })
+                        try {
+                            if (mut[0].id === from) return reply('Bot telah dimute di Group ini sebelumnya!')
+                        } catch {}
+                        db.adddata('mute', {
+                            id: from
+                        })
+                        reply('Sukses Mute Bot')
+                        break
+                    case 'unmute':
+                        if (!itsMe && !isGroupAdmins) return
+                        if (!isGroup) return
+                        mut = await db.showdata('mute', {
+                            id: from
+                        })
+                        try {
+                            if (mut[0].id === from) {
+                                db.delete('mute', {
+                                    id: from
+                                })
+                                reply('Sukses Unmute Bot')
+                            }
+                        } catch {
+                            return reply('Bot tidak dimute di Group ini!')
+                        }
+                        break
+                }
+                if (!isGroup && !itsMe) return
+                if (sender.startsWith('92')) return
+                senjid = sender.split('@')[0] + '@c.us'
+                for (let i of zynn.blocklist) {
+                    if (i === senjid) return
+                }
+                if (isGroup && !itsMe) {
+                    mute = await db.showdata('mute', {
+                        id: from
+                    })
+                    try {
+                        if (mute[0].id === from) return
+                    } catch {}
+                }
+
+                if (isGroup) {
+                    try {
+                        if (!tod.message.extendedTextMessage.contextInfo.expiration == '') {
+                            var isephe = false
+                        }
+                    } catch (e) {
+                        var isephe = true
+                    }
+                }
+                isephemeral = isephe == false ? true : false
+                if (isCmd && !m.isBaileys) {
+                    try {
+                        hitp = words.filter(mek => mek === command)
+                        if (hitp[0] === command && !command == '') {
+                            db.adddata('hit', {
+                                sender: sender,
+                                cmd: command
+                            })
+                        }
+                    } catch {}
+                }
+                if (isCmd && !m.isBaileys) {
+                    try {
+                        pendaftar = await db.showdata('user', {
+                            id: sender
+                        })
+                        if (pendaftar[0].id === sender) {
+                            ''
+                        }
+                    } catch {
+                        db.adddata('user', {
+                            username: await zynn.getName(sender),
+                            id: sender
+                        })
+                    }
+                }
+                //if(content.includes('stickerMessage','imageMessage','videoMessage','audioMessage')) return
+                if (command == '' && !chats.startsWith('<') && !chats.startsWith('>') && !chats.startsWith('$')) return
+                if (isCmd && !isGroup) {
+                    console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))
+                }
+                if (isCmd && isGroup) {
+                    console.log(color('[CMD]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(sender.split('@')[0]), 'in', color(groupName))
+                }
 switch (command) {
 case 'help':
 tothit = await db.showdata('hit')
