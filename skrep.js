@@ -496,7 +496,7 @@ exports.igstalk = async(username) => {
         'method': 'GET',
         'headers': {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
-        'cookie': 'ig_did=EA7DC112-2D2C-45CF-9B49-911C077DC4CB; mid=X93bwQAEAAHzC4NGbr6c9GYzt-3Y; ig_nrcb=1; csrftoken=xgGTxDVEDFhrFmD2EOj2eJIujNZy0Pc3; ds_user_id=8779859677; sessionid=8779859677%3AwZZLTcEATX3gC9%3A1; shbid="10275\0548779859677\0541663290382:01f7d0639a2cd9182f2cf3cfb1bd9d894226e5aa11a07df81eaa795503c369698346fd6e"; shbts="1631754382\0548779859677\0541663290382:01f7bbdb647df59fba613782b0c88e4b43e869fd3e3fbefbe77dd00f1c4ea1c429af0b06"; rur="EAG\0548779859677\0541663427301:01f706c58c531f4e9457a00618ee2cb3a668b1b2ef6bb8f7aa2568d50182727949780df8"'
+        'cookie': 'ig_did=77ADA31F-4AB0-4D19-8875-522C891A60E6; ig_nrcb=1; csrftoken=Zuy4R9169ejQY0R20InUOfeh2fCh7cfW; ds_user_id=8779859677; sessionid=8779859677%3Az2RfuCb1tsxTh1%3A26; shbid="10275\0548779859677\0541665541164:01f7683f87e5d1e3c2db8b41bfad455d2718c549ac0aeba033c00ae0e25647a7d8b87ee1"; shbts="1634005164\0548779859677\0541665541164:01f7df3ebca9d4ae3ecdb5f3b25d845142e5f462409976c5c140ba803c85bdd15fe0d45e"; rur="EAG\0548779859677\0541665541186:01f7c8bdbba6bfaf1f0fc03d5b843fe864bb908dc49069cc77dd546a9c6b50302d83b608"'
         }
     })
     let user = data.graphql.user
