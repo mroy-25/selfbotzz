@@ -13,10 +13,10 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install pillow
 
 RUN npm install -g npm@latest
-RUN npm install -g forever
+RUN npm install -g forever@latest
 
 WORKDIR /home/frmdev/frmdev
 COPY package.json .
 RUN npm install
 COPY . .
-CMD ["forever", "taka.js"]
+CMD ["forever", "main.js"]
