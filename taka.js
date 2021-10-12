@@ -2176,7 +2176,7 @@ for(let i of ysearch.all){
   teks += shp +` Upload :` + i.ago + '\n\n-----------------------------\n\n'
   num += 1
 }
-sendMediaURL(from, ysearch.all[0].thumbnail, teks)
+wa.sendFileFromUrl(from, ysearch.all[0].thumbnail, tod, teks)
 break
 case 'getmusic':
 if(!q) return reply('Masukkan nomo urutnya!')
