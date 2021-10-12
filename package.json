@@ -23,6 +23,7 @@
     "emoji-api": "^1.0.2",
     "encodeurl": "^1.0.2",
     "fake-useragent": "^1.0.1",
+    "forever": "^4.0.1",
     "file-type": "^16.3.0",
     "fluent-ffmpeg": "^2.1.2",
     "g-i-s": "^2.1.6",
