@@ -864,7 +864,7 @@ case 'stiker':
         } else if ((isMedia && tod.message.videoMessage.seconds < 11 || isQuotedVideo && tod.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
     const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
     const media = await zynn.downloadAndSaveMediaMessage(encmedia)
-    ran = wa.getRandom('.webp')
+    ran = await wa.getRandom('.webp')
     reply(mess.wait)
     await ffmpeg(`./${media}`)
         .inputFormat(media.split('.')[1])
