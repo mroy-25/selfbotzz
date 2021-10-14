@@ -25,7 +25,6 @@
     "express": "^4.17.1",
     "fake-useragent": "^1.0.1",
     "file-type": "^16.3.0",
-    //"forever": "^4.0.1",
     "fluent-ffmpeg": "^2.1.2",
     "g-i-s": "^2.1.6",
     "google-it": "^1.6.2",
