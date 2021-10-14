@@ -30,7 +30,6 @@ const cluster = require('cluster')
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const encodeUrl = require('encodeurl');
 const request = require('request');
-const conn = require('./main');
 const {color} = require('./lib/color');
 const {help} = require('./lib/help');
 const mess = JSON.parse(fs.readFileSync('./whatsapp/mess.json'));
