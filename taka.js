@@ -21,6 +21,7 @@ const fakereply = require('./lib/fake')
 const skrep = require('./skrep')
 const moment = require("moment-timezone");
 const fs = require("fs");
+const conn = require('./main')
 const { exec, spawn } = require('child_process');
 const speed = require('performance-now');
 const ffmpeg = require('fluent-ffmpeg');
@@ -97,16 +98,6 @@ baterai = {
   powersave: false
 }
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
-if (cluster.isMaster) {
-    console.log(`Master ${process.pid} is running`);
-    /*for (let i = 0; i < 1; i++) {
-        cluster.fork();
-    }*/
-    cluster.on('exit', (worker, code, signal) => {
-        console.log(`worker ${worker.process.pid} died`);
-        cluster.fork();
-    });
-}
 const tzy = conn.zynn
 tzy.on('CB:action,,battery', json => {
     const a = json[2][0][1].value
