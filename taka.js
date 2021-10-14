@@ -740,7 +740,7 @@ else{
               latensii = speed() - timestampi
 teks = `${fakec}
 
-Halo ${await wa.getPushname(sender, tod)}👋
+Halo ${await wa.getPushname(sender, tod)} 👋
 Saya ZBOT, Bot yang dibuat untuk memudahkan dalam berbagai hal
 Silahkan klik menu untuk melihat fitur bot
 
