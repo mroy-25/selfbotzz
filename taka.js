@@ -98,15 +98,11 @@ baterai = {
   powersave: false
 }
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
-/*app.use('/', (req, res) => {  
-conn.connects()
-console.log("on bang bot nya")
-})*/
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
-    for (let i = 0; i < 1; i++) {
+    /*for (let i = 0; i < 1; i++) {
         cluster.fork();
-    }
+    }*/
     cluster.on('exit', (worker, code, signal) => {
         console.log(`worker ${worker.process.pid} died`);
         cluster.fork();
