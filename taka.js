@@ -2425,7 +2425,7 @@ filesizeF = downm.filesizeF
   }
   if(Number(filesize) >= 50000){
       short = await axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-      return sendMediaURL(from, thumb, `*Y T M P 4  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
+      return wa.sendFileFromUrl(from, thumb, tod, `*Y T M P 4  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}\n${shp} Link : ${short.data}\n\n${mess.oversize}`)
   }
   teks = `*Y T M P 4  D O W N L O A D E R*\n\n${shp} Judul : ${title}\n${shp} Size : ${filesizeF}`
   buff = await wa.getBuffer(thumb)
@@ -2533,7 +2533,7 @@ reply(mess.wait)
 try{
   data = await wa.fetchJson(`https://x-restapi.herokuapp.com/api/yt-stalk?username=${q}&apikey=BETA`)
   teks = `*Y O U T U B E  S T A L K*\n\n${shp} Nama Channel : ${data.channel}\n${shp} Subscribers : ${data.subscriberCount}\n${shp} Deskripsi : ${data.description}\n${shp} Link Channel : ${data.link}`
-  sendMediaURL(from, data.thumb, teks)
+  wa.sendFileFromUrl(from, data.thumb, teks, tod)
 }catch(e){
   reply('Channel tidak ditemukan/error!')
 }
@@ -2958,7 +2958,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
   data = await textmaker.textpro('https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html', [q])
-  sendMediaURL(from, data)
+  wa.sendFileFromUrl(from, data, tod)
 }catch(e){
   reply(mess.error.api)
 }
@@ -2968,7 +2968,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
   data = await textmaker.textpro('https://textpro.me/create-a-futuristic-technology-neon-light-text-effect-1006.html', [q])
-  sendMediaURL(from, data)
+  wa.sendFileFromUrl(from, data, tod)
 }catch(e){
   reply(mess.error.api)
 }
@@ -2978,7 +2978,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
   data = await textmaker.textpro('https://textpro.me/create-blackpink-logo-style-online-1001.html', [q])
-  sendMediaURL(from, data)
+  wa.sendFileFromUrl(from, data, tod)
 }catch(e){
   reply(mess.error.api)
 }
@@ -2988,7 +2988,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
   data = await textmaker.textpro('https://textpro.me/blood-text-on-the-frosted-glass-941.html', [q])
-  sendMediaURL(from, data)
+  wa.sendFileFromUrl(from, data, tod)
 }catch(e){
   reply(mess.error.api)
 }
@@ -2998,7 +2998,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
   data = await textmaker.textpro('https://textpro.me/create-art-paper-cut-text-effect-online-1022.html', [q])
-  sendMediaURL(from, data)
+  wa.sendFileFromUrl(from, data, tod)
 }catch(e){
   reply(mess.error.api)
 }
@@ -3008,7 +3008,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
       data = await textmaker.textpro('https://textpro.me/natural-leaves-text-effect-931.html', [q])
-      sendMediaURL(from, data)
+      wa.sendFileFromUrl(from, data, tod)
 }catch(e){
       reply(mess.error.api)
 }
@@ -3018,7 +3018,7 @@ if(!q) return reply('Masukkan teks!')
 reply(mess.wait)
 try{
       data = await textmaker.textpro('https://textpro.me/create-logo-joker-online-934.html', [q])
-      sendMediaURL(from, data)
+      wa.sendFileFromUrl(from, data, tod)
 }catch(e){
       reply(mess.error.api)
 }
@@ -3703,7 +3703,7 @@ try{
   data = await Ra.OtakudesuSearch(q)
   data2 = await Ra.InfoOtakudesu(data.result[0].url)
   teks = `*I N F O  A N I M E*\n\n${shp} Bio : \n${data2.result.bio}\n${shp} Sinopsis : ${data2.result.sinopsis}\n${shp} Url : ${data.result[0].url}`
-  sendMediaURL(from, data2.result.thumb, teks)
+  wa.sendFileFromUrl(from, data2.result.thumb, teks, tod)
 }catch(e){
   reply(mess.error.api)
 }
