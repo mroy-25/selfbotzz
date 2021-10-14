@@ -19,6 +19,7 @@ const fs = require('fs')
 const { color } = require('./lib/color')
 let zynn = new WAConnection()
 //exports.zynn = zynn
+module.exports.zynn = zynn;
 require('./taka.js')
 require('./skrep.js')
 nocache('./skrep.js', module => console.log(`${module} is now updated!`))
@@ -121,4 +122,3 @@ if (cluster.isMaster) {
     });
 }*/
 module.exports.connects = connects;
-module.exports.zynn = zynn;
