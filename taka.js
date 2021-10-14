@@ -4687,6 +4687,28 @@ if (isQuotedAudio) {
     reply('Reply audionya!')
 }
 break
+case 'ocr':
+const { recognize } = require('./lib/ocr')
+if ((isMedia && !tod.message.videoMessage || isQuotedImage)) {
+    const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
+    const media = await zynn.downloadAndSaveMediaMessage(encmedia)
+    recognize(media, {
+            lang: 'eng+ind',
+            oem: 1,
+            psm: 3
+        })
+        .then(teks => {
+            reply(teks.trim())
+            fs.unlinkSync(media)
+        })
+        .catch(err => {
+            reply(err.message)
+            fs.unlinkSync(media)
+        })
+else{
+  reply(`reply/ kirim gambarnya dengan caption ${prefix}ocr`)
+}
+break
 case 'x':
 if(!itsMe) return
 console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval Nonasync`))
