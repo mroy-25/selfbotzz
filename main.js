@@ -110,4 +110,14 @@ function uncache(module = '.') {
 }  
 connects(zynn)
 let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+    /*for (let i = 0; i < 1; i++) {
+        cluster.fork();
+    }*/
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`worker ${worker.process.pid} died`);
+        cluster.fork();
+    });
+}
 module.exports.connects = connects;
