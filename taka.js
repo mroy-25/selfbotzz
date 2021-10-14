@@ -748,31 +748,31 @@ Note : Tidak semua fitur work, Maklum saya noob
 
 *I N F O  B O T*
 
-*› Creator* : Aqul
-*› Recode* : Fajar
-*› Library* : Baileys
-*› Version* : 5.0
-*› Prefix* : ${isprefix}
-*› Mode* : ${ispublic}
-*› Total Hit* : ${hit}
-*› Group Chat* : ${giid.length}
-*› Personal Chat* : ${totalchat.length - giid.length}
-*› Total Chat* : ${totalchat.length}
-*› Speed* : ${latensii.toFixed(4)} Second
-*› Runtime* : ${runtime(run)}
+*${shp} Creator* : Aqul
+*${shp} Recode* : Fajar
+*${shp} Library* : Baileys
+*${shp} Version* : 5.0
+*${shp} Prefix* : ${isprefix}
+*${shp} Mode* : ${ispublic}
+*${shp} Total Hit* : ${hit}
+*${shp} Group Chat* : ${giid.length}
+*${shp} Personal Chat* : ${totalchat.length - giid.length}
+*${shp} Total Chat* : ${totalchat.length}
+*${shp} Speed* : ${latensii.toFixed(4)} Second
+*${shp} Runtime* : ${runtime(run)}
 
 *I N F O  D E V I C E*
 
-*› V. WHATSAPP* : ${wa_version}
-*› Baterai* : ${baterai.baterai}%
-*› Charge* : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
-*› Powersave* : ${baterai.powersave === true ? 'Aktif' : 'Nonaktif'}
-*› RAM* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-*› MCC* : ${mcc}
-*› MNC* : ${mnc}
-*› Versi OS* : ${os_version}
-*› Merk HP* : ${device_manufacturer}
-*› Versi HP* : ${device_model}`
+*${shp} V. WHATSAPP* : ${wa_version}
+*${shp} Baterai* : ${baterai.baterai}%
+*${shp} Charge* : ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
+*${shp} Powersave* : ${baterai.powersave === true ? 'Aktif' : 'Nonaktif'}
+*${shp} RAM* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+*${shp} MCC* : ${mcc}
+*${shp} MNC* : ${mnc}
+*${shp} Versi OS* : ${os_version}
+*${shp} Merk HP* : ${device_manufacturer}
+*${shp} Versi HP* : ${device_model}`
 wa.sendButtonWithImage(from, teks, fakec + ' || ' + reg.length + ' Registered User\nRuntime : ' + runtime(run), fakeimage, [`⋮☰ MENU`, `🤴🏻 OWNER`, '⋮☰ DASHBOARD'], [`menu`, `owner`, 'dashboard'], sender, tod)
 break
 case 'menu':
