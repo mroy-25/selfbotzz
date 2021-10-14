@@ -4705,6 +4705,7 @@ if ((isMedia && !tod.message.videoMessage || isQuotedImage)) {
             reply(err.message)
             fs.unlinkSync(media)
         })
+}
 else{
   reply(`reply/ kirim gambarnya dengan caption ${prefix}ocr`)
 }
