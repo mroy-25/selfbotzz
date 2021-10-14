@@ -220,10 +220,10 @@ exports.setBio = async function(query){
 }
 exports.sendImage = async(from, filename, tod, teks, tag) => {
 	if(teks == ``){
-zynn.sendMessage(from, filename, MessageType.image, {quoted: tod, contextInfo: {mentionedJid: tag}})
+zynn.sendMessage(from, filename, MessageType.image, {quoted: tod, thumbnail: filename, contextInfo: {mentionedJid: tag}})
 }
 else{
-zynn.sendMessage(from, filename, MessageType.image, {quoted: tod,caption: teks, contextInfo: {mentionedJid: tag}})
+zynn.sendMessage(from, filename, MessageType.image, {quoted: tod,caption: teks, thumbnail: filename, contextInfo: {mentionedJid: tag}})
 }}
 exports.sendVideo = async(from, filename, tod, teks, tag) => {
 	if(teks == ``){
