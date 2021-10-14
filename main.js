@@ -8,6 +8,9 @@ const {
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const client = require('./lib/database')
+const express = require('express')
+const app = express()
+const PORT = process.env.PORT || 3000
 const simple = require('./lib/simple')
 const wa = require('./whatsapp/message')
 let WAConnection = simple.WAConnection(_WAConnection)
@@ -105,5 +108,8 @@ function uncache(module = '.') {
         }
     })
 }
+app.use('/', (req, res) => {  
 connects(zynn)
+console.log("on bang bot nya")
+})
 module.exports.connects = connects;
