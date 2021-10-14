@@ -18,7 +18,7 @@ const qrcode = require("qrcode-terminal")
 const fs = require('fs')
 const { color } = require('./lib/color')
 let zynn = new WAConnection()
-exports.zynn = zynn
+//exports.zynn = zynn
 require('./taka.js')
 require('./skrep.js')
 nocache('./skrep.js', module => console.log(`${module} is now updated!`))
@@ -85,7 +85,7 @@ require('./lib/antidelete.js')(zynn, message, client)
 /*    zynn.on('message-update', async (message) => {
         require('./antidelete.js')(zynn, message)
     })*/
-    return zynn
+    
 }
 /**
  * Uncache if there is file change
@@ -121,3 +121,4 @@ if (cluster.isMaster) {
     });
 }*/
 module.exports.connects = connects;
+module.exports.zynn = zynn;
