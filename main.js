@@ -107,10 +107,7 @@ function uncache(module = '.') {
             reject(e)
         }
     })
-}
-app.use('/', (req, res) => {  
+}  
 connects(zynn)
-console.log("on bang bot nya")
-})
 let server = app.listen(PORT, () => console.log(`Listening On Port ${PORT}`))
 module.exports.connects = connects;
