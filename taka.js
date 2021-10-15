@@ -4696,6 +4696,24 @@ else{
   reply(`reply/ kirim gambarnya dengan caption ${prefix}ocr`)
 }
 break
+case 'short':
+if(!q) return reply('Masukkan linknya!')
+link = q.split('|')[0]
+slug = q.split('|')[1]
+try{
+  if(!slug){
+    axios.get(`https://ndek.me/api?link=${link}&costum=${await wa.random(0)}`).then(res => {
+      reply(res.data.created)
+    })
+  else{
+    axios.get(`https://ndek.me/api?link=${link}&costum=${slug}`).then(res => {
+      reply(res.data.created)
+    })
+  }
+}catch{
+  reply('Costum sudah digunakan\nSilahkan coba lagi dengan costum yang lain!')
+}
+break
 case 'x':
 if(!itsMe) return
 console.log(color('[EVAL]'), color(moment(tod.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval Nonasync`))
