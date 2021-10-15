@@ -4300,9 +4300,12 @@ break
 case 'delete':
 case 'del':
 case 'd':
+try{
 if (!isGroup) return reply(mess.only.group)
 if(!m.quoted.sender === zynn.user.jid) return
 zynn.deleteMessage(from, { id: tod.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
+}catch{
+}
 break
 case 'afk':
 alasan = args.join(" ")
