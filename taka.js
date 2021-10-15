@@ -84,21 +84,14 @@ const {
 } = require('./lib/setcmd')
 const words = JSON.parse(fs.readFileSync('./src/correct.json'))
 const vcard = async (nomor, nama, bio) => {
-	kon = 'BEGIN:VCARD\n' +
-		'VERSION:3.0\n' +
-		`FN:${nama}\n` +
-		`ORG:${bio.status};\n` +
-		`TEL;type=CELL;type=VOICE;waid=${nomor}:${nomor}\n` +
-		'END:VCARD'
+	kon = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + `FN:${nama}\n` + `ORG:${bio.status};\n` + `TEL;type=CELL;type=VOICE;waid=${nomor}:${nomor}\n` + 'END:VCARD'
 	return kon
 }
 const stickermetadata = {
 	type: 'full',
 	pack: setting.packname,
 	author: setting.author,
-	categories: [
-		'🌹'
-	]
+	categories: ['🌹']
 }
 const {
 	createSticker
@@ -203,7 +196,6 @@ module.exports = zynn = async (zynn, tod, db) => {
 		} else if (type === 'stickerMessage') {
 			var prefix = ''
 		}
-
 		body = (type === 'buttonsResponseMessage' && tod.message.buttonsResponseMessage.selectedButtonId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.buttonsResponseMessage.selectedButtonId : (type === 'listResponseMessage' && tod.message.listResponseMessage.singleSelectReply.selectedRowId.startsWith(prefix) && m.quoted.sender === zynn.user.jid) ? tod.message.listResponseMessage.singleSelectReply.selectedRowId : (type === 'conversation' && tod.message.conversation.startsWith(prefix)) ? tod.message.conversation : (type == 'imageMessage') && tod.message.imageMessage.caption.startsWith(prefix) ? tod.message.imageMessage.caption : (type == 'videoMessage') && tod.message.videoMessage.caption.startsWith(prefix) ? tod.message.videoMessage.caption : (type == 'extendedTextMessage') && tod.message.extendedTextMessage.text.startsWith(prefix) ? tod.message.extendedTextMessage.text : (type == 'stickerMessage') && (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== null && await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) !== undefined) ? (await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) ? await getcmd(tod.message.stickerMessage.fileSha256.toString('hex'), db) : '') : ""
 		chats = (type === 'conversation') ? tod.message.conversation : (type === 'extendedTextMessage') ? tod.message.extendedTextMessage.text : ''
 		//const command = body.slice(slc).trim().split(/ +/).shift().toLowerCase()
@@ -216,7 +208,6 @@ module.exports = zynn = async (zynn, tod, db) => {
 		const arg = chats.slice(command.length + 1, chats.length)
 		asus = await wa.random(asupann.length)
 		global.asupan = 'http://sansekai.my.id/ptl_repost/' + asupann[asus]
-
 		//function
 		const sendText = (text) => {
 			zynn.sendMessage(from, text, MessageType.text)
@@ -342,7 +333,6 @@ module.exports = zynn = async (zynn, tod, db) => {
 		const fakegroup = await fakereply.fakegroup(from, tod, command)
 		const finvite = await fakereply.finvite(from, tod)
 		const ftoko = await fakereply.ftoko(from, tod)
-
 		//
 		var reply = async (text) => {
 			tunggu = type === 'buttonsResponseMessage' && text == mess.wait ? '' : zynn.sendMessage(from, text, MessageType.text, {
@@ -395,7 +385,6 @@ module.exports = zynn = async (zynn, tod, db) => {
 		} else {
 			var q = args.join(' ')
 		}
-
 		if (fakerep == "ftoko") {
 			var rep = ftoko
 		} else if (fakerep == "fgrup") {
@@ -479,11 +468,9 @@ module.exports = zynn = async (zynn, tod, db) => {
 						"mentionedJid": mids
 					}
 				})
-
 				fs.unlinkSync(filename)
 			});
 		}
-
 		const time2 = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 		const isUrl = (url) => {
 			return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
@@ -538,16 +525,12 @@ module.exports = zynn = async (zynn, tod, db) => {
 					const form = new FormData()
 					form.append('file', fileData, 'tmp.' + ext)
 					fetch('https://telegra.ph/upload', {
-							method: 'POST',
-							body: form
-						})
-						.then(res => res.json())
-						.then(res => {
-							if (res.error) return reject(res.error)
-							resolve('https://telegra.ph' + res[0].src)
-						})
-						.then(() => fs.unlinkSync(filePath))
-						.catch(err => reject(err))
+						method: 'POST',
+						body: form
+					}).then(res => res.json()).then(res => {
+						if (res.error) return reject(res.error)
+						resolve('https://telegra.ph' + res[0].src)
+					}).then(() => fs.unlinkSync(filePath)).catch(err => reject(err))
 				})
 			})
 		}
@@ -595,7 +578,6 @@ module.exports = zynn = async (zynn, tod, db) => {
 					}
 				} catch {}
 			}
-
 			efk = await db.showdata('afk', {
 				user: sender
 			})
@@ -680,7 +662,6 @@ module.exports = zynn = async (zynn, tod, db) => {
 				if (mute[0].id === from) return
 			} catch {}
 		}
-
 		if (isGroup) {
 			try {
 				if (!tod.message.extendedTextMessage.contextInfo.expiration == '') {
@@ -887,26 +868,19 @@ Note : Tidak semua fitur work, Maklum saya noob
 					const media = await zynn.downloadAndSaveMediaMessage(encmedia)
 					ran = await wa.getRandom('.webp')
 					reply(mess.wait)
-					await ffmpeg(`./${media}`)
-						.inputFormat(media.split('.')[1])
-						.on('start', function(cmd) {
-							console.log(`Started : ${cmd}`)
-						})
-						.on('error', function(err) {
-							console.log(`Error : ${err}`)
-							fs.unlinkSync(media)
-							tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-							reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
-						})
-						.on('end', function() {
-							console.log('Finish')
-							wa.sendSticker(from, fs.readFileSync(ran), tod)
-							fs.unlinkSync(media)
-							fs.unlinkSync(ran)
-						})
-						.addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-						.toFormat('webp')
-						.save(ran)
+					await ffmpeg(`./${media}`).inputFormat(media.split('.')[1]).on('start', function(cmd) {
+						console.log(`Started : ${cmd}`)
+					}).on('error', function(err) {
+						console.log(`Error : ${err}`)
+						fs.unlinkSync(media)
+						tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+						reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
+					}).on('end', function() {
+						console.log('Finish')
+						wa.sendSticker(from, fs.readFileSync(ran), tod)
+						fs.unlinkSync(media)
+						fs.unlinkSync(ran)
+					}).addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`]).toFormat('webp').save(ran)
 				} else {
 					reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
 				}
@@ -932,9 +906,7 @@ Note : Tidak semua fitur work, Maklum saya noob
 					type: 'full',
 					pack: q.split('|')[0],
 					author: q.split('|')[1],
-					categories: [
-						'🌹'
-					]
+					categories: ['🌹']
 				}
 				boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
 				owgi = await zynn.downloadMediaMessage(boij)
@@ -950,74 +922,60 @@ Note : Tidak semua fitur work, Maklum saya noob
 				if (isQuotedSticker) {
 					encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
 					const savedFilename = await zynn.downloadAndSaveMediaMessage(encmedia, `./media/${sender}`)
-					await tovid.webpToMp4(savedFilename)
-						.then(async (rest) => {
-							await axios({
-								method: "GET",
-								url: rest.result,
-								responseType: "stream",
-							}).then(({
-								data
-							}) => {
-								const saving = data.pipe(
-									fs.createWriteStream(`./media/${sender}-done.mp4`)
-								)
-								saving.on("finish", () => {
-									zynn.sendMessage(from,
-										fs.readFileSync(`./media/${sender}-done.mp4`),
-										MessageType.video, {
-											mimetype: Mimetype.mp4,
-											caption: `*Nih*`,
-											quoted: tod,
-										}
-									)
-									if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
-									if (fs.existsSync(`./media/${sender}-done.mp4`)) fs.unlinkSync(`./media/${sender}-done.mp4`)
+					await tovid.webpToMp4(savedFilename).then(async (rest) => {
+						await axios({
+							method: "GET",
+							url: rest.result,
+							responseType: "stream",
+						}).then(({
+							data
+						}) => {
+							const saving = data.pipe(fs.createWriteStream(`./media/${sender}-done.mp4`))
+							saving.on("finish", () => {
+								zynn.sendMessage(from, fs.readFileSync(`./media/${sender}-done.mp4`), MessageType.video, {
+									mimetype: Mimetype.mp4,
+									caption: `*Nih*`,
+									quoted: tod,
 								})
+								if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
+								if (fs.existsSync(`./media/${sender}-done.mp4`)) fs.unlinkSync(`./media/${sender}-done.mp4`)
 							})
 						})
-						.catch((e) => {
-							console.log(e)
-							reply(`Error gan`)
-							if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
-						})
+					}).catch((e) => {
+						console.log(e)
+						reply(`Error gan`)
+						if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
+					})
 				}
 				break
 			case 'togif':
 				if (isQuotedSticker) {
 					encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
 					const savedFilename = await zynn.downloadAndSaveMediaMessage(encmedia, `./media/${sender}`)
-					await tovid.webpToMp4(savedFilename)
-						.then(async (rest) => {
-							await axios({
-								method: "GET",
-								url: rest.result,
-								responseType: "stream",
-							}).then(({
-								data
-							}) => {
-								const saving = data.pipe(
-									fs.createWriteStream(`./media/${sender}-done.mp4`)
-								)
-								saving.on("finish", () => {
-									zynn.sendMessage(from,
-										fs.readFileSync(`./media/${sender}-done.mp4`),
-										MessageType.video, {
-											mimetype: Mimetype.gif,
-											caption: `*Nih*`,
-											quoted: tod,
-										}
-									)
-									if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
-									if (fs.existsSync(`./media/${sender}-done.mp4`)) fs.unlinkSync(`./media/${sender}-done.mp4`)
+					await tovid.webpToMp4(savedFilename).then(async (rest) => {
+						await axios({
+							method: "GET",
+							url: rest.result,
+							responseType: "stream",
+						}).then(({
+							data
+						}) => {
+							const saving = data.pipe(fs.createWriteStream(`./media/${sender}-done.mp4`))
+							saving.on("finish", () => {
+								zynn.sendMessage(from, fs.readFileSync(`./media/${sender}-done.mp4`), MessageType.video, {
+									mimetype: Mimetype.gif,
+									caption: `*Nih*`,
+									quoted: tod,
 								})
+								if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
+								if (fs.existsSync(`./media/${sender}-done.mp4`)) fs.unlinkSync(`./media/${sender}-done.mp4`)
 							})
 						})
-						.catch((e) => {
-							console.log(e)
-							reply(`Error gan`)
-							if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
-						})
+					}).catch((e) => {
+						console.log(e)
+						reply(`Error gan`)
+						if (fs.existsSync(savedFilename)) fs.unlinkSync(savedFilename)
+					})
 				}
 				break
 			case 'snowm':
@@ -1026,9 +984,7 @@ Note : Tidak semua fitur work, Maklum saya noob
 					type: 'full',
 					pack: '',
 					author: '',
-					categories: [
-						'🌹'
-					]
+					categories: ['🌹']
 				}
 				boij = isQuotedSticker ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
 				owgi = await zynn.downloadMediaMessage(boij)
@@ -1401,10 +1357,9 @@ ${res.desc}` : '\n*Tidak ada Deskripsi*'}
 			case 'get':
 				if (!itsMe) return
 				if (!q) return reply('linknya?')
-				fetch(`${q}`).then(res => res.text())
-					.then(bu => {
-						reply(bu)
-					})
+				fetch(`${q}`).then(res => res.text()).then(bu => {
+					reply(bu)
+				})
 				break
 			case 'chatscount':
 				if (!isGroupAdmins && !itsMe) return reoky(mess.only.admin)
@@ -1736,9 +1691,7 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 									type: 'full',
 									pack: command,
 									author: setting.packname,
-									categories: [
-										'🌹'
-									]
+									categories: ['🌹']
 								}
 								buff = await Buffer.from(data, 'base64')
 								stik = await createSticker(buff, weem)
@@ -1788,7 +1741,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 					reply('Gambar tidak ditemukan/error')
 				}
 				break
-
 			case 'nulis':
 				reply(`*Pilihan*\n${prefix}nuliskiri\n${prefix}nuliskanan\n${prefix}foliokiri\n${prefix}foliokanan`)
 				break
@@ -1798,25 +1750,11 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				var start = Date.now()
 				const splitText = q.replace(/(\S+\s*){1,9}/g, '$&\n')
 				const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
-				spawn('convert', [
-						'./media/nulis/images/buku/sebelumkiri.jpg',
-						'-font',
-						'./media/nulis/font/Indie-Flower.ttf',
-						'-size',
-						'960x1280',
-						'-pointsize',
-						'22',
-						'-interline-spacing',
-						'2',
-						'-annotate',
-						'+140+153',
-						fixHeight,
-						'./media/nulis/images/buku/setelahkiri.jpg'
-					])
-					.on(mess.error.api, () => reply(mess.error.api))
-					.on('exit', async () => {
-						wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'), tod, `${await wa.timer(start)}`)
-					})
+				spawn('convert', ['./media/nulis/images/buku/sebelumkiri.jpg', '-font', './media/nulis/font/Indie-Flower.ttf', '-size', '960x1280', '-pointsize', '22', '-interline-spacing', '2', '-annotate', '+140+153',
+					fixHeight, './media/nulis/images/buku/setelahkiri.jpg'
+				]).on(mess.error.api, () => reply(mess.error.api)).on('exit', async () => {
+					wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkiri.jpg'), tod, `${await wa.timer(start)}`)
+				})
 			}
 			break
 		case 'nuliskanan': {
@@ -1825,25 +1763,11 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			var start = Date.now()
 			const splitText = q.replace(/(\S+\s*){1,9}/g, '$&\n')
 			const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
-			spawn('convert', [
-					'./media/nulis/images/buku/sebelumkanan.jpg',
-					'-font',
-					'./media/nulis/font/Indie-Flower.ttf',
-					'-size',
-					'960x1280',
-					'-pointsize',
-					'23',
-					'-interline-spacing',
-					'2',
-					'-annotate',
-					'+128+129',
-					fixHeight,
-					'./media/nulis/images/buku/setelahkanan.jpg'
-				])
-				.on(mess.error.api, () => reply(mess.error.api))
-				.on('exit', async () => {
-					wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'), tod, `${await wa.timer(start)}`)
-				})
+			spawn('convert', ['./media/nulis/images/buku/sebelumkanan.jpg', '-font', './media/nulis/font/Indie-Flower.ttf', '-size', '960x1280', '-pointsize', '23', '-interline-spacing', '2', '-annotate', '+128+129',
+				fixHeight, './media/nulis/images/buku/setelahkanan.jpg'
+			]).on(mess.error.api, () => reply(mess.error.api)).on('exit', async () => {
+				wa.sendImage(from, fs.readFileSync('./media/nulis/images/buku/setelahkanan.jpg'), tod, `${await wa.timer(start)}`)
+			})
 		}
 		break
 		case 'foliokiri': {
@@ -1852,25 +1776,11 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			var start = Date.now()
 			const splitText = q.replace(/(\S+\s*){1,13}/g, '$&\n')
 			const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
-			spawn('convert', [
-					'./media/nulis/images/folio/sebelumkiri.jpg',
-					'-font',
-					'./media/nulis/font/Indie-Flower.ttf',
-					'-size',
-					'1720x1280',
-					'-pointsize',
-					'23',
-					'-interline-spacing',
-					'4',
-					'-annotate',
-					'+48+185',
-					fixHeight,
-					'./media/nulis/images/folio/setelahkiri.jpg'
-				])
-				.on(mess.error.api, () => reply(mess.error.api))
-				.on('exit', async () => {
-					wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'), tod, `${await wa.timer(start)}`)
-				})
+			spawn('convert', ['./media/nulis/images/folio/sebelumkiri.jpg', '-font', './media/nulis/font/Indie-Flower.ttf', '-size', '1720x1280', '-pointsize', '23', '-interline-spacing', '4', '-annotate', '+48+185',
+				fixHeight, './media/nulis/images/folio/setelahkiri.jpg'
+			]).on(mess.error.api, () => reply(mess.error.api)).on('exit', async () => {
+				wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkiri.jpg'), tod, `${await wa.timer(start)}`)
+			})
 		}
 		break
 		case 'foliokanan': {
@@ -1879,25 +1789,11 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			var start = Date.now()
 			const splitText = q.replace(/(\S+\s*){1,13}/g, '$&\n')
 			const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
-			spawn('convert', [
-					'./media/nulis/images/folio/sebelumkanan.jpg',
-					'-font',
-					'./media/nulis/font/Indie-Flower.ttf',
-					'-size',
-					'960x1280',
-					'-pointsize',
-					'23',
-					'-interline-spacing',
-					'3',
-					'-annotate',
-					'+89+190',
-					fixHeight,
-					'./media/nulis/images/folio/setelahkanan.jpg'
-				])
-				.on(mess.error.api, () => reply(mess.error.api))
-				.on('exit', async () => {
-					wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'), tod, `${await wa.timer(start)}`)
-				})
+			spawn('convert', ['./media/nulis/images/folio/sebelumkanan.jpg', '-font', './media/nulis/font/Indie-Flower.ttf', '-size', '960x1280', '-pointsize', '23', '-interline-spacing', '3', '-annotate', '+89+190',
+				fixHeight, './media/nulis/images/folio/setelahkanan.jpg'
+			]).on(mess.error.api, () => reply(mess.error.api)).on('exit', async () => {
+				wa.sendImage(from, fs.readFileSync('./media/nulis/images/folio/setelahkanan.jpg'), tod, `${await wa.timer(start)}`)
+			})
 		}
 		break
 		case 'infonomor':
@@ -2110,17 +2006,14 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				type: 'full',
 				pack: q.split('|')[0],
 				author: setting.packname,
-				categories: [
-					'🌹'
-				]
+				categories: ['🌹']
 			}
-			emoji.get(emot)
-				.then(emoji => {
-					console.log(emoji.images[idemot]);
-					createSticker(emoji.images[idemot].url, emojidata).then(res => {
-						wa.sendSticker(from, res, tod)
-					})
+			emoji.get(emot).then(emoji => {
+				console.log(emoji.images[idemot]);
+				createSticker(emoji.images[idemot].url, emojidata).then(res => {
+					wa.sendSticker(from, res, tod)
 				})
+			})
 			break
 		case 'resend':
 			if (!m.quoted) return reply('Reply pesannya!')
@@ -2159,16 +2052,14 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			for (let i = 0; i < hdata.length; i++) {
 				datai.push({
 					"rows": [{
-							"title": "MP3",
-							description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
-							"rowId": `${prefix}ytmp3 ${hdata[i].url}`
-						},
-						{
-							"title": "MP4",
-							description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
-							"rowId": `${prefix}ytmp4 ${hdata[i].url}`
-						}
-					],
+						"title": "MP3",
+						description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
+						"rowId": `${prefix}ytmp3 ${hdata[i].url}`
+					}, {
+						"title": "MP4",
+						description: `Title: ${hdata[i].title}\n\nUploader: ${hdata[i].author.name}`,
+						"rowId": `${prefix}ytmp4 ${hdata[i].url}`
+					}],
 					title: num
 				})
 				num += 1
@@ -2654,17 +2545,15 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				dtt = body.slice(8)
 				ranm = wa.getRandom('.mp3')
 				rano = wa.getRandom('.ogg')
-				dtt.length > 300 ?
-					reply('𝘁𝗲𝗸𝘀𝗻𝘆𝗮 𝗷𝗮𝗻𝗴𝗮𝗻 𝗸𝗲𝗽𝗮𝗻𝗷𝗮𝗻𝗴𝗮𝗻') :
-					gtts.save(ranm, dtt, function() {
-						exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
-							fs.unlinkSync(ranm)
-							buff = fs.readFileSync(rano)
-							if (err) return reply('𝗬𝗮𝗵 𝗴𝗮𝗴𝗮𝗹, 𝘂𝗹𝗮𝗻𝗴𝗶 𝗹𝗮𝗴𝗶 𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴')
-							wa.sendptt(from, buff, tod)
-							fs.unlinkSync(rano)
-						})
+				dtt.length > 300 ? reply('𝘁𝗲𝗸𝘀𝗻𝘆𝗮 𝗷𝗮𝗻𝗴𝗮𝗻 𝗸𝗲𝗽𝗮𝗻𝗷𝗮𝗻𝗴𝗮𝗻') : gtts.save(ranm, dtt, function() {
+					exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
+						fs.unlinkSync(ranm)
+						buff = fs.readFileSync(rano)
+						if (err) return reply('𝗬𝗮𝗵 𝗴𝗮𝗴𝗮𝗹, 𝘂𝗹𝗮𝗻𝗴𝗶 𝗹𝗮𝗴𝗶 𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴')
+						wa.sendptt(from, buff, tod)
+						fs.unlinkSync(rano)
 					})
+				})
 			} catch (e) {}
 			break
 		case 'mobilewallanime':
@@ -2819,7 +2708,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				reply('Error!, silahkan isi dengan format yang benar!')
 			}
 			break
-
 		case 'tafsirsurah':
 			if (!q) return reply(`Penggunaan : ${prefix}tafsirsurah nosurah\nExample : ${prefix}tafsirsurah 1`)
 			surah = q.split('|')[0]
@@ -3176,7 +3064,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				} catch {
 					return reply('Left tidak diaktifkan!')
 				}
-
 			} else {
 				reply(`_Kirim perintah on untuk mengaktifkan, off untuk menonaktifkan_\nContoh ${prefix}left on`)
 			}
@@ -3553,7 +3440,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			} else if (q == 'luar') {
 				kont = [];
 				for (let i of groupMembers.filter(id => !id.jid.startsWith('62')).map(res => res.jid)) {
-
 					kont.push({
 						displayName: await zynn.getName(i),
 						vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
@@ -3568,7 +3454,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			} else {
 				kont = [];
 				for (let i of groupMembers.filter(id => id.jid.startsWith(args[0])).map(res => res.jid)) {
-
 					kont.push({
 						displayName: await zynn.getName(i),
 						vcard: await vcard(i.split('@')[0], await zynn.getName(i), await zynn.getStatus(i))
@@ -3666,7 +3551,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				reply('Done')
 			}
 			break
-
 		case 'delerror':
 			if (!itsMe) return
 			if (!q) return reply('Masukkan nama fiturnya!')
@@ -3684,7 +3568,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 				reply('Fitur tidak terdaftar di listerror')
 			}
 			break
-
 		case 'listerror':
 			deta = await db.showdata('error')
 			teks = monospace(`List Fitur Error\n${shp} Total : ${deta.length}\n\n`)
@@ -4699,7 +4582,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 			} catch {
 				return reply(`Note dengan nama ${q} tidak ada di database`)
 			}
-
 			break
 		case 'bugreport':
 			if (!q) return reply('Silahkan masukkan deskripsi bugnya!')
@@ -4775,7 +4657,6 @@ ${groupAdmins.map((v, i) => `${i + 1}. @${v.split('@')[0]}`).join('\n')}
 ${tg}
 *MOST COMMAND USER*
 ${tu}`
-
 			reply(dash)
 			break
 		case 'dog':
@@ -4879,18 +4760,16 @@ ${tu}`
 				const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(tod).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : tod
 				const media = await zynn.downloadAndSaveMediaMessage(encmedia)
 				recognize(media, {
-						lang: 'eng+ind',
-						oem: 1,
-						psm: 3
-					})
-					.then(teks => {
-						reply(teks.trim())
-						fs.unlinkSync(media)
-					})
-					.catch(err => {
-						reply(err.message)
-						fs.unlinkSync(media)
-					})
+					lang: 'eng+ind',
+					oem: 1,
+					psm: 3
+				}).then(teks => {
+					reply(teks.trim())
+					fs.unlinkSync(media)
+				}).catch(err => {
+					reply(err.message)
+					fs.unlinkSync(media)
+				})
 			} else {
 				reply(`reply/ kirim gambarnya dengan caption ${prefix}ocr`)
 			}
@@ -4920,7 +4799,7 @@ ${tu}`
 			try {
 				hdata = await skrep.randomtt(q)
 				teks = 'PTL TIKTOK\n\n'
-				teks += shp + ' Username : ' + data.username + '\n'
+				teks += shp + ' Username : ' + hdata.username + '\n'
 				teks += shp + ' Caption : ' + hdata.caption + '\n'
 				teks += shp + ' Likes : ' + hdata.like_count + '\n'
 				teks += shp + ' Comments : ' + hdata.comment_count + '\n'
