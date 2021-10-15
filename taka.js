@@ -4702,7 +4702,7 @@ link = q.split('|')[0]
 slug = q.split('|')[1]
 try{
   if(!slug){
-    axios.get(`https://ndek.me/api?link=${link}&costum=${await wa.random(0)}`).then(res => {
+    axios.get(`https://ndek.me/api?link=${link}&costum=${await wa.getRandom(10)}`).then(res => {
       reply(res.data.created)
     })
   }
