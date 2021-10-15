@@ -81,6 +81,13 @@ require('./taka.js')(zynn, message, client)
 zynn.on('message-delete', async (message) => {
 require('./lib/antidelete.js')(zynn, message, client)
 })
+zynn.on("CB:Call", json => {
+let call;
+calling = JSON.parse(JSON.stringify(json))
+call = calling[1].from
+zynn.sendMessage(call, `Sorry ${master.user.name} can't receive calls.\n*Call = Block!*`, MessageType.text)
+.then(() => zynn.blockUser(call, "add"))
+})
 
 
 /*    zynn.on('message-update', async (message) => {
