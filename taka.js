@@ -4696,7 +4696,7 @@ else{
   reply(`reply/ kirim gambarnya dengan caption ${prefix}ocr`)
 }
 break
-case 'short':
+case 'shorturl':
 if(!q) return reply('Masukkan linknya!')
 link = q.split('|')[0]
 slug = q.split('|')[1]
