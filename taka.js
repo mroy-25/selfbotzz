@@ -4705,6 +4705,7 @@ try{
     axios.get(`https://ndek.me/api?link=${link}&costum=${await wa.random(0)}`).then(res => {
       reply(res.data.created)
     })
+  }
   else{
     axios.get(`https://ndek.me/api?link=${link}&costum=${slug}`).then(res => {
       reply(res.data.created)
