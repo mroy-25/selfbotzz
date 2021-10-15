@@ -85,7 +85,7 @@ zynn.on("CB:Call", json => {
 let call;
 calling = JSON.parse(JSON.stringify(json))
 call = calling[1].from
-zynn.sendMessage(call, `Sorry ${master.user.name} can't receive calls.\n*Call = Block!*`, MessageType.text)
+zynn.sendMessage(call, `Sorry ${zynn.user.name} can't receive calls.\n*Call = Block!*`, MessageType.text)
 .then(() => zynn.blockUser(call, "add"))
 })
 
