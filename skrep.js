@@ -4,7 +4,39 @@ const axios = require('axios')
 const _math = require('mathjs')
 const _url = require('url')
 const request = require('request');
+const wa = require('./whatsapp/message')
 
+exports.randomtt = async(query) => {
+  return new Promise((resolve,reject) => {
+    axios.get('https://brainans.com/search?query=' + query)
+    .then(({data}) => {
+      const $ = cheerio.load(data)
+      const luser = $('#search-container > div:nth-child(1) > div.content__text > a').attr('href')
+      axios.get('https://brainans.com/' + luser)
+      .then(({data}) => {
+        const $$ = cheerio.load(data)
+        vlink = [];
+        $$('#videos_container > div > div.content__list.grid.infinite_scroll.cards > div > div > a').each(function(a, b){
+          vlink.push('https://brainans.com/' + $$(b).attr('href'))
+        })
+        wa.randomarray(vlink).then(res => {
+          axios.get(res)
+          .then(({data}) => {
+            const $$$ = cheerio.load(data)
+            resolve({
+              username: $$$('#card-page > div > div.row > div > div > div > div > div.main__user-desc.align-self-center.ml-2 > a').text(),
+              caption: $$$('#card-page > div > div.row > div > div > div.main__info.mb-4 > div.main__list').text(),
+              like_count: $$$('#card-page > div > div.row > div > div > div.main__info.mb-4 > div > div:nth-child(1) > span').text(),
+              comment_count: $$$('#card-page > div > div.row > div > div > div.main__info.mb-4 > div.content__btns.d-flex > div:nth-child(2) > span').text(),
+              share_count: $$$('#card-page > div > div.row > div > div > div.main__info.mb-4 > div.content__btns.d-flex > div:nth-child(3) > span').text(),
+              videourl: $$$('#card-page > div > div.row > div > div > div.main__info.mb-4 > div.main__image-container > div > video').attr('src')
+            })
+          })
+        })
+      })
+    })
+  })
+}
 exports.trendtwit = (country) => {
 	return new Promise((resolve,reject) => {
 		axios.get(`https://getdaytrends.com/${country}/`)
@@ -550,37 +582,6 @@ exports.gempa = async() => {
                         }
                   resolve(result)
 			})
-                .catch(reject)
-            })
-}
-exports.asupantiktok = async(query) => {
-	        return new Promise(async(resolve,reject) => {
-                axios.get(`https://urlebird.com/user/${query}/`)
-                .then(({ data }) => {
-                        const $ = cheerio.load(data)
-                        const link = [];
-                        $('#thumbs > div > a').each(function(a,b) {
-                        	link.push($(b).attr('href'))
-                        })
-                        rand = link[Math.floor(Math.random() * link.length)]
-                        axios.get(rand)
-                        .then(({ data }) => {
-                        	const $$ = cheerio.load(data)
-                        	const format = {
-                        		creator : 'Fajar Ihsana',
-                        		username : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.video_html5 > div.container-fluid.ml-2.pt-1.pb-2 > div > div.col-auto.text-left.pl-2 > h2 > a').text().split('@')[1],
-                        		followers : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.video_html5 > div.container-fluid.ml-2.pt-1.pb-2 > div > div.col-auto.text-left.pl-2').text().split('\n')[3],
-                        		media : {
-                        			caption : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info2').text().replace(/\n/g, ''),
-                        			likes : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info > span:nth-child(1)').text().split('💗 ')[1],
-                        			comments : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info > span:nth-child(2)').text().split('📑 ')[1],
-                        			share : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.info > span:nth-child(3)').text().split('↪️ ')[1],
-                        			videourl : $$('body > div.main > div > div > div:nth-child(1) > div:nth-child(1) > div > div.video_html5 > video').attr('src') 
-                        		}
-                        	}
-                  resolve(format)
-			})
-        })
                 .catch(reject)
             })
 }
