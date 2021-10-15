@@ -4703,6 +4703,7 @@ case 'shorturl':
 if(!q) return reply('Masukkan linknya!')
 link = q.split('|')[0]
 slug = q.split('|')[1]
+if(!link.startsWith('https://')) return reply('Link harus diawali dengan https://!')
 try{
   if(!slug){
     axios.get(`https://ndek.me/api?link=${link}&costum=${await wa.getRandom(10)}`).then(res => {
