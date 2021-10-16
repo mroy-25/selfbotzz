@@ -97,7 +97,7 @@ const {
 	createSticker
 } = require('wa-sticker-formatter')
 fakecap = setting.fakecap
-fakeimage = fs.readFileSync(`./media/zynn.jpeg`)
+fakeimage = fs.readFileSync(`./media/zynn.jpg`)
 fakeimage2 = fs.readFileSync('./media/zynn2.jpeg')
 publicc = setting.public
 fakec = setting.fake
